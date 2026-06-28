@@ -1,0 +1,34 @@
+---
+id: "orders.checkout.orders-checkout.order-cancelled-event-v1"
+name: "order-cancelled-event-v1"
+version: "0.1.1"
+schemaPath: "https://github.com/arcadia-editions/orders-checkout-api/raw/main/avro/OrderCancelled.avsc"
+producers:
+- "orders.checkout.orders-checkout-0.1.1"
+consumers:
+- "notifications.customer-communications.notifications-consumer-0.1.0"
+channels:
+- id: "orders.checkout.orders-checkout.order-cancelled-event-v1"
+---
+import RemoteSpecificationSchema from '@catalog/components/RemoteSpecificationSchema.astro';
+
+## Overview
+
+Generated event reference page.
+
+<NodeGraph />
+
+
+## Consumer operations
+
+
+- `notifications.customer-communications.notifications-consumer.onOrderCancelledEventV1` (`receive`, matched by external-ref)
+
+
+
+
+## Schema
+
+<RemoteSpecificationSchema url="https://github.com/arcadia-editions/orders-checkout-api/raw/main/asyncapi.yml" channel="order-cancelled-event-v1" channelMessage="OrderCancelledEvent" />
+
+

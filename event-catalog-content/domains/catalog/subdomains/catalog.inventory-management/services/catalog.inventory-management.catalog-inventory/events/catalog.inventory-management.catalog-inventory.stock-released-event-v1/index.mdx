@@ -1,0 +1,34 @@
+---
+id: "catalog.inventory-management.catalog-inventory.stock-released-event-v1"
+name: "stock-released-event-v1"
+version: "0.1.0"
+schemaPath: "https://github.com/arcadia-editions/catalog-inventory-api/raw/main/avro/StockReleased.avsc"
+producers:
+- "catalog.inventory-management.catalog-inventory-0.1.0"
+consumers:
+- "orders.checkout.orders-checkout-0.1.1"
+channels:
+- id: "catalog.inventory-management.catalog-inventory.stock-released-event-v1"
+---
+import RemoteSpecificationSchema from '@catalog/components/RemoteSpecificationSchema.astro';
+
+## Overview
+
+Generated event reference page.
+
+<NodeGraph />
+
+
+## Consumer operations
+
+
+- `orders.checkout.orders-checkout.onStockReleasedEvent` (`receive`, matched by external-ref)
+
+
+
+
+## Schema
+
+<RemoteSpecificationSchema url="https://github.com/arcadia-editions/catalog-inventory-api/raw/main/asyncapi.yml" channel="stock-released-event-v1" channelMessage="StockReleasedEvent" />
+
+

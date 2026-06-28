@@ -1,0 +1,34 @@
+---
+id: "fulfillment.shipping.fulfillment-shipping.fulfillment-scheduled-event-v1"
+name: "fulfillment-scheduled-event-v1"
+version: "0.1.0"
+schemaPath: "https://github.com/arcadia-editions/fulfillment-shipping-api/raw/main/avro/FulfillmentScheduled.avsc"
+producers:
+- "fulfillment.shipping.fulfillment-shipping-0.1.0"
+consumers:
+- "payments.payment-processing.payments-processing-0.1.0"
+channels:
+- id: "fulfillment.shipping.fulfillment-shipping.fulfillment-scheduled-event-v1"
+---
+import RemoteSpecificationSchema from '@catalog/components/RemoteSpecificationSchema.astro';
+
+## Overview
+
+Generated event reference page.
+
+<NodeGraph />
+
+
+## Consumer operations
+
+
+- `payments.payment-processing.payments-processing.onFulfillmentScheduledEventV1` (`receive`, matched by external-ref)
+
+
+
+
+## Schema
+
+<RemoteSpecificationSchema url="https://github.com/arcadia-editions/fulfillment-shipping-api/raw/main/asyncapi.yml" channel="fulfillment-scheduled-event-v1" channelMessage="FulfillmentScheduledEvent" />
+
+

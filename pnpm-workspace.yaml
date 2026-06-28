@@ -1,0 +1,44 @@
+minimumReleaseAge: 10080
+trustPolicy: no-downgrade
+trustPolicyIgnoreAfter: 525600
+blockExoticSubdeps: true
+engineStrict: true
+nodeVersion: 24.18.1
+nodeLinker: hoisted
+savePrefix: ''
+strictDepBuilds: true
+strictPeerDependencies: false
+verifyDepsBeforeRun: error
+verifyStoreIntegrity: true
+strictStorePkgContentCheck: true
+overrides:
+  # Match the dependency set tested in EventCatalog 4.3.2's release lockfile.
+  '@emnapi/core': 1.11.1
+  '@emnapi/runtime': 1.11.1
+  # Security fixes override vulnerable EventCatalog transitive ranges.
+  '@hono/node-server': 2.0.10
+  '@tailwindcss/vite': 4.3.1
+  '@types/node': 22.19.21
+  '@auth/core': 0.41.3
+  astro: 7.1.1
+  astro-expressive-code: 0.44.0
+  'minimatch@3.1.5>brace-expansion': 5.0.8
+  prismjs: 1.30.0
+  rollup: 4.52.4
+  sharp: 0.35.3
+  svgo: 4.0.2
+  terser: 5.46.0
+  tsx: 4.21.0
+  vite: 8.1.0
+  yaml: 2.9.0
+  uuid: 11.1.1
+patchedDependencies:
+  '@astrojs/react@6.0.1': patches/@astrojs__react@6.0.1.patch
+allowBuilds:
+  '@scarf/scarf': false
+  '@parcel/watcher': true
+  '@tailwindcss/oxide': true
+  esbuild: true
+  protobufjs: false
+  sharp: true
+  vue-demi: true
