@@ -1,0 +1,71 @@
+---
+id: "notifications.customer-communications.notifications-consumer"
+name: "Notifications Consumer"
+summary: "Transforms business outcomes into customer-facing notifications and delivery\
+  \ results"
+version: "0.0.1"
+specifications:
+- type: "asyncapi"
+  path: "https://github.com/arcadia-editions/notifications-consumer-api/raw/main/asyncapi.yml"
+- type: "openapi"
+  path: "openapi.yml"
+sends:
+- id: "notifications.customer-communications.notifications-consumer.order-confirmation-sent-event-v1"
+- id: "notifications.customer-communications.notifications-consumer.notification-delivery-failed-event-v1"
+- id: "notifications.customer-communications.notifications-consumer.stock-unavailable-notification-sent-event-v1"
+- id: "notifications.customer-communications.notifications-consumer.order-cancelled-notification-sent-event-v1"
+entities:
+- id: "notifications.customer-communications.notifications-consumer.notification"
+  version: "0.0.1"
+---
+## Overview
+
+Transforms business outcomes into customer-facing notifications and delivery results
+
+<NodeGraph />
+
+## Message Flow
+
+<MessageTable format="all" limit={8} showChannels={true} />
+
+## Domain Model
+
+<EntityMap />
+
+## Specifications
+
+The linked specifications in the frontmatter drive EventCatalog reference views for this service.
+
+# Notifications Consumer
+
+## Description
+
+Notifications Consumer is the bounded context that turns domain events into
+customer communications. It reacts to outcomes produced by the core services and
+decides what message should be sent, through which channel, and to whom.
+
+It is a supporting service focused on communication rather than ownership of the
+core commerce process itself.
+
+## Scope
+
+- Send order confirmation messages after successful payment capture
+- Notify customers when scarce stock is unavailable
+- Notify customers when orders are cancelled
+- Track delivery success or failure for outbound communications
+
+## Main domain elements
+
+- &#x60;Notification&#x60;: aggregate for outbound communication attempts
+- &#x60;NotificationsConsumerService&#x60;: event-driven commands for customer messaging
+- &#x60;OrderConfirmationSent&#x60;: event announcing a successful order confirmation message
+- &#x60;StockUnavailableNotificationSent&#x60;: event announcing a successful stock-unavailable message
+- &#x60;OrderCancelledNotificationSent&#x60;: event announcing a successful order-cancelled message
+- &#x60;NotificationDeliveryFailed&#x60;: failure outcome for downstream monitoring or recovery
+
+2026-05-21
+
+- added &#x60;README.md&#x60; describing Notifications Consumer as a bounded context
+- added &#x60;SUMMARY.md&#x60; with the business-purpose summary for event catalog generation
+- added this &#x60;CHANGE.log&#x60; to track documentation updates
+

@@ -1,0 +1,70 @@
+name: Publish GitHub Pages branch
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: publish-event-catalog-pages
+  cancel-in-progress: false
+
+jobs:
+  publish:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 60
+    permissions:
+      contents: write
+      pages: write
+    env:
+      GH_TOKEN: ${{ github.token }}
+    steps:
+      - name: Check out main
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+        with:
+          ref: main
+          fetch-depth: 1
+          persist-credentials: false
+
+      - name: Set up pinned Node.js
+        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
+        with:
+          node-version: '24.18.1'
+
+      - name: Activate the pinned package manager
+        shell: bash
+        run: |
+          corepack enable
+          corepack prepare pnpm@10.34.5 --activate
+          pnpm --version
+
+      - name: Verify dependencies and build
+        run: |
+          pnpm install --frozen-lockfile
+          pnpm run verify:security
+          pnpm test
+          pnpm build
+
+      - name: Publish static output to the root of gh-pages
+        shell: bash
+        run: |
+          pages_directory="$(mktemp -d "$RUNNER_TEMP/arcadia-event-catalog-pages.XXXXXX")"
+          cp -a dist/. "$pages_directory/"
+          touch "$pages_directory/.nojekyll"
+
+          git -C "$pages_directory" init -b gh-pages
+          git -C "$pages_directory" config user.name 'arcadia-event-catalog[bot]'
+          git -C "$pages_directory" config user.email 'arcadia-event-catalog[bot]@users.noreply.github.com'
+          git -C "$pages_directory" add --all
+          git -C "$pages_directory" commit -m "Publish ${GITHUB_SHA}"
+          git -C "$pages_directory" remote add origin "https://github.com/${GITHUB_REPOSITORY}.git"
+          gh auth setup-git
+          git -C "$pages_directory" push --force origin gh-pages
+
+      - name: Request a Pages build for the workflow-authored branch commit
+        shell: bash
+        run: gh api --method POST "repos/${GITHUB_REPOSITORY}/pages/builds"

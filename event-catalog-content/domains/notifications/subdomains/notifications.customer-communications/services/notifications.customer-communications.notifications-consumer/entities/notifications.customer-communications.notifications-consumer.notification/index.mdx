@@ -1,0 +1,74 @@
+---
+id: "notifications.customer-communications.notifications-consumer.notification"
+name: "Notification"
+version: "0.0.1"
+aggregateRoot: true
+identifier: "notificationId"
+properties:
+- name: "notificationId"
+  type: "String"
+  required: true
+- name: "customerId"
+  type: "String"
+  required: true
+- name: "orderId"
+  type: "String"
+- name: "sku"
+  type: "String"
+- name: "type"
+  type: "NotificationType"
+  required: true
+  references: "NotificationType"
+  enum:
+  - "ORDER_CONFIRMATION"
+  - "STOCK_UNAVAILABLE"
+  - "ORDER_CANCELLED"
+- name: "channel"
+  type: "NotificationChannel"
+  required: true
+  references: "NotificationChannel"
+  enum:
+  - "EMAIL"
+  - "SMS"
+  - "PUSH"
+- name: "status"
+  type: "NotificationStatus"
+  required: true
+  references: "NotificationStatus"
+  enum:
+  - "PENDING"
+  - "SENT"
+  - "FAILED"
+- name: "subject"
+  type: "String"
+  required: true
+- name: "body"
+  type: "String"
+  required: true
+- name: "recipient"
+  type: "String"
+  required: true
+- name: "createdAt"
+  type: "Instant"
+  required: true
+- name: "sentAt"
+  type: "Instant"
+- name: "failedAt"
+  type: "Instant"
+- name: "failureReason"
+  type: "String"
+services:
+- "notifications.customer-communications.notifications-consumer-0.0.1"
+domains:
+- "notifications.customer-communications-0.0.1"
+---
+## Overview
+
+### Entity Properties
+
+<EntityPropertiesTable />
+
+## Relationships
+
+This entity includes references to related entities captured in the generated frontmatter properties.
+

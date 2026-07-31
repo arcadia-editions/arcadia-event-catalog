@@ -1,0 +1,12 @@
+node_modules/
+dist/
+.eventcatalog-build/
+.eventcatalog-core/
+.eventcatalog/
+.astro/
+.cache/
+.env
+.env.*
+!.env.example
+*.log
+

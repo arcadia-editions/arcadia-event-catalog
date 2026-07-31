@@ -1,0 +1,51 @@
+---
+id: "fulfillment.shipping.fulfillment-shipping.fulfillment"
+name: "Fulfillment"
+version: "0.0.1"
+aggregateRoot: true
+identifier: "fulfillmentId"
+properties:
+- name: "fulfillmentId"
+  type: "String"
+  required: true
+- name: "orderId"
+  type: "String"
+  required: true
+- name: "customerId"
+  type: "String"
+  required: true
+- name: "status"
+  type: "FulfillmentStatus"
+  required: true
+  references: "FulfillmentStatus"
+  enum:
+  - "SCHEDULED"
+  - "READY_TO_SHIP"
+  - "FAILED"
+- name: "carrierCode"
+  type: "String"
+- name: "trackingNumber"
+  type: "String"
+- name: "scheduledAt"
+  type: "Instant"
+- name: "readyAt"
+  type: "Instant"
+- name: "failedAt"
+  type: "Instant"
+- name: "failureReason"
+  type: "String"
+services:
+- "fulfillment.shipping.fulfillment-shipping-0.0.1"
+domains:
+- "fulfillment.shipping-0.0.1"
+---
+## Overview
+
+### Entity Properties
+
+<EntityPropertiesTable />
+
+## Relationships
+
+This entity includes references to related entities captured in the generated frontmatter properties.
+

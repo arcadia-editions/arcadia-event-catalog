@@ -1,0 +1,33 @@
+{
+  "name": "arcadia-event-catalog",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "packageManager": "pnpm@10.34.5+sha512.a4ee05f2f73658255bd6a89859c065a45c28a57daefae2c893a168ee2b73168c37b91e83e57ea67654ad03f03031746430e8bce38e362e042605fb8abc80192e",
+  "engines": {
+    "node": "24.18.1",
+    "pnpm": "10.34.5"
+  },
+  "scarfSettings": {
+    "enabled": false
+  },
+  "scripts": {
+    "build": "node scripts/run-eventcatalog.mjs build",
+    "dev": "node scripts/run-eventcatalog.mjs dev",
+    "preview": "node scripts/run-eventcatalog.mjs preview",
+    "test": "vitest run tests",
+    "verify:security": "node scripts/verify-lockfile.mjs",
+    "security:audit": "pnpm audit --audit-level moderate",
+    "zenwave:setup": "bash scripts/install-zenwave-alias.sh",
+    "generate": "bash scripts/generate-catalog.sh"
+  },
+  "dependencies": {
+    "@eventcatalog/core": "4.3.2",
+    "js-yaml": "4.3.0",
+    "jsonpath-plus": "10.4.0"
+  },
+  "devDependencies": {
+    "@types/js-yaml": "4.0.9",
+    "vitest": "4.1.10"
+  }
+}

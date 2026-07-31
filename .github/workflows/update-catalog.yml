@@ -1,0 +1,140 @@
+name: Regenerate event catalog
+
+on:
+  repository_dispatch:
+    types:
+      - api-updated
+  workflow_dispatch:
+    inputs:
+      zenwave_alias:
+        description: Pinned ZenWave JBang catalog alias to install.
+        required: true
+        default: release@zenwave360/zenwave-sdk
+        type: choice
+        options:
+          - release@zenwave360/zenwave-sdk
+          - snapshots@zenwave360/zenwave-sdk
+          - next@zenwave360/zenwave-sdk
+
+permissions:
+  contents: read
+
+concurrency:
+  group: regenerate-event-catalog
+  cancel-in-progress: false
+
+jobs:
+  regenerate:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 180
+    permissions:
+      actions: write
+      contents: write
+      pull-requests: write
+    env:
+      GH_TOKEN: ${{ github.token }}
+      REQUESTED_ZENWAVE_ALIAS: ${{ inputs.zenwave_alias || vars.ZENWAVE_ALIAS || 'release@zenwave360/zenwave-sdk' }}
+    steps:
+      - name: Check out protected main
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+        with:
+          ref: main
+          fetch-depth: 0
+          persist-credentials: false
+
+      - name: Set up pinned Java
+        uses: actions/setup-java@c1e323688fd81a25caa38c78aa6df2d33d3e20d9 # v4.7.1
+        with:
+          distribution: temurin
+          java-version: '21'
+
+      - name: Set up pinned Node.js
+        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
+        with:
+          node-version: '24.18.1'
+
+      - name: Activate the pinned package manager
+        shell: bash
+        run: |
+          corepack enable
+          corepack prepare pnpm@10.34.5 --activate
+          pnpm --version
+
+      - name: Install the pinned JBang distribution and ZenWave alias
+        shell: bash
+        env:
+          ZENWAVE_ALIAS: ${{ env.REQUESTED_ZENWAVE_ALIAS }}
+        run: |
+          chmod +x scripts/*.sh
+          scripts/setup-jbang.sh 0.138.0
+          scripts/install-zenwave-alias.sh
+
+      - name: Install reviewed dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Regenerate the complete catalog
+        shell: bash
+        run: scripts/generate-catalog.sh
+
+      - name: Verify and build before writing to GitHub
+        run: |
+          pnpm run verify:security
+          pnpm test
+          pnpm build
+
+      - name: Create the generated-content branch
+        id: changes
+        shell: bash
+        run: |
+          if git diff --quiet -- event-catalog-content; then
+            echo "changed=false" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+
+          update_branch="catalog/update-${GITHUB_RUN_ID}-${GITHUB_RUN_ATTEMPT}"
+          git config user.name 'arcadia-event-catalog[bot]'
+          git config user.email 'arcadia-event-catalog[bot]@users.noreply.github.com'
+          git switch -c "$update_branch"
+          git add event-catalog-content
+          git commit -m "Regenerate event catalog"
+          gh auth setup-git
+          git push --set-upstream origin "$update_branch"
+          echo "branch=$update_branch" >> "$GITHUB_OUTPUT"
+          echo "changed=true" >> "$GITHUB_OUTPUT"
+
+      - name: Open and merge through main branch protection
+        if: steps.changes.outputs.changed == 'true'
+        id: pull_request
+        shell: bash
+        env:
+          UPDATE_BRANCH: ${{ steps.changes.outputs.branch }}
+        run: |
+          pr_url="$(gh pr create \
+            --base main \
+            --head "$UPDATE_BRANCH" \
+            --title 'Regenerate event catalog' \
+            --body 'Generated from the complete Arcadia Editions architecture manifest by the pinned ZenWave EventCatalog generator workflow.')"
+
+          for attempt in $(seq 1 240); do
+            state="$(gh pr view "$pr_url" --json state --jq .state)"
+            [[ "$state" != 'MERGED' ]] || break
+            [[ "$state" == 'OPEN' ]] || {
+              echo "Catalog pull request entered state $state" >&2
+              exit 1
+            }
+            if gh pr merge "$pr_url" --merge --delete-branch; then
+              break
+            fi
+            sleep 30
+          done
+
+          [[ "$(gh pr view "$pr_url" --json state --jq .state)" == 'MERGED' ]] || {
+            echo 'Catalog pull request did not merge before timeout' >&2
+            exit 1
+          }
+          echo "url=$pr_url" >> "$GITHUB_OUTPUT"
+
+      - name: Publish the merged main revision
+        if: steps.changes.outputs.changed == 'true'
+        shell: bash
+        run: gh workflow run publish-pages.yml --ref main
