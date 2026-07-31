@@ -1,0 +1,35 @@
+---
+id: "orders.checkout"
+name: "Checkout"
+summary: "Customer checkout, order commitment, and commercial orchestration"
+version: "0.0.1"
+services:
+- id: "orders.checkout.orders-checkout"
+  version: "0.0.1"
+entities:
+- id: "orders.checkout.orders-checkout.order"
+  version: "0.0.1"
+sends:
+- id: "orders.checkout.orders-checkout.order-created-event-v1"
+- id: "orders.checkout.orders-checkout.stock-unavailable-event-v1"
+- id: "orders.checkout.orders-checkout.order-confirmed-event-v1"
+- id: "orders.checkout.orders-checkout.order-cancelled-event-v1"
+---
+Customer checkout, order commitment, and commercial orchestration
+
+## Overview
+
+This page is generated from the ZenWave architecture model and EventCatalog frontmatter.
+
+<NodeGraph />
+
+<MessageTable format="all" limit={8} showChannels={true} title="Messages in and out" />
+
+## Entity Map
+
+<EntityMap />
+
+## Related Resources
+
+<ResourceGroupTable id="related-resources" limit={8} showOwners={true} title="Core resources" />
+

@@ -1,0 +1,68 @@
+---
+id: "fulfillment.shipping.fulfillment-shipping"
+name: "Fulfillment Shipping"
+summary: "Owns scheduling and readiness of shipping operations after an order is confirmed"
+version: "0.0.1"
+specifications:
+- type: "asyncapi"
+  path: "https://github.com/arcadia-editions/fulfillment-shipping-api/raw/main/asyncapi.yml"
+- type: "openapi"
+  path: "openapi.yml"
+sends:
+- id: "fulfillment.shipping.fulfillment-shipping.fulfillment-scheduled-event-v1"
+- id: "fulfillment.shipping.fulfillment-shipping.fulfillment-failed-event-v1"
+- id: "fulfillment.shipping.fulfillment-shipping.fulfillment-ready-to-ship-event-v1"
+entities:
+- id: "fulfillment.shipping.fulfillment-shipping.fulfillment"
+  version: "0.0.1"
+---
+## Overview
+
+Owns scheduling and readiness of shipping operations after an order is confirmed
+
+<NodeGraph />
+
+## Message Flow
+
+<MessageTable format="all" limit={8} showChannels={true} />
+
+## Domain Model
+
+<EntityMap />
+
+## Specifications
+
+The linked specifications in the frontmatter drive EventCatalog reference views for this service.
+
+# Fulfillment Shipping
+
+## Description
+
+Fulfillment Shipping is the bounded context that owns the operational step after
+an order is commercially confirmed. It schedules fulfillment, decides whether
+shipping can proceed, and moves the order toward physical delivery readiness.
+
+It represents the operational side of the flow after the commercial sale has
+already been confirmed.
+
+## Scope
+
+- Schedule fulfillment after an order is confirmed
+- Hold shipping address and item-level fulfillment data needed for execution
+- Decide whether the shipment is ready to proceed or has failed
+- Publish shipping outcomes used by payment capture and downstream operations
+
+## Main domain elements
+
+- &#x60;Fulfillment&#x60;: aggregate for shipment scheduling and readiness
+- &#x60;FulfillmentShippingService&#x60;: commands for scheduling and preparing shipments
+- &#x60;FulfillmentScheduled&#x60;: event announcing shipping work has been scheduled
+- &#x60;FulfillmentFailed&#x60;: event announcing fulfillment could not proceed
+- &#x60;FulfillmentReadyToShip&#x60;: event announcing the order is ready for shipment
+
+2026-05-21
+
+- added &#x60;README.md&#x60; describing Fulfillment Shipping as a bounded context
+- added &#x60;SUMMARY.md&#x60; with the business-purpose summary for event catalog generation
+- added this &#x60;CHANGE.log&#x60; to track documentation updates
+

@@ -1,0 +1,42 @@
+---
+id: "orders.checkout.orders-checkout.order"
+name: "Order"
+version: "0.0.1"
+aggregateRoot: true
+identifier: "orderId"
+properties:
+- name: "orderId"
+  type: "String"
+  required: true
+- name: "status"
+  type: "OrderStatus"
+  required: true
+  references: "OrderStatus"
+  enum:
+  - "CREATED"
+  - "CONFIRMED"
+  - "CANCELLED"
+- name: "items"
+  type: "String"
+  required: true
+- name: "createdAt"
+  type: "Instant"
+- name: "confirmedAt"
+  type: "Instant"
+- name: "cancelledAt"
+  type: "Instant"
+services:
+- "orders.checkout.orders-checkout-0.0.1"
+domains:
+- "orders.checkout-0.0.1"
+---
+## Overview
+
+### Entity Properties
+
+<EntityPropertiesTable />
+
+## Relationships
+
+This entity includes references to related entities captured in the generated frontmatter properties.
+

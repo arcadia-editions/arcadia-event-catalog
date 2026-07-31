@@ -1,0 +1,66 @@
+---
+id: "catalog.catalog-management.catalog-products"
+name: "Catalog Products"
+summary: "Manages product catalog definitions, release metadata, and publication lifecycle"
+version: "0.0.1"
+specifications:
+- type: "asyncapi"
+  path: "https://github.com/arcadia-editions/catalog-products-api/raw/main/asyncapi.yml"
+- type: "openapi"
+  path: "https://github.com/arcadia-editions/catalog-products-api/raw/main/openapi.yml"
+sends:
+- id: "catalog.catalog-management.catalog-products.product-published-event-v1"
+- id: "catalog.catalog-management.catalog-products.product-retired-event-v1"
+entities:
+- id: "catalog.catalog-management.catalog-products.product"
+  version: "0.0.1"
+---
+## Overview
+
+Manages product catalog definitions, release metadata, and publication lifecycle
+
+<NodeGraph />
+
+## Message Flow
+
+<MessageTable format="all" limit={8} showChannels={true} />
+
+## Domain Model
+
+<EntityMap />
+
+## Specifications
+
+The linked specifications in the frontmatter drive EventCatalog reference views for this service.
+
+# Product Catalog
+
+## Description
+
+Product Catalog is the bounded context that defines what Arcadia Editions sells.
+It owns the commercial identity of each release, including the SKU, description,
+pricing, edition size, launch readiness, and publication lifecycle.
+
+It tells the rest of the platform what exists in the catalog, while leaving stock
+reservation and scarcity control to Catalog Inventory.
+
+## Scope
+
+- Create and maintain product definitions
+- Manage publication and retirement lifecycle
+- Own catalog-facing product attributes such as title, description, price, and launch date
+- Define inventory tracking mode metadata for each release
+
+## Main domain elements
+
+- &#x60;Product&#x60;: aggregate for the commercial definition of a release
+- &#x60;ProductCatalogService&#x60;: commands for creating, updating, publishing, and retiring products
+- &#x60;ProductPublished&#x60;: event announcing a release is available to downstream contexts
+- &#x60;ProductRetired&#x60;: event announcing a release is no longer active in the catalog
+
+2026-05-21
+
+- restructured &#x60;README.md&#x60; so it acts as the repository index
+- added &#x60;SUMMARY.md&#x60; with bounded context description, scope, and main domain elements
+- added this &#x60;CHANGELOG.md&#x60; to track documentation updates
+

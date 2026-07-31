@@ -1,0 +1,71 @@
+---
+id: "orders.checkout.orders-checkout"
+name: "Orders Checkout"
+summary: "Owns checkout flow, order lifecycle, and the handoff from purchase intent\
+  \ to confirmed order"
+version: "0.0.1"
+specifications:
+- type: "asyncapi"
+  path: "https://github.com/arcadia-editions/orders-checkout-api/raw/main/asyncapi.yml"
+- type: "openapi"
+  path: "https://github.com/arcadia-editions/orders-checkout-api/raw/main/openapi.yml"
+sends:
+- id: "orders.checkout.orders-checkout.order-created-event-v1"
+- id: "orders.checkout.orders-checkout.stock-unavailable-event-v1"
+- id: "orders.checkout.orders-checkout.order-confirmed-event-v1"
+- id: "orders.checkout.orders-checkout.order-cancelled-event-v1"
+entities:
+- id: "orders.checkout.orders-checkout.order"
+  version: "0.0.1"
+---
+## Overview
+
+Owns checkout flow, order lifecycle, and the handoff from purchase intent to confirmed order
+
+<NodeGraph />
+
+## Message Flow
+
+<MessageTable format="all" limit={8} showChannels={true} />
+
+## Domain Model
+
+<EntityMap />
+
+## Specifications
+
+The linked specifications in the frontmatter drive EventCatalog reference views for this service.
+
+# Orders Checkout
+
+## Description
+
+Orders Checkout is the bounded context that owns the commercial commitment to
+buy. It starts the checkout, reacts to stock and payment outcomes, and decides
+whether the order is created, confirmed, or cancelled.
+
+It is the service that marks the transition from customer purchase intent into a
+real order that other operational contexts can act on.
+
+## Scope
+
+- Start customer checkout for selected items
+- Own the order lifecycle from creation to confirmation or cancellation
+- Publish the pivotal &#x60;OrderConfirmed&#x60; event that shifts the flow into operations
+- React to stock and payment outcomes without owning payment or inventory rules
+
+## Main domain elements
+
+- &#x60;Order&#x60;: aggregate for the checkout commitment
+- &#x60;OrdersCheckoutService&#x60;: commands for starting checkout, confirming, and cancelling orders
+- &#x60;OrderCreated&#x60;: event announcing that checkout successfully created an order
+- &#x60;OrderConfirmed&#x60;: event that hands the flow off to downstream operational contexts
+- &#x60;OrderCancelled&#x60;: event announcing the commercial flow could not complete
+- &#x60;StockUnavailable&#x60;: commercial outcome when checkout cannot secure scarce stock
+
+2026-05-21
+
+- rewrote &#x60;README.md&#x60; to explain Orders Checkout as a bounded context
+- added &#x60;SUMMARY.md&#x60; with the business-purpose summary for event catalog generation
+- added this &#x60;CHANGE.log&#x60; to track documentation updates
+

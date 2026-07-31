@@ -1,0 +1,10 @@
+diff --git a/dist/server.js b/dist/server.js
+index fbcf5a1..75510af 100644
+--- a/dist/server.js
++++ b/dist/server.js
+@@ -1,4 +1,4 @@
+-import opts from "astro:react:opts";
++const opts = {};
+ import React from "react";
+ import ReactDOM from "react-dom/server";
+ import { incrementId } from "./context.js";

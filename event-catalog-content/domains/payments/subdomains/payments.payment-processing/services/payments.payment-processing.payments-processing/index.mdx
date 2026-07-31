@@ -1,0 +1,81 @@
+---
+id: "payments.payment-processing.payments-processing"
+name: "Payments Processing"
+summary: "Owns payment authorization, retries, capture, voiding, and provider-facing\
+  \ outcomes"
+version: "0.0.1"
+specifications:
+- type: "asyncapi"
+  path: "https://github.com/arcadia-editions/payments-processing-api/raw/main/asyncapi.yml"
+- type: "openapi"
+  path: "openapi.yml"
+sends:
+- id: "payments.payment-processing.payments-processing.payment-authorized-event-v1"
+- id: "payments.payment-processing.payments-processing.payment-declined-event-v1"
+- id: "payments.payment-processing.payments-processing.payment-failed-event-v1"
+- id: "payments.payment-processing.payments-processing.payment-retried-event-v1"
+- id: "payments.payment-processing.payments-processing.payment-retry-exhausted-event-v1"
+- id: "payments.payment-processing.payments-processing.payment-captured-event-v1"
+- id: "payments.payment-processing.payments-processing.payment-capture-failed-event-v1"
+- id: "payments.payment-processing.payments-processing.payment-voided-event-v1"
+receives:
+- id: "payments.payment-processing.payments-processing.payment-failed-event-v1"
+- id: "payments.payment-processing.payments-processing.payment-capture-failed-event-v1"
+entities:
+- id: "payments.payment-processing.payments-processing.payment"
+  version: "0.0.1"
+---
+## Overview
+
+Owns payment authorization, retries, capture, voiding, and provider-facing outcomes
+
+<NodeGraph />
+
+## Message Flow
+
+<MessageTable format="all" limit={8} showChannels={true} />
+
+## Domain Model
+
+<EntityMap />
+
+## Specifications
+
+The linked specifications in the frontmatter drive EventCatalog reference views for this service.
+
+# Payments Processing
+
+## Description
+
+Payments Processing is the bounded context that owns the money side of an
+Arcadia Editions order. It handles authorization, retries, capture, voiding, and
+the integration details required to work with external payment providers.
+
+It gives the rest of the platform trustworthy payment outcomes without owning the
+order, stock, or shipping domains.
+
+## Scope
+
+- Authorize payment when an order is created
+- Retry failed payment attempts when policy allows it
+- Capture payment once fulfillment has been scheduled
+- Void payment when fulfillment fails or capture cannot complete
+- Own provider references, failure reasons, and payment attempt tracking
+
+## Main domain elements
+
+- &#x60;Payment&#x60;: aggregate for provider interaction and payment state
+- &#x60;PaymentsProcessingService&#x60;: commands for authorization, retry, capture, and void
+- &#x60;PaymentAuthorized&#x60;: event announcing successful authorization
+- &#x60;PaymentDeclined&#x60;: event announcing a provider rejection
+- &#x60;PaymentFailed&#x60;: event announcing a technical or operational authorization failure
+- &#x60;PaymentCaptured&#x60;: event announcing funds were captured successfully
+- &#x60;PaymentCaptureFailed&#x60;: event announcing capture did not complete
+- &#x60;PaymentVoided&#x60;: event announcing the payment was compensated
+
+2026-05-21
+
+- added &#x60;README.md&#x60; describing Payments Processing as a bounded context
+- added &#x60;SUMMARY.md&#x60; with the business-purpose summary for event catalog generation
+- added this &#x60;CHANGE.log&#x60; to track documentation updates
+
