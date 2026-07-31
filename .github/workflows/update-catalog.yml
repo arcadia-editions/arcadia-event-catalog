@@ -67,6 +67,9 @@ jobs:
         run: |
           chmod +x scripts/*.sh
           scripts/setup-jbang.sh 0.138.0
+          while IFS= read -r new_path; do
+            export PATH="$new_path:$PATH"
+          done < "$GITHUB_PATH"
           scripts/install-zenwave-alias.sh
 
       - name: Install reviewed dependencies
