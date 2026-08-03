@@ -2,14 +2,18 @@
 id: "catalog.inventory-management.catalog-inventory.stock-adjusted-event-v1"
 name: "stock-adjusted-event-v1"
 version: "0.0.1"
+schemaPath: "https://github.com/arcadia-editions/catalog-inventory-api/raw/main/avro/StockAdjusted.avsc"
 producers:
 - "catalog.inventory-management.catalog-inventory-0.0.1"
 channels:
 - id: "catalog.inventory-management.catalog-inventory.stock-adjusted-event-v1"
 ---
+import RemoteSpecificationSchema from '@catalog/components/RemoteSpecificationSchema.astro';
+
 ## Overview
 
 Generated event reference page.
 
-<NodeGraph />
+<NodeGraph />## Schema
 
+<RemoteSpecificationSchema url="https://github.com/arcadia-editions/catalog-inventory-api/raw/main/asyncapi.yml" channel="stock-adjusted-event-v1" channelMessage="StockAdjustedMessage" />
