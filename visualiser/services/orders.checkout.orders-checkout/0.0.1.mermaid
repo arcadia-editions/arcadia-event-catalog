@@ -1,0 +1,26 @@
+%% EventCatalog Mermaid Diagram
+%% Resource: services/orders.checkout.orders-checkout (v0.0.1)
+%% Generated: 2026-08-03T19:48:11.088Z
+
+flowchart LR
+
+    %% Style definitions
+    classDef services fill:#ec4899,stroke:#be185d,color:#fff
+    classDef events fill:#f97316,stroke:#c2410c,color:#fff
+
+    %% Nodes
+    orders_checkout_orders_checkout_0_0_1[["Orders Checkout (0.0.1)"]]:::services
+    orders_checkout_orders_checkout_order_created_event_v1_0_0_1>"order-created-event-v1 (0.0.1)"]:::events
+    orders_checkout_orders_checkout_stock_unavailable_event_v1_0_0_1>"stock-unavailable-event-v1 (0.0.1)"]:::events
+    orders_checkout_orders_checkout_order_confirmed_event_v1_0_0_1>"order-confirmed-event-v1 (0.0.1)"]:::events
+    orders_checkout_orders_checkout_order_cancelled_event_v1_0_0_1>"order-cancelled-event-v1 (0.0.1)"]:::events
+
+    %% Edges
+    orders_checkout_orders_checkout_0_0_1 -->|"publishes  event"| orders_checkout_orders_checkout_order_created_event_v1_0_0_1
+    orders_checkout_orders_checkout_order_created_event_v1_0_0_1 -->|"routes to"| orders_checkout_orders_checkout_order_created_event_v1_0_0_1
+    orders_checkout_orders_checkout_0_0_1 -->|"publishes  event"| orders_checkout_orders_checkout_stock_unavailable_event_v1_0_0_1
+    orders_checkout_orders_checkout_stock_unavailable_event_v1_0_0_1 -->|"routes to"| orders_checkout_orders_checkout_stock_unavailable_event_v1_0_0_1
+    orders_checkout_orders_checkout_0_0_1 -->|"publishes  event"| orders_checkout_orders_checkout_order_confirmed_event_v1_0_0_1
+    orders_checkout_orders_checkout_order_confirmed_event_v1_0_0_1 -->|"routes to"| orders_checkout_orders_checkout_order_confirmed_event_v1_0_0_1
+    orders_checkout_orders_checkout_0_0_1 -->|"publishes  event"| orders_checkout_orders_checkout_order_cancelled_event_v1_0_0_1
+    orders_checkout_orders_checkout_order_cancelled_event_v1_0_0_1 -->|"routes to"| orders_checkout_orders_checkout_order_cancelled_event_v1_0_0_1

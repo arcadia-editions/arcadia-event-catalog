@@ -1,0 +1,26 @@
+%% EventCatalog Mermaid Diagram
+%% Resource: domains/notifications.customer-communications (v0.0.1)
+%% Generated: 2026-08-03T19:48:11.119Z
+
+flowchart LR
+
+    %% Style definitions
+    classDef services fill:#ec4899,stroke:#be185d,color:#fff
+    classDef events fill:#f97316,stroke:#c2410c,color:#fff
+
+    %% Nodes
+    notifications_customer_communications_notifications_consumer_0_0_1[["Notifications Consumer (0.0.1)"]]:::services
+    notifications_customer_communications_notifications_consumer_order_confirmation_sent_event_v1_0_0_1>"order-confirmation-sent-event-v1 (0.0.1)"]:::events
+    notifications_customer_communications_notifications_consumer_notification_delivery_failed_event_v1_0_0_1>"notification-delivery-failed-event-v1 (0.0.1)"]:::events
+    notifications_customer_communications_notifications_consumer_stock_unavailable_notification_sent_event_v1_0_0_1>"stock-unavailable-notification-sent-event-v1 (0.0.1)"]:::events
+    notifications_customer_communications_notifications_consumer_order_cancelled_notification_sent_event_v1_0_0_1>"order-cancelled-notification-sent-event-v1 (0.0.1)"]:::events
+
+    %% Edges
+    notifications_customer_communications_notifications_consumer_0_0_1 -->|"publishes  event"| notifications_customer_communications_notifications_consumer_order_confirmation_sent_event_v1_0_0_1
+    notifications_customer_communications_notifications_consumer_order_confirmation_sent_event_v1_0_0_1 -->|"routes to"| notifications_customer_communications_notifications_consumer_order_confirmation_sent_event_v1_0_0_1
+    notifications_customer_communications_notifications_consumer_0_0_1 -->|"publishes  event"| notifications_customer_communications_notifications_consumer_notification_delivery_failed_event_v1_0_0_1
+    notifications_customer_communications_notifications_consumer_notification_delivery_failed_event_v1_0_0_1 -->|"routes to"| notifications_customer_communications_notifications_consumer_notification_delivery_failed_event_v1_0_0_1
+    notifications_customer_communications_notifications_consumer_0_0_1 -->|"publishes  event"| notifications_customer_communications_notifications_consumer_stock_unavailable_notification_sent_event_v1_0_0_1
+    notifications_customer_communications_notifications_consumer_stock_unavailable_notification_sent_event_v1_0_0_1 -->|"routes to"| notifications_customer_communications_notifications_consumer_stock_unavailable_notification_sent_event_v1_0_0_1
+    notifications_customer_communications_notifications_consumer_0_0_1 -->|"publishes  event"| notifications_customer_communications_notifications_consumer_order_cancelled_notification_sent_event_v1_0_0_1
+    notifications_customer_communications_notifications_consumer_order_cancelled_notification_sent_event_v1_0_0_1 -->|"routes to"| notifications_customer_communications_notifications_consumer_order_cancelled_notification_sent_event_v1_0_0_1

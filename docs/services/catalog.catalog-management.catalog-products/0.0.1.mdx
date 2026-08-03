@@ -1,0 +1,142 @@
+---
+id: catalog.catalog-management.catalog-products
+name: Catalog Products
+summary: >-
+  Manages product catalog definitions, release metadata, and publication
+  lifecycle
+version: 0.0.1
+specifications:
+  - type: asyncapi
+    path: >-
+      https://github.com/arcadia-editions/catalog-products-api/raw/main/asyncapi.yml
+  - type: openapi
+    path: >-
+      https://github.com/arcadia-editions/catalog-products-api/raw/main/openapi.yml
+sends:
+  - id: catalog.catalog-management.catalog-products.product-published-event-v1
+    to:
+      - id: catalog.catalog-management.catalog-products.product-published-event-v1
+  - id: catalog.catalog-management.catalog-products.product-retired-event-v1
+    to:
+      - id: catalog.catalog-management.catalog-products.product-retired-event-v1
+entities:
+  - id: catalog.catalog-management.catalog-products.product
+    version: 0.0.1
+---
+## OverviewManages product catalog definitions, release metadata, and publication lifecycle<NodeGraph />## Message Flow
+
+<MessageTable format="all" limit={8} showChannels={true} />## Domain Model
+
+<EntityMap />## Specifications
+
+The linked specifications in the frontmatter drive EventCatalog reference views for this service.# Product Catalog
+
+## Description
+
+Product Catalog is the bounded context that defines what Arcadia Editions sells.
+It owns the commercial identity of each release, including the SKU, description,
+pricing, edition size, launch readiness, and publication lifecycle.
+
+It tells the rest of the platform what exists in the catalog, while leaving stock
+reservation and scarcity control to Catalog Inventory.
+
+## Scope
+
+- Create and maintain product definitions
+- Manage publication and retirement lifecycle
+- Own catalog-facing product attributes such as title, description, price, and launch date
+- Define inventory tracking mode metadata for each release
+
+## Main domain elements
+
+- &#x60;Product&#x60;: aggregate for the commercial definition of a release
+- &#x60;ProductCatalogService&#x60;: commands for creating, updating, publishing, and retiring products
+- &#x60;ProductPublished&#x60;: event announcing a release is available to downstream contexts
+- &#x60;ProductRetired&#x60;: event announcing a release is no longer active in the catalog
+# Catalog Products
+
+## Overview
+
+Catalog Products is the publishing home for the commercial definition of every
+Arcadia Editions release. It gives each offering a clear, enduring identity and
+establishes the information needed for people across the business to understand
+what is being presented for sale. The service treats a product as more than a
+listing: it is the considered expression of an edition&#x27;s title, character,
+commercial proposition, and place in the catalogue.
+
+This page describes the business capability represented by Catalog Products. It
+is intended as a durable guide to the service&#x27;s purpose and language, rather
+than a technical reference. The detailed contracts and artifacts in the
+repository remain the source for precise integration and delivery information.
+
+## Domain context
+
+Catalog Products sits within the Catalog Management subdomain of the Catalog &amp;
+Inventory domain. Catalog Management is concerned with defining the offer that
+Arcadia Editions brings to market: the releases it curates, the qualities that
+distinguish them, and the conditions under which they are presented as part of
+the active catalogue.
+
+For a limited-edition business, a product definition provides the stable
+commercial frame around an edition. It captures the qualities that make a
+release recognisable and marketable, while allowing the catalogue to remain
+intentional as collections, seasons, and editorial priorities change. This
+bounded context creates a common business understanding of each release without
+turning the catalogue into a record of operational activity.
+
+## Responsibilities
+
+Catalog Products maintains the authoritative commercial definition of a
+product. Its responsibilities include establishing product records, curating the
+customer-facing information that explains an offering, and keeping that
+information coherent throughout the product&#x27;s catalogue life.
+
+It manages the progression from an internal product definition to an offering
+that is suitable for publication, and later to a state in which it is no longer
+presented as active. This includes stewardship of descriptive, pricing,
+edition, and release-oriented information so that product material remains
+meaningful, accurate, and consistent over time.
+
+The service also records the inventory-tracking intent associated with a
+release. That role is deliberately descriptive: it helps express how an
+offering should be understood in the catalogue without taking ownership of the
+day-to-day accounting of units. In this way, Catalog Products preserves the
+business meaning of an edition while leaving operational concerns in their
+proper place.
+
+## Boundaries
+
+Catalog Products owns the commercial identity and publication lifecycle of a
+release. It does not determine the physical availability of copies, make
+allocation decisions, maintain fulfilment activity, or carry out financial
+processing. It is also not a content-management system for every possible
+editorial asset; its focus is the product information needed to define and
+present an offer coherently.
+
+The boundary keeps catalogue decisions understandable and auditable. Changes to
+how a product is named, described, positioned, priced, or presented belong here
+when they affect the commercial definition. Matters concerned with operational
+execution, customer interaction, or downstream administration remain outside
+this service&#x27;s responsibility.
+
+## Business value
+
+By giving every release a dependable commercial definition, Catalog Products
+helps Arcadia Editions present a catalogue that is clear, curated, and aligned
+with its editorial standards. It reduces ambiguity around what an offering is
+and how it should be represented, supporting confident decisions by commercial
+and editorial teams.
+
+The service also makes change more deliberate. A defined publication lifecycle
+allows the organisation to prepare releases thoughtfully, present them at the
+right moment, and retire them without losing the historical meaning of the
+catalogue. The result is a more trustworthy product estate: one that can evolve
+with the collection while keeping each edition&#x27;s commercial story intact.
+2026-05-21
+
+- restructured &#x60;README.md&#x60; so it acts as the repository index
+- added &#x60;SUMMARY.md&#x60; with bounded context description, scope, and main domain elements
+- added this &#x60;CHANGELOG.md&#x60; to track documentation updates
+- added &#x60;EVENT_CATALOG.md&#x60; with the service-level event catalog description
+
+

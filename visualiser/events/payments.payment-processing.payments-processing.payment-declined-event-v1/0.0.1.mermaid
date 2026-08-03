@@ -1,0 +1,19 @@
+%% EventCatalog Mermaid Diagram
+%% Resource: events/payments.payment-processing.payments-processing.payment-declined-event-v1 (v0.0.1)
+%% Generated: 2026-08-03T19:48:11.023Z
+
+flowchart LR
+
+    %% Style definitions
+    classDef events fill:#f97316,stroke:#c2410c,color:#fff
+    classDef services fill:#ec4899,stroke:#be185d,color:#fff
+    classDef channels fill:#6b7280,stroke:#374151,color:#fff
+
+    %% Nodes
+    payments_payment_processing_payments_processing_payment_declined_event_v1_0_0_1>"payment-declined-event-v1 (0.0.1)"]:::events
+    payments_payment_processing_payments_processing_0_0_1[["Payments Processing (0.0.1)"]]:::services
+    payments_payment_processing_payments_processing_payment_declined_event_v1_0_0_1[("payment-declined-event-v1 (0.0.1)")]:::channels
+
+    %% Edges
+    payments_payment_processing_payments_processing_0_0_1 -->|"publishes  event"| payments_payment_processing_payments_processing_payment_declined_event_v1_0_0_1
+    payments_payment_processing_payments_processing_payment_declined_event_v1_0_0_1 -->|"routes to"| payments_payment_processing_payments_processing_payment_declined_event_v1_0_0_1

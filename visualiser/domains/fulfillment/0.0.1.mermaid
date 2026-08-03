@@ -1,0 +1,23 @@
+%% EventCatalog Mermaid Diagram
+%% Resource: domains/fulfillment (v0.0.1)
+%% Generated: 2026-08-03T19:48:11.124Z
+
+flowchart LR
+
+    %% Style definitions
+    classDef services fill:#ec4899,stroke:#be185d,color:#fff
+    classDef events fill:#f97316,stroke:#c2410c,color:#fff
+
+    %% Nodes
+    fulfillment_shipping_fulfillment_shipping_0_0_1[["Fulfillment Shipping (0.0.1)"]]:::services
+    fulfillment_shipping_fulfillment_shipping_fulfillment_scheduled_event_v1_0_0_1>"fulfillment-scheduled-event-v1 (0.0.1)"]:::events
+    fulfillment_shipping_fulfillment_shipping_fulfillment_failed_event_v1_0_0_1>"fulfillment-failed-event-v1 (0.0.1)"]:::events
+    fulfillment_shipping_fulfillment_shipping_fulfillment_ready_to_ship_event_v1_0_0_1>"fulfillment-ready-to-ship-event-v1 (0.0.1)"]:::events
+
+    %% Edges
+    fulfillment_shipping_fulfillment_shipping_0_0_1 -->|"publishes  event"| fulfillment_shipping_fulfillment_shipping_fulfillment_scheduled_event_v1_0_0_1
+    fulfillment_shipping_fulfillment_shipping_fulfillment_scheduled_event_v1_0_0_1 -->|"routes to"| fulfillment_shipping_fulfillment_shipping_fulfillment_scheduled_event_v1_0_0_1
+    fulfillment_shipping_fulfillment_shipping_0_0_1 -->|"publishes  event"| fulfillment_shipping_fulfillment_shipping_fulfillment_failed_event_v1_0_0_1
+    fulfillment_shipping_fulfillment_shipping_fulfillment_failed_event_v1_0_0_1 -->|"routes to"| fulfillment_shipping_fulfillment_shipping_fulfillment_failed_event_v1_0_0_1
+    fulfillment_shipping_fulfillment_shipping_0_0_1 -->|"publishes  event"| fulfillment_shipping_fulfillment_shipping_fulfillment_ready_to_ship_event_v1_0_0_1
+    fulfillment_shipping_fulfillment_shipping_fulfillment_ready_to_ship_event_v1_0_0_1 -->|"routes to"| fulfillment_shipping_fulfillment_shipping_fulfillment_ready_to_ship_event_v1_0_0_1

@@ -1,0 +1,19 @@
+%% EventCatalog Mermaid Diagram
+%% Resource: events/catalog.inventory-management.catalog-inventory.stock-received-event-v1 (v0.0.1)
+%% Generated: 2026-08-03T19:48:11.046Z
+
+flowchart LR
+
+    %% Style definitions
+    classDef events fill:#f97316,stroke:#c2410c,color:#fff
+    classDef services fill:#ec4899,stroke:#be185d,color:#fff
+    classDef channels fill:#6b7280,stroke:#374151,color:#fff
+
+    %% Nodes
+    catalog_inventory_management_catalog_inventory_stock_received_event_v1_0_0_1>"stock-received-event-v1 (0.0.1)"]:::events
+    catalog_inventory_management_catalog_inventory_0_0_1[["Catalog Inventory (0.0.1)"]]:::services
+    catalog_inventory_management_catalog_inventory_stock_received_event_v1_0_0_1[("stock-received-event-v1 (0.0.1)")]:::channels
+
+    %% Edges
+    catalog_inventory_management_catalog_inventory_0_0_1 -->|"publishes  event"| catalog_inventory_management_catalog_inventory_stock_received_event_v1_0_0_1
+    catalog_inventory_management_catalog_inventory_stock_received_event_v1_0_0_1 -->|"routes to"| catalog_inventory_management_catalog_inventory_stock_received_event_v1_0_0_1

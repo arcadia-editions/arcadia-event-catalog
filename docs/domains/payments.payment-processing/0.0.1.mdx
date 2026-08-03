@@ -1,0 +1,35 @@
+---
+id: "payments.payment-processing"
+name: "Payment Processing"
+summary: "Payment provider integration, lifecycle state, and compensation handling"
+version: "0.0.1"
+services:
+- id: "payments.payment-processing.payments-processing"
+  version: "0.0.1"
+entities:
+- id: "payments.payment-processing.payments-processing.payment"
+  version: "0.0.1"
+sends:
+- id: "payments.payment-processing.payments-processing.payment-authorized-event-v1"
+- id: "payments.payment-processing.payments-processing.payment-declined-event-v1"
+- id: "payments.payment-processing.payments-processing.payment-failed-event-v1"
+- id: "payments.payment-processing.payments-processing.payment-retried-event-v1"
+- id: "payments.payment-processing.payments-processing.payment-retry-exhausted-event-v1"
+- id: "payments.payment-processing.payments-processing.payment-captured-event-v1"
+- id: "payments.payment-processing.payments-processing.payment-capture-failed-event-v1"
+- id: "payments.payment-processing.payments-processing.payment-voided-event-v1"
+receives:
+- id: "payments.payment-processing.payments-processing.payment-failed-event-v1"
+- id: "payments.payment-processing.payments-processing.payment-capture-failed-event-v1"
+---
+Payment provider integration, lifecycle state, and compensation handling## Overview
+
+This page is generated from the ZenWave architecture model and EventCatalog frontmatter.
+
+<NodeGraph />
+
+<MessageTable format="all" limit={8} showChannels={true} title="Messages in and out" />## Entity Map
+
+<EntityMap />## Related Resources
+
+<ResourceGroupTable id="related-resources" limit={8} showOwners={true} title="Core resources" />

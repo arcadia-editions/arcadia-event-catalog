@@ -1,0 +1,20 @@
+%% EventCatalog Mermaid Diagram
+%% Resource: services/catalog.catalog-management.catalog-products (v0.0.1)
+%% Generated: 2026-08-03T19:48:11.073Z
+
+flowchart LR
+
+    %% Style definitions
+    classDef services fill:#ec4899,stroke:#be185d,color:#fff
+    classDef events fill:#f97316,stroke:#c2410c,color:#fff
+
+    %% Nodes
+    catalog_catalog_management_catalog_products_0_0_1[["Catalog Products (0.0.1)"]]:::services
+    catalog_catalog_management_catalog_products_product_published_event_v1_0_0_1>"product-published-event-v1 (0.0.1)"]:::events
+    catalog_catalog_management_catalog_products_product_retired_event_v1_0_0_1>"product-retired-event-v1 (0.0.1)"]:::events
+
+    %% Edges
+    catalog_catalog_management_catalog_products_0_0_1 -->|"publishes  event"| catalog_catalog_management_catalog_products_product_published_event_v1_0_0_1
+    catalog_catalog_management_catalog_products_product_published_event_v1_0_0_1 -->|"routes to"| catalog_catalog_management_catalog_products_product_published_event_v1_0_0_1
+    catalog_catalog_management_catalog_products_0_0_1 -->|"publishes  event"| catalog_catalog_management_catalog_products_product_retired_event_v1_0_0_1
+    catalog_catalog_management_catalog_products_product_retired_event_v1_0_0_1 -->|"routes to"| catalog_catalog_management_catalog_products_product_retired_event_v1_0_0_1

@@ -1,0 +1,355 @@
+<!DOCTYPE html><html lang="en" data-catalog-theme="sunset"><head><!-- Inline script to prevent flash of wrong theme --><script>(function(){const catalogTheme = "sunset";
+
+      (function () {
+        function getDefaultTheme() {
+          return 'dark';
+        }
+
+        function applyTheme() {
+          // Check localStorage first, fall back to dark mode
+          const stored = localStorage.getItem('eventcatalog-theme');
+          const theme = stored === 'light' || stored === 'dark' ? stored : getDefaultTheme();
+          document.documentElement.setAttribute('data-theme', theme);
+          // Also ensure catalog theme is set (for page transitions)
+          document.documentElement.setAttribute('data-catalog-theme', catalogTheme);
+        }
+
+        // Apply on initial load
+        applyTheme();
+
+        // Apply after Astro page transitions
+        document.addEventListener('astro:after-swap', applyTheme);
+        document.addEventListener('astro:page-load', applyTheme);
+      })();
+    })();</script><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="viewport" content="width=device-width"><link rel="icon" href="/arcadia-event-catalog/favicon.ico" sizes="any"><link rel="icon" type="image/svg+xml" href="/arcadia-event-catalog/favicon.svg"><link rel="icon" type="image/png" sizes="32x32" href="/arcadia-event-catalog/favicon-32x32.png"><link rel="icon" type="image/png" sizes="16x16" href="/arcadia-event-catalog/favicon-16x16.png"><link rel="apple-touch-icon" href="/arcadia-event-catalog/apple-touch-icon.png"><title>EventCatalog | Entities | Payment</title><link rel="canonical" href="https://arcadia-editions.github.io/arcadia-event-catalog/docs/entities/payments.payment-processing.payments-processing.payment/0.0.1/"><meta name="description" content="Discover the domains, services, APIs, messages, channels, and data models that make up Arcadia Editions."><meta name="robots" content="index, follow"><meta property="og:title" content="Entities | Payment"><meta property="og:type" content="website"><meta property="og:image" content="https://arcadia-editions.github.io/arcadia-event-catalog/_astro/opengraph.L5gHdVBc.png"><meta property="og:url" content="https://arcadia-editions.github.io/arcadia-event-catalog/"><meta property="og:image:url" content="https://arcadia-editions.github.io/arcadia-event-catalog/_astro/opengraph.L5gHdVBc.png"><meta property="og:image:secure_url" content="https://arcadia-editions.github.io/arcadia-event-catalog/_astro/opengraph.L5gHdVBc.png"><meta property="og:image:alt" content="Entities | Payment"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="Entities | Payment"><meta name="twitter:image" content="https://arcadia-editions.github.io/arcadia-event-catalog/_astro/opengraph.L5gHdVBc.png"><meta name="twitter:image:alt" content="Entities | Payment"><meta name="twitter:description" content="Discover the domains, services, APIs, messages, channels, and data models that make up Arcadia Editions."><meta name="og:locale" content="en_US"><meta name="og:description" content="Discover the domains, services, APIs, messages, channels, and data models that make up Arcadia Editions."><meta name="og:site_name" content="https://arcadia-editions.github.io/arcadia-event-catalog/"><script>(function(){const verticalNavAutoCollapsePaths = ["/arcadia-event-catalog/discover","/arcadia-event-catalog/docs"];
+
+      (() => {
+        const verticalNavStorageKey = 'eventcatalog-vertical-nav-collapsed';
+        const routeShouldAutoCollapseVerticalNav = (pathname) =>
+          verticalNavAutoCollapsePaths.some((path) => pathname === path || pathname.startsWith(`${path}/`));
+
+        try {
+          const shouldAutoCollapse = routeShouldAutoCollapseVerticalNav(window.location.pathname);
+          if (shouldAutoCollapse) {
+            localStorage.setItem(verticalNavStorageKey, 'true');
+          }
+
+          const savedState = localStorage.getItem(verticalNavStorageKey);
+          const isCollapsed = shouldAutoCollapse ? true : savedState === null ? true : savedState === 'true';
+          document.documentElement.setAttribute('data-vertical-nav-collapsed', isCollapsed ? 'true' : 'false');
+        } catch (error) {
+          document.documentElement.setAttribute('data-vertical-nav-collapsed', 'true');
+        }
+      })();
+    })();</script><style>.accordion-group .accordion{box-shadow:none;background:0 0;border:none;border-radius:0;margin:0}.accordion-group .accordion+.accordion{border-top:1px solid rgb(var(--ec-page-border))}.tile-card[data-astro-cid-iamct5lr]:hover{box-shadow:0 10px 15px -3px rgb(var(--ec-accent) / .1), 0 4px 6px -4px rgb(var(--ec-accent) / .1)}.tile-grid[data-astro-cid-iamct5lr]{background-image:linear-gradient(rgb(var(--ec-accent) / .1) 1px, transparent 1px), linear-gradient(90deg, rgb(var(--ec-accent) / .1) 1px, transparent 1px);background-size:28px 28px;mask-image:radial-gradient(#000 60%,#0000 100%)}.tile-icon[data-astro-cid-iamct5lr]{color:rgb(var(--ec-accent))}.step a{color:rgb(var(--ec-page-text-muted));text-decoration:underline;&:hover{color:#b977f9}}.line-clamp-2[data-astro-cid-4ume6x6s]{-webkit-line-clamp:2;-webkit-box-orient:vertical;display:-webkit-box;overflow:hidden}.tab-button.tab-active{color:rgb(var(--ec-accent));border-color:rgb(var(--ec-accent))}.react-flow__attribution{display:none}
+</style><link rel="stylesheet" href="/arcadia-event-catalog/_astro/VerticalSideBarLayout.DTLXwFHe.css"><style>.version-item[data-astro-cid-352buqy7]:hover{background:linear-gradient(to left, rgb(var(--ec-accent-gradient-from)), rgb(var(--ec-accent-gradient-to)))}.docs-layout .prose{max-width:none;overflow:auto}.mermaid svg{margin:1em auto 2em}.mermaid[data-content*=architecture] svg{margin:0;max-width:350px!important}.toc-active-text{color:rgb(var(--ec-accent))}.toc-active-border{border-color:rgb(var(--ec-accent))}
+</style><link rel="stylesheet" href="/arcadia-event-catalog/_astro/tailwind.CJg1p9Xp.css"><style>.react-flow__attribution{display:none}
+
+</style><link rel="stylesheet" href="/arcadia-event-catalog/_astro/styles-core.3nc7Tqe4.css"></head><body><div data-astro-transition-persist="navigation-progress" id="navigation-progress-container" data-astro-cid-hvvv4prj><div id="navigation-progress" role="progressbar" aria-label="Loading page" aria-hidden="true" data-visible="false" data-astro-cid-hvvv4prj><div class="navigation-progress__bar" data-astro-cid-hvvv4prj></div></div><span id="navigation-progress-status" class="sr-only" role="status" aria-live="polite" aria-atomic="true" data-astro-cid-hvvv4prj></span></div><script type="module">(()=>{let e,t,n=0,r=null,i=()=>document.getElementById(`navigation-progress`),a=()=>document.getElementById(`navigation-progress-status`),o=()=>{r?.removeAttribute(`aria-busy`),r?.removeAttribute(`data-navigation-pending`),r=null},s=()=>{let e=i();if(!e)return;n=performance.now(),e.dataset.visible=`true`,e.setAttribute(`aria-hidden`,`false`),document.getElementById(`content`)?.setAttribute(`aria-busy`,`true`);let t=a();t&&(t.textContent=`Loading page`)},c=()=>{let e=i();e&&(e.dataset.visible=`false`,e.setAttribute(`aria-hidden`,`true`)),document.getElementById(`content`)?.removeAttribute(`aria-busy`);let r=a();r&&(r.textContent=``),o(),n=0,t=void 0},l=n=>{e&&clearTimeout(e),t&&clearTimeout(t),o(),n.sourceElement instanceof HTMLElement&&(r=n.sourceElement,r.setAttribute(`aria-busy`,`true`),r.dataset.navigationPending=`true`),e=setTimeout(s,200)},u=()=>{if(e&&=(clearTimeout(e),void 0),!n){c();return}let r=Math.max(0,250-(performance.now()-n));t=setTimeout(c,r)},d=()=>{!e&&!t&&!n&&c()};return document.addEventListener(`astro:before-preparation`,l),document.addEventListener(`astro:after-preparation`,u),document.addEventListener(`astro:page-load`,d),()=>{e&&clearTimeout(e),t&&clearTimeout(t),c(),document.removeEventListener(`astro:before-preparation`,l),document.removeEventListener(`astro:after-preparation`,u),document.removeEventListener(`astro:page-load`,d)}})();</script><script type="module" src="/arcadia-event-catalog/_astro/SearchDataLoader.astro_astro_type_script_index_0_lang.CYx4eSN8.js"></script><main id="eventcatalog-application" class="relative"><div data-astro-transition-persist="site-header"><nav id="eventcatalog-header" class="fixed top-0 right-0 h-[60px] bg-[rgb(var(--ec-header-bg))] border-b border-[rgb(var(--ec-header-border))] py-3 font-bold text-xl z-50 text-[rgb(var(--ec-header-text))]" style="left: calc(var(--ec-vertical-nav-width, 14rem) + var(--ec-sidebar-panel-width, 20rem));" data-astro-cid-nen7h5rs><div class="px-6" data-astro-cid-nen7h5rs><div class="flex justify-between items-center" data-astro-cid-nen7h5rs><div class="hidden lg:flex flex-grow items-center" data-astro-cid-nen7h5rs><div class="w-full max-w-xl" data-astro-cid-nen7h5rs><div data-astro-cid-ufzkaqdl><div class="relative flex items-center w-full pr-4 ml-1" data-astro-cid-ufzkaqdl><input id="search-dummy-input" type="text" name="search" placeholder="Search EventCatalog" autocomplete="off" class="block w-full rounded-md caret-transparent border-0 py-1.5 pr-14 pl-10! text-[rgb(var(--ec-header-text))] bg-[rgb(var(--ec-header-bg))] shadow-xs ring-1 ring-inset ring-[rgb(var(--ec-dropdown-border))] placeholder:text-[rgb(var(--ec-icon-color))] font-light sm:text-sm sm:leading-6" data-astro-cid-ufzkaqdl><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true" data-slot="icon" class="absolute inset-y-0 left-0 h-9 w-8 flex items-center pl-4 text-[rgb(var(--ec-icon-color))]" data-astro-cid-ufzkaqdl="true"><path stroke-linecap="round" stroke-linejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z"></path></svg><div class="absolute inset-y-0 right-0 flex py-1.5 pr-6" data-astro-cid-ufzkaqdl><kbd class="inline-flex items-center rounded px-1 font-sans text-xs text-[rgb(var(--ec-icon-color))]" data-astro-cid-ufzkaqdl>⌘K</kbd></div></div></div><style>astro-island,astro-slot,astro-static-slot{display:contents}</style><script>(()=>{var l=(n,t)=>{let i=async()=>{await(await n())()},e=typeof t.value=="object"?t.value:void 0,s={timeout:e==null?void 0:e.timeout};"requestIdleCallback"in window?window.requestIdleCallback(i,s):setTimeout(i,s.timeout||200)};(self.Astro||(self.Astro={})).idle=l;window.dispatchEvent(new Event("astro:idle"));})();</script><script>(()=>{var g=Object.defineProperty;var w=(a,s,c)=>s in a?g(a,s,{enumerable:!0,configurable:!0,writable:!0,value:c}):a[s]=c;var l=(a,s,c)=>w(a,typeof s!="symbol"?s+"":s,c);var E=new Set(["__proto__","constructor","prototype"]);{let a={0:t=>y(t),1:t=>c(t),2:t=>new RegExp(t),3:t=>new Date(t),4:t=>new Map(c(t)),5:t=>new Set(c(t)),6:t=>BigInt(t),7:t=>new URL(t),8:t=>new Uint8Array(t),9:t=>new Uint16Array(t),10:t=>new Uint32Array(t),11:t=>Number.POSITIVE_INFINITY*t},s=t=>{let[p,e]=t;return p in a?a[p](e):void 0},c=t=>t.map(s),y=t=>typeof t!="object"||t===null?t:Object.fromEntries(Object.entries(t).map(([p,e])=>[p,s(e)]));class f extends HTMLElement{constructor(){super(...arguments);l(this,"Component");l(this,"hydrator");l(this,"hydrate",async()=>{var b;if(!this.hydrator||!this.isConnected)return;let e=(b=this.parentElement)==null?void 0:b.closest("astro-island[ssr]");if(e){e.addEventListener("astro:hydrate",this.hydrate,{once:!0});return}let r=this.querySelectorAll("astro-slot"),n={},d=this.querySelectorAll("template[data-astro-template]");for(let o of d){let i=o.closest(this.tagName);i!=null&&i.isSameNode(this)&&(n[o.getAttribute("data-astro-template")||"default"]=o.innerHTML,o.remove())}for(let o of r){let i=o.closest(this.tagName);i!=null&&i.isSameNode(this)&&(n[o.getAttribute("name")||"default"]=o.innerHTML)}let u;try{u=this.hasAttribute("props")?y(JSON.parse(this.getAttribute("props"))):{}}catch(o){let i=this.getAttribute("component-url")||"<unknown>",v=this.getAttribute("component-export");throw v&&(i+=` (export ${v})`),console.error(`[hydrate] Error parsing props for component ${i}`,this.getAttribute("props"),o),o}let h;await this.hydrator(this)(this.Component,u,n,{client:this.getAttribute("client")}),this.removeAttribute("ssr"),this.dispatchEvent(new CustomEvent("astro:hydrate"))});l(this,"unmount",()=>{this.isConnected||this.dispatchEvent(new CustomEvent("astro:unmount"))})}disconnectedCallback(){document.removeEventListener("astro:after-swap",this.unmount),document.addEventListener("astro:after-swap",this.unmount,{once:!0})}connectedCallback(){if(!this.hasAttribute("await-children")||document.readyState==="interactive"||document.readyState==="complete")this.childrenConnectedCallback();else{let e=()=>{document.removeEventListener("DOMContentLoaded",e),r.disconnect(),this.childrenConnectedCallback()},r=new MutationObserver(()=>{var n;((n=this.lastChild)==null?void 0:n.nodeType)===Node.COMMENT_NODE&&this.lastChild.nodeValue==="astro:end"&&(this.lastChild.remove(),e())});r.observe(this,{childList:!0}),document.addEventListener("DOMContentLoaded",e)}}async childrenConnectedCallback(){let e=this.getAttribute("before-hydration-url");e&&await import(e),this.start()}getRetryImportUrl(e){let r=new URL(e,document.baseURI);return r.searchParams.set("astro-retry",Date.now().toString()),r.toString()}async importWithRetry(e){try{return await import(e)}catch(r){return await new Promise(n=>setTimeout(n,1e3)),import(this.getRetryImportUrl(e))}}handleHydrationError(e){let r=this.getAttribute("component-url"),n=new CustomEvent("astro:hydration-error",{cancelable:!0,bubbles:!0,composed:!0,detail:{error:e,componentUrl:r}});this.dispatchEvent(n)&&console.error(`[astro-island] Error hydrating ${r}`,e)}async start(){let e=JSON.parse(this.getAttribute("opts")),r=this.getAttribute("client");if(Astro[r]===void 0){window.addEventListener(`astro:${r}`,()=>this.start(),{once:!0});return}try{await Astro[r](async()=>{let n=this.getAttribute("renderer-url");try{let[d,{default:u}]=await Promise.all([this.importWithRetry(this.getAttribute("component-url")),n?this.importWithRetry(n):Promise.resolve({default:()=>()=>{}})]),h=this.getAttribute("component-export")||"default";if(h.includes(".")){this.Component=d;for(let m of h.split(".")){if(E.has(m)||!this.Component||typeof this.Component!="object"&&typeof this.Component!="function"||!Object.hasOwn(this.Component,m))throw new Error(`Invalid component export path: ${h}`);this.Component=this.Component[m]}}else{if(E.has(h))throw new Error(`Invalid component export path: ${h}`);this.Component=d[h]}return this.hydrator=u,this.hydrate}catch(d){return this.handleHydrationError(d),()=>{}}},e,this)}catch(n){this.handleHydrationError(n)}}attributeChangedCallback(){this.hydrate()}}l(f,"observedAttributes",["props"]),customElements.get("astro-island")||customElements.define("astro-island",f)}})();</script><astro-island uid="1FGp0N" prefix="r18" component-url="/arcadia-event-catalog/_astro/SearchModal.DY9YK-AV.js" component-export="default" renderer-url="/arcadia-event-catalog/_astro/client.CW5b9o3y.js" props="{&quot;data-astro-cid-ufzkaqdl&quot;:[0,true]}" ssr client="idle" opts="{&quot;name&quot;:&quot;SearchModal&quot;,&quot;value&quot;:true}"></astro-island><script type="module">window.searchModalState={isOpen:!1,isClosing:!1,open:function(){this.isClosing||(this.isOpen=!0,this.render())},toggle:function(){this.isClosing||(this.isOpen=!this.isOpen,this.render())},close:function(){this.isOpen=!1,this.isClosing=!0,this.render(),setTimeout(()=>{this.isClosing=!1},500)},render:function(){let e=new CustomEvent(`searchModalToggle`,{detail:{isOpen:this.isOpen}});window.dispatchEvent(e)}};function e(){let e=document.getElementById(`search-dummy-input`);if(e){let t=e.cloneNode(!0);e.parentNode?.replaceChild(t,e);let n=document.getElementById(`search-dummy-input`);n?.addEventListener(`click`,function(e){e.preventDefault(),this.blur(),window.searchModalState.open()}),n?.addEventListener(`focus`,function(e){e.preventDefault(),this.blur(),window.searchModalState.open()})}}window.addEventListener(`keydown`,e=>{(e.metaKey||e.ctrlKey)&&e.key===`k`&&(e.preventDefault(),window.searchModalState.open())}),window.addEventListener(`searchModalToggle`,e=>{let t=document.getElementById(`eventcatalog-header`),n=document.getElementById(`eventcatalog-vertical-nav`),r=document.querySelectorAll(`aside[class*="fixed"][class*="z-10"]`);e.detail.isOpen?(t&&t.classList.remove(`backdrop-blur-sm`),n&&(n.style.zIndex=`-100`),r.forEach(e=>{e.style.zIndex=`-100`})):(t&&t.classList.add(`backdrop-blur-sm`),n&&(n.style.zIndex=`10`),r.forEach(e=>{e.style.zIndex=`10`}))}),e(),document.addEventListener(`astro:page-load`,e);</script></div></div><div class="hidden md:block w-3/12" data-astro-cid-nen7h5rs><div class="flex items-center space-x-4 justify-end pr-2" data-astro-cid-nen7h5rs><astro-island uid="1qeOV4" prefix="r17" component-url="/arcadia-event-catalog/_astro/ThemeToggle.CIvMFS9U.js" component-export="default" renderer-url="/arcadia-event-catalog/_astro/client.CW5b9o3y.js" props="{&quot;data-astro-cid-nen7h5rs&quot;:[0,true]}" ssr client="idle" opts="{&quot;name&quot;:&quot;ThemeToggle&quot;,&quot;value&quot;:true}" await-children><button class="p-2 rounded-md text-[rgb(var(--ec-icon-color))] hover:text-[rgb(var(--ec-icon-hover))] hover:bg-[rgb(var(--ec-dropdown-hover))] transition-colors" aria-label="Toggle theme" title="Toggle theme"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-moon w-5 h-5" aria-hidden="true"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"></path></svg></button><!--astro:end--></astro-island><ul class="flex space-x-4" data-astro-cid-nen7h5rs><li data-astro-cid-nen7h5rs><a href="https://discord.com/invite/3rjaZMmrAm" class="block p-1.5 rounded-lg hover:bg-[rgb(var(--ec-dropdown-hover))] transition-colors" aria-label="Join our Discord community" data-astro-cid-nen7h5rs><img src="/arcadia-event-catalog/icons/discord.svg" alt="" class="h-6 w-6 hover:opacity-100 transition-opacity ec-themed-icon" aria-hidden="true" data-astro-cid-nen7h5rs></a></li><li data-astro-cid-nen7h5rs><a href="https://github.com/event-catalog/eventcatalog" class="block p-1.5 rounded-lg hover:bg-[rgb(var(--ec-dropdown-hover))] transition-colors" aria-label="View EventCatalog on GitHub" data-astro-cid-nen7h5rs><img src="/arcadia-event-catalog/icons/github.svg" alt="" class="h-6 w-6 hover:opacity-100 transition-opacity ec-themed-icon" aria-hidden="true" data-astro-cid-nen7h5rs></a></li></ul></div></div><div class="md:hidden" data-astro-cid-nen7h5rs><button id="menu-toggle" type="button" class="text-[rgb(var(--ec-icon-color))] hover:text-[rgb(var(--ec-icon-hover))] focus:outline-hidden focus:text-[rgb(var(--ec-icon-hover))]" aria-label="Toggle menu" data-astro-cid-nen7h5rs><svg viewBox="0 0 24 24" class="h-6 w-6 fill-current" data-astro-cid-nen7h5rs><path fill-rule="evenodd" d="M4 5h16a1 1 0 0 1 0 2H4a1 1 0 1 1 0-2zm0 6h16a1 1 0 0 1 0 2H4a1 1 0 0 1 0-2zm0 6h16a1 1 0 0 1 0 2H4a1 1 0 0 1 0-2z" data-astro-cid-nen7h5rs></path></svg></button></div></div><div id="mobile-menu" class="md:hidden ec-hidden mt-4" data-astro-cid-nen7h5rs><ul class="flex flex-col space-y-8 my-4 mb-8" data-astro-cid-nen7h5rs><!-- {
+          navItems.map((item) => {
+            const isActive = currentPath.includes(item.href);
+            return (
+              <li class={`font-light ${isActive ? 'font-bold text-primary' : ''}`}>
+                <a href={item.href}>{item.label}</a>
+              </li>
+            );
+          })
+        } --></ul></div></div></nav><div id="eventcatalog-header-spacer" class="h-[60px]" data-astro-cid-nen7h5rs></div><!-- Spacer to prevent content from being hidden under the fixed header --><script type="module">async function e(e){let{callbackUrl:t=window.location.href,prefix:n=`/api/auth`}=e??{},{csrfToken:r}=await(await fetch(`${n}/csrf`)).json(),i=(await(await fetch(`${n}/signout`,{method:`post`,headers:{"Content-Type":`application/x-www-form-urlencoded`,"X-Auth-Return-Redirect":`1`},body:new URLSearchParams({csrfToken:r,callbackUrl:t})})).json()).url??t;window.location.href=i,i.includes(`#`)&&window.location.reload()}function t(){let t=document.getElementById(`menu-toggle`),n=document.getElementById(`mobile-menu`);t&&n&&t.addEventListener(`click`,()=>{n.classList.toggle(`ec-hidden`)});let r=document.getElementById(`profile-menu-button`),i=document.getElementById(`profile-dropdown`);r&&i&&(r.addEventListener(`click`,e=>{e.stopPropagation(),i.classList.toggle(`ec-hidden`),r.setAttribute(`aria-expanded`,i.classList.contains(`ec-hidden`)?`false`:`true`)}),document.addEventListener(`click`,e=>{!r.contains(e.target)&&!i.contains(e.target)&&(i.classList.add(`ec-hidden`),r.setAttribute(`aria-expanded`,`false`))}),document.addEventListener(`keydown`,e=>{e.key===`Escape`&&!i.classList.contains(`ec-hidden`)&&(i.classList.add(`ec-hidden`),r.setAttribute(`aria-expanded`,`false`),r.focus())}),document.getElementById(`signout-btn`)?.addEventListener(`click`,async()=>{try{await e()}catch(e){console.error(`Sign out failed:`,e),alert(`Sign out failed. Please check your AUTH_TRUST_HOST configuration if running behind a reverse proxy.`)}}))}t(),document.addEventListener(`astro:page-load`,t);</script></div><div class="app-shell app-shell--with-sidebar"><aside class="flex" id="eventcatalog-vertical-nav"><div data-astro-transition-persist="vertical-nav-rail" id="vertical-nav-rail" data-collapsed="true" class="vertical-nav-rail fixed top-0 left-0 flex flex-col h-screen z-30 transition-[width] duration-200"><a href="/arcadia-event-catalog//" aria-label="Home" class="nav-brand-link flex items-center gap-2.5 px-4 h-[3.75rem] border-b border-[rgb(var(--ec-sidebar-border)/0.7)] flex-shrink-0"><img src="/arcadia-event-catalog/logo.png" alt="EventCatalog" class="w-6 h-6 flex-shrink-0"><span class="nav-brand-text text-[15px] font-semibold text-[rgb(var(--ec-page-text))] tracking-tight">Arcadia Editions</span></a><nav class="flex flex-col flex-1 overflow-y-auto px-3 py-4 gap-1"><a id="/" href="/arcadia-event-catalog//" data-role="vertical-nav-item" aria-label="Home" class="flex items-center gap-3 px-3 py-2.5 rounded-xl border text-[13px] font-medium transition-all duration-150 border-[rgb(var(--ec-accent)/0.2)] bg-[rgb(var(--ec-page-bg)/0.88)] text-[rgb(var(--ec-accent))] shadow-sm" title="Home"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-house h-4 w-4 flex-shrink-0" aria-hidden="true"><path d="M15 21v-8a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v8"></path><path d="M3 10a2 2 0 0 1 .709-1.528l7-5.999a2 2 0 0 1 2.582 0l7 5.999A2 2 0 0 1 21 10v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path></svg><span class="nav-item-label">Home</span></a><hr class="rail-divider my-3 border-t border-[rgb(var(--ec-sidebar-border)/0.7)]"><div class="rail-section-label px-3 pb-1 text-[0.65rem] font-semibold tracking-[0.18em] uppercase text-[rgb(var(--ec-sidebar-text)/0.5)]">Browse</div><a id="/discover" href="/arcadia-event-catalog/discover/domains/" data-role="vertical-nav-item" aria-label="Catalog" class="flex items-center gap-3 px-3 py-2.5 rounded-xl border text-[13px] font-medium transition-all duration-150 border-transparent text-[rgb(var(--ec-sidebar-text))] hover:border-[rgb(var(--ec-sidebar-border)/0.65)] hover:bg-[rgb(var(--ec-page-bg)/0.78)] hover:text-[rgb(var(--ec-page-text))]" title="Catalog"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-table-properties h-4 w-4 flex-shrink-0" aria-hidden="true"><path d="M15 3v18"></path><rect width="18" height="18" x="3" y="3" rx="2"></rect><path d="M21 9H3"></path><path d="M21 15H3"></path></svg><span class="nav-item-label">Catalog</span></a><a id="/schemas/explorer" href="/arcadia-event-catalog/schemas/explorer/" data-role="vertical-nav-item" aria-label="Schemas &amp; APIs" class="flex items-center gap-3 px-3 py-2.5 rounded-xl border text-[13px] font-medium transition-all duration-150 border-transparent text-[rgb(var(--ec-sidebar-text))] hover:border-[rgb(var(--ec-sidebar-border)/0.65)] hover:bg-[rgb(var(--ec-page-bg)/0.78)] hover:text-[rgb(var(--ec-page-text))]" title="Schemas &amp; APIs"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-file-code h-4 w-4 flex-shrink-0" aria-hidden="true"><path d="M10 12.5 8 15l2 2.5"></path><path d="m14 12.5 2 2.5-2 2.5"></path><path d="M14 2v4a2 2 0 0 0 2 2h4"></path><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7z"></path></svg><span class="nav-item-label">Schemas &amp; APIs</span></a><hr class="rail-divider my-3 border-t border-[rgb(var(--ec-sidebar-border)/0.7)]"><div class="rail-section-label px-3 pb-1 text-[0.65rem] font-semibold tracking-[0.18em] uppercase text-[rgb(var(--ec-sidebar-text)/0.5)]">Organization</div><a id="/directory/teams" href="/arcadia-event-catalog/directory/teams/" data-role="vertical-nav-item" aria-label="Teams" class="flex items-center gap-3 px-3 py-2.5 rounded-xl border text-[13px] font-medium transition-all duration-150 border-transparent text-[rgb(var(--ec-sidebar-text))] hover:border-[rgb(var(--ec-sidebar-border)/0.65)] hover:bg-[rgb(var(--ec-page-bg)/0.78)] hover:text-[rgb(var(--ec-page-text))]" title="Teams"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-users-round h-4 w-4 flex-shrink-0" aria-hidden="true"><path d="M18 21a8 8 0 0 0-16 0"></path><circle cx="10" cy="8" r="5"></circle><path d="M22 20c0-3.37-2-6.5-4-8a5 5 0 0 0-.45-8.3"></path></svg><span class="nav-item-label">Teams</span></a><a id="/directory/users" href="/arcadia-event-catalog/directory/users/" data-role="vertical-nav-item" aria-label="Users" class="flex items-center gap-3 px-3 py-2.5 rounded-xl border text-[13px] font-medium transition-all duration-150 border-transparent text-[rgb(var(--ec-sidebar-text))] hover:border-[rgb(var(--ec-sidebar-border)/0.65)] hover:bg-[rgb(var(--ec-page-bg)/0.78)] hover:text-[rgb(var(--ec-page-text))]" title="Users"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-user-round h-4 w-4 flex-shrink-0" aria-hidden="true"><circle cx="12" cy="8" r="5"></circle><path d="M20 21a8 8 0 0 0-16 0"></path></svg><span class="nav-item-label">Users</span></a><div class="mt-auto pt-3"><hr class="rail-divider mb-3 border-t border-[rgb(var(--ec-sidebar-border)/0.7)]"><a id="/settings/general" href="/arcadia-event-catalog/settings/general/" data-role="vertical-nav-item" aria-label="Settings" class="flex items-center gap-3 px-3 py-2.5 rounded-xl border text-[13px] font-medium transition-all duration-150 border-transparent text-[rgb(var(--ec-sidebar-text))] hover:border-[rgb(var(--ec-sidebar-border)/0.65)] hover:bg-[rgb(var(--ec-page-bg)/0.78)] hover:text-[rgb(var(--ec-page-text))]" title="Settings"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-settings h-4 w-4 flex-shrink-0" aria-hidden="true"><path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"></path><circle cx="12" cy="12" r="3"></circle></svg><span class="nav-item-label">Settings</span></a></div></nav><div class="border-t border-[rgb(var(--ec-sidebar-border)/0.7)] px-3 py-3 flex-shrink-0"><button id="vertical-nav-toggle" type="button" aria-label="Collapse sidebar" class="flex items-center gap-3 px-3 py-2.5 rounded-xl border border-transparent text-[13px] font-medium text-[rgb(var(--ec-sidebar-text))] hover:border-[rgb(var(--ec-sidebar-border)/0.65)] hover:bg-[rgb(var(--ec-page-bg)/0.78)] hover:text-[rgb(var(--ec-page-text))] transition-all duration-150 w-full"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-panel-left-close h-4 w-4 flex-shrink-0 nav-collapse-icon" aria-hidden="true"><rect width="18" height="18" x="3" y="3" rx="2"></rect><path d="M9 3v18"></path><path d="m16 15-3-3 3-3"></path></svg><span class="nav-label">Collapse</span></button></div></div></aside><div id="sidebar" class="sidebar-panel sidebar-transition"><meta name="astro-view-transitions-enabled" content="true"><meta name="astro-view-transitions-fallback" content="animate"><script type="module" src="/arcadia-event-catalog/_astro/ClientRouter.astro_astro_type_script_index_0_lang.D4eiATAK.js"></script><script>(()=>{var e=async t=>{await(await t())()};(self.Astro||(self.Astro={})).only=e;window.dispatchEvent(new Event("astro:only"));})();</script><astro-island uid="1tckF6" component-url="/arcadia-event-catalog/_astro/index.CXjBsjYU.js" component-export="default" renderer-url="/arcadia-event-catalog/_astro/client.CW5b9o3y.js" props="{}" ssr client="only" opts="{&quot;name&quot;:&quot;NestedSideBar&quot;,&quot;value&quot;:&quot;react&quot;}"></astro-island></div><main class="content-panel sidebar-transition w-full bg-[rgb(var(--ec-page-bg))]" id="content"><div class="app-content-wrapper "><main class="flex docs-layout min-h-full bg-[rgb(var(--ec-page-bg))]" data-pagefind-body data-pagefind-meta="title:Entities | Payment"><div class="flex docs-layout w-full"><div class="w-full lg:mr-2 pr-24 py-8 bg-[rgb(var(--ec-page-bg))]"><div class="border-b border-[rgb(var(--ec-page-border))] md:pb-6 pt-4"><div><div><div class="flex flex-col gap-4"><span class="text-xs md:text-sm font-semibold text-[rgb(var(--ec-accent))] capitalize">entity</span><div class="flex items-center gap-3"><div class="flex items-center gap-2"><h2 id="doc-page-header" class="text-2xl md:text-4xl font-bold text-[rgb(var(--ec-page-text))]">Payment</h2><script>(()=>{var e=async t=>{await(await t())()};(self.Astro||(self.Astro={})).load=e;window.dispatchEvent(new Event("astro:load"));})();</script><astro-island uid="Z67TkS" prefix="r4" component-url="/arcadia-event-catalog/_astro/FavoriteButton.BXaG8hhI.js" component-export="default" renderer-url="/arcadia-event-catalog/_astro/client.CW5b9o3y.js" props="{&quot;nodeKey&quot;:[0,&quot;entity:payments.payment-processing.payments-processing.payment:0.0.1&quot;],&quot;title&quot;:[0,&quot;Payment&quot;],&quot;badge&quot;:[0,&quot;Entity&quot;],&quot;href&quot;:[0,&quot;/arcadia-event-catalog/docs/entities/payments.payment-processing.payments-processing.payment/0.0.1/&quot;],&quot;size&quot;:[0,&quot;md&quot;]}" ssr client="load" opts="{&quot;name&quot;:&quot;FavoriteButton&quot;,&quot;value&quot;:true}" await-children><button class="p-2 rounded-md transition-colors text-[rgb(var(--ec-icon-color))] hover:text-amber-400" aria-label="Add to favorites" title="Add to favorites"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true" data-slot="icon" class="h-6 w-6"><path stroke-linecap="round" stroke-linejoin="round" d="M11.48 3.499a.562.562 0 0 1 1.04 0l2.125 5.111a.563.563 0 0 0 .475.345l5.518.442c.499.04.701.663.321.988l-4.204 3.602a.563.563 0 0 0-.182.557l1.285 5.385a.562.562 0 0 1-.84.61l-4.725-2.885a.562.562 0 0 0-.586 0L6.982 20.54a.562.562 0 0 1-.84-.61l1.285-5.386a.562.562 0 0 0-.182-.557l-4.204-3.602a.562.562 0 0 1 .321-.988l5.518-.442a.563.563 0 0 0 .475-.345L11.48 3.5Z"></path></svg></button><!--astro:end--></astro-island></div></div></div></div><h2 class="text-base pt-4 text-[rgb(var(--ec-page-text-muted))] font-light"></h2><div class="flex flex-wrap gap-1.5 pt-4"><span class="
+  inline-flex items-center gap-1 px-1.5 py-0.5 rounded-md text-xs font-medium
+  bg-transparent border border-[rgb(var(--ec-page-border))]
+  text-[rgb(var(--ec-page-text))]
+  shadow-xs
+  
+  
+" style="color: rgb(var(--ec-badge-color-gray-text));" title="Entity"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-box w-3 h-3 flex-shrink-0" aria-hidden="true"><path d="M21 8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16Z"></path><path d="m3.3 7 8.7 5 8.7-5"></path><path d="M12 22V12"></path></svg><span>Entity</span></span><span class="
+  inline-flex items-center gap-1 px-1.5 py-0.5 rounded-md text-xs font-medium
+  bg-transparent border border-[rgb(var(--ec-page-border))]
+  text-[rgb(var(--ec-page-text))]
+  shadow-xs
+  
+  
+" style="color: rgb(var(--ec-badge-color-gray-text));" title="(Aggregate Root)"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-boxes w-3 h-3 flex-shrink-0" aria-hidden="true"><path d="M2.97 12.92A2 2 0 0 0 2 14.63v3.24a2 2 0 0 0 .97 1.71l3 1.8a2 2 0 0 0 2.06 0L12 19v-5.5l-5-3-4.03 2.42Z"></path><path d="m7 16.5-4.74-2.85"></path><path d="m7 16.5 5-3"></path><path d="M7 16.5v5.17"></path><path d="M12 13.5V19l3.97 2.38a2 2 0 0 0 2.06 0l3-1.8a2 2 0 0 0 .97-1.71v-3.24a2 2 0 0 0-.97-1.71L17 10.5l-5 3Z"></path><path d="m17 16.5-5-3"></path><path d="m17 16.5 4.74-2.85"></path><path d="M17 16.5v5.17"></path><path d="M7.97 4.42A2 2 0 0 0 7 6.13v4.37l5 3 5-3V6.13a2 2 0 0 0-.97-1.71l-3-1.8a2 2 0 0 0-2.06 0l-3 1.8Z"></path><path d="M12 8 7.26 5.15"></path><path d="m12 8 4.74-2.85"></path><path d="M12 13.5V8"></path></svg><span>(Aggregate Root)</span></span></div><div class="pt-5"><astro-island uid="2g1eVs" component-url="/arcadia-event-catalog/_astro/CopyAsMarkdown.BRAQQQa3.js" component-export="default" renderer-url="/arcadia-event-catalog/_astro/client.CW5b9o3y.js" props="{&quot;variant&quot;:[0,&quot;toolbar&quot;],&quot;schemas&quot;:[1,[]],&quot;chatQuery&quot;:[0,&quot;\n    Please tell me more about the entitie -  Payment v0.0.1 in this catalog.\n  &quot;],&quot;chatEnabled&quot;:[0,false],&quot;markdownDownloadEnabled&quot;:[0,true],&quot;rssFeedEnabled&quot;:[0,false],&quot;editUrl&quot;:[0,&quot;https://github.com/arcadia-editions/arcadia-event-catalog/edit/main/domains/payments/subdomains/payments.payment-processing/services/payments.payment-processing.payments-processing/entities/payments.payment-processing.payments-processing.payment/index.mdx&quot;],&quot;preferChatAsDefault&quot;:[0,false],&quot;mcpServerUrl&quot;:[0],&quot;resourceName&quot;:[0,&quot;Payment&quot;],&quot;mcpResourceType&quot;:[0]}" ssr client="only" opts="{&quot;name&quot;:&quot;CopyAsMarkdown&quot;,&quot;value&quot;:&quot;react&quot;}"></astro-island></div></div></div><div data-pagefind-ignore></div><div class="prose prose-md py-4 w-full text-[15px]"><h2 id="overview-entity-properties">Overview### Entity Properties<a class="anchor-link" href="#overview-entity-properties"><span class="icon icon-link"></span></a></h2>
+<p><div class="overflow-x-auto relative not-prose"><table class="w-full text-sm text-left text-[rgb(var(--ec-page-text-muted))] border border-[rgb(var(--ec-page-border))] rounded-lg shadow-xs"><thead class="text-xs text-[rgb(var(--ec-page-text))] uppercase bg-[rgb(var(--ec-content-hover))]"><tr><th scope="col" class="py-3 px-6">Name</th><th scope="col" class="py-3 px-6">Type</th><th scope="col" class="py-3 px-6">Required</th><th scope="col" class="py-3 px-6 min-w-[250px]">Description</th><th scope="col" class="py-3 px-6 min-w-[180px]">Reference</th></tr></thead><tbody><tr class="bg-[rgb(var(--ec-card-bg,var(--ec-page-bg)))] border-b border-[rgb(var(--ec-page-border))] hover:bg-[rgb(var(--ec-content-hover))] align-top"><td class="py-4 pr-6 font-medium text-[rgb(var(--ec-page-text))] whitespace-nowrap" style="padding-left: 24px"><code class="text-sm bg-[rgb(var(--ec-content-hover))] rounded px-1 py-0.5">paymentId</code></td><td class="py-4 px-6 text-[rgb(var(--ec-page-text-muted))]"><code class="text-sm bg-[rgb(var(--ec-content-hover))] rounded px-1 py-0.5">String</code></td><td class="py-4 px-6"><span class="bg-[rgb(var(--ec-accent-subtle))] text-[rgb(var(--ec-accent-text))] text-xs font-semibold mr-2 px-2.5 py-0.5 rounded">Required</span></td><td class="py-4 px-6 text-[rgb(var(--ec-page-text-muted))]"><span class="text-[rgb(var(--ec-icon-color))] italic">No description provided.</span></td><td class="py-4 px-6 text-[rgb(var(--ec-page-text-muted))]"><span class="text-[rgb(var(--ec-icon-color))]">—</span></td></tr><tr class="bg-[rgb(var(--ec-card-bg,var(--ec-page-bg)))] border-b border-[rgb(var(--ec-page-border))] hover:bg-[rgb(var(--ec-content-hover))] align-top"><td class="py-4 pr-6 font-medium text-[rgb(var(--ec-page-text))] whitespace-nowrap" style="padding-left: 24px"><code class="text-sm bg-[rgb(var(--ec-content-hover))] rounded px-1 py-0.5">orderId</code></td><td class="py-4 px-6 text-[rgb(var(--ec-page-text-muted))]"><code class="text-sm bg-[rgb(var(--ec-content-hover))] rounded px-1 py-0.5">String</code></td><td class="py-4 px-6"><span class="bg-[rgb(var(--ec-accent-subtle))] text-[rgb(var(--ec-accent-text))] text-xs font-semibold mr-2 px-2.5 py-0.5 rounded">Required</span></td><td class="py-4 px-6 text-[rgb(var(--ec-page-text-muted))]"><span class="text-[rgb(var(--ec-icon-color))] italic">No description provided.</span></td><td class="py-4 px-6 text-[rgb(var(--ec-page-text-muted))]"><span class="text-[rgb(var(--ec-icon-color))]">—</span></td></tr><tr class="bg-[rgb(var(--ec-card-bg,var(--ec-page-bg)))] border-b border-[rgb(var(--ec-page-border))] hover:bg-[rgb(var(--ec-content-hover))] align-top"><td class="py-4 pr-6 font-medium text-[rgb(var(--ec-page-text))] whitespace-nowrap" style="padding-left: 24px"><code class="text-sm bg-[rgb(var(--ec-content-hover))] rounded px-1 py-0.5">customerId</code></td><td class="py-4 px-6 text-[rgb(var(--ec-page-text-muted))]"><code class="text-sm bg-[rgb(var(--ec-content-hover))] rounded px-1 py-0.5">String</code></td><td class="py-4 px-6"><span class="bg-[rgb(var(--ec-accent-subtle))] text-[rgb(var(--ec-accent-text))] text-xs font-semibold mr-2 px-2.5 py-0.5 rounded">Required</span></td><td class="py-4 px-6 text-[rgb(var(--ec-page-text-muted))]"><span class="text-[rgb(var(--ec-icon-color))] italic">No description provided.</span></td><td class="py-4 px-6 text-[rgb(var(--ec-page-text-muted))]"><span class="text-[rgb(var(--ec-icon-color))]">—</span></td></tr><tr class="bg-[rgb(var(--ec-card-bg,var(--ec-page-bg)))] border-b border-[rgb(var(--ec-page-border))] hover:bg-[rgb(var(--ec-content-hover))] align-top"><td class="py-4 pr-6 font-medium text-[rgb(var(--ec-page-text))] whitespace-nowrap" style="padding-left: 24px"><code class="text-sm bg-[rgb(var(--ec-content-hover))] rounded px-1 py-0.5">amount</code></td><td class="py-4 px-6 text-[rgb(var(--ec-page-text-muted))]"><code class="text-sm bg-[rgb(var(--ec-content-hover))] rounded px-1 py-0.5">BigDecimal</code></td><td class="py-4 px-6"><span class="bg-[rgb(var(--ec-accent-subtle))] text-[rgb(var(--ec-accent-text))] text-xs font-semibold mr-2 px-2.5 py-0.5 rounded">Required</span></td><td class="py-4 px-6 text-[rgb(var(--ec-page-text-muted))]"><span class="text-[rgb(var(--ec-icon-color))] italic">No description provided.</span></td><td class="py-4 px-6 text-[rgb(var(--ec-page-text-muted))]"><span class="text-[rgb(var(--ec-icon-color))]">—</span></td></tr><tr class="bg-[rgb(var(--ec-card-bg,var(--ec-page-bg)))] border-b border-[rgb(var(--ec-page-border))] hover:bg-[rgb(var(--ec-content-hover))] align-top"><td class="py-4 pr-6 font-medium text-[rgb(var(--ec-page-text))] whitespace-nowrap" style="padding-left: 24px"><code class="text-sm bg-[rgb(var(--ec-content-hover))] rounded px-1 py-0.5">currency</code></td><td class="py-4 px-6 text-[rgb(var(--ec-page-text-muted))]"><code class="text-sm bg-[rgb(var(--ec-content-hover))] rounded px-1 py-0.5">String</code></td><td class="py-4 px-6"><span class="bg-[rgb(var(--ec-accent-subtle))] text-[rgb(var(--ec-accent-text))] text-xs font-semibold mr-2 px-2.5 py-0.5 rounded">Required</span></td><td class="py-4 px-6 text-[rgb(var(--ec-page-text-muted))]"><span class="text-[rgb(var(--ec-icon-color))] italic">No description provided.</span></td><td class="py-4 px-6 text-[rgb(var(--ec-page-text-muted))]"><span class="text-[rgb(var(--ec-icon-color))]">—</span></td></tr><tr class="bg-[rgb(var(--ec-card-bg,var(--ec-page-bg)))] border-b border-[rgb(var(--ec-page-border))] hover:bg-[rgb(var(--ec-content-hover))] align-top"><td class="py-4 pr-6 font-medium text-[rgb(var(--ec-page-text))] whitespace-nowrap" style="padding-left: 24px"><code class="text-sm bg-[rgb(var(--ec-content-hover))] rounded px-1 py-0.5">status</code></td><td class="py-4 px-6 text-[rgb(var(--ec-page-text-muted))]"><code class="text-sm bg-[rgb(var(--ec-content-hover))] rounded px-1 py-0.5">PaymentStatus</code><div class="text-xs text-[rgb(var(--ec-page-text-muted))] mt-2"><span class="font-semibold block mb-1">Enum:</span><ul class="list-disc list-inside ml-2 space-y-1"><li><code class="text-xs bg-[rgb(var(--ec-content-hover))] rounded px-1 py-0.5">AUTHORIZATION_REQUESTED</code></li><li><code class="text-xs bg-[rgb(var(--ec-content-hover))] rounded px-1 py-0.5">AUTHORIZED</code></li><li><code class="text-xs bg-[rgb(var(--ec-content-hover))] rounded px-1 py-0.5">DECLINED</code></li><li><code class="text-xs bg-[rgb(var(--ec-content-hover))] rounded px-1 py-0.5">FAILED</code></li><li><code class="text-xs bg-[rgb(var(--ec-content-hover))] rounded px-1 py-0.5">RETRY_EXHAUSTED</code></li><li><code class="text-xs bg-[rgb(var(--ec-content-hover))] rounded px-1 py-0.5">CAPTURED</code></li><li><code class="text-xs bg-[rgb(var(--ec-content-hover))] rounded px-1 py-0.5">VOIDED</code></li></ul></div></td><td class="py-4 px-6"><span class="bg-[rgb(var(--ec-accent-subtle))] text-[rgb(var(--ec-accent-text))] text-xs font-semibold mr-2 px-2.5 py-0.5 rounded">Required</span></td><td class="py-4 px-6 text-[rgb(var(--ec-page-text-muted))]"><span class="text-[rgb(var(--ec-icon-color))] italic">No description provided.</span></td><td class="py-4 px-6 text-[rgb(var(--ec-page-text-muted))]"><div class="flex flex-col gap-1"><code class="text-sm bg-[rgb(var(--ec-content-hover))] rounded px-1 py-0.5 w-fit">PaymentStatus</code><span class="text-xs">Identifier or first property</span></div></td></tr><tr class="bg-[rgb(var(--ec-card-bg,var(--ec-page-bg)))] border-b border-[rgb(var(--ec-page-border))] hover:bg-[rgb(var(--ec-content-hover))] align-top"><td class="py-4 pr-6 font-medium text-[rgb(var(--ec-page-text))] whitespace-nowrap" style="padding-left: 24px"><code class="text-sm bg-[rgb(var(--ec-content-hover))] rounded px-1 py-0.5">providerReference</code></td><td class="py-4 px-6 text-[rgb(var(--ec-page-text-muted))]"><code class="text-sm bg-[rgb(var(--ec-content-hover))] rounded px-1 py-0.5">String</code></td><td class="py-4 px-6"><span class="bg-[rgb(var(--ec-content-hover))] text-[rgb(var(--ec-page-text-muted))] text-xs font-semibold mr-2 px-2.5 py-0.5 rounded">Optional</span></td><td class="py-4 px-6 text-[rgb(var(--ec-page-text-muted))]"><span class="text-[rgb(var(--ec-icon-color))] italic">No description provided.</span></td><td class="py-4 px-6 text-[rgb(var(--ec-page-text-muted))]"><span class="text-[rgb(var(--ec-icon-color))]">—</span></td></tr><tr class="bg-[rgb(var(--ec-card-bg,var(--ec-page-bg)))] border-b border-[rgb(var(--ec-page-border))] hover:bg-[rgb(var(--ec-content-hover))] align-top"><td class="py-4 pr-6 font-medium text-[rgb(var(--ec-page-text))] whitespace-nowrap" style="padding-left: 24px"><code class="text-sm bg-[rgb(var(--ec-content-hover))] rounded px-1 py-0.5">attemptCount</code></td><td class="py-4 px-6 text-[rgb(var(--ec-page-text-muted))]"><code class="text-sm bg-[rgb(var(--ec-content-hover))] rounded px-1 py-0.5">Integer</code></td><td class="py-4 px-6"><span class="bg-[rgb(var(--ec-accent-subtle))] text-[rgb(var(--ec-accent-text))] text-xs font-semibold mr-2 px-2.5 py-0.5 rounded">Required</span></td><td class="py-4 px-6 text-[rgb(var(--ec-page-text-muted))]"><span class="text-[rgb(var(--ec-icon-color))] italic">No description provided.</span></td><td class="py-4 px-6 text-[rgb(var(--ec-page-text-muted))]"><span class="text-[rgb(var(--ec-icon-color))]">—</span></td></tr><tr class="bg-[rgb(var(--ec-card-bg,var(--ec-page-bg)))] border-b border-[rgb(var(--ec-page-border))] hover:bg-[rgb(var(--ec-content-hover))] align-top"><td class="py-4 pr-6 font-medium text-[rgb(var(--ec-page-text))] whitespace-nowrap" style="padding-left: 24px"><code class="text-sm bg-[rgb(var(--ec-content-hover))] rounded px-1 py-0.5">authorizedAt</code></td><td class="py-4 px-6 text-[rgb(var(--ec-page-text-muted))]"><code class="text-sm bg-[rgb(var(--ec-content-hover))] rounded px-1 py-0.5">Instant</code></td><td class="py-4 px-6"><span class="bg-[rgb(var(--ec-content-hover))] text-[rgb(var(--ec-page-text-muted))] text-xs font-semibold mr-2 px-2.5 py-0.5 rounded">Optional</span></td><td class="py-4 px-6 text-[rgb(var(--ec-page-text-muted))]"><span class="text-[rgb(var(--ec-icon-color))] italic">No description provided.</span></td><td class="py-4 px-6 text-[rgb(var(--ec-page-text-muted))]"><span class="text-[rgb(var(--ec-icon-color))]">—</span></td></tr><tr class="bg-[rgb(var(--ec-card-bg,var(--ec-page-bg)))] border-b border-[rgb(var(--ec-page-border))] hover:bg-[rgb(var(--ec-content-hover))] align-top"><td class="py-4 pr-6 font-medium text-[rgb(var(--ec-page-text))] whitespace-nowrap" style="padding-left: 24px"><code class="text-sm bg-[rgb(var(--ec-content-hover))] rounded px-1 py-0.5">declinedAt</code></td><td class="py-4 px-6 text-[rgb(var(--ec-page-text-muted))]"><code class="text-sm bg-[rgb(var(--ec-content-hover))] rounded px-1 py-0.5">Instant</code></td><td class="py-4 px-6"><span class="bg-[rgb(var(--ec-content-hover))] text-[rgb(var(--ec-page-text-muted))] text-xs font-semibold mr-2 px-2.5 py-0.5 rounded">Optional</span></td><td class="py-4 px-6 text-[rgb(var(--ec-page-text-muted))]"><span class="text-[rgb(var(--ec-icon-color))] italic">No description provided.</span></td><td class="py-4 px-6 text-[rgb(var(--ec-page-text-muted))]"><span class="text-[rgb(var(--ec-icon-color))]">—</span></td></tr><tr class="bg-[rgb(var(--ec-card-bg,var(--ec-page-bg)))] border-b border-[rgb(var(--ec-page-border))] hover:bg-[rgb(var(--ec-content-hover))] align-top"><td class="py-4 pr-6 font-medium text-[rgb(var(--ec-page-text))] whitespace-nowrap" style="padding-left: 24px"><code class="text-sm bg-[rgb(var(--ec-content-hover))] rounded px-1 py-0.5">failedAt</code></td><td class="py-4 px-6 text-[rgb(var(--ec-page-text-muted))]"><code class="text-sm bg-[rgb(var(--ec-content-hover))] rounded px-1 py-0.5">Instant</code></td><td class="py-4 px-6"><span class="bg-[rgb(var(--ec-content-hover))] text-[rgb(var(--ec-page-text-muted))] text-xs font-semibold mr-2 px-2.5 py-0.5 rounded">Optional</span></td><td class="py-4 px-6 text-[rgb(var(--ec-page-text-muted))]"><span class="text-[rgb(var(--ec-icon-color))] italic">No description provided.</span></td><td class="py-4 px-6 text-[rgb(var(--ec-page-text-muted))]"><span class="text-[rgb(var(--ec-icon-color))]">—</span></td></tr><tr class="bg-[rgb(var(--ec-card-bg,var(--ec-page-bg)))] border-b border-[rgb(var(--ec-page-border))] hover:bg-[rgb(var(--ec-content-hover))] align-top"><td class="py-4 pr-6 font-medium text-[rgb(var(--ec-page-text))] whitespace-nowrap" style="padding-left: 24px"><code class="text-sm bg-[rgb(var(--ec-content-hover))] rounded px-1 py-0.5">capturedAt</code></td><td class="py-4 px-6 text-[rgb(var(--ec-page-text-muted))]"><code class="text-sm bg-[rgb(var(--ec-content-hover))] rounded px-1 py-0.5">Instant</code></td><td class="py-4 px-6"><span class="bg-[rgb(var(--ec-content-hover))] text-[rgb(var(--ec-page-text-muted))] text-xs font-semibold mr-2 px-2.5 py-0.5 rounded">Optional</span></td><td class="py-4 px-6 text-[rgb(var(--ec-page-text-muted))]"><span class="text-[rgb(var(--ec-icon-color))] italic">No description provided.</span></td><td class="py-4 px-6 text-[rgb(var(--ec-page-text-muted))]"><span class="text-[rgb(var(--ec-icon-color))]">—</span></td></tr><tr class="bg-[rgb(var(--ec-card-bg,var(--ec-page-bg)))] border-b border-[rgb(var(--ec-page-border))] hover:bg-[rgb(var(--ec-content-hover))] align-top"><td class="py-4 pr-6 font-medium text-[rgb(var(--ec-page-text))] whitespace-nowrap" style="padding-left: 24px"><code class="text-sm bg-[rgb(var(--ec-content-hover))] rounded px-1 py-0.5">voidedAt</code></td><td class="py-4 px-6 text-[rgb(var(--ec-page-text-muted))]"><code class="text-sm bg-[rgb(var(--ec-content-hover))] rounded px-1 py-0.5">Instant</code></td><td class="py-4 px-6"><span class="bg-[rgb(var(--ec-content-hover))] text-[rgb(var(--ec-page-text-muted))] text-xs font-semibold mr-2 px-2.5 py-0.5 rounded">Optional</span></td><td class="py-4 px-6 text-[rgb(var(--ec-page-text-muted))]"><span class="text-[rgb(var(--ec-icon-color))] italic">No description provided.</span></td><td class="py-4 px-6 text-[rgb(var(--ec-page-text-muted))]"><span class="text-[rgb(var(--ec-icon-color))]">—</span></td></tr><tr class="bg-[rgb(var(--ec-card-bg,var(--ec-page-bg)))] border-b border-[rgb(var(--ec-page-border))] hover:bg-[rgb(var(--ec-content-hover))] align-top"><td class="py-4 pr-6 font-medium text-[rgb(var(--ec-page-text))] whitespace-nowrap" style="padding-left: 24px"><code class="text-sm bg-[rgb(var(--ec-content-hover))] rounded px-1 py-0.5">failureReason</code></td><td class="py-4 px-6 text-[rgb(var(--ec-page-text-muted))]"><code class="text-sm bg-[rgb(var(--ec-content-hover))] rounded px-1 py-0.5">String</code></td><td class="py-4 px-6"><span class="bg-[rgb(var(--ec-content-hover))] text-[rgb(var(--ec-page-text-muted))] text-xs font-semibold mr-2 px-2.5 py-0.5 rounded">Optional</span></td><td class="py-4 px-6 text-[rgb(var(--ec-page-text-muted))]"><span class="text-[rgb(var(--ec-icon-color))] italic">No description provided.</span></td><td class="py-4 px-6 text-[rgb(var(--ec-page-text-muted))]"><span class="text-[rgb(var(--ec-icon-color))]">—</span></td></tr></tbody></table></div>## Relationships</p>
+<p>This entity includes references to related entities captured in the generated frontmatter properties.</p></div><div data-pagefind-ignore><!-- @ts-ignore --><!-- <SchemaViewer id={props.data.id} catalog={props.catalog} filePath={props.filePath} /> --><section class="space-y-4"></section><script>(function(){const schemas = [];
+
+  // Can we move the SchemaViewerClient to another container? example container with the id "my-schema-viewer-container"
+  // and then we can move the SchemaViewerClient to that container?
+
+  function moveSchemaViewerToPortal(schema) {
+    const schemaViewerContainers = document.querySelectorAll(`[data-schema-viewer-portal-id="${schema.id}"]`);
+    const schemaPortalIndex = schemas.slice(0, schema.index).filter((previousSchema) => previousSchema.id === schema.id).length;
+    const schemaViewerContainer = schemaViewerContainers[schemaPortalIndex];
+    const schemaViewerClient = document.getElementById(`${schema.id}-${schema.index}-SchemaViewer-client`);
+
+    if (schemaViewerContainer && schemaViewerClient) {
+      // Get attributes from the portal
+      const expand = schemaViewerContainer.getAttribute('data-expand') === 'true';
+      const maxHeight = schemaViewerContainer.getAttribute('data-max-height');
+      const search = schemaViewerContainer.getAttribute('data-search');
+
+      // Set the expand attribute on the schema viewer client
+      if (expand) {
+        schemaViewerClient.setAttribute('data-expand', 'true');
+      }
+
+      // Set the search attribute on the schema viewer client
+      if (search) {
+        schemaViewerClient.setAttribute('data-search', search);
+      }
+
+      // Set the maxHeight on the schema viewer element
+      if (maxHeight) {
+        const schemaViewerElement = schemaViewerClient.querySelector('.schema-viewer');
+        if (schemaViewerElement) {
+          schemaViewerElement.style.maxHeight = `${maxHeight}px`;
+        }
+      }
+
+      schemaViewerContainer.appendChild(schemaViewerClient);
+    }
+  }
+
+  // on DOM ready, move the SchemaViewerClient to the portal
+  document.addEventListener('DOMContentLoaded', () => {
+    schemas.forEach(moveSchemaViewerToPortal);
+  });
+
+  // on DOM ready, move the SchemaViewerClient to the portal
+  document.addEventListener('astro:page-load', () => {
+    schemas.forEach(moveSchemaViewerToPortal);
+  });
+})();</script><div><astro-island uid="Z1CjsPx" component-url="/arcadia-event-catalog/_astro/AstroNodeGraph.B1gXMtEs.js" component-export="default" renderer-url="/arcadia-event-catalog/_astro/client.CW5b9o3y.js" props="{&quot;id&quot;:[0,&quot;payments.payment-processing.payments-processing.payment&quot;],&quot;nodes&quot;:[1,[]],&quot;edges&quot;:[1,[]],&quot;title&quot;:[0],&quot;hrefLabel&quot;:[0,&quot;Open in Visualiser&quot;],&quot;href&quot;:[0,&quot;/arcadia-event-catalog/visualiser/entities/payments.payment-processing.payments-processing.payment/0.0.1/&quot;],&quot;linkTo&quot;:[0,&quot;docs&quot;],&quot;linksToVisualiser&quot;:[0,true],&quot;links&quot;:[1,[]],&quot;mode&quot;:[0,&quot;simple&quot;],&quot;showSearch&quot;:[0,true],&quot;includeKey&quot;:[0,true],&quot;zoomOnScroll&quot;:[0,false],&quot;isChatEnabled&quot;:[0,false],&quot;maxTextSize&quot;:[0],&quot;isDevMode&quot;:[0,false],&quot;resourceKey&quot;:[0,&quot;entities/payments.payment-processing.payments-processing.payment/0.0.1&quot;],&quot;portalId&quot;:[0],&quot;disableMessageAnimation&quot;:[0,false]}" ssr client="only" opts="{&quot;name&quot;:&quot;AstroNodeGraph&quot;,&quot;value&quot;:&quot;react&quot;}"></astro-island></div></div><footer data-astro-transition-persist="site-footer" class="relative py-4 space-y-8 border-t border-[rgb(var(--ec-page-border))] undefined"><div class="flex justify-between items-center py-8 text-[rgb(var(--ec-page-text-muted))] text-sm font-light"><div class="flex space-x-5"><a href="https://github.com/event-catalog/eventcatalog" target="_blank" aria-label="View EventCatalog on GitHub"><svg class="w-5 h-5 bg-[rgb(var(--ec-icon-color))] hover:bg-[rgb(var(--ec-accent))]" style="mask-image: url(&quot;/arcadia-event-catalog/icons/github.svg&quot;); mask-repeat: no-repeat; mask-position: center center;" aria-hidden="true"></svg></a><a href="https://x.com/event_catalog" target="_blank" aria-label="Follow EventCatalog on X (Twitter)"><span class="sr-only">X (Twitter)</span><svg class="w-5 h-5 bg-[rgb(var(--ec-icon-color))] hover:bg-[rgb(var(--ec-accent))]" style="mask-image: url(&quot;/arcadia-event-catalog/icons/x-twitter.svg&quot;); mask-repeat: no-repeat; mask-position: center center;" aria-hidden="true"></svg></a><a href="https://www.youtube.com/@event-catalog" target="_blank" aria-label="Watch EventCatalog on YouTube"><span class="sr-only">YouTube</span><svg class="w-5 h-5 bg-[rgb(var(--ec-icon-color))] hover:bg-[rgb(var(--ec-accent))]" style="mask-image: url(&quot;/arcadia-event-catalog/icons/youtube.svg&quot;); mask-repeat: no-repeat; mask-position: center center;" aria-hidden="true"></svg></a></div><a target="_blank" class="hover:text-[rgb(var(--ec-accent))] hover:underline text-[rgb(var(--ec-icon-color))] font-light not-prose" href="https://eventcatalog.dev">Powered by EventCatalog</a></div></footer><!-- Add edit this page button  with icon and text--><div class="flex justify-end"><!-- Built with EventCatalog --><div class="flex justify-end"><a href="https://github.com/arcadia-editions/arcadia-event-catalog/edit/main/domains/payments/subdomains/payments.payment-processing/services/payments.payment-processing.payments-processing/entities/payments.payment-processing.payments-processing.payment/index.mdx" class="text-sm text-[rgb(var(--ec-page-text-muted))] hover:text-[rgb(var(--ec-page-text))] border border-[rgb(var(--ec-page-border))] rounded-md p-2"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-square-pen w-4 h-4 inline-block mr-1" aria-hidden="true"><path d="M12 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path><path d="M18.375 2.625a1 1 0 0 1 3 3l-9.013 9.014a2 2 0 0 1-.853.505l-2.873.84a.5.5 0 0 1-.62-.62l.84-2.873a2 2 0 0 1 .506-.852z"></path></svg>Edit this page</a></div></div></div><aside id="eventcatalog-docs-sidebar" class="hidden xl:block sticky top-[4rem] self-start w-[280px] max-h-[calc(100vh-4rem)] overflow-y-auto py-2 flex-shrink-0 pr-10 bg-[rgb(var(--ec-page-bg))]"><div class="mt-8 space-y-8"><div><h3 class="text-xs text-[rgb(var(--ec-page-text))] font-semibold group-data-[hover]:text-[rgb(var(--ec-page-text))]/80 capitalize flex items-center gap-2 mb-4"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-align-left w-4 h-4" aria-hidden="true"><path d="M15 12H3"></path><path d="M17 18H3"></path><path d="M21 6H3"></path></svg>On this page</h3><div class="space-y-8"><nav class="text-xs border-l border-[rgb(var(--ec-page-border))]"><a href="#overview-entity-properties" class="block py-1.5 pr-2.5 leading-5 text-[rgb(var(--ec-page-text-muted))] hover:border-[rgb(var(--ec-page-border))] hover:text-[rgb(var(--ec-page-text))] border-l-2 border-transparent -ml-px transition-all duration-200" style="padding-left: 0.75rem">Overview### Entity Properties</a></nav></div></div></div></aside></div><script>(function(){const config = {"title":"Arcadia Editions Event Catalog","tagline":"Discover the domains, services, APIs, messages, channels, and data models that make up Arcadia Editions.","organizationName":"Arcadia Editions","theme":"sunset","homepageLink":"https://arcadia-editions.github.io/arcadia-event-catalog/","editUrl":"https://github.com/arcadia-editions/arcadia-event-catalog/edit/main","output":"static","outDir":"dist","base":"/arcadia-event-catalog/","trailingSlash":true,"search":{"type":"resource"},"navigation":{"pages":["list:top-level-domains","list:all"]},"llmsTxt":{"enabled":true},"cId":"6dc9f235-4146-4393-8f9e-3756dc41ad45"};
+
+      window.eventcatalog = {};
+      window.eventcatalog.mermaid = config.mermaid;
+    })();</script><script type="module" src="/arcadia-event-catalog/_astro/index.astro_astro_type_script_index_0_lang.BRYyx0JP.js"></script><script type="module" src="/arcadia-event-catalog/_astro/index.astro_astro_type_script_index_1_lang.BPoMBJHH.js"></script><script type="module">function e(){try{let e={rootMargin:`0px 0px -40% 0px`,threshold:.1},t=!1;function n(e){document.querySelectorAll(`.active-toc-item`).forEach(e=>{e.classList.remove(`active-toc-item`,`toc-active-text`,`font-medium`,`toc-active-border`),e.classList.add(`border-transparent`)});let t=document.querySelector(`nav a[href="#${e}"]`);t&&(t.classList.add(`active-toc-item`,`toc-active-text`,`font-medium`,`toc-active-border`),t.classList.remove(`border-transparent`),setTimeout(()=>{t.scrollIntoView({behavior:`smooth`,block:`nearest`,inline:`nearest`})},10))}let r=new IntersectionObserver(e=>{t||e.forEach(e=>{try{let t=e.target.getAttribute(`id`);e.isIntersecting&&t&&n(t)}catch(e){console.error(`Error processing intersection entry:`,e)}})},e),i=document.querySelector(`.prose`);if(!i){console.warn(`No .prose container found for TOC highlighting`);return}let a=i.querySelectorAll(`h1[id], h2[id], h3[id]`);a.length>0?a.forEach(e=>{r.observe(e)}):i.querySelectorAll(`h1, h2, h3`).forEach(e=>{e.id||=(e.textContent||``).toLowerCase().replace(/[^\w\s-]/g,``).replace(/\s+/g,`-`),r.observe(e)}),document.querySelectorAll(`nav a[href^="#"]`).forEach(e=>{e.addEventListener(`click`,r=>{let i=e.getAttribute(`href`);i&&(n(i.substring(1)),t=!0,setTimeout(()=>{t=!1},500))})})}catch(e){console.error(`Error setting up TOC highlighting:`,e)}}e(),document.addEventListener(`astro:page-load`,e);</script></main></div></main><!-- Create a overlay that tells people to purchase backstage plugin if they want to embed the page --><div class="absolute inset-0 bg-black items-center justify-center z-50 hidden" id="embed-overlay"><div class="text-white text-center space-y-4"><div><h1 class="text-2xl font-bold">EventCatalog Backstage Integration</h1><p class="text-md text-red-500">Missing license key for backstage integration.</p></div><div><p class="text-sm text-gray-500">Please configure the backstage plugin to embed this page into Backstage.</p><a href="https://www.eventcatalog.dev/integrations/backstage" class="text-blue-500 text-xs">Configure backstage plugin &rarr;</a></div></div></div></div></main></body></html><meta name="astro-view-transitions-enabled" content="true"><meta name="astro-view-transitions-fallback" content="animate"><script>(function(){const clientNavigationItems = [{"id":"/","href":"/arcadia-event-catalog//","matchId":"/"},{"id":"/discover","href":"/arcadia-event-catalog/discover/domains/","matchId":"/discover"},{"id":"/schemas/explorer","href":"/arcadia-event-catalog/schemas/explorer/","matchId":"/schemas/explorer"},{"id":"/directory/teams","href":"/arcadia-event-catalog/directory/teams/","matchId":"/directory/teams"},{"id":"/directory/users","href":"/arcadia-event-catalog/directory/users/","matchId":"/directory/users"},{"id":"/settings/general","href":"/arcadia-event-catalog/settings/general/","matchId":"/settings/general"}];
+const canPageBeEmbedded = false;
+const verticalNavAutoCollapsePaths = ["/arcadia-event-catalog/discover","/arcadia-event-catalog/docs"];
+
+  const VERTICAL_NAV_STORAGE_KEY = 'eventcatalog-vertical-nav-collapsed';
+  const ACTIVE_NAV_CLASSES = [
+    'border-[rgb(var(--ec-accent)/0.2)]',
+    'bg-[rgb(var(--ec-page-bg)/0.88)]',
+    'text-[rgb(var(--ec-accent))]',
+    'shadow-sm',
+  ];
+  const INACTIVE_NAV_CLASSES = [
+    'border-transparent',
+    'text-[rgb(var(--ec-sidebar-text))]',
+    'hover:border-[rgb(var(--ec-sidebar-border)/0.65)]',
+    'hover:bg-[rgb(var(--ec-page-bg)/0.78)]',
+    'hover:text-[rgb(var(--ec-page-text))]',
+  ];
+
+  const isNavItemCurrent = (item, pathname) => {
+    const matchId = item?.matchId || item?.id;
+
+    if (matchId === '/') {
+      const targetPath = item?.href ? new URL(item.href, window.location.origin).pathname : '/';
+      return (
+        pathname === targetPath ||
+        (pathname.includes('/docs') && !pathname.includes('/docs/custom')) ||
+        pathname.includes('/architecture/') ||
+        pathname.includes('/visualiser') ||
+        (pathname.includes('/schemas') && !pathname.includes('/schemas/explorer') && !pathname.includes('/schemas/fields'))
+      );
+    }
+
+    if (matchId === '/schemas/explorer') {
+      return pathname.includes('/schemas/explorer') && !pathname.includes('/schemas/fields');
+    }
+
+    if (matchId === '/schemas/fields') {
+      return pathname.includes('/schemas/fields');
+    }
+
+    if (matchId === '/discover') {
+      return pathname.endsWith('/discover') || pathname.includes('/discover/');
+    }
+
+    if (matchId === '/studio') {
+      return pathname.includes('/studio');
+    }
+
+    if (matchId === '/docs/custom') {
+      return pathname.includes('/docs/custom');
+    }
+
+    if (matchId === '/settings/general') {
+      return pathname.includes('/settings');
+    }
+
+    const matches = Array.isArray(item?.match) ? item.match : item?.match ? [item.match] : [];
+    if (matches.length > 0) {
+      return matches.some((match) => {
+        if (/^https?:\/\//.test(match)) return false;
+
+        return pathname === match || pathname.startsWith(match);
+      });
+    }
+
+    if (item?.href) {
+      if (/^https?:\/\//.test(item.href)) return false;
+
+      const targetPath = new URL(item.href, window.location.origin).pathname;
+      return pathname === targetPath;
+    }
+
+    return false;
+  };
+
+  const syncNavItemStates = () => {
+    const pathname = window.location.pathname;
+    const navItems = document.querySelectorAll('[data-role="vertical-nav-item"]');
+
+    navItems.forEach((item) => {
+      const id = item.getAttribute('id');
+      const navigationItem = clientNavigationItems.find((navItem) => navItem.id === id);
+      const isCurrent = navigationItem ? isNavItemCurrent(navigationItem, pathname) : false;
+
+      if (isCurrent) {
+        item.classList.remove(...INACTIVE_NAV_CLASSES);
+        item.classList.add(...ACTIVE_NAV_CLASSES);
+      } else {
+        item.classList.remove(...ACTIVE_NAV_CLASSES);
+        item.classList.add(...INACTIVE_NAV_CLASSES);
+      }
+    });
+  };
+
+  const routeShouldAutoCollapseVerticalNav = (pathname) =>
+    verticalNavAutoCollapsePaths.some((path) => pathname === path || pathname.startsWith(`${path}/`));
+
+  const persistVerticalNavCollapsedState = (collapsed) => {
+    try {
+      localStorage.setItem(VERTICAL_NAV_STORAGE_KEY, String(collapsed));
+    } catch (error) {}
+  };
+
+  const getPersistedVerticalNavCollapsedState = () => {
+    if (routeShouldAutoCollapseVerticalNav(window.location.pathname)) {
+      persistVerticalNavCollapsedState(true);
+      return true;
+    }
+
+    try {
+      const savedState = localStorage.getItem(VERTICAL_NAV_STORAGE_KEY);
+      return savedState === null ? true : savedState === 'true';
+    } catch (error) {
+      return true;
+    }
+  };
+
+  const applyPersistedVerticalNavState = () => {
+    const isCollapsed = getPersistedVerticalNavCollapsedState();
+    document.documentElement.setAttribute('data-vertical-nav-collapsed', isCollapsed ? 'true' : 'false');
+
+    const verticalNavRail = document.getElementById('vertical-nav-rail');
+    if (verticalNavRail) {
+      verticalNavRail.setAttribute('data-collapsed', isCollapsed ? 'true' : 'false');
+    }
+  };
+
+  // Apply immediately when this script executes so transitions don't briefly re-open the rail.
+  applyPersistedVerticalNavState();
+
+  // Re-apply around Astro view transitions because the incoming document can momentarily drop the root attribute.
+  document.addEventListener('astro:before-preparation', applyPersistedVerticalNavState);
+  document.addEventListener('astro:after-swap', applyPersistedVerticalNavState);
+
+  // Listen for Astro transititions
+  document.addEventListener('astro:page-load', () => {
+    applyPersistedVerticalNavState();
+    document.dispatchEvent(new CustomEvent('contentLoaded'));
+  });
+
+  // Listen for DOM loaded
+  document.addEventListener('DOMContentLoaded', () => {
+    applyPersistedVerticalNavState();
+    document.dispatchEvent(new CustomEvent('contentLoaded'));
+  });
+
+  document.addEventListener('contentLoaded', () => {
+    // Users can add ?embed=true to the URL to hide the navigation
+    const urlSearchParams = new URLSearchParams(window.location.search);
+    const params = Object.fromEntries(urlSearchParams.entries());
+    const embeded = params.embed === 'true' ? true : false;
+    const content = document.getElementById('content');
+    const shell = document.querySelector('.app-shell');
+    const app = document.getElementById('eventcatalog-application');
+    const verticalNavRail = document.getElementById('vertical-nav-rail');
+    const verticalNavToggle = document.getElementById('vertical-nav-toggle');
+    const navToggleLabel = verticalNavToggle?.querySelector('.nav-label');
+    const collapseIcon = verticalNavToggle?.querySelector('.nav-collapse-icon');
+
+    const setVerticalNavCollapsedState = (collapsed) => {
+      if (!app || !verticalNavRail || !verticalNavToggle || !navToggleLabel) return;
+      const railTextElements = verticalNavRail.querySelectorAll(
+        '.nav-brand-text, .nav-item-label, .rail-section-label, .nav-count-pill, .nav-label'
+      );
+
+      document.documentElement.setAttribute('data-vertical-nav-collapsed', collapsed ? 'true' : 'false');
+      verticalNavRail.setAttribute('data-collapsed', collapsed ? 'true' : 'false');
+      verticalNavToggle.setAttribute('aria-label', collapsed ? 'Expand sidebar' : 'Collapse sidebar');
+      verticalNavToggle.setAttribute('aria-expanded', collapsed ? 'false' : 'true');
+      navToggleLabel.textContent = collapsed ? 'Expand' : 'Collapse';
+      railTextElements.forEach((element) => {
+        if (collapsed) {
+          element.setAttribute('hidden', '');
+        } else {
+          element.removeAttribute('hidden');
+        }
+      });
+
+      if (collapseIcon) {
+        collapseIcon.setAttribute('title', collapsed ? 'Expand sidebar' : 'Collapse sidebar');
+      }
+    };
+
+    if (embeded && !canPageBeEmbedded) {
+      const overlay = document.getElementById('embed-overlay');
+      overlay.style.display = 'flex';
+      return;
+    }
+
+    if (embeded) {
+      const elementsToHide = [
+        'eventcatalog-vertical-nav',
+        'eventcatalog-header',
+        'eventcatalog-header-spacer',
+        'visualiser-footer',
+        // /discover page elements
+        'discover-collection-tabs',
+        'discover-title',
+      ];
+
+      elementsToHide.forEach((id) => {
+        const element = document.getElementById(id);
+        if (element) element.style.display = 'none';
+      });
+
+      document.body.style.overflow = '';
+      app.style.overflow = '';
+      if (shell) shell.style.marginLeft = '0';
+      return;
+    }
+
+    if (shell) {
+      shell.style.marginLeft = '';
+    }
+
+    setVerticalNavCollapsedState(getPersistedVerticalNavCollapsedState());
+
+    syncNavItemStates();
+
+    if (verticalNavToggle) {
+      verticalNavToggle.onclick = () => {
+        const isCollapsed = verticalNavRail?.getAttribute('data-collapsed') === 'true';
+        const nextState = !isCollapsed;
+
+        setVerticalNavCollapsedState(nextState);
+        persistVerticalNavCollapsedState(nextState);
+      };
+    }
+  });
+})();</script>

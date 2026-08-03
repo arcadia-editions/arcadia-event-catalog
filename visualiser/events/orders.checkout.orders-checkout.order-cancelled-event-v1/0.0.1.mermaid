@@ -1,0 +1,19 @@
+%% EventCatalog Mermaid Diagram
+%% Resource: events/orders.checkout.orders-checkout.order-cancelled-event-v1 (v0.0.1)
+%% Generated: 2026-08-03T19:48:11.003Z
+
+flowchart LR
+
+    %% Style definitions
+    classDef events fill:#f97316,stroke:#c2410c,color:#fff
+    classDef services fill:#ec4899,stroke:#be185d,color:#fff
+    classDef channels fill:#6b7280,stroke:#374151,color:#fff
+
+    %% Nodes
+    orders_checkout_orders_checkout_order_cancelled_event_v1_0_0_1>"order-cancelled-event-v1 (0.0.1)"]:::events
+    orders_checkout_orders_checkout_0_0_1[["Orders Checkout (0.0.1)"]]:::services
+    orders_checkout_orders_checkout_order_cancelled_event_v1_0_0_1[("order-cancelled-event-v1 (0.0.1)")]:::channels
+
+    %% Edges
+    orders_checkout_orders_checkout_0_0_1 -->|"publishes  event"| orders_checkout_orders_checkout_order_cancelled_event_v1_0_0_1
+    orders_checkout_orders_checkout_order_cancelled_event_v1_0_0_1 -->|"routes to"| orders_checkout_orders_checkout_order_cancelled_event_v1_0_0_1

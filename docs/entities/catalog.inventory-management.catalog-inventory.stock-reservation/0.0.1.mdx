@@ -1,0 +1,53 @@
+---
+id: "catalog.inventory-management.catalog-inventory.stock-reservation"
+name: "StockReservation"
+version: "0.0.1"
+aggregateRoot: true
+identifier: "reservationId"
+properties:
+- name: "reservationId"
+  type: "String"
+  required: true
+- name: "orderId"
+  type: "String"
+  required: true
+- name: "sku"
+  type: "String"
+  required: true
+- name: "quantity"
+  type: "Integer"
+  required: true
+- name: "status"
+  type: "ReservationStatus"
+  required: true
+  references: "ReservationStatus"
+  enum:
+  - "RESERVED"
+  - "RELEASED"
+  - "CONFIRMED"
+- name: "reservedAt"
+  type: "Instant"
+  required: true
+- name: "expiresAt"
+  type: "Instant"
+  required: true
+- name: "releasedAt"
+  type: "Instant"
+- name: "releaseReason"
+  type: "StockReleaseReason"
+  references: "StockReleaseReason"
+  enum:
+  - "PAYMENT_DECLINED"
+  - "PAYMENT_RETRY_EXHAUSTED"
+  - "PAYMENT_VOIDED"
+  - "RESERVATION_EXPIRED"
+services:
+- "catalog.inventory-management.catalog-inventory-0.0.1"
+domains:
+- "catalog.inventory-management-0.0.1"
+---
+## Overview### Entity Properties
+
+<EntityPropertiesTable />## Relationships
+
+This entity includes references to related entities captured in the generated frontmatter properties.

@@ -1,0 +1,33 @@
+%% EventCatalog Mermaid Diagram
+%% Resource: domains/catalog (v0.0.1)
+%% Generated: 2026-08-03T19:48:11.105Z
+
+flowchart LR
+
+    %% Style definitions
+    classDef services fill:#ec4899,stroke:#be185d,color:#fff
+    classDef events fill:#f97316,stroke:#c2410c,color:#fff
+
+    %% Nodes
+    catalog_catalog_management_catalog_products_0_0_1[["Catalog Products (0.0.1)"]]:::services
+    catalog_catalog_management_catalog_products_product_published_event_v1_0_0_1>"product-published-event-v1 (0.0.1)"]:::events
+    catalog_catalog_management_catalog_products_product_retired_event_v1_0_0_1>"product-retired-event-v1 (0.0.1)"]:::events
+    catalog_inventory_management_catalog_inventory_0_0_1[["Catalog Inventory (0.0.1)"]]:::services
+    catalog_inventory_management_catalog_inventory_stock_released_event_v1_0_0_1>"stock-released-event-v1 (0.0.1)"]:::events
+    catalog_inventory_management_catalog_inventory_stock_reservation_confirmed_event_v1_0_0_1>"stock-reservation-confirmed-event-v1 (0.0.1)"]:::events
+    catalog_inventory_management_catalog_inventory_stock_received_event_v1_0_0_1>"stock-received-event-v1 (0.0.1)"]:::events
+    catalog_inventory_management_catalog_inventory_stock_adjusted_event_v1_0_0_1>"stock-adjusted-event-v1 (0.0.1)"]:::events
+
+    %% Edges
+    catalog_catalog_management_catalog_products_0_0_1 -->|"publishes  event"| catalog_catalog_management_catalog_products_product_published_event_v1_0_0_1
+    catalog_catalog_management_catalog_products_product_published_event_v1_0_0_1 -->|"routes to"| catalog_catalog_management_catalog_products_product_published_event_v1_0_0_1
+    catalog_catalog_management_catalog_products_0_0_1 -->|"publishes  event"| catalog_catalog_management_catalog_products_product_retired_event_v1_0_0_1
+    catalog_catalog_management_catalog_products_product_retired_event_v1_0_0_1 -->|"routes to"| catalog_catalog_management_catalog_products_product_retired_event_v1_0_0_1
+    catalog_inventory_management_catalog_inventory_0_0_1 -->|"publishes  event"| catalog_inventory_management_catalog_inventory_stock_released_event_v1_0_0_1
+    catalog_inventory_management_catalog_inventory_stock_released_event_v1_0_0_1 -->|"routes to"| catalog_inventory_management_catalog_inventory_stock_released_event_v1_0_0_1
+    catalog_inventory_management_catalog_inventory_0_0_1 -->|"publishes  event"| catalog_inventory_management_catalog_inventory_stock_reservation_confirmed_event_v1_0_0_1
+    catalog_inventory_management_catalog_inventory_stock_reservation_confirmed_event_v1_0_0_1 -->|"routes to"| catalog_inventory_management_catalog_inventory_stock_reservation_confirmed_event_v1_0_0_1
+    catalog_inventory_management_catalog_inventory_0_0_1 -->|"publishes  event"| catalog_inventory_management_catalog_inventory_stock_received_event_v1_0_0_1
+    catalog_inventory_management_catalog_inventory_stock_received_event_v1_0_0_1 -->|"routes to"| catalog_inventory_management_catalog_inventory_stock_received_event_v1_0_0_1
+    catalog_inventory_management_catalog_inventory_0_0_1 -->|"publishes  event"| catalog_inventory_management_catalog_inventory_stock_adjusted_event_v1_0_0_1
+    catalog_inventory_management_catalog_inventory_stock_adjusted_event_v1_0_0_1 -->|"routes to"| catalog_inventory_management_catalog_inventory_stock_adjusted_event_v1_0_0_1

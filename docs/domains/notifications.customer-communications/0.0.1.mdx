@@ -1,0 +1,28 @@
+---
+id: "notifications.customer-communications"
+name: "Customer Communications"
+summary: "Notification delivery triggered by order, stock, and payment events"
+version: "0.0.1"
+services:
+- id: "notifications.customer-communications.notifications-consumer"
+  version: "0.0.1"
+entities:
+- id: "notifications.customer-communications.notifications-consumer.notification"
+  version: "0.0.1"
+sends:
+- id: "notifications.customer-communications.notifications-consumer.order-confirmation-sent-event-v1"
+- id: "notifications.customer-communications.notifications-consumer.notification-delivery-failed-event-v1"
+- id: "notifications.customer-communications.notifications-consumer.stock-unavailable-notification-sent-event-v1"
+- id: "notifications.customer-communications.notifications-consumer.order-cancelled-notification-sent-event-v1"
+---
+Notification delivery triggered by order, stock, and payment events## Overview
+
+This page is generated from the ZenWave architecture model and EventCatalog frontmatter.
+
+<NodeGraph />
+
+<MessageTable format="all" limit={8} showChannels={true} title="Messages in and out" />## Entity Map
+
+<EntityMap />## Related Resources
+
+<ResourceGroupTable id="related-resources" limit={8} showOwners={true} title="Core resources" />

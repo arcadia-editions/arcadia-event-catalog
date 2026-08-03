@@ -1,0 +1,1 @@
+import{t as e}from"./createLucideIcon._PWpB5FA.js";var t=e(`chevron-up`,[[`path`,{d:`m18 15-6-6-6 6`,key:`153udz`}]]),n=e(`corner-down-right`,[[`polyline`,{points:`15 10 20 15 15 20`,key:`1q7qjw`}],[`path`,{d:`M4 4v7a4 4 0 0 0 4 4h12`,key:`z08zvw`}]]);export{t as n,n as t};

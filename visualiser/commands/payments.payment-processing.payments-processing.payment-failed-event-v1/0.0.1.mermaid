@@ -1,0 +1,24 @@
+%% EventCatalog Mermaid Diagram
+%% Resource: commands/payments.payment-processing.payments-processing.payment-failed-event-v1 (v0.0.1)
+%% Generated: 2026-08-03T19:48:11.065Z
+
+flowchart LR
+
+    %% Style definitions
+    classDef commands fill:#3b82f6,stroke:#1d4ed8,color:#fff
+    classDef services fill:#ec4899,stroke:#be185d,color:#fff
+    classDef channels fill:#6b7280,stroke:#374151,color:#fff
+
+    %% Nodes
+    payments_payment_processing_payments_processing_payment_failed_event_v1_0_0_1>"payment-failed-event-v1 (0.0.1)"]:::commands
+    payments_payment_processing_payments_processing_0_0_1[["Payments Processing (0.0.1)"]]:::services
+    payments_payment_processing_payments_processing_payment_failed_event_v1_0_0_1[("payment-failed-event-v1 (0.0.1)")]:::channels
+    payments_payment_processing_payments_processing_0_0_1[["Payments Processing (0.0.1)"]]:::services
+    payments_payment_processing_payments_processing_payment_failed_event_v1_0_0_1[("payment-failed-event-v1 (0.0.1)")]:::channels
+
+    %% Edges
+    payments_payment_processing_payments_processing_0_0_1 -->|"invokes"| payments_payment_processing_payments_processing_payment_failed_event_v1_0_0_1
+    payments_payment_processing_payments_processing_payment_failed_event_v1_0_0_1 -->|"routes to"| payments_payment_processing_payments_processing_payment_failed_event_v1_0_0_1
+    payments_payment_processing_payments_processing_payment_failed_event_v1_0_0_1 -->|"routes to"| payments_payment_processing_payments_processing_payment_failed_event_v1_0_0_1
+    payments_payment_processing_payments_processing_payment_failed_event_v1_0_0_1 -->|"consumes"| payments_payment_processing_payments_processing_0_0_1
+    payments_payment_processing_payments_processing_payment_failed_event_v1_0_0_1 -->|"publishes and subscribes"| payments_payment_processing_payments_processing_0_0_1

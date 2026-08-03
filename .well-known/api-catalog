@@ -1,0 +1,166 @@
+{
+  "linkset": [
+    {
+      "anchor": "https://arcadia-editions.github.io/arcadia-event-catalog/docs/services/catalog.inventory-management.catalog-inventory/0.0.1",
+      "service-desc": [
+        {
+          "href": "https://arcadia-editions.github.io/arcadia-event-catalog/api-catalog/specifications/services/catalog.inventory-management.catalog-inventory/0.0.1/asyncapi-aHR0cHM6Ly9naXRodWIuY29tL2FyY2FkaWEtZWRpdGlvbnMvY2F0YWxvZy1pbnZlbnRvcnktYXBpL3Jhdy9tYWluL2FzeW5jYXBpLnltbA",
+          "type": "application/yaml",
+          "title": "Catalog Inventory AsyncAPI"
+        },
+        {
+          "href": "https://arcadia-editions.github.io/arcadia-event-catalog/api-catalog/specifications/services/catalog.inventory-management.catalog-inventory/0.0.1/openapi-aHR0cHM6Ly9naXRodWIuY29tL2FyY2FkaWEtZWRpdGlvbnMvY2F0YWxvZy1pbnZlbnRvcnktYXBpL3Jhdy9tYWluL29wZW5hcGkueW1s",
+          "type": "application/yaml",
+          "title": "Catalog Inventory OpenAPI"
+        }
+      ],
+      "service-doc": [
+        {
+          "href": "https://arcadia-editions.github.io/arcadia-event-catalog/docs/services/catalog.inventory-management.catalog-inventory/0.0.1.md",
+          "type": "text/markdown",
+          "title": "Catalog Inventory documentation"
+        },
+        {
+          "href": "https://arcadia-editions.github.io/arcadia-event-catalog/docs/services/catalog.inventory-management.catalog-inventory/0.0.1",
+          "type": "text/html",
+          "title": "Catalog Inventory documentation"
+        }
+      ]
+    },
+    {
+      "anchor": "https://arcadia-editions.github.io/arcadia-event-catalog/docs/services/catalog.catalog-management.catalog-products/0.0.1",
+      "service-desc": [
+        {
+          "href": "https://arcadia-editions.github.io/arcadia-event-catalog/api-catalog/specifications/services/catalog.catalog-management.catalog-products/0.0.1/asyncapi-aHR0cHM6Ly9naXRodWIuY29tL2FyY2FkaWEtZWRpdGlvbnMvY2F0YWxvZy1wcm9kdWN0cy1hcGkvcmF3L21haW4vYXN5bmNhcGkueW1s",
+          "type": "application/yaml",
+          "title": "Catalog Products AsyncAPI"
+        },
+        {
+          "href": "https://arcadia-editions.github.io/arcadia-event-catalog/api-catalog/specifications/services/catalog.catalog-management.catalog-products/0.0.1/openapi-aHR0cHM6Ly9naXRodWIuY29tL2FyY2FkaWEtZWRpdGlvbnMvY2F0YWxvZy1wcm9kdWN0cy1hcGkvcmF3L21haW4vb3BlbmFwaS55bWw",
+          "type": "application/yaml",
+          "title": "Catalog Products OpenAPI"
+        }
+      ],
+      "service-doc": [
+        {
+          "href": "https://arcadia-editions.github.io/arcadia-event-catalog/docs/services/catalog.catalog-management.catalog-products/0.0.1.md",
+          "type": "text/markdown",
+          "title": "Catalog Products documentation"
+        },
+        {
+          "href": "https://arcadia-editions.github.io/arcadia-event-catalog/docs/services/catalog.catalog-management.catalog-products/0.0.1",
+          "type": "text/html",
+          "title": "Catalog Products documentation"
+        }
+      ]
+    },
+    {
+      "anchor": "https://arcadia-editions.github.io/arcadia-event-catalog/docs/services/fulfillment.shipping.fulfillment-shipping/0.0.1",
+      "service-desc": [
+        {
+          "href": "https://arcadia-editions.github.io/arcadia-event-catalog/api-catalog/specifications/services/fulfillment.shipping.fulfillment-shipping/0.0.1/asyncapi-aHR0cHM6Ly9naXRodWIuY29tL2FyY2FkaWEtZWRpdGlvbnMvZnVsZmlsbG1lbnQtc2hpcHBpbmctYXBpL3Jhdy9tYWluL2FzeW5jYXBpLnltbA",
+          "type": "application/yaml",
+          "title": "Fulfillment Shipping AsyncAPI"
+        },
+        {
+          "href": "https://arcadia-editions.github.io/arcadia-event-catalog/api-catalog/specifications/services/fulfillment.shipping.fulfillment-shipping/0.0.1/openapi-aHR0cHM6Ly9naXRodWIuY29tL2FyY2FkaWEtZWRpdGlvbnMvZnVsZmlsbG1lbnQtc2hpcHBpbmctYXBpL3Jhdy9tYWluL29wZW5hcGkueW1s",
+          "type": "application/yaml",
+          "title": "Fulfillment Shipping OpenAPI"
+        }
+      ],
+      "service-doc": [
+        {
+          "href": "https://arcadia-editions.github.io/arcadia-event-catalog/docs/services/fulfillment.shipping.fulfillment-shipping/0.0.1.md",
+          "type": "text/markdown",
+          "title": "Fulfillment Shipping documentation"
+        },
+        {
+          "href": "https://arcadia-editions.github.io/arcadia-event-catalog/docs/services/fulfillment.shipping.fulfillment-shipping/0.0.1",
+          "type": "text/html",
+          "title": "Fulfillment Shipping documentation"
+        }
+      ]
+    },
+    {
+      "anchor": "https://arcadia-editions.github.io/arcadia-event-catalog/docs/services/notifications.customer-communications.notifications-consumer/0.0.1",
+      "service-desc": [
+        {
+          "href": "https://arcadia-editions.github.io/arcadia-event-catalog/api-catalog/specifications/services/notifications.customer-communications.notifications-consumer/0.0.1/asyncapi-aHR0cHM6Ly9naXRodWIuY29tL2FyY2FkaWEtZWRpdGlvbnMvbm90aWZpY2F0aW9ucy1jb25zdW1lci1hcGkvcmF3L21haW4vYXN5bmNhcGkueW1s",
+          "type": "application/yaml",
+          "title": "Notifications Consumer AsyncAPI"
+        },
+        {
+          "href": "https://arcadia-editions.github.io/arcadia-event-catalog/api-catalog/specifications/services/notifications.customer-communications.notifications-consumer/0.0.1/openapi-aHR0cHM6Ly9naXRodWIuY29tL2FyY2FkaWEtZWRpdGlvbnMvbm90aWZpY2F0aW9ucy1jb25zdW1lci1hcGkvcmF3L21haW4vb3BlbmFwaS55bWw",
+          "type": "application/yaml",
+          "title": "Notifications Consumer OpenAPI"
+        }
+      ],
+      "service-doc": [
+        {
+          "href": "https://arcadia-editions.github.io/arcadia-event-catalog/docs/services/notifications.customer-communications.notifications-consumer/0.0.1.md",
+          "type": "text/markdown",
+          "title": "Notifications Consumer documentation"
+        },
+        {
+          "href": "https://arcadia-editions.github.io/arcadia-event-catalog/docs/services/notifications.customer-communications.notifications-consumer/0.0.1",
+          "type": "text/html",
+          "title": "Notifications Consumer documentation"
+        }
+      ]
+    },
+    {
+      "anchor": "https://arcadia-editions.github.io/arcadia-event-catalog/docs/services/orders.checkout.orders-checkout/0.0.1",
+      "service-desc": [
+        {
+          "href": "https://arcadia-editions.github.io/arcadia-event-catalog/api-catalog/specifications/services/orders.checkout.orders-checkout/0.0.1/asyncapi-aHR0cHM6Ly9naXRodWIuY29tL2FyY2FkaWEtZWRpdGlvbnMvb3JkZXJzLWNoZWNrb3V0LWFwaS9yYXcvbWFpbi9hc3luY2FwaS55bWw",
+          "type": "application/yaml",
+          "title": "Orders Checkout AsyncAPI"
+        },
+        {
+          "href": "https://arcadia-editions.github.io/arcadia-event-catalog/api-catalog/specifications/services/orders.checkout.orders-checkout/0.0.1/openapi-aHR0cHM6Ly9naXRodWIuY29tL2FyY2FkaWEtZWRpdGlvbnMvb3JkZXJzLWNoZWNrb3V0LWFwaS9yYXcvbWFpbi9vcGVuYXBpLnltbA",
+          "type": "application/yaml",
+          "title": "Orders Checkout OpenAPI"
+        }
+      ],
+      "service-doc": [
+        {
+          "href": "https://arcadia-editions.github.io/arcadia-event-catalog/docs/services/orders.checkout.orders-checkout/0.0.1.md",
+          "type": "text/markdown",
+          "title": "Orders Checkout documentation"
+        },
+        {
+          "href": "https://arcadia-editions.github.io/arcadia-event-catalog/docs/services/orders.checkout.orders-checkout/0.0.1",
+          "type": "text/html",
+          "title": "Orders Checkout documentation"
+        }
+      ]
+    },
+    {
+      "anchor": "https://arcadia-editions.github.io/arcadia-event-catalog/docs/services/payments.payment-processing.payments-processing/0.0.1",
+      "service-desc": [
+        {
+          "href": "https://arcadia-editions.github.io/arcadia-event-catalog/api-catalog/specifications/services/payments.payment-processing.payments-processing/0.0.1/asyncapi-aHR0cHM6Ly9naXRodWIuY29tL2FyY2FkaWEtZWRpdGlvbnMvcGF5bWVudHMtcHJvY2Vzc2luZy1hcGkvcmF3L21haW4vYXN5bmNhcGkueW1s",
+          "type": "application/yaml",
+          "title": "Payments Processing AsyncAPI"
+        },
+        {
+          "href": "https://arcadia-editions.github.io/arcadia-event-catalog/api-catalog/specifications/services/payments.payment-processing.payments-processing/0.0.1/openapi-aHR0cHM6Ly9naXRodWIuY29tL2FyY2FkaWEtZWRpdGlvbnMvcGF5bWVudHMtcHJvY2Vzc2luZy1hcGkvcmF3L21haW4vb3BlbmFwaS55bWw",
+          "type": "application/yaml",
+          "title": "Payments Processing OpenAPI"
+        }
+      ],
+      "service-doc": [
+        {
+          "href": "https://arcadia-editions.github.io/arcadia-event-catalog/docs/services/payments.payment-processing.payments-processing/0.0.1.md",
+          "type": "text/markdown",
+          "title": "Payments Processing documentation"
+        },
+        {
+          "href": "https://arcadia-editions.github.io/arcadia-event-catalog/docs/services/payments.payment-processing.payments-processing/0.0.1",
+          "type": "text/html",
+          "title": "Payments Processing documentation"
+        }
+      ]
+    }
+  ]
+}

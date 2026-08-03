@@ -1,0 +1,1 @@
+import{n as e,t}from"./mermaid-zoom.DzECfQqh.js";document.addEventListener(`astro:page-load`,()=>{t();let n=document.getElementsByClassName(`mermaid`);n.length>0&&e(n,window.eventcatalog?.mermaid)});var n=document.getElementsByClassName(`mermaid`);n.length>0&&e(n,window.eventcatalog?.mermaid),window.renderDiagrams=t=>{e(t,window.eventcatalog?.mermaid)};

@@ -1,0 +1,19 @@
+%% EventCatalog Mermaid Diagram
+%% Resource: events/notifications.customer-communications.notifications-consumer.stock-unavailable-notification-sent-event-v1 (v0.0.1)
+%% Generated: 2026-08-03T19:48:11.059Z
+
+flowchart LR
+
+    %% Style definitions
+    classDef events fill:#f97316,stroke:#c2410c,color:#fff
+    classDef services fill:#ec4899,stroke:#be185d,color:#fff
+    classDef channels fill:#6b7280,stroke:#374151,color:#fff
+
+    %% Nodes
+    notifications_customer_communications_notifications_consumer_stock_unavailable_notification_sent_event_v1_0_0_1>"stock-unavailable-notification-sent-event-v1 (0.0.1)"]:::events
+    notifications_customer_communications_notifications_consumer_0_0_1[["Notifications Consumer (0.0.1)"]]:::services
+    notifications_customer_communications_notifications_consumer_stock_unavailable_notification_sent_event_v1_0_0_1[("stock-unavailable-notification-sent-event-v1 (0.0.1)")]:::channels
+
+    %% Edges
+    notifications_customer_communications_notifications_consumer_0_0_1 -->|"publishes  event"| notifications_customer_communications_notifications_consumer_stock_unavailable_notification_sent_event_v1_0_0_1
+    notifications_customer_communications_notifications_consumer_stock_unavailable_notification_sent_event_v1_0_0_1 -->|"routes to"| notifications_customer_communications_notifications_consumer_stock_unavailable_notification_sent_event_v1_0_0_1
