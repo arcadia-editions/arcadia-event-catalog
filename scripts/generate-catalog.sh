@@ -3,7 +3,7 @@ set -euo pipefail
 
 script_dir="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)"
 repository_root="$(cd -- "$script_dir/.." && pwd)"
-architecture_url="${ARCHITECTURE_URL:-https://raw.githubusercontent.com/arcadia-editions/arcadia-editions-docs/main/zenwave-architecture.yml}"
+architecture_url="${ARCHITECTURE_URL:-https://raw.githubusercontent.com/arcadia-editions/arcadia-editions-architecture/main/zenwave-architecture.yml}"
 output_directory="$repository_root/event-catalog-content"
 input_directory="$repository_root/.eventcatalog-build/input"
 architecture_file="$input_directory/zenwave-architecture.yml"

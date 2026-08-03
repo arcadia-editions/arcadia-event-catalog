@@ -69,7 +69,7 @@ The generation defaults match
 `ArcadiaEditionsEventCatalogGeneratorTest.java`:
 
 - architecture manifest:
-  `https://raw.githubusercontent.com/arcadia-editions/arcadia-editions-docs/main/zenwave-architecture.yml`
+  `https://raw.githubusercontent.com/arcadia-editions/arcadia-editions-architecture/main/zenwave-architecture.yml`
 - `preferredSource=git`
 - `allowFallback=false`
 - `linkSource=git`
