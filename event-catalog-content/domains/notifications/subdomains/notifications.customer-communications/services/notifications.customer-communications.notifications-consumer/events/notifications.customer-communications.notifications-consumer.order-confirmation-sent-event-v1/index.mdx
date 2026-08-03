@@ -2,14 +2,18 @@
 id: "notifications.customer-communications.notifications-consumer.order-confirmation-sent-event-v1"
 name: "order-confirmation-sent-event-v1"
 version: "0.0.1"
+schemaPath: "https://github.com/arcadia-editions/notifications-consumer-api/raw/main/avro/OrderConfirmationSent.avsc"
 producers:
 - "notifications.customer-communications.notifications-consumer-0.0.1"
 channels:
 - id: "notifications.customer-communications.notifications-consumer.order-confirmation-sent-event-v1"
 ---
+import RemoteSpecificationSchema from '@catalog/components/RemoteSpecificationSchema.astro';
+
 ## Overview
 
 Generated event reference page.
 
-<NodeGraph />
+<NodeGraph />## Schema
 
+<RemoteSpecificationSchema url="https://github.com/arcadia-editions/notifications-consumer-api/raw/main/asyncapi.yml" channel="order-confirmation-sent-event-v1" channelMessage="OrderConfirmationSentMessage" />

@@ -2,6 +2,7 @@
 id: "payments.payment-processing.payments-processing.payment-capture-failed-event-v1"
 name: "payment-capture-failed-event-v1"
 version: "0.0.1"
+schemaPath: "https://github.com/arcadia-editions/payments-processing-api/raw/main/avro/VoidPaymentInput.avsc"
 producers:
 - "payments.payment-processing.payments-processing-0.0.1"
 consumers:
@@ -9,9 +10,12 @@ consumers:
 channels:
 - id: "payments.payment-processing.payments-processing.payment-capture-failed-event-v1"
 ---
+import RemoteSpecificationSchema from '@catalog/components/RemoteSpecificationSchema.astro';
+
 ## Overview
 
 Generated command reference page.
 
-<NodeGraph />
+<NodeGraph />## Schema
 
+<RemoteSpecificationSchema url="https://github.com/arcadia-editions/payments-processing-api/raw/main/asyncapi.yml" channel="payment-capture-failed-event-v1" channelMessage="VoidPaymentInputMessage" />

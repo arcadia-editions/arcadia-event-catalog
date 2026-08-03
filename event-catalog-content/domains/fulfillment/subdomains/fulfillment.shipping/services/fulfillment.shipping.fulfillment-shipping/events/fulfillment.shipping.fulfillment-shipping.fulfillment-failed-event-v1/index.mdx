@@ -2,14 +2,18 @@
 id: "fulfillment.shipping.fulfillment-shipping.fulfillment-failed-event-v1"
 name: "fulfillment-failed-event-v1"
 version: "0.0.1"
+schemaPath: "https://github.com/arcadia-editions/fulfillment-shipping-api/raw/main/avro/FulfillmentFailed.avsc"
 producers:
 - "fulfillment.shipping.fulfillment-shipping-0.0.1"
 channels:
 - id: "fulfillment.shipping.fulfillment-shipping.fulfillment-failed-event-v1"
 ---
+import RemoteSpecificationSchema from '@catalog/components/RemoteSpecificationSchema.astro';
+
 ## Overview
 
 Generated event reference page.
 
-<NodeGraph />
+<NodeGraph />## Schema
 
+<RemoteSpecificationSchema url="https://github.com/arcadia-editions/fulfillment-shipping-api/raw/main/asyncapi.yml" channel="fulfillment-failed-event-v1" channelMessage="FulfillmentFailedMessage" />
