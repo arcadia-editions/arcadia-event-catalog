@@ -5,7 +5,13 @@ summary: "Product catalog definition, publication lifecycle, and release metadat
 version: "0.0.1"
 services:
 - id: "catalog.catalog-management.catalog-products"
-  version: "0.0.0"
+  version: "0.5.0"
+entities:
+- id: "catalog.catalog-management.catalog-products.product"
+  version: "0.5.0"
+sends:
+- id: "catalog.catalog-management.catalog-products.product-published-event-v1"
+- id: "catalog.catalog-management.catalog-products.product-retired-event-v1"
 ---
 Product catalog definition, publication lifecycle, and release metadata## Overview
 
@@ -13,6 +19,8 @@ This page is generated from the ZenWave architecture model and EventCatalog fron
 
 <NodeGraph />
 
-<MessageTable format="all" limit={8} showChannels={true} title="Messages in and out" />## Related Resources
+<MessageTable format="all" limit={8} showChannels={true} title="Messages in and out" />## Entity Map
+
+<EntityMap />## Related Resources
 
 <ResourceGroupTable id="related-resources" limit={8} showOwners={true} title="Core resources" />
