@@ -5,7 +5,14 @@ summary: "Shipment scheduling, readiness, and fulfillment failure handling"
 version: "0.0.1"
 services:
 - id: "fulfillment.shipping.fulfillment-shipping"
-  version: "0.0.0"
+  version: "0.1.0"
+entities:
+- id: "fulfillment.shipping.fulfillment-shipping.fulfillment"
+  version: "0.1.0"
+sends:
+- id: "fulfillment.shipping.fulfillment-shipping.fulfillment-scheduled-event-v1"
+- id: "fulfillment.shipping.fulfillment-shipping.fulfillment-failed-event-v1"
+- id: "fulfillment.shipping.fulfillment-shipping.fulfillment-ready-to-ship-event-v1"
 ---
 Shipment scheduling, readiness, and fulfillment failure handling## Overview
 
@@ -13,6 +20,8 @@ This page is generated from the ZenWave architecture model and EventCatalog fron
 
 <NodeGraph />
 
-<MessageTable format="all" limit={8} showChannels={true} title="Messages in and out" />## Related Resources
+<MessageTable format="all" limit={8} showChannels={true} title="Messages in and out" />## Entity Map
+
+<EntityMap />## Related Resources
 
 <ResourceGroupTable id="related-resources" limit={8} showOwners={true} title="Core resources" />
