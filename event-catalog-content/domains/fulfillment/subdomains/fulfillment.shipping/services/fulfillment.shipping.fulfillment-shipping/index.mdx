@@ -12,9 +12,14 @@ sends:
 - id: "fulfillment.shipping.fulfillment-shipping.fulfillment-scheduled-event-v1"
 - id: "fulfillment.shipping.fulfillment-shipping.fulfillment-failed-event-v1"
 - id: "fulfillment.shipping.fulfillment-shipping.fulfillment-ready-to-ship-event-v1"
+receives:
+- id: "orders.checkout.orders-checkout.order-confirmed-event-v1"
 entities:
 - id: "fulfillment.shipping.fulfillment-shipping.fulfillment"
   version: "0.1.0"
+flows:
+- id: "place-order-flow"
+  version: "0.0.0"
 ---
 ## OverviewOwns scheduling and readiness of shipping operations after an order is confirmed<NodeGraph />## Message Flow
 
@@ -22,7 +27,10 @@ entities:
 
 <EntityMap />## Specifications
 
-The linked specifications in the frontmatter drive EventCatalog reference views for this service.# Fulfillment Shipping
+The linked specifications in the frontmatter drive EventCatalog reference views for this service.
+
+
+# Fulfillment Shipping
 
 ## Description
 
@@ -84,5 +92,6 @@ By making shipment preparation explicit, Fulfillment Shipping gives operations a
 - added &#x60;SUMMARY.md&#x60; with the business-purpose summary for event catalog generation
 - added this &#x60;CHANGE.log&#x60; to track documentation updates
 - added &#x60;EVENT_CATALOG.md&#x60; with publication-ready Fulfillment Shipping catalog content
+
 
 

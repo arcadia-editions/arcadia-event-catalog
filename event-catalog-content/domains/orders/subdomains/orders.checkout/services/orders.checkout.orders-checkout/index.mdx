@@ -14,9 +14,15 @@ sends:
 - id: "orders.checkout.orders-checkout.stock-unavailable-event-v1"
 - id: "orders.checkout.orders-checkout.order-confirmed-event-v1"
 - id: "orders.checkout.orders-checkout.order-cancelled-event-v1"
+receives:
+- id: "catalog.inventory-management.catalog-inventory.stock-released-event-v1"
+- id: "payments.payment-processing.payments-processing.payment-authorized-event-v1"
 entities:
 - id: "orders.checkout.orders-checkout.order"
   version: "0.1.1"
+flows:
+- id: "place-order-flow"
+  version: "0.0.0"
 ---
 ## OverviewOwns checkout flow, order lifecycle, and the handoff from purchase intent to confirmed order<NodeGraph />## Message Flow
 
@@ -24,7 +30,10 @@ entities:
 
 <EntityMap />## Specifications
 
-The linked specifications in the frontmatter drive EventCatalog reference views for this service.# Orders Checkout
+The linked specifications in the frontmatter drive EventCatalog reference views for this service.
+
+
+# Orders Checkout
 
 ## Description
 
@@ -85,5 +94,6 @@ The catalog provides a stable, human-readable reference for the business meaning
 - added &#x60;SUMMARY.md&#x60; with the business-purpose summary for event catalog generation
 - added this &#x60;CHANGE.log&#x60; to track documentation updates
 - added &#x60;EVENT_CATALOG.md&#x60; with an evergreen description of Orders Checkout for event catalog publication
+
 
 

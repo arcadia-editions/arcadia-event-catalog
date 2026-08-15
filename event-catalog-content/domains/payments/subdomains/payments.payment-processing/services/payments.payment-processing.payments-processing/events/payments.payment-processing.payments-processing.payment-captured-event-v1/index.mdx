@@ -5,6 +5,8 @@ version: "0.1.0"
 schemaPath: "https://github.com/arcadia-editions/payments-processing-api/raw/main/avro/PaymentCaptured.avsc"
 producers:
 - "payments.payment-processing.payments-processing-0.1.0"
+consumers:
+- "notifications.customer-communications.notifications-consumer-0.1.0"
 channels:
 - id: "payments.payment-processing.payments-processing.payment-captured-event-v1"
 ---
@@ -14,6 +16,19 @@ import RemoteSpecificationSchema from '@catalog/components/RemoteSpecificationSc
 
 Generated event reference page.
 
-<NodeGraph />## Schema
+<NodeGraph />
+
+
+## Consumer operations
+
+
+- `notifications.customer-communications.notifications-consumer.onPaymentCapturedEventV1` (`receive`, matched by external-ref)
+
+
+
+
+## Schema
 
 <RemoteSpecificationSchema url="https://github.com/arcadia-editions/payments-processing-api/raw/main/asyncapi.yml" channel="payment-captured-event-v1" channelMessage="PaymentCapturedMessage" />
+
+

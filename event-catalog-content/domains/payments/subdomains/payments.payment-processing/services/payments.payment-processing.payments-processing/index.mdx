@@ -10,20 +10,25 @@ specifications:
 - type: "openapi"
   path: "https://github.com/arcadia-editions/payments-processing-api/raw/main/openapi.yml"
 sends:
+- id: "payments.payment-processing.payments-processing.payment-failed-event-v1"
+- id: "payments.payment-processing.payments-processing.payment-capture-failed-event-v1"
 - id: "payments.payment-processing.payments-processing.payment-authorized-event-v1"
 - id: "payments.payment-processing.payments-processing.payment-declined-event-v1"
-- id: "payments.payment-processing.payments-processing.payment-failed-event-v1"
 - id: "payments.payment-processing.payments-processing.payment-retried-event-v1"
 - id: "payments.payment-processing.payments-processing.payment-retry-exhausted-event-v1"
 - id: "payments.payment-processing.payments-processing.payment-captured-event-v1"
-- id: "payments.payment-processing.payments-processing.payment-capture-failed-event-v1"
 - id: "payments.payment-processing.payments-processing.payment-voided-event-v1"
 receives:
 - id: "payments.payment-processing.payments-processing.payment-failed-event-v1"
 - id: "payments.payment-processing.payments-processing.payment-capture-failed-event-v1"
+- id: "orders.checkout.orders-checkout.order-created-event-v1"
+- id: "fulfillment.shipping.fulfillment-shipping.fulfillment-scheduled-event-v1"
 entities:
 - id: "payments.payment-processing.payments-processing.payment"
   version: "0.1.0"
+flows:
+- id: "place-order-flow"
+  version: "0.0.0"
 ---
 ## OverviewOwns payment authorization, retries, capture, voiding, and provider-facing outcomes<NodeGraph />## Message Flow
 
@@ -31,7 +36,10 @@ entities:
 
 <EntityMap />## Specifications
 
-The linked specifications in the frontmatter drive EventCatalog reference views for this service.# Payments Processing
+The linked specifications in the frontmatter drive EventCatalog reference views for this service.
+
+
+# Payments Processing
 
 ## Description
 
@@ -97,5 +105,6 @@ This catalog is a stable reference that can outlast changes in vendors, delivery
 - added &#x60;SUMMARY.md&#x60; with the business-purpose summary for event catalog generation
 - added this &#x60;CHANGE.log&#x60; to track documentation updates
 - added &#x60;EVENT_CATALOG.md&#x60; with an evergreen description of Payments Processing for event catalog publication
+
 
 

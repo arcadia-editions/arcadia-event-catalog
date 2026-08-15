@@ -14,9 +14,16 @@ sends:
 - id: "notifications.customer-communications.notifications-consumer.notification-delivery-failed-event-v1"
 - id: "notifications.customer-communications.notifications-consumer.stock-unavailable-notification-sent-event-v1"
 - id: "notifications.customer-communications.notifications-consumer.order-cancelled-notification-sent-event-v1"
+receives:
+- id: "orders.checkout.orders-checkout.stock-unavailable-event-v1"
+- id: "orders.checkout.orders-checkout.order-cancelled-event-v1"
+- id: "payments.payment-processing.payments-processing.payment-captured-event-v1"
 entities:
 - id: "notifications.customer-communications.notifications-consumer.notification"
   version: "0.1.0"
+flows:
+- id: "place-order-flow"
+  version: "0.0.0"
 ---
 ## OverviewTransforms business outcomes into customer-facing notifications and delivery results<NodeGraph />## Message Flow
 
@@ -24,7 +31,10 @@ entities:
 
 <EntityMap />## Specifications
 
-The linked specifications in the frontmatter drive EventCatalog reference views for this service.# Notifications Consumer
+The linked specifications in the frontmatter drive EventCatalog reference views for this service.
+
+
+# Notifications Consumer
 
 ## Description
 
@@ -89,5 +99,6 @@ The service makes communication outcomes visible and manageable without binding 
 - added &#x60;SUMMARY.md&#x60; with the business-purpose summary for event catalog generation
 - added this &#x60;CHANGE.log&#x60; to track documentation updates
 - added &#x60;EVENT_CATALOG.md&#x60; with publication-ready Notifications Consumer catalog content
+
 
 

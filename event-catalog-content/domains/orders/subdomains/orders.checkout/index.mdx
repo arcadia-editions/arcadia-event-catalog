@@ -14,6 +14,9 @@ sends:
 - id: "orders.checkout.orders-checkout.stock-unavailable-event-v1"
 - id: "orders.checkout.orders-checkout.order-confirmed-event-v1"
 - id: "orders.checkout.orders-checkout.order-cancelled-event-v1"
+receives:
+- id: "catalog.inventory-management.catalog-inventory.stock-released-event-v1"
+- id: "payments.payment-processing.payments-processing.payment-authorized-event-v1"
 ---
 Customer checkout, order commitment, and commercial orchestration## Overview
 

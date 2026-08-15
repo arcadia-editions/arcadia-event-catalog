@@ -13,6 +13,8 @@ sends:
 - id: "catalog.inventory-management.catalog-inventory.stock-reservation-confirmed-event-v1"
 - id: "catalog.inventory-management.catalog-inventory.stock-received-event-v1"
 - id: "catalog.inventory-management.catalog-inventory.stock-adjusted-event-v1"
+receives:
+- id: "payments.payment-processing.payments-processing.payment-voided-event-v1"
 entities:
 - id: "catalog.inventory-management.catalog-inventory.stock-reservation"
   version: "0.1.0"
@@ -25,7 +27,17 @@ entities:
 
 <EntityMap />## Specifications
 
-The linked specifications in the frontmatter drive EventCatalog reference views for this service.# Catalog Inventory
+The linked specifications in the frontmatter drive EventCatalog reference views for this service.
+
+
+## Declared API consumers
+
+
+- `orders.checkout.orders-checkout`
+
+
+
+# Catalog Inventory
 
 ## Description
 
@@ -132,5 +144,6 @@ foundation for a curated, limited-edition business.
 - added &#x60;SUMMARY.md&#x60; with the business-purpose summary for event catalog generation
 - added this &#x60;CHANGE.log&#x60; to track documentation updates
 - added &#x60;EVENT_CATALOG.md&#x60; with the service-level event catalog description
+
 
 
