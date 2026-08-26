@@ -1,0 +1,40 @@
+%% EventCatalog Mermaid Diagram
+%% Resource: services/notifications.customer-communications.notifications-consumer (v0.1.0)
+%% Generated: 2026-08-26T20:38:03.346Z
+
+flowchart LR
+
+    %% Style definitions
+    classDef events fill:#f97316,stroke:#c2410c,color:#fff
+    classDef services fill:#ec4899,stroke:#be185d,color:#fff
+
+    %% Nodes
+    orders_checkout_orders_checkout_stock_unavailable_event_v1_0_1_1>"stock-unavailable-event-v1 (0.1.1)"]:::events
+    notifications_customer_communications_notifications_consumer_0_1_0[["Notifications Consumer (0.1.0)"]]:::services
+    orders_checkout_orders_checkout_0_1_1[["Orders Checkout (0.1.1)"]]:::services
+    orders_checkout_orders_checkout_order_cancelled_event_v1_0_1_1>"order-cancelled-event-v1 (0.1.1)"]:::events
+    payments_payment_processing_payments_processing_payment_captured_event_v1_0_1_0>"payment-captured-event-v1 (0.1.0)"]:::events
+    payments_payment_processing_payments_processing_0_1_0[["Payments Processing (0.1.0)"]]:::services
+    notifications_customer_communications_notifications_consumer_order_confirmation_sent_event_v1_0_1_0>"order-confirmation-sent-event-v1 (0.1.0)"]:::events
+    notifications_customer_communications_notifications_consumer_notification_delivery_failed_event_v1_0_1_0>"notification-delivery-failed-event-v1 (0.1.0)"]:::events
+    notifications_customer_communications_notifications_consumer_stock_unavailable_notification_sent_event_v1_0_1_0>"stock-unavailable-notification-sent-event-v1 (0.1.0)"]:::events
+    notifications_customer_communications_notifications_consumer_order_cancelled_notification_sent_event_v1_0_1_0>"order-cancelled-notification-sent-event-v1 (0.1.0)"]:::events
+
+    %% Edges
+    orders_checkout_orders_checkout_stock_unavailable_event_v1_0_1_1 -->|"subscribed by"| notifications_customer_communications_notifications_consumer_0_1_0
+    orders_checkout_orders_checkout_0_1_1 -->|"publishes  event"| orders_checkout_orders_checkout_stock_unavailable_event_v1_0_1_1
+    orders_checkout_orders_checkout_stock_unavailable_event_v1_0_1_1 -->|"routes to"| orders_checkout_orders_checkout_stock_unavailable_event_v1_0_1_1
+    orders_checkout_orders_checkout_order_cancelled_event_v1_0_1_1 -->|"subscribed by"| notifications_customer_communications_notifications_consumer_0_1_0
+    orders_checkout_orders_checkout_0_1_1 -->|"publishes  event"| orders_checkout_orders_checkout_order_cancelled_event_v1_0_1_1
+    orders_checkout_orders_checkout_order_cancelled_event_v1_0_1_1 -->|"routes to"| orders_checkout_orders_checkout_order_cancelled_event_v1_0_1_1
+    payments_payment_processing_payments_processing_payment_captured_event_v1_0_1_0 -->|"subscribed by"| notifications_customer_communications_notifications_consumer_0_1_0
+    payments_payment_processing_payments_processing_0_1_0 -->|"publishes  event"| payments_payment_processing_payments_processing_payment_captured_event_v1_0_1_0
+    payments_payment_processing_payments_processing_payment_captured_event_v1_0_1_0 -->|"routes to"| payments_payment_processing_payments_processing_payment_captured_event_v1_0_1_0
+    notifications_customer_communications_notifications_consumer_0_1_0 -->|"publishes  event"| notifications_customer_communications_notifications_consumer_order_confirmation_sent_event_v1_0_1_0
+    notifications_customer_communications_notifications_consumer_order_confirmation_sent_event_v1_0_1_0 -->|"routes to"| notifications_customer_communications_notifications_consumer_order_confirmation_sent_event_v1_0_1_0
+    notifications_customer_communications_notifications_consumer_0_1_0 -->|"publishes  event"| notifications_customer_communications_notifications_consumer_notification_delivery_failed_event_v1_0_1_0
+    notifications_customer_communications_notifications_consumer_notification_delivery_failed_event_v1_0_1_0 -->|"routes to"| notifications_customer_communications_notifications_consumer_notification_delivery_failed_event_v1_0_1_0
+    notifications_customer_communications_notifications_consumer_0_1_0 -->|"publishes  event"| notifications_customer_communications_notifications_consumer_stock_unavailable_notification_sent_event_v1_0_1_0
+    notifications_customer_communications_notifications_consumer_stock_unavailable_notification_sent_event_v1_0_1_0 -->|"routes to"| notifications_customer_communications_notifications_consumer_stock_unavailable_notification_sent_event_v1_0_1_0
+    notifications_customer_communications_notifications_consumer_0_1_0 -->|"publishes  event"| notifications_customer_communications_notifications_consumer_order_cancelled_notification_sent_event_v1_0_1_0
+    notifications_customer_communications_notifications_consumer_order_cancelled_notification_sent_event_v1_0_1_0 -->|"routes to"| notifications_customer_communications_notifications_consumer_order_cancelled_notification_sent_event_v1_0_1_0

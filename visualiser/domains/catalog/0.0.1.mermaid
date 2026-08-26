@@ -1,0 +1,40 @@
+%% EventCatalog Mermaid Diagram
+%% Resource: domains/catalog (v0.0.1)
+%% Generated: 2026-08-26T20:38:03.394Z
+
+flowchart LR
+
+    %% Style definitions
+    classDef services fill:#ec4899,stroke:#be185d,color:#fff
+    classDef events fill:#f97316,stroke:#c2410c,color:#fff
+
+    %% Nodes
+    catalog_catalog_management_catalog_products_0_5_0[["Catalog Products (0.5.0)"]]:::services
+    catalog_catalog_management_catalog_products_product_published_event_v1_0_5_0>"product-published-event-v1 (0.5.0)"]:::events
+    catalog_catalog_management_catalog_products_product_retired_event_v1_0_5_0>"product-retired-event-v1 (0.5.0)"]:::events
+    payments_payment_processing_payments_processing_payment_voided_event_v1_0_1_0>"payment-voided-event-v1 (0.1.0)"]:::events
+    catalog_inventory_management_catalog_inventory_0_1_0[["Catalog Inventory (0.1.0)"]]:::services
+    payments_payment_processing_payments_processing_0_1_0[["Payments Processing (0.1.0)"]]:::services
+    catalog_inventory_management_catalog_inventory_stock_released_event_v1_0_1_0>"stock-released-event-v1 (0.1.0)"]:::events
+    orders_checkout_orders_checkout_0_1_1[["Orders Checkout (0.1.1)"]]:::services
+    catalog_inventory_management_catalog_inventory_stock_reservation_confirmed_event_v1_0_1_0>"stock-reservation-confirmed-event-v1 (0.1.0)"]:::events
+    catalog_inventory_management_catalog_inventory_stock_received_event_v1_0_1_0>"stock-received-event-v1 (0.1.0)"]:::events
+    catalog_inventory_management_catalog_inventory_stock_adjusted_event_v1_0_1_0>"stock-adjusted-event-v1 (0.1.0)"]:::events
+
+    %% Edges
+    catalog_catalog_management_catalog_products_0_5_0 -->|"publishes  event"| catalog_catalog_management_catalog_products_product_published_event_v1_0_5_0
+    catalog_catalog_management_catalog_products_product_published_event_v1_0_5_0 -->|"routes to"| catalog_catalog_management_catalog_products_product_published_event_v1_0_5_0
+    catalog_catalog_management_catalog_products_0_5_0 -->|"publishes  event"| catalog_catalog_management_catalog_products_product_retired_event_v1_0_5_0
+    catalog_catalog_management_catalog_products_product_retired_event_v1_0_5_0 -->|"routes to"| catalog_catalog_management_catalog_products_product_retired_event_v1_0_5_0
+    payments_payment_processing_payments_processing_payment_voided_event_v1_0_1_0 -->|"subscribed by"| catalog_inventory_management_catalog_inventory_0_1_0
+    payments_payment_processing_payments_processing_0_1_0 -->|"publishes  event"| payments_payment_processing_payments_processing_payment_voided_event_v1_0_1_0
+    payments_payment_processing_payments_processing_payment_voided_event_v1_0_1_0 -->|"routes to"| payments_payment_processing_payments_processing_payment_voided_event_v1_0_1_0
+    catalog_inventory_management_catalog_inventory_0_1_0 -->|"publishes  event"| catalog_inventory_management_catalog_inventory_stock_released_event_v1_0_1_0
+    catalog_inventory_management_catalog_inventory_stock_released_event_v1_0_1_0 -->|"routes to"| catalog_inventory_management_catalog_inventory_stock_released_event_v1_0_1_0
+    catalog_inventory_management_catalog_inventory_stock_released_event_v1_0_1_0 -->|"consumes"| orders_checkout_orders_checkout_0_1_1
+    catalog_inventory_management_catalog_inventory_0_1_0 -->|"publishes  event"| catalog_inventory_management_catalog_inventory_stock_reservation_confirmed_event_v1_0_1_0
+    catalog_inventory_management_catalog_inventory_stock_reservation_confirmed_event_v1_0_1_0 -->|"routes to"| catalog_inventory_management_catalog_inventory_stock_reservation_confirmed_event_v1_0_1_0
+    catalog_inventory_management_catalog_inventory_0_1_0 -->|"publishes  event"| catalog_inventory_management_catalog_inventory_stock_received_event_v1_0_1_0
+    catalog_inventory_management_catalog_inventory_stock_received_event_v1_0_1_0 -->|"routes to"| catalog_inventory_management_catalog_inventory_stock_received_event_v1_0_1_0
+    catalog_inventory_management_catalog_inventory_0_1_0 -->|"publishes  event"| catalog_inventory_management_catalog_inventory_stock_adjusted_event_v1_0_1_0
+    catalog_inventory_management_catalog_inventory_stock_adjusted_event_v1_0_1_0 -->|"routes to"| catalog_inventory_management_catalog_inventory_stock_adjusted_event_v1_0_1_0

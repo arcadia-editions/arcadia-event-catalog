@@ -1,0 +1,19 @@
+%% EventCatalog Mermaid Diagram
+%% Resource: events/catalog.inventory-management.catalog-inventory.stock-reservation-confirmed-event-v1 (v0.1.0)
+%% Generated: 2026-08-26T20:38:03.274Z
+
+flowchart LR
+
+    %% Style definitions
+    classDef events fill:#f97316,stroke:#c2410c,color:#fff
+    classDef services fill:#ec4899,stroke:#be185d,color:#fff
+    classDef channels fill:#6b7280,stroke:#374151,color:#fff
+
+    %% Nodes
+    catalog_inventory_management_catalog_inventory_stock_reservation_confirmed_event_v1_0_1_0>"stock-reservation-confirmed-event-v1 (0.1.0)"]:::events
+    catalog_inventory_management_catalog_inventory_0_1_0[["Catalog Inventory (0.1.0)"]]:::services
+    catalog_inventory_management_catalog_inventory_stock_reservation_confirmed_event_v1_0_1_0[("stock-reservation-confirmed-event-v1 (0.1.0)")]:::channels
+
+    %% Edges
+    catalog_inventory_management_catalog_inventory_0_1_0 -->|"publishes  event"| catalog_inventory_management_catalog_inventory_stock_reservation_confirmed_event_v1_0_1_0
+    catalog_inventory_management_catalog_inventory_stock_reservation_confirmed_event_v1_0_1_0 -->|"routes to"| catalog_inventory_management_catalog_inventory_stock_reservation_confirmed_event_v1_0_1_0

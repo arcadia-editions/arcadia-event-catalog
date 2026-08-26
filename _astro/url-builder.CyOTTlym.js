@@ -1,0 +1,1 @@
+var e=e=>e.replace(/\/+/g,`/`),t=(t,n=!1,r=!1)=>{let i=t;return r||(i=`/arcadia-event-catalog/${t}`),n?e(i):t.endsWith(`/`)?i:e(`${i}/`)},n=e=>e.replace(/\/$/,``)+`.mdx/`;export{n,t};

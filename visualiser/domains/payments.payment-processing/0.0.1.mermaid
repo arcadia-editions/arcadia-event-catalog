@@ -1,0 +1,57 @@
+%% EventCatalog Mermaid Diagram
+%% Resource: domains/payments.payment-processing (v0.0.1)
+%% Generated: 2026-08-26T20:38:03.477Z
+
+flowchart LR
+
+    %% Style definitions
+    classDef events fill:#f97316,stroke:#c2410c,color:#fff
+    classDef services fill:#ec4899,stroke:#be185d,color:#fff
+
+    %% Nodes
+    payments_payment_processing_payments_processing_payment_failed_event_v1_0_1_0>"payment-failed-event-v1 (0.1.0)"]:::events
+    payments_payment_processing_payments_processing_0_1_0[["Payments Processing (0.1.0)"]]:::services
+    payments_payment_processing_payments_processing_payment_capture_failed_event_v1_0_1_0>"payment-capture-failed-event-v1 (0.1.0)"]:::events
+    orders_checkout_orders_checkout_order_created_event_v1_0_1_1>"order-created-event-v1 (0.1.1)"]:::events
+    orders_checkout_orders_checkout_0_1_1[["Orders Checkout (0.1.1)"]]:::services
+    fulfillment_shipping_fulfillment_shipping_fulfillment_scheduled_event_v1_0_1_0>"fulfillment-scheduled-event-v1 (0.1.0)"]:::events
+    fulfillment_shipping_fulfillment_shipping_0_1_0[["Fulfillment Shipping (0.1.0)"]]:::services
+    payments_payment_processing_payments_processing_payment_authorized_event_v1_0_1_0>"payment-authorized-event-v1 (0.1.0)"]:::events
+    payments_payment_processing_payments_processing_payment_declined_event_v1_0_1_0>"payment-declined-event-v1 (0.1.0)"]:::events
+    payments_payment_processing_payments_processing_payment_retried_event_v1_0_1_0>"payment-retried-event-v1 (0.1.0)"]:::events
+    payments_payment_processing_payments_processing_payment_retry_exhausted_event_v1_0_1_0>"payment-retry-exhausted-event-v1 (0.1.0)"]:::events
+    payments_payment_processing_payments_processing_payment_captured_event_v1_0_1_0>"payment-captured-event-v1 (0.1.0)"]:::events
+    notifications_customer_communications_notifications_consumer_0_1_0[["Notifications Consumer (0.1.0)"]]:::services
+    payments_payment_processing_payments_processing_payment_voided_event_v1_0_1_0>"payment-voided-event-v1 (0.1.0)"]:::events
+    catalog_inventory_management_catalog_inventory_0_1_0[["Catalog Inventory (0.1.0)"]]:::services
+
+    %% Edges
+    payments_payment_processing_payments_processing_payment_failed_event_v1_0_1_0 -->|"subscribed by"| payments_payment_processing_payments_processing_0_1_0
+    payments_payment_processing_payments_processing_0_1_0 -->|"publishes  event"| payments_payment_processing_payments_processing_payment_failed_event_v1_0_1_0
+    payments_payment_processing_payments_processing_payment_failed_event_v1_0_1_0 -->|"routes to"| payments_payment_processing_payments_processing_payment_failed_event_v1_0_1_0
+    payments_payment_processing_payments_processing_payment_capture_failed_event_v1_0_1_0 -->|"subscribed by"| payments_payment_processing_payments_processing_0_1_0
+    payments_payment_processing_payments_processing_0_1_0 -->|"publishes  event"| payments_payment_processing_payments_processing_payment_capture_failed_event_v1_0_1_0
+    payments_payment_processing_payments_processing_payment_capture_failed_event_v1_0_1_0 -->|"routes to"| payments_payment_processing_payments_processing_payment_capture_failed_event_v1_0_1_0
+    orders_checkout_orders_checkout_order_created_event_v1_0_1_1 -->|"subscribed by"| payments_payment_processing_payments_processing_0_1_0
+    orders_checkout_orders_checkout_0_1_1 -->|"publishes  event"| orders_checkout_orders_checkout_order_created_event_v1_0_1_1
+    orders_checkout_orders_checkout_order_created_event_v1_0_1_1 -->|"routes to"| orders_checkout_orders_checkout_order_created_event_v1_0_1_1
+    fulfillment_shipping_fulfillment_shipping_fulfillment_scheduled_event_v1_0_1_0 -->|"subscribed by"| payments_payment_processing_payments_processing_0_1_0
+    fulfillment_shipping_fulfillment_shipping_0_1_0 -->|"publishes  event"| fulfillment_shipping_fulfillment_shipping_fulfillment_scheduled_event_v1_0_1_0
+    fulfillment_shipping_fulfillment_shipping_fulfillment_scheduled_event_v1_0_1_0 -->|"routes to"| fulfillment_shipping_fulfillment_shipping_fulfillment_scheduled_event_v1_0_1_0
+    payments_payment_processing_payments_processing_0_1_0 -->|"publishes  event"| payments_payment_processing_payments_processing_payment_authorized_event_v1_0_1_0
+    payments_payment_processing_payments_processing_payment_authorized_event_v1_0_1_0 -->|"routes to"| payments_payment_processing_payments_processing_payment_authorized_event_v1_0_1_0
+    payments_payment_processing_payments_processing_payment_authorized_event_v1_0_1_0 -->|"consumes"| orders_checkout_orders_checkout_0_1_1
+    payments_payment_processing_payments_processing_0_1_0 -->|"publishes  event"| payments_payment_processing_payments_processing_payment_declined_event_v1_0_1_0
+    payments_payment_processing_payments_processing_payment_declined_event_v1_0_1_0 -->|"routes to"| payments_payment_processing_payments_processing_payment_declined_event_v1_0_1_0
+    payments_payment_processing_payments_processing_0_1_0 -->|"publishes  event"| payments_payment_processing_payments_processing_payment_retried_event_v1_0_1_0
+    payments_payment_processing_payments_processing_payment_retried_event_v1_0_1_0 -->|"routes to"| payments_payment_processing_payments_processing_payment_retried_event_v1_0_1_0
+    payments_payment_processing_payments_processing_0_1_0 -->|"publishes  event"| payments_payment_processing_payments_processing_payment_retry_exhausted_event_v1_0_1_0
+    payments_payment_processing_payments_processing_payment_retry_exhausted_event_v1_0_1_0 -->|"routes to"| payments_payment_processing_payments_processing_payment_retry_exhausted_event_v1_0_1_0
+    payments_payment_processing_payments_processing_0_1_0 -->|"publishes  event"| payments_payment_processing_payments_processing_payment_captured_event_v1_0_1_0
+    payments_payment_processing_payments_processing_payment_captured_event_v1_0_1_0 -->|"routes to"| payments_payment_processing_payments_processing_payment_captured_event_v1_0_1_0
+    payments_payment_processing_payments_processing_payment_captured_event_v1_0_1_0 -->|"consumes"| notifications_customer_communications_notifications_consumer_0_1_0
+    payments_payment_processing_payments_processing_0_1_0 -->|"publishes  event"| payments_payment_processing_payments_processing_payment_voided_event_v1_0_1_0
+    payments_payment_processing_payments_processing_payment_voided_event_v1_0_1_0 -->|"routes to"| payments_payment_processing_payments_processing_payment_voided_event_v1_0_1_0
+    payments_payment_processing_payments_processing_payment_voided_event_v1_0_1_0 -->|"consumes"| catalog_inventory_management_catalog_inventory_0_1_0
+    payments_payment_processing_payments_processing_0_1_0 -->|"publishes event & receives event"| payments_payment_processing_payments_processing_payment_failed_event_v1_0_1_0
+    payments_payment_processing_payments_processing_0_1_0 -->|"publishes event & receives event"| payments_payment_processing_payments_processing_payment_capture_failed_event_v1_0_1_0
