@@ -1,0 +1,58 @@
+---
+id: "modulith.application.arcadia-editions-modulith"
+name: "Arcadia Editions Modulith"
+summary: "Owns the in-process ZDL domain models for the modular monolith"
+version: "0.0.1"
+specifications:
+- type: "openapi"
+  path: "https://github.com/arcadia-editions/arcadia-editions-modulith-api/raw/main/orders-checkout-openapi.yml"
+entities:
+- id: "modulith.application.arcadia-editions-modulith.stock-reservation"
+  version: "0.0.1"
+- id: "modulith.application.arcadia-editions-modulith.inventory-position"
+  version: "0.0.1"
+- id: "modulith.application.arcadia-editions-modulith.product"
+  version: "0.0.1"
+- id: "modulith.application.arcadia-editions-modulith.fulfillment"
+  version: "0.0.1"
+- id: "modulith.application.arcadia-editions-modulith.notification"
+  version: "0.0.1"
+- id: "modulith.application.arcadia-editions-modulith.order"
+  version: "0.0.1"
+- id: "modulith.application.arcadia-editions-modulith.payment"
+  version: "0.0.1"
+---
+## OverviewOwns the in-process ZDL domain models for the modular monolith<NodeGraph />## Domain Model
+
+<EntityMap />## Specifications
+
+The linked specifications in the frontmatter drive EventCatalog reference views for this service.
+
+
+# arcadia-editions-modulith-api
+
+ZDL domain models for the Arcadia Editions modular monolith. Events are consumed
+in-process with &#x60;@listener&#x60;; there is no AsyncAPI or Kafka contract in this
+repository.
+
+## Contents
+
+- [zdl-annotations.md](./zdl-annotations.md): how &#x60;@listener&#x60; and &#x60;@asyncapi&#x60; are resolved by zenwave-sdk
+- &#x60;*-domain-model.zdl&#x60;: one ZDL model per bounded context
+- [.github/workflows/artifact-ci.yml](./.github/workflows/artifact-ci.yml): lint and validate declared ZDL artifacts
+- [.github/workflows/artifact-release.yml](./.github/workflows/artifact-release.yml): package and publish a ZDL artifact or &#x60;service-all&#x60;
+
+## Release identities
+
+| Input &#x60;artifact&#x60; | Packages |
+|---|---|
+| &#x60;catalog-inventory-domain-model&#x60; | that ZDL file |
+| &#x60;catalog-products-domain-model&#x60; | that ZDL file |
+| &#x60;fulfillment-shipping-domain-model&#x60; | that ZDL file |
+| &#x60;notifications-consumer-domain-model&#x60; | that ZDL file |
+| &#x60;orders-checkout-domain-model&#x60; | that ZDL file |
+| &#x60;payments-processing-domain-model&#x60; | that ZDL file |
+| &#x60;service-all&#x60; | every tracked file in this repository |
+
+
+

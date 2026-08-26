@@ -1,0 +1,61 @@
+---
+id: "modulith.application.arcadia-editions-modulith.payment"
+name: "Payment"
+version: "0.0.1"
+aggregateRoot: true
+identifier: "paymentId"
+properties:
+- name: "paymentId"
+  type: "String"
+  required: true
+- name: "orderId"
+  type: "String"
+  required: true
+- name: "customerId"
+  type: "String"
+  required: true
+- name: "amount"
+  type: "BigDecimal"
+  required: true
+- name: "currency"
+  type: "String"
+  required: true
+- name: "status"
+  type: "PaymentStatus"
+  required: true
+  references: "PaymentStatus"
+  enum:
+  - "AUTHORIZATION_REQUESTED"
+  - "AUTHORIZED"
+  - "DECLINED"
+  - "FAILED"
+  - "RETRY_EXHAUSTED"
+  - "CAPTURED"
+  - "VOIDED"
+- name: "providerReference"
+  type: "String"
+- name: "attemptCount"
+  type: "Integer"
+  required: true
+- name: "authorizedAt"
+  type: "Instant"
+- name: "declinedAt"
+  type: "Instant"
+- name: "failedAt"
+  type: "Instant"
+- name: "capturedAt"
+  type: "Instant"
+- name: "voidedAt"
+  type: "Instant"
+- name: "failureReason"
+  type: "String"
+services:
+- "modulith.application.arcadia-editions-modulith-0.0.1"
+domains:
+- "modulith.application-0.0.1"
+---
+## Overview### Entity Properties
+
+<EntityPropertiesTable />## Relationships
+
+This entity includes references to related entities captured in the generated frontmatter properties.

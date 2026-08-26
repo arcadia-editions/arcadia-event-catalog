@@ -1,0 +1,50 @@
+---
+id: "modulith.application.arcadia-editions-modulith.product"
+name: "Product"
+version: "0.0.1"
+aggregateRoot: true
+properties:
+- name: "sku"
+  type: "String"
+  required: true
+- name: "name"
+  type: "String"
+  required: true
+- name: "description"
+  type: "String"
+- name: "price"
+  type: "BigDecimal"
+  required: true
+- name: "currency"
+  type: "String"
+  required: true
+- name: "editionSize"
+  type: "Integer"
+  required: true
+- name: "trackingMode"
+  type: "InventoryTrackingMode"
+  required: true
+  references: "InventoryTrackingMode"
+  enum:
+  - "QUANTITY"
+  - "SERIALIZED"
+- name: "launchAt"
+  type: "Instant"
+- name: "status"
+  type: "ProductStatus"
+  required: true
+  references: "ProductStatus"
+  enum:
+  - "DRAFT"
+  - "PUBLISHED"
+  - "RETIRED"
+services:
+- "modulith.application.arcadia-editions-modulith-0.0.1"
+domains:
+- "modulith.application-0.0.1"
+---
+## Overview### Entity Properties
+
+<EntityPropertiesTable />## Relationships
+
+This entity includes references to related entities captured in the generated frontmatter properties.
