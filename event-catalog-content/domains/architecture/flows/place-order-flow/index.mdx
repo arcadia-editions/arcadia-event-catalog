@@ -41,7 +41,7 @@ steps:
   title: "fulfillment-failed-event-v1"
   message:
     id: "fulfillment.shipping.fulfillment-shipping.fulfillment-failed-event-v1"
-    version: "0.0.0"
+    version: "0.1.0"
     type: "event"
   next_step:
     id: "zw:architecture/artifact/place-order-flow/zfl-step/flows.PlaceOrderFlow.occurrences.voidPayment%40when%5BFulfillmentFailed%2CPaymentCaptureFailed%5D:service"
@@ -50,7 +50,7 @@ steps:
   title: "fulfillment-scheduled-event-v1"
   message:
     id: "fulfillment.shipping.fulfillment-shipping.fulfillment-scheduled-event-v1"
-    version: "0.0.0"
+    version: "0.1.0"
     type: "event"
   next_step:
     id: "zw:architecture/artifact/place-order-flow/zfl-step/flows.PlaceOrderFlow.occurrences.capturePayment%40when%5BFulfillmentScheduled%5D:service"
@@ -59,7 +59,7 @@ steps:
   title: "order-cancelled-event-v1"
   message:
     id: "orders.checkout.orders-checkout.order-cancelled-event-v1"
-    version: "0.1.1"
+    version: "0.1.0"
     type: "event"
   next_step:
     id: "zw:architecture/artifact/place-order-flow/zfl-step/flows.PlaceOrderFlow.occurrences.sendOrderCancelledNotification%40when%5BOrderCancelled%5D:service"
@@ -68,7 +68,7 @@ steps:
   title: "order-cancelled-notification-sent-event-v1"
   message:
     id: "notifications.customer-communications.notifications-consumer.order-cancelled-notification-sent-event-v1"
-    version: "0.0.0"
+    version: "0.1.0"
     type: "event"
   next_step:
     id: "zw:architecture/artifact/place-order-flow/zfl-outcome/flows.PlaceOrderFlow.outcomes.orderCancelled"
@@ -77,7 +77,7 @@ steps:
   title: "order-confirmation-sent-event-v1"
   message:
     id: "notifications.customer-communications.notifications-consumer.order-confirmation-sent-event-v1"
-    version: "0.0.0"
+    version: "0.1.0"
     type: "event"
   next_step:
     id: "zw:architecture/artifact/place-order-flow/zfl-outcome/flows.PlaceOrderFlow.outcomes.completed"
@@ -86,7 +86,7 @@ steps:
   title: "order-confirmed-event-v1"
   message:
     id: "orders.checkout.orders-checkout.order-confirmed-event-v1"
-    version: "0.1.1"
+    version: "0.1.0"
     type: "event"
   next_step:
     id: "zw:architecture/artifact/place-order-flow/zfl-step/flows.PlaceOrderFlow.occurrences.scheduleFulfillment%40when%5BOrderConfirmed%5D:service"
@@ -95,7 +95,7 @@ steps:
   title: "order-created-event-v1"
   message:
     id: "orders.checkout.orders-checkout.order-created-event-v1"
-    version: "0.1.1"
+    version: "0.1.0"
     type: "event"
   next_step:
     id: "zw:architecture/artifact/place-order-flow/zfl-step/flows.PlaceOrderFlow.occurrences.authorizePayment%40when%5BOrderCreated%5D:service"
@@ -104,7 +104,7 @@ steps:
   title: "payment-authorized-event-v1"
   message:
     id: "payments.payment-processing.payments-processing.payment-authorized-event-v1"
-    version: "0.0.0"
+    version: "0.1.0"
     type: "event"
   next_step:
     id: "zw:architecture/artifact/place-order-flow/zfl-step/flows.PlaceOrderFlow.occurrences.confirmOrder%40when%5BPaymentAuthorized%5D:service"
@@ -113,7 +113,7 @@ steps:
   title: "payment-capture-failed-event-v1"
   message:
     id: "payments.payment-processing.payments-processing.payment-capture-failed-event-v1"
-    version: "0.0.0"
+    version: "0.1.0"
     type: "event"
   next_step:
     id: "zw:architecture/artifact/place-order-flow/zfl-step/flows.PlaceOrderFlow.occurrences.voidPayment%40when%5BFulfillmentFailed%2CPaymentCaptureFailed%5D:service"
@@ -122,7 +122,7 @@ steps:
   title: "payment-captured-event-v1"
   message:
     id: "payments.payment-processing.payments-processing.payment-captured-event-v1"
-    version: "0.0.0"
+    version: "0.1.0"
     type: "event"
   next_step:
     id: "zw:architecture/artifact/place-order-flow/zfl-step/flows.PlaceOrderFlow.occurrences.sendOrderConfirmation%40when%5BPaymentCaptured%5D:service"
@@ -131,7 +131,7 @@ steps:
   title: "payment-declined-event-v1"
   message:
     id: "payments.payment-processing.payments-processing.payment-declined-event-v1"
-    version: "0.0.0"
+    version: "0.1.0"
     type: "event"
   next_step:
     id: "zw:architecture/artifact/place-order-flow/zfl-step/flows.PlaceOrderFlow.occurrences.releaseStock%40when%5BPaymentDeclined%2CPaymentRetryExhausted%2CPaymentVoided%2CReservationExpired%5D:service"
@@ -140,7 +140,7 @@ steps:
   title: "payment-failed-event-v1"
   message:
     id: "payments.payment-processing.payments-processing.payment-failed-event-v1"
-    version: "0.0.0"
+    version: "0.1.0"
     type: "event"
   next_step:
     id: "zw:architecture/artifact/place-order-flow/zfl-step/flows.PlaceOrderFlow.occurrences.retryPayment%40when%5BPaymentFailed%5D:service"
@@ -149,7 +149,7 @@ steps:
   title: "payment-retried-event-v1"
   message:
     id: "payments.payment-processing.payments-processing.payment-retried-event-v1"
-    version: "0.0.0"
+    version: "0.1.0"
     type: "event"
   next_step:
     id: "zw:architecture/artifact/place-order-flow/zfl-step/flows.PlaceOrderFlow.occurrences.authorizePayment%40when%5BPaymentRetried%5D:service"
@@ -158,7 +158,7 @@ steps:
   title: "payment-retry-exhausted-event-v1"
   message:
     id: "payments.payment-processing.payments-processing.payment-retry-exhausted-event-v1"
-    version: "0.0.0"
+    version: "0.1.0"
     type: "event"
   next_step:
     id: "zw:architecture/artifact/place-order-flow/zfl-step/flows.PlaceOrderFlow.occurrences.releaseStock%40when%5BPaymentDeclined%2CPaymentRetryExhausted%2CPaymentVoided%2CReservationExpired%5D:service"
@@ -167,7 +167,7 @@ steps:
   title: "payment-voided-event-v1"
   message:
     id: "payments.payment-processing.payments-processing.payment-voided-event-v1"
-    version: "0.0.0"
+    version: "0.1.0"
     type: "event"
   next_step:
     id: "zw:architecture/artifact/place-order-flow/zfl-step/flows.PlaceOrderFlow.occurrences.releaseStock%40when%5BPaymentDeclined%2CPaymentRetryExhausted%2CPaymentVoided%2CReservationExpired%5D:service"
@@ -176,7 +176,7 @@ steps:
   title: "stock-released-event-v1"
   message:
     id: "catalog.inventory-management.catalog-inventory.stock-released-event-v1"
-    version: "0.0.0"
+    version: "0.1.0"
     type: "event"
   next_step:
     id: "zw:architecture/artifact/place-order-flow/zfl-step/flows.PlaceOrderFlow.occurrences.cancelOrder%40when%5BStockReleased%5D:service"
@@ -185,14 +185,14 @@ steps:
   title: "stock-reservation-confirmed-event-v1"
   message:
     id: "catalog.inventory-management.catalog-inventory.stock-reservation-confirmed-event-v1"
-    version: "0.0.0"
+    version: "0.1.0"
     type: "event"
 - id: "zw:architecture/artifact/place-order-flow/zfl-event/flows.PlaceOrderFlow.events.StockUnavailable"
   type: "message"
   title: "stock-unavailable-event-v1"
   message:
     id: "orders.checkout.orders-checkout.stock-unavailable-event-v1"
-    version: "0.1.1"
+    version: "0.1.0"
     type: "event"
   next_step:
     id: "zw:architecture/artifact/place-order-flow/zfl-step/flows.PlaceOrderFlow.occurrences.sendStockUnavailableNotification%40when%5BStockUnavailable%5D:service"
@@ -201,7 +201,7 @@ steps:
   title: "stock-unavailable-notification-sent-event-v1"
   message:
     id: "notifications.customer-communications.notifications-consumer.stock-unavailable-notification-sent-event-v1"
-    version: "0.0.0"
+    version: "0.1.0"
     type: "event"
   next_step:
     id: "zw:architecture/artifact/place-order-flow/zfl-outcome/flows.PlaceOrderFlow.outcomes.stockGone"
@@ -210,7 +210,7 @@ steps:
   title: "Start Order Checkout"
   service:
     id: "orders.checkout.orders-checkout"
-    version: "0.1.1"
+    version: "0.1.0"
   next_step:
     id: "zw:architecture/artifact/place-order-flow/zfl-step/flows.PlaceOrderFlow.occurrences.startOrderCheckout%40when%5BStartOrderCheckout%5D"
 - id: "zw:architecture/artifact/place-order-flow/zfl-step/flows.PlaceOrderFlow.occurrences.startOrderCheckout%40when%5BStartOrderCheckout%5D"
@@ -236,7 +236,7 @@ steps:
     \ here."
   service:
     id: "catalog.inventory-management.catalog-inventory"
-    version: "0.0.0"
+    version: "0.1.0"
   next_step:
     id: "zw:architecture/artifact/place-order-flow/zfl-step/flows.PlaceOrderFlow.occurrences.reserveStock%40definition"
 - id: "zw:architecture/artifact/place-order-flow/zfl-step/flows.PlaceOrderFlow.occurrences.reserveStock%40definition"
@@ -266,7 +266,7 @@ steps:
     \     * or the processor's, which we will retry within the reservation window."
   service:
     id: "payments.payment-processing.payments-processing"
-    version: "0.0.0"
+    version: "0.1.0"
   next_step:
     id: "zw:architecture/artifact/place-order-flow/zfl-step/flows.PlaceOrderFlow.occurrences.authorizePayment%40when%5BOrderCreated%5D"
 - id: "zw:architecture/artifact/place-order-flow/zfl-step/flows.PlaceOrderFlow.occurrences.authorizePayment%40when%5BOrderCreated%5D"
@@ -303,7 +303,7 @@ steps:
     \     * PaymentRetried feeds back into authorizePayment for the next attempt."
   service:
     id: "payments.payment-processing.payments-processing"
-    version: "0.0.0"
+    version: "0.1.0"
   next_step:
     id: "zw:architecture/artifact/place-order-flow/zfl-step/flows.PlaceOrderFlow.occurrences.retryPayment%40when%5BPaymentFailed%5D"
 - id: "zw:architecture/artifact/place-order-flow/zfl-step/flows.PlaceOrderFlow.occurrences.retryPayment%40when%5BPaymentFailed%5D"
@@ -336,7 +336,7 @@ steps:
     \     * or the processor's, which we will retry within the reservation window."
   service:
     id: "payments.payment-processing.payments-processing"
-    version: "0.0.0"
+    version: "0.1.0"
   next_step:
     id: "zw:architecture/artifact/place-order-flow/zfl-step/flows.PlaceOrderFlow.occurrences.authorizePayment%40when%5BPaymentRetried%5D"
 - id: "zw:architecture/artifact/place-order-flow/zfl-step/flows.PlaceOrderFlow.occurrences.authorizePayment%40when%5BPaymentRetried%5D"
@@ -371,7 +371,7 @@ steps:
     \     * system knows this order is payment-backed and ready for fulfillment."
   service:
     id: "orders.checkout.orders-checkout"
-    version: "0.1.1"
+    version: "0.1.0"
   next_step:
     id: "zw:architecture/artifact/place-order-flow/zfl-step/flows.PlaceOrderFlow.occurrences.confirmOrder%40when%5BPaymentAuthorized%5D"
 - id: "zw:architecture/artifact/place-order-flow/zfl-step/flows.PlaceOrderFlow.occurrences.confirmOrder%40when%5BPaymentAuthorized%5D"
@@ -394,7 +394,7 @@ steps:
   summary: "Stock Reservation is confirmed"
   service:
     id: "catalog.inventory-management.catalog-inventory"
-    version: "0.0.0"
+    version: "0.1.0"
   next_step:
     id: "zw:architecture/artifact/place-order-flow/zfl-step/flows.PlaceOrderFlow.occurrences.confirmStockReservation%40definition"
 - id: "zw:architecture/artifact/place-order-flow/zfl-step/flows.PlaceOrderFlow.occurrences.confirmStockReservation%40definition"
@@ -417,7 +417,7 @@ steps:
     \     * authorization rather than capturing it."
   service:
     id: "fulfillment.shipping.fulfillment-shipping"
-    version: "0.0.0"
+    version: "0.1.0"
   next_step:
     id: "zw:architecture/artifact/place-order-flow/zfl-step/flows.PlaceOrderFlow.occurrences.scheduleFulfillment%40when%5BOrderConfirmed%5D"
 - id: "zw:architecture/artifact/place-order-flow/zfl-step/flows.PlaceOrderFlow.occurrences.scheduleFulfillment%40when%5BOrderConfirmed%5D"
@@ -447,7 +447,7 @@ steps:
     \     * void the authorization."
   service:
     id: "payments.payment-processing.payments-processing"
-    version: "0.0.0"
+    version: "0.1.0"
   next_step:
     id: "zw:architecture/artifact/place-order-flow/zfl-step/flows.PlaceOrderFlow.occurrences.capturePayment%40when%5BFulfillmentScheduled%5D"
 - id: "zw:architecture/artifact/place-order-flow/zfl-step/flows.PlaceOrderFlow.occurrences.capturePayment%40when%5BFulfillmentScheduled%5D"
@@ -476,7 +476,7 @@ steps:
     \     * authorization — would risk confirming an order we later have to cancel."
   service:
     id: "notifications.customer-communications.notifications-consumer"
-    version: "0.0.0"
+    version: "0.1.0"
   next_step:
     id: "zw:architecture/artifact/place-order-flow/zfl-step/flows.PlaceOrderFlow.occurrences.sendOrderConfirmation%40when%5BPaymentCaptured%5D"
 - id: "zw:architecture/artifact/place-order-flow/zfl-step/flows.PlaceOrderFlow.occurrences.sendOrderConfirmation%40when%5BPaymentCaptured%5D"
@@ -502,7 +502,7 @@ steps:
     \     * and no order record was created."
   service:
     id: "notifications.customer-communications.notifications-consumer"
-    version: "0.0.0"
+    version: "0.1.0"
   next_step:
     id: "zw:architecture/artifact/place-order-flow/zfl-step/flows.PlaceOrderFlow.occurrences.sendStockUnavailableNotification%40when%5BStockUnavailable%5D"
 - id: "zw:architecture/artifact/place-order-flow/zfl-step/flows.PlaceOrderFlow.occurrences.sendStockUnavailableNotification%40when%5BStockUnavailable%5D"
@@ -529,7 +529,7 @@ steps:
     \   * on the customer's statement."
   service:
     id: "payments.payment-processing.payments-processing"
-    version: "0.0.0"
+    version: "0.1.0"
   next_step:
     id: "zw:architecture/artifact/place-order-flow/zfl-step/flows.PlaceOrderFlow.occurrences.voidPayment%40when%5BFulfillmentFailed%2CPaymentCaptureFailed%5D"
 - id: "zw:architecture/artifact/place-order-flow/zfl-step/flows.PlaceOrderFlow.occurrences.voidPayment%40when%5BFulfillmentFailed%2CPaymentCaptureFailed%5D"
@@ -561,7 +561,7 @@ steps:
     \     * does not need to know it."
   service:
     id: "catalog.inventory-management.catalog-inventory"
-    version: "0.0.0"
+    version: "0.1.0"
   next_step:
     id: "zw:architecture/artifact/place-order-flow/zfl-step/flows.PlaceOrderFlow.occurrences.releaseStock%40when%5BPaymentDeclined%2CPaymentRetryExhausted%2CPaymentVoided%2CReservationExpired%5D"
 - id: "zw:architecture/artifact/place-order-flow/zfl-step/flows.PlaceOrderFlow.occurrences.releaseStock%40when%5BPaymentDeclined%2CPaymentRetryExhausted%2CPaymentVoided%2CReservationExpired%5D"
@@ -593,7 +593,7 @@ steps:
     \     * no other part of the system should emits OrderCancelled directly."
   service:
     id: "orders.checkout.orders-checkout"
-    version: "0.1.1"
+    version: "0.1.0"
   next_step:
     id: "zw:architecture/artifact/place-order-flow/zfl-step/flows.PlaceOrderFlow.occurrences.cancelOrder%40when%5BStockReleased%5D"
 - id: "zw:architecture/artifact/place-order-flow/zfl-step/flows.PlaceOrderFlow.occurrences.cancelOrder%40when%5BStockReleased%5D"
@@ -621,7 +621,7 @@ steps:
     \    * payment was taken."
   service:
     id: "notifications.customer-communications.notifications-consumer"
-    version: "0.0.0"
+    version: "0.1.0"
   next_step:
     id: "zw:architecture/artifact/place-order-flow/zfl-step/flows.PlaceOrderFlow.occurrences.sendOrderCancelledNotification%40when%5BOrderCancelled%5D"
 - id: "zw:architecture/artifact/place-order-flow/zfl-step/flows.PlaceOrderFlow.occurrences.sendOrderCancelledNotification%40when%5BOrderCancelled%5D"
@@ -666,7 +666,7 @@ steps:
   summary: "Stock Reservation is confirmed"
   service:
     id: "catalog.inventory-management.catalog-inventory"
-    version: "0.0.0"
+    version: "0.1.0"
   next_step:
     id: "edge/invokes/zw%3Aarchitecture%2Fartifact%2Fplace-order-flow%2Fzfl-step%2Fflows.PlaceOrderFlow.occurrences.confirmOrder%2540when%255BPaymentAuthorized%255D/zw%3Aarchitecture%2Fartifact%2Fplace-order-flow%2Fzfl-operation%2Fflows.PlaceOrderFlow.operations.confirmStockReservation/confirmOrder%40when%5BPaymentAuthorized%5D%3Acall%3A1%3AconfirmStockReservation"
 - id: "edge/invokes/zw%3Aarchitecture%2Fartifact%2Fplace-order-flow%2Fzfl-step%2Fflows.PlaceOrderFlow.occurrences.confirmOrder%2540when%255BPaymentAuthorized%255D/zw%3Aarchitecture%2Fartifact%2Fplace-order-flow%2Fzfl-operation%2Fflows.PlaceOrderFlow.operations.confirmStockReservation/confirmOrder%40when%5BPaymentAuthorized%5D%3Acall%3A1%3AconfirmStockReservation"
@@ -688,7 +688,7 @@ steps:
     \ here."
   service:
     id: "catalog.inventory-management.catalog-inventory"
-    version: "0.0.0"
+    version: "0.1.0"
   next_step:
     id: "edge/invokes/zw%3Aarchitecture%2Fartifact%2Fplace-order-flow%2Fzfl-step%2Fflows.PlaceOrderFlow.occurrences.startOrderCheckout%2540when%255BStartOrderCheckout%255D/zw%3Aarchitecture%2Fartifact%2Fplace-order-flow%2Fzfl-operation%2Fflows.PlaceOrderFlow.operations.reserveStock/startOrderCheckout%40when%5BStartOrderCheckout%5D%3Acall%3A1%3AreserveStock"
 - id: "edge/invokes/zw%3Aarchitecture%2Fartifact%2Fplace-order-flow%2Fzfl-step%2Fflows.PlaceOrderFlow.occurrences.startOrderCheckout%2540when%255BStartOrderCheckout%255D/zw%3Aarchitecture%2Fartifact%2Fplace-order-flow%2Fzfl-operation%2Fflows.PlaceOrderFlow.operations.reserveStock/startOrderCheckout%40when%5BStartOrderCheckout%5D%3Acall%3A1%3AreserveStock"

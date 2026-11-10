@@ -1,0 +1,20 @@
+---
+id: "orders.checkout.orders-checkout.getOrder"
+name: "getOrder"
+summary: "getOrder"
+version: "0.0.0"
+operation:
+  method: "GET"
+  path: "/orders/{id}"
+  statusCodes:
+  - "200"
+---
+import RemoteSpecificationSchema from '@catalog/components/RemoteSpecificationSchema.astro';
+
+## Overview
+
+getOrder
+
+<NodeGraph />## Response Schema
+
+<RemoteSpecificationSchema url="https://github.com/arcadia-editions/orders-checkout-api/raw/main/openapi.yml" operationId="getOrder" operationTarget="response" statusCode="200" mediaType="application/json" />
