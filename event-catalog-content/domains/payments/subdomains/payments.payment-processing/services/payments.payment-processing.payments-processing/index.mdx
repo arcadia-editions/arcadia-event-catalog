@@ -3,12 +3,12 @@ id: "payments.payment-processing.payments-processing"
 name: "Payments Processing"
 summary: "Owns payment authorization, retries, capture, voiding, and provider-facing\
   \ outcomes"
-version: "0.0.0"
+version: "0.1.0"
 specifications:
 - type: "asyncapi"
   path: "https://github.com/arcadia-editions/payments-processing-api/raw/main/asyncapi.yml"
 - type: "openapi"
-  path: "openapi.yml"
+  path: "https://github.com/arcadia-editions/payments-processing-api/raw/main/openapi.yml"
 sends:
 - id: "payments.payment-processing.payments-processing.payment-retried-event-v1"
 - id: "payments.payment-processing.payments-processing.payment-failed-event-v1"
@@ -25,7 +25,7 @@ receives:
 - id: "fulfillment.shipping.fulfillment-shipping.fulfillment-scheduled-event-v1"
 entities:
 - id: "payments.payment-processing.payments-processing.payment"
-  version: "0.0.0"
+  version: "0.1.0"
 flows:
 - id: "place-order-flow"
   version: "0.0.0"
