@@ -7,6 +7,7 @@ export default {
   theme: 'sunset',
   homepageLink: 'https://arcadia-editions.github.io/arcadia-event-catalog/',
   editUrl: 'https://github.com/arcadia-editions/arcadia-event-catalog/edit/main',
+  telemetry: false,
   output: 'static',
   outDir: 'dist',
   base: '/arcadia-event-catalog/',

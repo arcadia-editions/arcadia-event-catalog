@@ -11,13 +11,18 @@
 - Dependabot proposes updates through pull requests; updates are never
   automatically merged.
 - A scheduled `pnpm audit` checks the unchanged lockfile every week.
-- The reviewed Astro renderer compatibility patch is hash-bound in the lockfile
-  and verified as part of the dependency policy check.
 
-The release-age rule is intentionally not bypassed for EventCatalog. Updating an
-exact dependency may therefore require waiting until it has aged seven days.
-Known vulnerabilities are resolved with narrow, exact transitive overrides
-after both compatibility and the seven-day quarantine have been checked.
+The release-age rule is not normally bypassed. Updating an exact dependency may
+therefore require waiting until it has aged seven days. Known vulnerabilities
+are resolved with narrow, exact transitive overrides after both compatibility
+and the seven-day quarantine have been checked.
+
+Temporary exception: the EventCatalog 5.8.0 upgrade (10 November 2026) was
+approved by the repository owner to proceed before every dependency reached
+seven days. `pnpm-workspace.yaml` therefore carries a clearly marked
+`minimumReleaseAgeExclude` block for `@eventcatalog/core@5.8.0`, `astro@7.3.8`
+and `@astrojs/*`. Remove that block, and re-resolve the lockfile, after
+16 November 2026. `minimumReleaseAge` itself stays at seven days.
 
 ## AsyncAPI supply-chain incident
 
