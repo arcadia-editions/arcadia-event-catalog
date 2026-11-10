@@ -2,7 +2,7 @@
 id: "catalog.inventory-management.catalog-inventory"
 name: "Catalog Inventory"
 summary: "Owns scarce stock reservation, stock release, and inventory position management"
-version: "0.1.0"
+version: "0.0.0"
 specifications:
 - type: "asyncapi"
   path: "https://github.com/arcadia-editions/catalog-inventory-api/raw/main/asyncapi.yml"
@@ -17,9 +17,12 @@ receives:
 - id: "payments.payment-processing.payments-processing.payment-voided-event-v1"
 entities:
 - id: "catalog.inventory-management.catalog-inventory.stock-reservation"
-  version: "0.1.0"
+  version: "0.0.0"
 - id: "catalog.inventory-management.catalog-inventory.inventory-position"
-  version: "0.1.0"
+  version: "0.0.0"
+flows:
+- id: "place-order-flow"
+  version: "0.0.0"
 ---
 ## OverviewOwns scarce stock reservation, stock release, and inventory position management<NodeGraph />## Message Flow
 

@@ -25,20 +25,27 @@ running EventCatalog.
 
 - Node.js `24.18.1`
 - pnpm `10.34.5`, including its package-manager integrity hash
-- EventCatalog `4.3.2`
+- EventCatalog `5.8.0`
 - JBang `0.138.0` in CI
-- Vitest `4.1.10`
+- Vitest `4.1.12`
 
-EventCatalog `4.3.2` was selected on 31 July 2026. It was published on 23 July,
-making it eight days old; newer `4.3.3` and `4.3.4` releases had not passed the
-repository's seven-day release-age policy.
+EventCatalog `5.8.0` was adopted on 10 November 2026, migrating from `4.3.2`
+with the upgrade guide bundled in the package
+(`node_modules/@eventcatalog/core/dist/docs/development/upgrading/v5.md`).
+`@eventcatalog/core` 5.x is licensed under the Business Source License 1.1.
+This catalog is an open-source project, which qualifies for EventCatalog's Free
+Use terms, so no license key or `license.jwt` is required. Telemetry is turned
+off with `telemetry: false` in `site/eventcatalog.config.js`.
 
-The release's `@astrojs/react@6.0.1` renderer imports the build-only
-`astro:react:opts` virtual module from an entrypoint Astro leaves external
-during static prerendering. Because this catalog invokes `react()` without
-options, the reviewed patch in `patches/` replaces that unresolved import with
-its equivalent empty object. pnpm records the patch hash in the lockfile; remove
-the patch when an upgraded, seven-day-old Astro integration no longer needs it.
+EventCatalog 5 runs on React 19 and pins `astro@7.3.8`. The `@astrojs/react`
+build patch needed with 4.3.2 is no longer required and has been removed. When
+upgrading across major versions, delete `node_modules` and `pnpm-lock.yaml`
+first so that only one copy of React is installed.
+
+The `5.8.0` release was published on 3 November, and Astro `7.3.8` on 9
+November, so they were younger than the seven-day policy when adopted. The owner
+approved a temporary `minimumReleaseAgeExclude` block in
+`pnpm-workspace.yaml` for them; see [SECURITY.md](SECURITY.md).
 
 ## Local development
 

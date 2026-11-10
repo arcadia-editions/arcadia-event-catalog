@@ -42,13 +42,6 @@ if (workspace.strictDepBuilds !== true) {
   errors.push('pnpm-workspace.yaml strictDepBuilds must remain enabled');
 }
 
-if (
-  workspace.patchedDependencies?.['@astrojs/react@6.0.1'] !==
-  'patches/@astrojs__react@6.0.1.patch'
-) {
-  errors.push('the reviewed @astrojs/react@6.0.1 compatibility patch must remain configured');
-}
-
 const serializedLockfile = JSON.stringify(lockfile);
 const deniedLocators = [
   '@asyncapi/parser@3.4.1',

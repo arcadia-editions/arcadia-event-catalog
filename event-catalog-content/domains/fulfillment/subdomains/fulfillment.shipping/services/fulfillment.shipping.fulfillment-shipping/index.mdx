@@ -2,12 +2,12 @@
 id: "fulfillment.shipping.fulfillment-shipping"
 name: "Fulfillment Shipping"
 summary: "Owns scheduling and readiness of shipping operations after an order is confirmed"
-version: "0.1.0"
+version: "0.0.0"
 specifications:
 - type: "asyncapi"
   path: "https://github.com/arcadia-editions/fulfillment-shipping-api/raw/main/asyncapi.yml"
 - type: "openapi"
-  path: "https://github.com/arcadia-editions/fulfillment-shipping-api/raw/main/openapi.yml"
+  path: "openapi.yml"
 sends:
 - id: "fulfillment.shipping.fulfillment-shipping.fulfillment-scheduled-event-v1"
 - id: "fulfillment.shipping.fulfillment-shipping.fulfillment-failed-event-v1"
@@ -16,7 +16,11 @@ receives:
 - id: "orders.checkout.orders-checkout.order-confirmed-event-v1"
 entities:
 - id: "fulfillment.shipping.fulfillment-shipping.fulfillment"
-  version: "0.1.0"
+  version: "0.0.0"
+- id: "fulfillment.shipping.fulfillment-shipping.shipping-address"
+  version: "0.0.0"
+- id: "fulfillment.shipping.fulfillment-shipping.fulfillment-item"
+  version: "0.0.0"
 flows:
 - id: "place-order-flow"
   version: "0.0.0"

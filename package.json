@@ -22,12 +22,12 @@
     "generate": "bash scripts/generate-catalog.sh"
   },
   "dependencies": {
-    "@eventcatalog/core": "4.3.2",
-    "js-yaml": "4.3.0",
+    "@eventcatalog/core": "5.8.0",
+    "js-yaml": "4.3.2",
     "jsonpath-plus": "10.4.0"
   },
   "devDependencies": {
     "@types/js-yaml": "4.0.9",
-    "vitest": "4.1.10"
+    "vitest": "4.1.12"
   }
 }

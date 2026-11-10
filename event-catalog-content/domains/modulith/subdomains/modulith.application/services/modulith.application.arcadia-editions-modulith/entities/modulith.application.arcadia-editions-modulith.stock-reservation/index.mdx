@@ -1,7 +1,7 @@
 ---
 id: "modulith.application.arcadia-editions-modulith.stock-reservation"
 name: "StockReservation"
-version: "0.0.1"
+version: "0.0.0"
 aggregateRoot: true
 identifier: "reservationId"
 properties:
@@ -11,6 +11,8 @@ properties:
 - name: "orderId"
   type: "String"
   required: true
+  description: "One reservation per order line: an order has as many reservations\
+    \ as items."
 - name: "sku"
   type: "String"
   required: true
@@ -31,6 +33,8 @@ properties:
 - name: "expiresAt"
   type: "Instant"
   required: true
+- name: "confirmedAt"
+  type: "Instant"
 - name: "releasedAt"
   type: "Instant"
 - name: "releaseReason"
@@ -42,7 +46,7 @@ properties:
   - "PAYMENT_VOIDED"
   - "RESERVATION_EXPIRED"
 services:
-- "modulith.application.arcadia-editions-modulith-0.0.1"
+- "modulith.application.arcadia-editions-modulith-0.0.0"
 domains:
 - "modulith.application-0.0.1"
 ---

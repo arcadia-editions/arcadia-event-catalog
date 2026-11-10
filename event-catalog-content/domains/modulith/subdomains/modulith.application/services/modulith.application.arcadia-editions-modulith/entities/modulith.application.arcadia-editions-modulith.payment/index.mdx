@@ -1,19 +1,23 @@
 ---
 id: "modulith.application.arcadia-editions-modulith.payment"
 name: "Payment"
-version: "0.0.1"
+version: "0.0.0"
 aggregateRoot: true
-identifier: "paymentId"
+identifier: "orderId"
 properties:
-- name: "paymentId"
-  type: "String"
-  required: true
 - name: "orderId"
   type: "String"
   required: true
 - name: "customerId"
   type: "String"
   required: true
+- name: "paymentMethodId"
+  type: "String"
+  required: true
+- name: "customerEmail"
+  type: "String"
+  required: true
+  description: "Carried so PaymentCaptured can drive the order confirmation e-mail."
 - name: "amount"
   type: "BigDecimal"
   required: true
@@ -31,6 +35,7 @@ properties:
   - "FAILED"
   - "RETRY_EXHAUSTED"
   - "CAPTURED"
+  - "CAPTURE_FAILED"
   - "VOIDED"
 - name: "providerReference"
   type: "String"
@@ -50,7 +55,7 @@ properties:
 - name: "failureReason"
   type: "String"
 services:
-- "modulith.application.arcadia-editions-modulith-0.0.1"
+- "modulith.application.arcadia-editions-modulith-0.0.0"
 domains:
 - "modulith.application-0.0.1"
 ---

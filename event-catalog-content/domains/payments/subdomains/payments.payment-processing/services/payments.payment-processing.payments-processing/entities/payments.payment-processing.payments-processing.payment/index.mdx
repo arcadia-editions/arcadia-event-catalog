@@ -1,19 +1,23 @@
 ---
 id: "payments.payment-processing.payments-processing.payment"
 name: "Payment"
-version: "0.1.0"
+version: "0.0.0"
 aggregateRoot: true
-identifier: "paymentId"
+identifier: "orderId"
 properties:
-- name: "paymentId"
-  type: "String"
-  required: true
 - name: "orderId"
   type: "String"
   required: true
 - name: "customerId"
   type: "String"
   required: true
+- name: "paymentMethodId"
+  type: "String"
+  required: true
+- name: "customerEmail"
+  type: "String"
+  required: true
+  description: "Carried so PaymentCaptured can drive the order confirmation e-mail."
 - name: "amount"
   type: "BigDecimal"
   required: true
@@ -31,6 +35,7 @@ properties:
   - "FAILED"
   - "RETRY_EXHAUSTED"
   - "CAPTURED"
+  - "CAPTURE_FAILED"
   - "VOIDED"
 - name: "providerReference"
   type: "String"
@@ -50,7 +55,7 @@ properties:
 - name: "failureReason"
   type: "String"
 services:
-- "payments.payment-processing.payments-processing-0.1.0"
+- "payments.payment-processing.payments-processing-0.0.0"
 domains:
 - "payments.payment-processing-0.0.1"
 ---
