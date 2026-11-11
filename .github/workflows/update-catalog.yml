@@ -82,6 +82,9 @@ jobs:
       - name: Verify and build before writing to GitHub
         run: |
           pnpm run verify:security
+          # Fails the run (no PR, no merge, no publish) when the generated catalog is empty,
+          # malformed, or does not match the architecture manifest.
+          pnpm run verify:catalog
           pnpm test
           pnpm build
 

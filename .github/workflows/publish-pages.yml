@@ -46,6 +46,8 @@ jobs:
         run: |
           pnpm install --frozen-lockfile
           pnpm run verify:security
+          # Never publish a catalog that is empty or malformed.
+          pnpm run verify:catalog:structure
           pnpm test
           pnpm build
 

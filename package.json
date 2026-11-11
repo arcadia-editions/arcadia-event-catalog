@@ -17,6 +17,8 @@
     "preview": "node scripts/run-eventcatalog.mjs preview",
     "test": "vitest run tests",
     "verify:security": "node scripts/verify-lockfile.mjs",
+    "verify:catalog": "node scripts/verify-catalog.mjs",
+    "verify:catalog:structure": "node scripts/verify-catalog.mjs --structure-only",
     "security:audit": "pnpm audit --audit-level moderate",
     "zenwave:setup": "bash scripts/install-zenwave-alias.sh",
     "generate": "bash scripts/generate-catalog.sh"
