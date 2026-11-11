@@ -1,0 +1,36 @@
+%% EventCatalog Mermaid Diagram
+%% Resource: domains/fulfillment (v0.0.1)
+%% Level: L2 services and data stores
+%% Generated: 2026-11-11T08:56:41.102Z
+
+flowchart LR
+
+    %% Style definitions
+    classDef context_domain fill:#eab308,stroke:#a16207,color:#000
+    classDef services fill:#ec4899,stroke:#be185d,color:#fff
+    classDef domainGroup fill:#eab30814,stroke:#ca8a04,stroke-width:2px,stroke-dasharray:6 4,color:#a16207
+    classDef otherDomainGroup fill:#9ca3af14,stroke:#9ca3af,stroke-dasharray:4 4,color:#6b7280
+    classDef subdomainGroup fill:#eab3080d,stroke:#ca8a04,stroke-dasharray:4 4,color:#a16207
+
+    %% Nodes
+    subgraph domain_group_fulfillment_0_0_1["Fulfillment (0.0.1)"]
+        subgraph domain_group_fulfillment_shipping_0_0_1["Shipping (0.0.1)"]
+            fulfillment_shipping_fulfillment_shipping_0_1_0[["Fulfillment Shipping (0.1.0)"]]:::services
+        end
+    end
+    subgraph domain_group_orders_0_0_1["Orders (0.0.1)"]
+        domain_orders_checkout_0_0_1["Checkout (0.0.1)"]:::context_domain
+    end
+    subgraph domain_group_payments_0_0_1["Payments (0.0.1)"]
+        domain_payments_payment_processing_0_0_1["Payment Processing (0.0.1)"]:::context_domain
+    end
+
+    %% Edges
+    domain_orders_checkout_0_0_1 -->|"publishes order-confirmed-event-v1"| fulfillment_shipping_fulfillment_shipping_0_1_0
+    fulfillment_shipping_fulfillment_shipping_0_1_0 -->|"publishes fulfillment-scheduled-event-v1"| domain_payments_payment_processing_0_0_1
+
+    %% Boundaries and highlights
+    class domain_group_fulfillment_0_0_1 domainGroup
+    class domain_group_orders_0_0_1,domain_group_payments_0_0_1 otherDomainGroup
+    class domain_group_fulfillment_shipping_0_0_1 subdomainGroup
+    linkStyle 0,1 stroke:#4f46e5,stroke-width:3px

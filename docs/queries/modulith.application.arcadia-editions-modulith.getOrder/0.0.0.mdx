@@ -1,0 +1,21 @@
+---
+id: "modulith.application.arcadia-editions-modulith.getOrder"
+name: "getOrder"
+summary: "getOrder"
+version: "0.0.0"
+operation:
+  method: "GET"
+  path: "/orders/{id}"
+  statusCodes:
+  - "200"
+  - "400"
+---
+import RemoteSpecificationSchema from '@catalog/components/RemoteSpecificationSchema.astro';
+
+## Overview
+
+getOrder
+
+<NodeGraph />## Response Schema
+
+<RemoteSpecificationSchema url="https://github.com/arcadia-editions/arcadia-editions-modulith-api/raw/main/orders-checkout-openapi.yml" operationId="getOrder" operationTarget="response" statusCode="200" mediaType="application/json" />

@@ -1,0 +1,50 @@
+%% EventCatalog Mermaid Diagram
+%% Resource: services/orders.checkout.orders-checkout (v0.1.0)
+%% Level: L3 full (services, messages and channels)
+%% Generated: 2026-11-11T08:56:41.588Z
+
+flowchart LR
+
+    %% Style definitions
+    classDef events fill:#f97316,stroke:#c2410c,color:#fff
+    classDef services fill:#ec4899,stroke:#be185d,color:#fff
+    classDef focused stroke-width:4px
+
+    %% Nodes
+    catalog_inventory_management_catalog_inventory_stock_released_event_v1_0_1_0>"stock-released-event-v1 (0.1.0)"]:::events
+    orders_checkout_orders_checkout_0_1_0[["Orders Checkout (0.1.0)"]]:::services
+    catalog_inventory_management_catalog_inventory_0_0_0[["Catalog Inventory (0.0.0)"]]:::services
+    catalog_inventory_management_catalog_inventory_0_1_0[["Catalog Inventory (0.1.0)"]]:::services
+    payments_payment_processing_payments_processing_payment_authorized_event_v1_0_1_0>"payment-authorized-event-v1 (0.1.0)"]:::events
+    payments_payment_processing_payments_processing_0_0_0[["Payments Processing (0.0.0)"]]:::services
+    payments_payment_processing_payments_processing_0_1_0[["Payments Processing (0.1.0)"]]:::services
+    orders_checkout_orders_checkout_order_created_event_v1_0_1_0>"order-created-event-v1 (0.1.0)"]:::events
+    orders_checkout_orders_checkout_stock_unavailable_event_v1_0_1_0>"stock-unavailable-event-v1 (0.1.0)"]:::events
+    notifications_customer_communications_notifications_consumer_0_1_0[["Notifications Consumer (0.1.0)"]]:::services
+    orders_checkout_orders_checkout_order_confirmed_event_v1_0_1_0>"order-confirmed-event-v1 (0.1.0)"]:::events
+    fulfillment_shipping_fulfillment_shipping_0_1_0[["Fulfillment Shipping (0.1.0)"]]:::services
+    orders_checkout_orders_checkout_order_cancelled_event_v1_0_1_0>"order-cancelled-event-v1 (0.1.0)"]:::events
+
+    %% Edges
+    catalog_inventory_management_catalog_inventory_stock_released_event_v1_0_1_0 -->|"subscribed by"| orders_checkout_orders_checkout_0_1_0
+    catalog_inventory_management_catalog_inventory_0_0_0 -->|"publishes event"| catalog_inventory_management_catalog_inventory_stock_released_event_v1_0_1_0
+    catalog_inventory_management_catalog_inventory_stock_released_event_v1_0_1_0 -->|"routes to"| catalog_inventory_management_catalog_inventory_stock_released_event_v1_0_1_0
+    catalog_inventory_management_catalog_inventory_0_1_0 -->|"publishes event"| catalog_inventory_management_catalog_inventory_stock_released_event_v1_0_1_0
+    payments_payment_processing_payments_processing_payment_authorized_event_v1_0_1_0 -->|"subscribed by"| orders_checkout_orders_checkout_0_1_0
+    payments_payment_processing_payments_processing_0_0_0 -->|"publishes event"| payments_payment_processing_payments_processing_payment_authorized_event_v1_0_1_0
+    payments_payment_processing_payments_processing_payment_authorized_event_v1_0_1_0 -->|"routes to"| payments_payment_processing_payments_processing_payment_authorized_event_v1_0_1_0
+    payments_payment_processing_payments_processing_0_1_0 -->|"publishes event"| payments_payment_processing_payments_processing_payment_authorized_event_v1_0_1_0
+    orders_checkout_orders_checkout_0_1_0 -->|"publishes event"| orders_checkout_orders_checkout_order_created_event_v1_0_1_0
+    orders_checkout_orders_checkout_order_created_event_v1_0_1_0 -->|"routes to"| orders_checkout_orders_checkout_order_created_event_v1_0_1_0
+    orders_checkout_orders_checkout_0_1_0 -->|"publishes event"| orders_checkout_orders_checkout_stock_unavailable_event_v1_0_1_0
+    orders_checkout_orders_checkout_stock_unavailable_event_v1_0_1_0 -->|"routes to"| orders_checkout_orders_checkout_stock_unavailable_event_v1_0_1_0
+    orders_checkout_orders_checkout_stock_unavailable_event_v1_0_1_0 -->|"consumes"| notifications_customer_communications_notifications_consumer_0_1_0
+    orders_checkout_orders_checkout_0_1_0 -->|"publishes event"| orders_checkout_orders_checkout_order_confirmed_event_v1_0_1_0
+    orders_checkout_orders_checkout_order_confirmed_event_v1_0_1_0 -->|"routes to"| orders_checkout_orders_checkout_order_confirmed_event_v1_0_1_0
+    orders_checkout_orders_checkout_order_confirmed_event_v1_0_1_0 -->|"consumes"| fulfillment_shipping_fulfillment_shipping_0_1_0
+    orders_checkout_orders_checkout_0_1_0 -->|"publishes event"| orders_checkout_orders_checkout_order_cancelled_event_v1_0_1_0
+    orders_checkout_orders_checkout_order_cancelled_event_v1_0_1_0 -->|"routes to"| orders_checkout_orders_checkout_order_cancelled_event_v1_0_1_0
+    orders_checkout_orders_checkout_order_cancelled_event_v1_0_1_0 -->|"consumes"| notifications_customer_communications_notifications_consumer_0_1_0
+
+    %% Boundaries and highlights
+    class orders_checkout_orders_checkout_0_1_0 focused

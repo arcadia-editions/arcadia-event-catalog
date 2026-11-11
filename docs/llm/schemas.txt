@@ -1,0 +1,38 @@
+# Arcadia Editions EventCatalog Schemas
+List of schemas for events, commands, queries, and services in EventCatalog.
+
+## Events
+
+
+## Commands
+
+
+## Queries
+
+
+## Services
+- [catalog.catalog-management.catalog-products - 0.0.0 - asyncapi specification](https://arcadia-editions.github.io/api/schemas/services/catalog.catalog-management.catalog-products/0.0.0/asyncapi) - Specification for Manages product catalog definitions, release metadata, and publication lifecycle
+- [catalog.catalog-management.catalog-products - 0.0.0 - openapi specification](https://arcadia-editions.github.io/api/schemas/services/catalog.catalog-management.catalog-products/0.0.0/openapi) - Specification for Manages product catalog definitions, release metadata, and publication lifecycle
+- [catalog.catalog-management.catalog-products - 0.1.0 - asyncapi specification](https://arcadia-editions.github.io/api/schemas/services/catalog.catalog-management.catalog-products/0.1.0/asyncapi) - Specification for Manages product catalog definitions, release metadata, and publication lifecycle
+- [catalog.catalog-management.catalog-products - 0.1.0 - openapi specification](https://arcadia-editions.github.io/api/schemas/services/catalog.catalog-management.catalog-products/0.1.0/openapi) - Specification for Manages product catalog definitions, release metadata, and publication lifecycle
+- [catalog.inventory-management.catalog-inventory - 0.0.0 - asyncapi specification](https://arcadia-editions.github.io/api/schemas/services/catalog.inventory-management.catalog-inventory/0.0.0/asyncapi) - Specification for Owns scarce stock reservation, stock release, and inventory position management
+- [catalog.inventory-management.catalog-inventory - 0.0.0 - openapi specification](https://arcadia-editions.github.io/api/schemas/services/catalog.inventory-management.catalog-inventory/0.0.0/openapi) - Specification for Owns scarce stock reservation, stock release, and inventory position management
+- [catalog.inventory-management.catalog-inventory - 0.1.0 - asyncapi specification](https://arcadia-editions.github.io/api/schemas/services/catalog.inventory-management.catalog-inventory/0.1.0/asyncapi) - Specification for Owns scarce stock reservation, stock release, and inventory position management
+- [catalog.inventory-management.catalog-inventory - 0.1.0 - openapi specification](https://arcadia-editions.github.io/api/schemas/services/catalog.inventory-management.catalog-inventory/0.1.0/openapi) - Specification for Owns scarce stock reservation, stock release, and inventory position management
+- [fulfillment.shipping.fulfillment-shipping - 0.0.0 - asyncapi specification](https://arcadia-editions.github.io/api/schemas/services/fulfillment.shipping.fulfillment-shipping/0.0.0/asyncapi) - Specification for Owns scheduling and readiness of shipping operations after an order is confirmed
+- [fulfillment.shipping.fulfillment-shipping - 0.0.0 - openapi specification](https://arcadia-editions.github.io/api/schemas/services/fulfillment.shipping.fulfillment-shipping/0.0.0/openapi) - Specification for Owns scheduling and readiness of shipping operations after an order is confirmed
+- [fulfillment.shipping.fulfillment-shipping - 0.1.0 - asyncapi specification](https://arcadia-editions.github.io/api/schemas/services/fulfillment.shipping.fulfillment-shipping/0.1.0/asyncapi) - Specification for Owns scheduling and readiness of shipping operations after an order is confirmed
+- [fulfillment.shipping.fulfillment-shipping - 0.1.0 - openapi specification](https://arcadia-editions.github.io/api/schemas/services/fulfillment.shipping.fulfillment-shipping/0.1.0/openapi) - Specification for Owns scheduling and readiness of shipping operations after an order is confirmed
+- [modulith.application.arcadia-editions-modulith - 0.0.0 - openapi specification](https://arcadia-editions.github.io/api/schemas/services/modulith.application.arcadia-editions-modulith/0.0.0/openapi) - Specification for Owns the in-process ZDL domain models for the modular monolith
+- [notifications.customer-communications.notifications-consumer - 0.0.0 - asyncapi specification](https://arcadia-editions.github.io/api/schemas/services/notifications.customer-communications.notifications-consumer/0.0.0/asyncapi) - Specification for Transforms business outcomes into customer-facing notifications and delivery results
+- [notifications.customer-communications.notifications-consumer - 0.0.0 - openapi specification](https://arcadia-editions.github.io/api/schemas/services/notifications.customer-communications.notifications-consumer/0.0.0/openapi) - Specification for Transforms business outcomes into customer-facing notifications and delivery results
+- [notifications.customer-communications.notifications-consumer - 0.1.0 - asyncapi specification](https://arcadia-editions.github.io/api/schemas/services/notifications.customer-communications.notifications-consumer/0.1.0/asyncapi) - Specification for Transforms business outcomes into customer-facing notifications and delivery results
+- [notifications.customer-communications.notifications-consumer - 0.1.0 - openapi specification](https://arcadia-editions.github.io/api/schemas/services/notifications.customer-communications.notifications-consumer/0.1.0/openapi) - Specification for Transforms business outcomes into customer-facing notifications and delivery results
+- [orders.checkout.orders-checkout - 0.0.0 - asyncapi specification](https://arcadia-editions.github.io/api/schemas/services/orders.checkout.orders-checkout/0.0.0/asyncapi) - Specification for Owns checkout flow, order lifecycle, and the handoff from purchase intent to confirmed order
+- [orders.checkout.orders-checkout - 0.0.0 - openapi specification](https://arcadia-editions.github.io/api/schemas/services/orders.checkout.orders-checkout/0.0.0/openapi) - Specification for Owns checkout flow, order lifecycle, and the handoff from purchase intent to confirmed order
+- [orders.checkout.orders-checkout - 0.1.0 - asyncapi specification](https://arcadia-editions.github.io/api/schemas/services/orders.checkout.orders-checkout/0.1.0/asyncapi) - Specification for Owns checkout flow, order lifecycle, and the handoff from purchase intent to confirmed order
+- [orders.checkout.orders-checkout - 0.1.0 - openapi specification](https://arcadia-editions.github.io/api/schemas/services/orders.checkout.orders-checkout/0.1.0/openapi) - Specification for Owns checkout flow, order lifecycle, and the handoff from purchase intent to confirmed order
+- [payments.payment-processing.payments-processing - 0.0.0 - asyncapi specification](https://arcadia-editions.github.io/api/schemas/services/payments.payment-processing.payments-processing/0.0.0/asyncapi) - Specification for Owns payment authorization, retries, capture, voiding, and provider-facing outcomes
+- [payments.payment-processing.payments-processing - 0.0.0 - openapi specification](https://arcadia-editions.github.io/api/schemas/services/payments.payment-processing.payments-processing/0.0.0/openapi) - Specification for Owns payment authorization, retries, capture, voiding, and provider-facing outcomes
+- [payments.payment-processing.payments-processing - 0.1.0 - asyncapi specification](https://arcadia-editions.github.io/api/schemas/services/payments.payment-processing.payments-processing/0.1.0/asyncapi) - Specification for Owns payment authorization, retries, capture, voiding, and provider-facing outcomes
+- [payments.payment-processing.payments-processing - 0.1.0 - openapi specification](https://arcadia-editions.github.io/api/schemas/services/payments.payment-processing.payments-processing/0.1.0/openapi) - Specification for Owns payment authorization, retries, capture, voiding, and provider-facing outcomes

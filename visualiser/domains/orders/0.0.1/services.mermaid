@@ -1,0 +1,48 @@
+%% EventCatalog Mermaid Diagram
+%% Resource: domains/orders (v0.0.1)
+%% Level: L2 services and data stores
+%% Generated: 2026-11-11T08:56:41.105Z
+
+flowchart LR
+
+    %% Style definitions
+    classDef services fill:#ec4899,stroke:#be185d,color:#fff
+    classDef context_domain fill:#eab308,stroke:#a16207,color:#000
+    classDef domainGroup fill:#eab30814,stroke:#ca8a04,stroke-width:2px,stroke-dasharray:6 4,color:#a16207
+    classDef otherDomainGroup fill:#9ca3af14,stroke:#9ca3af,stroke-dasharray:4 4,color:#6b7280
+    classDef subdomainGroup fill:#eab3080d,stroke:#ca8a04,stroke-dasharray:4 4,color:#a16207
+
+    %% Nodes
+    subgraph domain_group_orders_0_0_1["Orders (0.0.1)"]
+        subgraph domain_group_orders_checkout_0_0_1["Checkout (0.0.1)"]
+            orders_checkout_orders_checkout_0_1_0[["Orders Checkout (0.1.0)"]]:::services
+        end
+    end
+    catalog_inventory_management_catalog_inventory_0_0_0[["Catalog Inventory (0.0.0)"]]:::services
+    subgraph domain_group_catalog_0_0_1["Catalog & Inventory (0.0.1)"]
+        domain_catalog_inventory_management_0_0_1["Inventory Management (0.0.1)"]:::context_domain
+    end
+    payments_payment_processing_payments_processing_0_0_0[["Payments Processing (0.0.0)"]]:::services
+    subgraph domain_group_payments_0_0_1["Payments (0.0.1)"]
+        domain_payments_payment_processing_0_0_1["Payment Processing (0.0.1)"]:::context_domain
+    end
+    subgraph domain_group_notifications_0_0_1["Notifications (0.0.1)"]
+        domain_notifications_customer_communications_0_0_1["Customer Communications (0.0.1)"]:::context_domain
+    end
+    subgraph domain_group_fulfillment_0_0_1["Fulfillment (0.0.1)"]
+        domain_fulfillment_shipping_0_0_1["Shipping (0.0.1)"]:::context_domain
+    end
+
+    %% Edges
+    catalog_inventory_management_catalog_inventory_0_0_0 -->|"publishes stock-released-event-v1"| orders_checkout_orders_checkout_0_1_0
+    domain_catalog_inventory_management_0_0_1 -->|"publishes stock-released-event-v1"| orders_checkout_orders_checkout_0_1_0
+    payments_payment_processing_payments_processing_0_0_0 -->|"publishes payment-authorized-event-v1"| orders_checkout_orders_checkout_0_1_0
+    domain_payments_payment_processing_0_0_1 -->|"publishes payment-authorized-event-v1"| orders_checkout_orders_checkout_0_1_0
+    orders_checkout_orders_checkout_0_1_0 -->|"publishes 2 events"| domain_notifications_customer_communications_0_0_1
+    orders_checkout_orders_checkout_0_1_0 -->|"publishes order-confirmed-event-v1"| domain_fulfillment_shipping_0_0_1
+
+    %% Boundaries and highlights
+    class domain_group_orders_0_0_1 domainGroup
+    class domain_group_catalog_0_0_1,domain_group_payments_0_0_1,domain_group_notifications_0_0_1,domain_group_fulfillment_0_0_1 otherDomainGroup
+    class domain_group_orders_checkout_0_0_1 subdomainGroup
+    linkStyle 1,3,4,5 stroke:#4f46e5,stroke-width:3px

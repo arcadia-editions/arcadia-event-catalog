@@ -1,0 +1,34 @@
+%% EventCatalog Mermaid Diagram
+%% Resource: domains/notifications.customer-communications (v0.0.1)
+%% Level: L2 services and data stores
+%% Generated: 2026-11-11T08:56:41.101Z
+
+flowchart LR
+
+    %% Style definitions
+    classDef services fill:#ec4899,stroke:#be185d,color:#fff
+    classDef context_domain fill:#eab308,stroke:#a16207,color:#000
+    classDef subdomainGroup fill:#eab3080d,stroke:#ca8a04,stroke-dasharray:4 4,color:#a16207
+    classDef otherDomainGroup fill:#9ca3af14,stroke:#9ca3af,stroke-dasharray:4 4,color:#6b7280
+
+    %% Nodes
+    subgraph domain_group_notifications_customer_communications_0_0_1["Customer Communications (0.0.1)"]
+        notifications_customer_communications_notifications_consumer_0_1_0[["Notifications Consumer (0.1.0)"]]:::services
+    end
+    subgraph domain_group_orders_0_0_1["Orders (0.0.1)"]
+        domain_orders_checkout_0_0_1["Checkout (0.0.1)"]:::context_domain
+    end
+    payments_payment_processing_payments_processing_0_0_0[["Payments Processing (0.0.0)"]]:::services
+    subgraph domain_group_payments_0_0_1["Payments (0.0.1)"]
+        domain_payments_payment_processing_0_0_1["Payment Processing (0.0.1)"]:::context_domain
+    end
+
+    %% Edges
+    domain_orders_checkout_0_0_1 -->|"publishes 2 events"| notifications_customer_communications_notifications_consumer_0_1_0
+    payments_payment_processing_payments_processing_0_0_0 -->|"publishes payment-captured-event-v1"| notifications_customer_communications_notifications_consumer_0_1_0
+    domain_payments_payment_processing_0_0_1 -->|"publishes payment-captured-event-v1"| notifications_customer_communications_notifications_consumer_0_1_0
+
+    %% Boundaries and highlights
+    class domain_group_notifications_customer_communications_0_0_1 subdomainGroup
+    class domain_group_orders_0_0_1,domain_group_payments_0_0_1 otherDomainGroup
+    linkStyle 0,2 stroke:#4f46e5,stroke-width:3px

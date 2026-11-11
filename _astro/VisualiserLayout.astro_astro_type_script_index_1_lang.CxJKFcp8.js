@@ -1,0 +1,1 @@
+import{t as e}from"./client.Cy7fLNQY.js";function t(){window.__ecNavigate=t=>e(t)}t(),document.addEventListener(`astro:page-load`,t);

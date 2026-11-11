@@ -1,0 +1,46 @@
+openapi: 3.0.1
+info:
+  title: "Arcadia Editions - Payments Processing"
+  version: "0.1.0"
+  description: "Arcadia Editions - Payments Processing"
+  contact:
+    email: email@domain.com
+  license:
+    name: MIT
+    url: https://opensource.org/licenses/MIT
+servers:
+  - description: API
+    url: /api
+  - description: custom
+    url: "{protocol}://{server}/{path}"
+    variables:
+      protocol:
+        enum: ['http', 'https']
+        default: 'http'
+      server:
+        default: 'localhost:8080'
+      path:
+        default: 'api'
+tags:
+  - name: "Default"
+    description: "Operations that are not assigned to a service."
+  - name: "PaymentsProcessing"
+    description: "Authorize, retry, capture, and void payments."
+
+
+paths: {}
+
+components:
+  schemas: {}
+
+  securitySchemes:
+    basicAuth:     # <-- arbitrary name for the security scheme
+      type: http
+      scheme: basic
+    bearerAuth:     # <-- arbitrary name for the security scheme
+      type: http
+      scheme: bearer
+      bearerFormat: JWT    # optional, arbitrary value for documentation purposes
+security:
+  - basicAuth: []  # <-- use the same name here
+  - bearerAuth: []  # <-- use the same name here

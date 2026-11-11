@@ -1,0 +1,41 @@
+%% EventCatalog Mermaid Diagram
+%% Resource: domains/fulfillment.shipping (v0.0.1)
+%% Level: L3 full (services, messages and channels)
+%% Generated: 2026-11-11T08:56:41.022Z
+
+flowchart LR
+
+    %% Style definitions
+    classDef events fill:#f97316,stroke:#c2410c,color:#fff
+    classDef services fill:#ec4899,stroke:#be185d,color:#fff
+    classDef context_domain fill:#eab308,stroke:#a16207,color:#000
+    classDef subdomainGroup fill:#eab3080d,stroke:#ca8a04,stroke-dasharray:4 4,color:#a16207
+    classDef otherDomainGroup fill:#9ca3af14,stroke:#9ca3af,stroke-dasharray:4 4,color:#6b7280
+
+    %% Nodes
+    subgraph domain_group_fulfillment_shipping_0_0_1["Shipping (0.0.1)"]
+        fulfillment_shipping_fulfillment_shipping_0_1_0[["Fulfillment Shipping (0.1.0)"]]:::services
+        fulfillment_shipping_fulfillment_shipping_fulfillment_scheduled_event_v1_0_1_0>"fulfillment-scheduled-event-v1 (0.1.0)"]:::events
+        fulfillment_shipping_fulfillment_shipping_fulfillment_failed_event_v1_0_1_0>"fulfillment-failed-event-v1 (0.1.0)"]:::events
+        fulfillment_shipping_fulfillment_shipping_fulfillment_ready_to_ship_event_v1_0_1_0>"fulfillment-ready-to-ship-event-v1 (0.1.0)"]:::events
+    end
+    orders_checkout_orders_checkout_order_confirmed_event_v1_0_1_0>"order-confirmed-event-v1 (0.1.0)"]:::events
+    subgraph domain_group_orders_0_0_1["Orders (0.0.1)"]
+        domain_orders_checkout_0_0_1["Checkout (0.0.1)"]:::context_domain
+    end
+    subgraph domain_group_payments_0_0_1["Payments (0.0.1)"]
+        domain_payments_payment_processing_0_0_1["Payment Processing (0.0.1)"]:::context_domain
+    end
+
+    %% Edges
+    orders_checkout_orders_checkout_order_confirmed_event_v1_0_1_0 -->|"subscribed by"| fulfillment_shipping_fulfillment_shipping_0_1_0
+    domain_orders_checkout_0_0_1 -->|"publishes event"| orders_checkout_orders_checkout_order_confirmed_event_v1_0_1_0
+    fulfillment_shipping_fulfillment_shipping_0_1_0 -->|"publishes event"| fulfillment_shipping_fulfillment_shipping_fulfillment_scheduled_event_v1_0_1_0
+    fulfillment_shipping_fulfillment_shipping_fulfillment_scheduled_event_v1_0_1_0 -->|"consumes"| domain_payments_payment_processing_0_0_1
+    fulfillment_shipping_fulfillment_shipping_0_1_0 -->|"publishes event"| fulfillment_shipping_fulfillment_shipping_fulfillment_failed_event_v1_0_1_0
+    fulfillment_shipping_fulfillment_shipping_0_1_0 -->|"publishes event"| fulfillment_shipping_fulfillment_shipping_fulfillment_ready_to_ship_event_v1_0_1_0
+
+    %% Boundaries and highlights
+    class domain_group_fulfillment_shipping_0_0_1 subdomainGroup
+    class domain_group_orders_0_0_1,domain_group_payments_0_0_1 otherDomainGroup
+    linkStyle 0,1,2,3 stroke:#4f46e5,stroke-width:3px

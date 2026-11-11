@@ -1,0 +1,24 @@
+%% EventCatalog Mermaid Diagram
+%% Resource: domains/modulith (v0.0.1)
+%% Level: L2 services and data stores
+%% Generated: 2026-11-11T08:56:41.104Z
+
+flowchart LR
+
+    %% Style definitions
+    classDef services fill:#ec4899,stroke:#be185d,color:#fff
+    classDef domainGroup fill:#eab30814,stroke:#ca8a04,stroke-width:2px,stroke-dasharray:6 4,color:#a16207
+    classDef subdomainGroup fill:#eab3080d,stroke:#ca8a04,stroke-dasharray:4 4,color:#a16207
+
+    %% Nodes
+    subgraph domain_group_modulith_0_0_1["Modulith (0.0.1)"]
+        subgraph domain_group_modulith_application_0_0_1["Application (0.0.1)"]
+            modulith_application_arcadia_editions_modulith_0_0_0[["Arcadia Editions Modulith (0.0.0)"]]:::services
+        end
+    end
+
+    %% Edges
+
+    %% Boundaries and highlights
+    class domain_group_modulith_0_0_1 domainGroup
+    class domain_group_modulith_application_0_0_1 subdomainGroup

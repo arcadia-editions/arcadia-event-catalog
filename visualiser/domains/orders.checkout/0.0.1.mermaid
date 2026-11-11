@@ -1,0 +1,58 @@
+%% EventCatalog Mermaid Diagram
+%% Resource: domains/orders.checkout (v0.0.1)
+%% Level: L3 full (services, messages and channels)
+%% Generated: 2026-11-11T08:56:40.820Z
+
+flowchart LR
+
+    %% Style definitions
+    classDef events fill:#f97316,stroke:#c2410c,color:#fff
+    classDef services fill:#ec4899,stroke:#be185d,color:#fff
+    classDef context_domain fill:#eab308,stroke:#a16207,color:#000
+    classDef subdomainGroup fill:#eab3080d,stroke:#ca8a04,stroke-dasharray:4 4,color:#a16207
+    classDef otherDomainGroup fill:#9ca3af14,stroke:#9ca3af,stroke-dasharray:4 4,color:#6b7280
+
+    %% Nodes
+    subgraph domain_group_orders_checkout_0_0_1["Checkout (0.0.1)"]
+        orders_checkout_orders_checkout_0_1_0[["Orders Checkout (0.1.0)"]]:::services
+        orders_checkout_orders_checkout_order_created_event_v1_0_1_0>"order-created-event-v1 (0.1.0)"]:::events
+        orders_checkout_orders_checkout_stock_unavailable_event_v1_0_1_0>"stock-unavailable-event-v1 (0.1.0)"]:::events
+        orders_checkout_orders_checkout_order_confirmed_event_v1_0_1_0>"order-confirmed-event-v1 (0.1.0)"]:::events
+        orders_checkout_orders_checkout_order_cancelled_event_v1_0_1_0>"order-cancelled-event-v1 (0.1.0)"]:::events
+    end
+    catalog_inventory_management_catalog_inventory_stock_released_event_v1_0_1_0>"stock-released-event-v1 (0.1.0)"]:::events
+    catalog_inventory_management_catalog_inventory_0_0_0[["Catalog Inventory (0.0.0)"]]:::services
+    subgraph domain_group_catalog_0_0_1["Catalog & Inventory (0.0.1)"]
+        domain_catalog_inventory_management_0_0_1["Inventory Management (0.0.1)"]:::context_domain
+    end
+    payments_payment_processing_payments_processing_payment_authorized_event_v1_0_1_0>"payment-authorized-event-v1 (0.1.0)"]:::events
+    payments_payment_processing_payments_processing_0_0_0[["Payments Processing (0.0.0)"]]:::services
+    subgraph domain_group_payments_0_0_1["Payments (0.0.1)"]
+        domain_payments_payment_processing_0_0_1["Payment Processing (0.0.1)"]:::context_domain
+    end
+    subgraph domain_group_notifications_0_0_1["Notifications (0.0.1)"]
+        domain_notifications_customer_communications_0_0_1["Customer Communications (0.0.1)"]:::context_domain
+    end
+    subgraph domain_group_fulfillment_0_0_1["Fulfillment (0.0.1)"]
+        domain_fulfillment_shipping_0_0_1["Shipping (0.0.1)"]:::context_domain
+    end
+
+    %% Edges
+    catalog_inventory_management_catalog_inventory_stock_released_event_v1_0_1_0 -->|"subscribed by"| orders_checkout_orders_checkout_0_1_0
+    catalog_inventory_management_catalog_inventory_0_0_0 -->|"publishes event"| catalog_inventory_management_catalog_inventory_stock_released_event_v1_0_1_0
+    domain_catalog_inventory_management_0_0_1 -->|"publishes event"| catalog_inventory_management_catalog_inventory_stock_released_event_v1_0_1_0
+    payments_payment_processing_payments_processing_payment_authorized_event_v1_0_1_0 -->|"subscribed by"| orders_checkout_orders_checkout_0_1_0
+    payments_payment_processing_payments_processing_0_0_0 -->|"publishes event"| payments_payment_processing_payments_processing_payment_authorized_event_v1_0_1_0
+    domain_payments_payment_processing_0_0_1 -->|"publishes event"| payments_payment_processing_payments_processing_payment_authorized_event_v1_0_1_0
+    orders_checkout_orders_checkout_0_1_0 -->|"publishes event"| orders_checkout_orders_checkout_order_created_event_v1_0_1_0
+    orders_checkout_orders_checkout_0_1_0 -->|"publishes event"| orders_checkout_orders_checkout_stock_unavailable_event_v1_0_1_0
+    orders_checkout_orders_checkout_stock_unavailable_event_v1_0_1_0 -->|"consumes"| domain_notifications_customer_communications_0_0_1
+    orders_checkout_orders_checkout_0_1_0 -->|"publishes event"| orders_checkout_orders_checkout_order_confirmed_event_v1_0_1_0
+    orders_checkout_orders_checkout_order_confirmed_event_v1_0_1_0 -->|"consumes"| domain_fulfillment_shipping_0_0_1
+    orders_checkout_orders_checkout_0_1_0 -->|"publishes event"| orders_checkout_orders_checkout_order_cancelled_event_v1_0_1_0
+    orders_checkout_orders_checkout_order_cancelled_event_v1_0_1_0 -->|"consumes"| domain_notifications_customer_communications_0_0_1
+
+    %% Boundaries and highlights
+    class domain_group_orders_checkout_0_0_1 subdomainGroup
+    class domain_group_catalog_0_0_1,domain_group_payments_0_0_1,domain_group_notifications_0_0_1,domain_group_fulfillment_0_0_1 otherDomainGroup
+    linkStyle 2,5,7,8,9,10,11,12 stroke:#4f46e5,stroke-width:3px

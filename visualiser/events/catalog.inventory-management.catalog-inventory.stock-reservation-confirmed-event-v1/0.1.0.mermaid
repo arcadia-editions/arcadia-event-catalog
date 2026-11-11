@@ -1,0 +1,28 @@
+%% EventCatalog Mermaid Diagram
+%% Resource: events/catalog.inventory-management.catalog-inventory.stock-reservation-confirmed-event-v1 (v0.1.0)
+%% Level: L3 full (services, messages and channels)
+%% Generated: 2026-11-11T08:56:41.443Z
+
+flowchart LR
+
+    %% Style definitions
+    classDef events fill:#f97316,stroke:#c2410c,color:#fff
+    classDef services fill:#ec4899,stroke:#be185d,color:#fff
+    classDef channels fill:#6b7280,stroke:#374151,color:#fff
+    classDef focused stroke-width:4px
+
+    %% Nodes
+    catalog_inventory_management_catalog_inventory_stock_reservation_confirmed_event_v1_0_1_0_3>"stock-reservation-confirmed-event-v1 (0.1.0)"]:::events
+    catalog_inventory_management_catalog_inventory_0_0_0[["Catalog Inventory (0.0.0)"]]:::services
+    catalog_inventory_management_catalog_inventory_stock_reservation_confirmed_event_v1_0_1_0_3[/"stock-reservation-confirmed-event-v1 (0.1.0)"/]:::channels
+    catalog_inventory_management_catalog_inventory_0_1_0[["Catalog Inventory (0.1.0)"]]:::services
+    catalog_inventory_management_catalog_inventory_stock_reservation_confirmed_event_v1_0_1_0_3[/"stock-reservation-confirmed-event-v1 (0.1.0)"/]:::channels
+
+    %% Edges
+    catalog_inventory_management_catalog_inventory_0_0_0 -->|"publishes event"| catalog_inventory_management_catalog_inventory_stock_reservation_confirmed_event_v1_0_1_0_3
+    catalog_inventory_management_catalog_inventory_stock_reservation_confirmed_event_v1_0_1_0_3 -->|"routes to"| catalog_inventory_management_catalog_inventory_stock_reservation_confirmed_event_v1_0_1_0_3
+    catalog_inventory_management_catalog_inventory_0_1_0 -->|"publishes event"| catalog_inventory_management_catalog_inventory_stock_reservation_confirmed_event_v1_0_1_0_3
+    catalog_inventory_management_catalog_inventory_stock_reservation_confirmed_event_v1_0_1_0_3 -->|"routes to"| catalog_inventory_management_catalog_inventory_stock_reservation_confirmed_event_v1_0_1_0_3
+
+    %% Boundaries and highlights
+    class catalog_inventory_management_catalog_inventory_stock_reservation_confirmed_event_v1_0_1_0_3 focused

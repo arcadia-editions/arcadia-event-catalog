@@ -1,0 +1,264 @@
+openapi: 3.0.1
+info:
+  title: "Arcadia Editions - Orders Checkout"
+  version: "0.0.0"
+  description: "Arcadia Editions - Orders Checkout"
+  contact:
+    email: email@domain.com
+  license:
+    name: MIT
+    url: https://opensource.org/licenses/MIT
+servers:
+  - description: API
+    url: /api
+  - description: custom
+    url: "{protocol}://{server}/{path}"
+    variables:
+      protocol:
+        enum: ['http', 'https']
+        default: 'http'
+      server:
+        default: 'localhost:8080'
+      path:
+        default: 'api'
+tags:
+  - name: "Default"
+    description: "Operations that are not assigned to a service."
+  - name: "OrdersCheckout"
+    description: "Start checkout and read an order."
+
+
+paths:
+  /orders/start-checkout:
+    post:
+      operationId: startOrderCheckout
+      description: "startOrderCheckout"
+      summary: "startOrderCheckout"
+      tags: [OrdersCheckout]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/StartOrderCheckoutInput"
+      responses:
+        "201":
+          description: "OK"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Order"
+        "400":
+          description: "Invalid request"
+  /orders/{id}:
+    get:
+      operationId: getOrder
+      description: "getOrder"
+      summary: "getOrder"
+      tags: [OrdersCheckout]
+      parameters:
+        - name: "id"
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        "200":
+          description: "OK"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Order"
+        "400":
+          description: "Invalid request"
+
+components:
+  schemas:
+    StartOrderCheckoutInput:
+      type: "object"
+      x-business-entity: "StartOrderCheckoutInput"
+      required:
+      - "customerId"
+      - "customerEmail"
+      - "paymentMethodId"
+      - "currency"
+      - "items"
+      - "shippingAddress"
+      properties:
+        customerId:
+          type: "string"
+        customerEmail:
+          type: "string"
+          maxLength: 254
+        paymentMethodId:
+          type: "string"
+        currency:
+          type: "string"
+          maxLength: 3
+        items:
+          type: "array"
+          minItems: 1 
+          items:
+            $ref: "#/components/schemas/OrderItemInput"
+        shippingAddress:
+          $ref: "#/components/schemas/ShippingAddressInput"
+    Order:
+      type: "object"
+      x-business-entity: "Order"
+      required:
+      - "orderId"
+      - "status"
+      - "customerId"
+      - "customerEmail"
+      - "paymentMethodId"
+      - "items"
+      - "shippingAddress"
+      - "totalAmount"
+      - "currency"
+      properties:
+        id:
+          type: "integer"
+          format: "int64"
+          readOnly: true
+        version:
+          type: "integer"
+          default: "null"
+          description: "Version of the document (required in PUT for concurrency control,\
+            \ should be null in POSTs)."
+        orderId:
+          type: "string"
+        status:
+          $ref: "#/components/schemas/OrderStatus"
+        customerId:
+          type: "string"
+          description: "Customer snapshot taken at checkout (there is no customers\
+            \ bounded context yet)."
+        customerEmail:
+          type: "string"
+          maxLength: 254
+        paymentMethodId:
+          type: "string"
+        items:
+          type: "array"
+          items:
+            $ref: "#/components/schemas/OrderItem"
+          minItems: 1
+        shippingAddress:
+          $ref: "#/components/schemas/ShippingAddress"
+        totalAmount:
+          type: "number"
+          format: "double"
+        currency:
+          type: "string"
+          maxLength: 3
+        createdAt:
+          type: "string"
+          format: "date-time"
+        confirmedAt:
+          type: "string"
+          format: "date-time"
+        cancelledAt:
+          type: "string"
+          format: "date-time"
+        cancellationReason:
+          type: "string"
+    OrderStatus:
+      type: "string"
+      x-business-entity: "OrderStatus"
+      enum:
+      - "CREATED"
+      - "CONFIRMED"
+      - "CANCELLED"
+    OrderItem:
+      type: "object"
+      x-business-entity: "OrderItem"
+      required:
+      - "sku"
+      - "quantity"
+      - "unitPrice"
+      properties:
+        sku:
+          type: "string"
+        quantity:
+          type: "integer"
+          format: "int32"
+        unitPrice:
+          type: "number"
+          format: "double"
+    ShippingAddress:
+      type: "object"
+      x-business-entity: "ShippingAddress"
+      required:
+      - "name"
+      - "line1"
+      - "city"
+      - "postalCode"
+      - "country"
+      properties:
+        name:
+          type: "string"
+        line1:
+          type: "string"
+        line2:
+          type: "string"
+        city:
+          type: "string"
+        region:
+          type: "string"
+        postalCode:
+          type: "string"
+        country:
+          type: "string"
+    ShippingAddressInput:
+      type: "object"
+      x-business-entity: "ShippingAddressInput"
+      required:
+      - "name"
+      - "line1"
+      - "city"
+      - "postalCode"
+      - "country"
+      properties:
+        name:
+          type: "string"
+        line1:
+          type: "string"
+        line2:
+          type: "string"
+        city:
+          type: "string"
+        region:
+          type: "string"
+        postalCode:
+          type: "string"
+        country:
+          type: "string"
+    OrderItemInput:
+      type: "object"
+      x-business-entity: "OrderItemInput"
+      required:
+      - "sku"
+      - "quantity"
+      - "unitPrice"
+      properties:
+        sku:
+          type: "string"
+        quantity:
+          type: "integer"
+          format: "int32"
+        unitPrice:
+          type: "number"
+          format: "double"
+
+  securitySchemes:
+    basicAuth:     # <-- arbitrary name for the security scheme
+      type: http
+      scheme: basic
+    bearerAuth:     # <-- arbitrary name for the security scheme
+      type: http
+      scheme: bearer
+      bearerFormat: JWT    # optional, arbitrary value for documentation purposes
+security:
+  - basicAuth: []  # <-- use the same name here
+  - bearerAuth: []  # <-- use the same name here

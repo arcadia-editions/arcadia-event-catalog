@@ -1,0 +1,68 @@
+%% EventCatalog Mermaid Diagram
+%% Resource: domains/payments.payment-processing (v0.0.1)
+%% Level: L1 overview (domains, systems and their relationships)
+%% Generated: 2026-11-11T08:56:41.106Z
+
+flowchart LR
+
+    %% Style definitions
+    classDef services fill:#ec4899,stroke:#be185d,color:#fff
+    classDef events fill:#f97316,stroke:#c2410c,color:#fff
+    classDef context_domain fill:#eab308,stroke:#a16207,color:#000
+    classDef subdomainGroup fill:#eab3080d,stroke:#ca8a04,stroke-dasharray:4 4,color:#a16207
+    classDef otherDomainGroup fill:#9ca3af14,stroke:#9ca3af,stroke-dasharray:4 4,color:#6b7280
+
+    %% Nodes
+    subgraph domain_group_payments_payment_processing_0_0_1["Payment Processing (0.0.1)"]
+        payments_payment_processing_payments_processing_payment_retried_event_v1_0_1_0>"payment-retried-event-v1 (0.1.0)"]:::events
+        payments_payment_processing_payments_processing_0_1_0[["Payments Processing (0.1.0)"]]:::services
+        payments_payment_processing_payments_processing_payment_failed_event_v1_0_1_0>"payment-failed-event-v1 (0.1.0)"]:::events
+        payments_payment_processing_payments_processing_payment_capture_failed_event_v1_0_1_0>"payment-capture-failed-event-v1 (0.1.0)"]:::events
+        payments_payment_processing_payments_processing_payment_authorized_event_v1_0_1_0>"payment-authorized-event-v1 (0.1.0)"]:::events
+        payments_payment_processing_payments_processing_payment_declined_event_v1_0_1_0>"payment-declined-event-v1 (0.1.0)"]:::events
+        payments_payment_processing_payments_processing_payment_retry_exhausted_event_v1_0_1_0>"payment-retry-exhausted-event-v1 (0.1.0)"]:::events
+        payments_payment_processing_payments_processing_payment_captured_event_v1_0_1_0>"payment-captured-event-v1 (0.1.0)"]:::events
+        payments_payment_processing_payments_processing_payment_voided_event_v1_0_1_0>"payment-voided-event-v1 (0.1.0)"]:::events
+    end
+    payments_payment_processing_payments_processing_0_0_0[["Payments Processing (0.0.0)"]]:::services
+    fulfillment_shipping_fulfillment_shipping_fulfillment_scheduled_event_v1_0_1_0>"fulfillment-scheduled-event-v1 (0.1.0)"]:::events
+    fulfillment_shipping_fulfillment_shipping_0_0_0[["Fulfillment Shipping (0.0.0)"]]:::services
+    subgraph domain_group_fulfillment_0_0_1["Fulfillment (0.0.1)"]
+        domain_fulfillment_shipping_0_0_1["Shipping (0.0.1)"]:::context_domain
+    end
+    subgraph domain_group_orders_0_0_1["Orders (0.0.1)"]
+        domain_orders_checkout_0_0_1["Checkout (0.0.1)"]:::context_domain
+    end
+    subgraph domain_group_notifications_0_0_1["Notifications (0.0.1)"]
+        domain_notifications_customer_communications_0_0_1["Customer Communications (0.0.1)"]:::context_domain
+    end
+    subgraph domain_group_catalog_0_0_1["Catalog & Inventory (0.0.1)"]
+        domain_catalog_inventory_management_0_0_1["Inventory Management (0.0.1)"]:::context_domain
+    end
+
+    %% Edges
+    payments_payment_processing_payments_processing_payment_retried_event_v1_0_1_0 -->|"subscribed by"| payments_payment_processing_payments_processing_0_1_0
+    payments_payment_processing_payments_processing_0_0_0 -->|"publishes event"| payments_payment_processing_payments_processing_payment_retried_event_v1_0_1_0
+    payments_payment_processing_payments_processing_0_1_0 -->|"publishes event"| payments_payment_processing_payments_processing_payment_retried_event_v1_0_1_0
+    payments_payment_processing_payments_processing_payment_failed_event_v1_0_1_0 -->|"subscribed by"| payments_payment_processing_payments_processing_0_1_0
+    payments_payment_processing_payments_processing_0_0_0 -->|"publishes event"| payments_payment_processing_payments_processing_payment_failed_event_v1_0_1_0
+    payments_payment_processing_payments_processing_0_1_0 -->|"publishes event"| payments_payment_processing_payments_processing_payment_failed_event_v1_0_1_0
+    payments_payment_processing_payments_processing_payment_capture_failed_event_v1_0_1_0 -->|"subscribed by"| payments_payment_processing_payments_processing_0_1_0
+    payments_payment_processing_payments_processing_0_0_0 -->|"publishes event"| payments_payment_processing_payments_processing_payment_capture_failed_event_v1_0_1_0
+    payments_payment_processing_payments_processing_0_1_0 -->|"publishes event"| payments_payment_processing_payments_processing_payment_capture_failed_event_v1_0_1_0
+    fulfillment_shipping_fulfillment_shipping_fulfillment_scheduled_event_v1_0_1_0 -->|"subscribed by"| payments_payment_processing_payments_processing_0_1_0
+    fulfillment_shipping_fulfillment_shipping_0_0_0 -->|"publishes event"| fulfillment_shipping_fulfillment_shipping_fulfillment_scheduled_event_v1_0_1_0
+    domain_fulfillment_shipping_0_0_1 -->|"publishes event"| fulfillment_shipping_fulfillment_shipping_fulfillment_scheduled_event_v1_0_1_0
+    payments_payment_processing_payments_processing_0_1_0 -->|"publishes event"| payments_payment_processing_payments_processing_payment_authorized_event_v1_0_1_0
+    payments_payment_processing_payments_processing_payment_authorized_event_v1_0_1_0 -->|"consumes"| domain_orders_checkout_0_0_1
+    payments_payment_processing_payments_processing_0_1_0 -->|"publishes event"| payments_payment_processing_payments_processing_payment_declined_event_v1_0_1_0
+    payments_payment_processing_payments_processing_0_1_0 -->|"publishes event"| payments_payment_processing_payments_processing_payment_retry_exhausted_event_v1_0_1_0
+    payments_payment_processing_payments_processing_0_1_0 -->|"publishes event"| payments_payment_processing_payments_processing_payment_captured_event_v1_0_1_0
+    payments_payment_processing_payments_processing_payment_captured_event_v1_0_1_0 -->|"consumes"| domain_notifications_customer_communications_0_0_1
+    payments_payment_processing_payments_processing_0_1_0 -->|"publishes event"| payments_payment_processing_payments_processing_payment_voided_event_v1_0_1_0
+    payments_payment_processing_payments_processing_payment_voided_event_v1_0_1_0 -->|"consumes"| domain_catalog_inventory_management_0_0_1
+
+    %% Boundaries and highlights
+    class domain_group_payments_payment_processing_0_0_1 subdomainGroup
+    class domain_group_fulfillment_0_0_1,domain_group_orders_0_0_1,domain_group_notifications_0_0_1,domain_group_catalog_0_0_1 otherDomainGroup
+    linkStyle 11,12,13,16,17,18,19 stroke:#4f46e5,stroke-width:3px

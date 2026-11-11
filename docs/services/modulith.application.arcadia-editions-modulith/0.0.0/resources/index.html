@@ -1,0 +1,529 @@
+<!DOCTYPE html><html lang="en" data-catalog-theme="sunset"><head><!-- Inline script to prevent flash of wrong theme --><script>(function(){const catalogTheme = "sunset";
+
+      (function () {
+        function getDefaultTheme() {
+          return 'dark';
+        }
+
+        function getEmbeddedTheme() {
+          const params = new URLSearchParams(window.location.search);
+          const requestedTheme = params.get('theme');
+          const embedded = params.get('embed') === 'true';
+          return embedded && (requestedTheme === 'light' || requestedTheme === 'dark') ? requestedTheme : null;
+        }
+
+        function applyTheme() {
+          // An embed can request its own theme without changing the user's saved catalog preference.
+          const embeddedTheme = getEmbeddedTheme();
+          const stored = localStorage.getItem('eventcatalog-theme');
+          const theme = embeddedTheme || (stored === 'light' || stored === 'dark' ? stored : getDefaultTheme());
+          document.documentElement.setAttribute('data-theme', theme);
+          // Also ensure catalog theme is set (for page transitions)
+          document.documentElement.setAttribute('data-catalog-theme', catalogTheme);
+        }
+
+        // Apply on initial load
+        applyTheme();
+
+        // Apply after Astro page transitions
+        document.addEventListener('astro:after-swap', applyTheme);
+        document.addEventListener('astro:page-load', applyTheme);
+      })();
+    })();</script><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="viewport" content="width=device-width"><link rel="icon" href="/arcadia-event-catalog/favicon.ico" sizes="any"><link rel="icon" type="image/svg+xml" href="/arcadia-event-catalog/favicon.svg"><link rel="icon" type="image/png" sizes="32x32" href="/arcadia-event-catalog/favicon-32x32.png"><link rel="icon" type="image/png" sizes="16x16" href="/arcadia-event-catalog/favicon-16x16.png"><link rel="apple-touch-icon" href="/arcadia-event-catalog/apple-touch-icon.png"><title>Arcadia Editions Modulith | Resources | Arcadia Editions Event Catalog</title><link rel="canonical" href="https://arcadia-editions.github.io/arcadia-event-catalog/docs/services/modulith.application.arcadia-editions-modulith/0.0.0/resources/"><meta name="description" content="Discover the domains, services, APIs, messages, channels, and data models that make up Arcadia Editions."><meta name="robots" content="index, follow"><meta property="og:title" content="Arcadia Editions Modulith | Resources | Arcadia Editions Event Catalog"><meta property="og:type" content="website"><meta property="og:image" content="https://arcadia-editions.github.io/arcadia-event-catalog/_astro/opengraph.L5gHdVBc.png"><meta property="og:url" content="https://arcadia-editions.github.io/arcadia-event-catalog/"><meta property="og:image:url" content="https://arcadia-editions.github.io/arcadia-event-catalog/_astro/opengraph.L5gHdVBc.png"><meta property="og:image:secure_url" content="https://arcadia-editions.github.io/arcadia-event-catalog/_astro/opengraph.L5gHdVBc.png"><meta property="og:image:alt" content="Arcadia Editions Modulith | Resources | Arcadia Editions Event Catalog"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="Arcadia Editions Modulith | Resources | Arcadia Editions Event Catalog"><meta name="twitter:image" content="https://arcadia-editions.github.io/arcadia-event-catalog/_astro/opengraph.L5gHdVBc.png"><meta name="twitter:image:alt" content="Arcadia Editions Modulith | Resources | Arcadia Editions Event Catalog"><meta name="twitter:description" content="Discover the domains, services, APIs, messages, channels, and data models that make up Arcadia Editions."><meta name="og:locale" content="en_US"><meta name="og:description" content="Discover the domains, services, APIs, messages, channels, and data models that make up Arcadia Editions."><meta name="og:site_name" content="https://arcadia-editions.github.io/arcadia-event-catalog/"><script>(function(){const verticalNavAutoCollapsePaths = ["/arcadia-event-catalog/discover","/arcadia-event-catalog/docs"];
+
+      (() => {
+        const verticalNavStorageKey = 'eventcatalog-vertical-nav-collapsed';
+        const embedded = new URLSearchParams(window.location.search).get('embed') === 'true';
+
+        document.documentElement.setAttribute('data-embedded', embedded ? 'true' : 'false');
+
+        const routeShouldAutoCollapseVerticalNav = (pathname) =>
+          verticalNavAutoCollapsePaths.some((path) => pathname === path || pathname.startsWith(`${path}/`));
+
+        try {
+          const shouldAutoCollapse = routeShouldAutoCollapseVerticalNav(window.location.pathname);
+          if (shouldAutoCollapse) {
+            localStorage.setItem(verticalNavStorageKey, 'true');
+          }
+
+          const savedState = localStorage.getItem(verticalNavStorageKey);
+          const isCollapsed = shouldAutoCollapse ? true : savedState === null ? true : savedState === 'true';
+          document.documentElement.setAttribute('data-vertical-nav-collapsed', isCollapsed ? 'true' : 'false');
+        } catch (error) {
+          document.documentElement.setAttribute('data-vertical-nav-collapsed', 'true');
+        }
+      })();
+    })();</script><script>
+      (() => {
+        const sidebarWidthStorageKey = 'eventcatalog-sidebar-width:v1';
+        const minimumSidebarWidth = 224;
+        const maximumSidebarWidth = 576;
+
+        try {
+          const savedWidth = Number(localStorage.getItem(sidebarWidthStorageKey));
+          if (Number.isFinite(savedWidth) && savedWidth > 0) {
+            const width = Math.min(maximumSidebarWidth, Math.max(minimumSidebarWidth, savedWidth));
+            document.documentElement.style.setProperty('--ec-sidebar-panel-width', `${width}px`);
+          }
+        } catch (error) {}
+      })();
+    </script><style>:root[data-embedded=true] #resources-page{height:100dvh!important}
+</style><link rel="stylesheet" href="/arcadia-event-catalog/_astro/VerticalSideBarLayout.B9hmTXIj.css"><link rel="stylesheet" href="/arcadia-event-catalog/_astro/tailwind.BBbOZqVB.css"><style>
+</style></head><body><div data-astro-transition-persist="navigation-progress" id="navigation-progress-container" data-astro-cid-hg2dwqfk><div id="navigation-progress" role="progressbar" aria-label="Loading page" aria-hidden="true" data-visible="false" data-astro-cid-hg2dwqfk><div class="navigation-progress__bar" data-astro-cid-hg2dwqfk></div></div><span id="navigation-progress-status" class="sr-only" role="status" aria-live="polite" aria-atomic="true" data-astro-cid-hg2dwqfk></span></div><script type="module">(()=>{let e,t,n=0,r=null,i=()=>document.getElementById(`navigation-progress`),a=()=>document.getElementById(`navigation-progress-status`),o=()=>{r?.removeAttribute(`aria-busy`),r?.removeAttribute(`data-navigation-pending`),r=null},s=()=>{let e=i();if(!e)return;n=performance.now(),e.dataset.visible=`true`,e.setAttribute(`aria-hidden`,`false`),document.getElementById(`content`)?.setAttribute(`aria-busy`,`true`);let t=a();t&&(t.textContent=`Loading page`)},c=()=>{let e=i();e&&(e.dataset.visible=`false`,e.setAttribute(`aria-hidden`,`true`)),document.getElementById(`content`)?.removeAttribute(`aria-busy`);let r=a();r&&(r.textContent=``),o(),n=0,t=void 0},l=n=>{e&&clearTimeout(e),t&&clearTimeout(t),o(),n.sourceElement instanceof HTMLElement&&(r=n.sourceElement,r.setAttribute(`aria-busy`,`true`),r.dataset.navigationPending=`true`),e=setTimeout(s,200)},u=()=>{if(e&&=(clearTimeout(e),void 0),!n){c();return}let r=Math.max(0,250-(performance.now()-n));t=setTimeout(c,r)},d=()=>{!e&&!t&&!n&&c()};return document.addEventListener(`astro:before-preparation`,l),document.addEventListener(`astro:after-preparation`,u),document.addEventListener(`astro:page-load`,d),()=>{e&&clearTimeout(e),t&&clearTimeout(t),c(),document.removeEventListener(`astro:before-preparation`,l),document.removeEventListener(`astro:after-preparation`,u),document.removeEventListener(`astro:page-load`,d)}})();</script><script type="module" src="/arcadia-event-catalog/_astro/SearchDataLoader.astro_astro_type_script_index_0_lang.CW1c_LMh.js"></script><main id="eventcatalog-application" class="relative"><div data-astro-transition-persist="site-header"><nav id="eventcatalog-header" class="fixed top-0 right-0 h-[60px] bg-[rgb(var(--ec-header-bg))] border-b border-[rgb(var(--ec-header-border))] py-3 font-bold text-xl z-50 text-[rgb(var(--ec-header-text))]" style="left: calc(var(--ec-vertical-nav-width, 14rem) + var(--ec-sidebar-panel-width, 20rem));" data-astro-cid-vyp7el5t><div class="px-6" data-astro-cid-vyp7el5t><div class="flex justify-between items-center gap-4" data-astro-cid-vyp7el5t><div class="flex min-w-0 flex-1 items-center gap-3" data-astro-cid-vyp7el5t><div class="hidden lg:block min-w-0 flex-1 max-w-xl" data-astro-cid-vyp7el5t><div data-astro-cid-b2d5cl7c><div class="relative flex min-w-0 items-center w-full" data-astro-cid-b2d5cl7c><input id="search-dummy-input" type="text" name="search" placeholder="Search EventCatalog" autocomplete="off" class="block h-9 min-w-0 w-full rounded-md caret-transparent border-0 py-1.5 pr-20 pl-10! text-[rgb(var(--ec-header-text))] bg-[rgb(var(--ec-header-bg))] shadow-xs ring-1 ring-inset ring-[rgb(var(--ec-dropdown-border))] placeholder:text-gray-400 font-light sm:text-sm sm:leading-6" data-astro-cid-b2d5cl7c><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true" data-slot="icon" class="absolute inset-y-0 left-0 h-9 w-8 flex items-center pl-4 text-[rgb(var(--ec-icon-color))]" data-astro-cid-b2d5cl7c="true"><path stroke-linecap="round" stroke-linejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z"></path></svg><div class="absolute inset-y-0 right-0 flex items-center gap-1 pr-2 pointer-events-none" data-astro-cid-b2d5cl7c><kbd class="inline-flex h-6 min-w-6 items-center justify-center rounded-lg border border-[rgb(var(--ec-dropdown-border))] bg-[rgb(var(--ec-card-bg))] px-1 font-sans text-xs font-normal text-[rgb(var(--ec-icon-color))] shadow-xs" data-astro-cid-b2d5cl7c>⌘</kbd><kbd class="inline-flex h-6 min-w-6 items-center justify-center rounded-lg border border-[rgb(var(--ec-dropdown-border))] bg-[rgb(var(--ec-card-bg))] px-1 font-sans text-xs font-normal text-[rgb(var(--ec-icon-color))] shadow-xs" data-astro-cid-b2d5cl7c>K</kbd></div></div></div><style>astro-island,astro-slot,astro-static-slot{display:contents}</style><script>(function(){let e=(e,t)=>{let n=async()=>{await(await e())()},r=typeof t.value==`object`?t.value:void 0,i={timeout:r==null?void 0:r.timeout};`requestIdleCallback`in window?window.requestIdleCallback(n,i):setTimeout(n,i.timeout||200)};(self.Astro||(self.Astro={})).idle=e,window.dispatchEvent(new Event(`astro:idle`))})();</script><script>(function(){function e(t){"@babel/helpers - typeof";return e=typeof Symbol==`function`&&typeof Symbol.iterator==`symbol`?function(e){return typeof e}:function(e){return e&&typeof Symbol==`function`&&e.constructor===Symbol&&e!==Symbol.prototype?`symbol`:typeof e},e(t)}function t(t,n){if(e(t)!=`object`||!t)return t;var r=t[Symbol.toPrimitive];if(r!==void 0){var i=r.call(t,n||`default`);if(e(i)!=`object`)return i;throw TypeError(`@@toPrimitive must return a primitive value.`)}return(n===`string`?String:Number)(t)}function n(n){var r=t(n,`string`);return e(r)==`symbol`?r:r+``}function r(e,t,r){return(t=n(t))in e?Object.defineProperty(e,t,{value:r,enumerable:!0,configurable:!0,writable:!0}):e[t]=r,e}let i=/* @__PURE__ */ new Set([`__proto__`,`constructor`,`prototype`]);{let e={0:e=>a(e),1:e=>n(e),2:e=>new RegExp(e),3:e=>new Date(e),4:e=>new Map(n(e)),5:e=>new Set(n(e)),6:e=>BigInt(e),7:e=>new URL(e),8:e=>new Uint8Array(e),9:e=>new Uint16Array(e),10:e=>new Uint32Array(e),11:e=>1/0*e},t=t=>{let[n,r]=t;return n in e?e[n](r):void 0},n=e=>e.map(t),a=e=>typeof e!=`object`||!e?e:Object.fromEntries(Object.entries(e).map(([e,n])=>[e,t(n)]));class o extends HTMLElement{constructor(...e){super(...e),r(this,`Component`,void 0),r(this,`hydrator`,void 0),r(this,`hydrate`,async()=>{var e;if(!this.hydrator||!this.isConnected)return;let t=(e=this.parentElement)==null?void 0:e.closest(`astro-island[ssr]`);if(t){t.addEventListener(`astro:hydrate`,this.hydrate,{once:!0});return}let n=this.querySelectorAll(`astro-slot`),r={},i=this.querySelectorAll(`template[data-astro-template]`);for(let e of i){let t=e.closest(this.tagName);t!=null&&t.isSameNode(this)&&(r[e.getAttribute(`data-astro-template`)||`default`]=e.innerHTML,e.remove())}for(let e of n){let t=e.closest(this.tagName);t!=null&&t.isSameNode(this)&&(r[e.getAttribute(`name`)||`default`]=e.innerHTML)}let o;try{o=this.hasAttribute(`props`)?a(JSON.parse(this.getAttribute(`props`))):{}}catch(e){let t=this.getAttribute(`component-url`)||`<unknown>`,n=this.getAttribute(`component-export`);throw n&&(t+=` (export ${n})`),console.error(`[hydrate] Error parsing props for component ${t}`,this.getAttribute(`props`),e),e}await this.hydrator(this)(this.Component,o,r,{client:this.getAttribute(`client`)}),this.removeAttribute(`ssr`),this.dispatchEvent(new CustomEvent(`astro:hydrate`))}),r(this,`unmount`,()=>{this.isConnected||this.dispatchEvent(new CustomEvent(`astro:unmount`))})}disconnectedCallback(){document.removeEventListener(`astro:after-swap`,this.unmount),document.addEventListener(`astro:after-swap`,this.unmount,{once:!0})}connectedCallback(){if(!this.hasAttribute(`await-children`)||document.readyState===`interactive`||document.readyState===`complete`)this.childrenConnectedCallback();else{let e=()=>{document.removeEventListener(`DOMContentLoaded`,e),t.disconnect(),this.childrenConnectedCallback()},t=new MutationObserver(()=>{var t;((t=this.lastChild)==null?void 0:t.nodeType)===Node.COMMENT_NODE&&this.lastChild.nodeValue===`astro:end`&&(this.lastChild.remove(),e())});t.observe(this,{childList:!0}),document.addEventListener(`DOMContentLoaded`,e)}}async childrenConnectedCallback(){let e=this.getAttribute(`before-hydration-url`);e&&await import(e),this.start()}getRetryImportUrl(e){let t=new URL(e,document.baseURI);return t.searchParams.set(`astro-retry`,Date.now().toString()),t.toString()}async importWithRetry(e){try{return await import(e)}catch(t){return await new Promise(e=>setTimeout(e,1e3)),import(this.getRetryImportUrl(e))}}handleHydrationError(e){let t=this.getAttribute(`component-url`),n=new CustomEvent(`astro:hydration-error`,{cancelable:!0,bubbles:!0,composed:!0,detail:{error:e,componentUrl:t}});this.dispatchEvent(n)&&console.error(`[astro-island] Error hydrating ${t}`,e)}async start(){let e=JSON.parse(this.getAttribute(`opts`)),t=this.getAttribute(`client`);if(Astro[t]===void 0){window.addEventListener(`astro:${t}`,()=>this.start(),{once:!0});return}try{await Astro[t](async()=>{let e=this.getAttribute(`renderer-url`);try{let[t,{default:n}]=await Promise.all([this.importWithRetry(this.getAttribute(`component-url`)),e?this.importWithRetry(e):Promise.resolve({default:()=>()=>{}})]),r=this.getAttribute(`component-export`)||`default`;if(r.includes(`.`)){this.Component=t;for(let e of r.split(`.`)){if(i.has(e)||!this.Component||typeof this.Component!=`object`&&typeof this.Component!=`function`||!Object.hasOwn(this.Component,e))throw Error(`Invalid component export path: ${r}`);this.Component=this.Component[e]}}else{if(i.has(r))throw Error(`Invalid component export path: ${r}`);this.Component=t[r]}return this.hydrator=n,this.hydrate}catch(e){return this.handleHydrationError(e),()=>{}}},e,this)}catch(e){this.handleHydrationError(e)}}attributeChangedCallback(){this.hydrate()}}r(o,`observedAttributes`,[`props`]),customElements.get(`astro-island`)||customElements.define(`astro-island`,o)}})();</script><astro-island uid="1Xoelr" prefix="r15" component-url="/arcadia-event-catalog/_astro/SearchModal.F78m424F.js" component-export="default" renderer-url="/arcadia-event-catalog/_astro/client.CzAn2KrN.js" props="{&quot;data-astro-cid-b2d5cl7c&quot;:[0,true]}" ssr client="idle" opts="{&quot;name&quot;:&quot;SearchModal&quot;,&quot;value&quot;:true}"></astro-island><script type="module">window.searchModalState={isOpen:!1,isClosing:!1,open:function(){this.isClosing||(this.isOpen=!0,this.render())},toggle:function(){this.isClosing||(this.isOpen=!this.isOpen,this.render())},close:function(){this.isOpen=!1,this.isClosing=!0,this.render(),setTimeout(()=>{this.isClosing=!1},500)},render:function(){let e=new CustomEvent(`searchModalToggle`,{detail:{isOpen:this.isOpen}});window.dispatchEvent(e)}};function e(){let e=document.getElementById(`search-dummy-input`);if(e){let t=e.cloneNode(!0);e.parentNode?.replaceChild(t,e);let n=document.getElementById(`search-dummy-input`);n?.addEventListener(`click`,function(e){e.preventDefault(),this.blur(),window.searchModalState.open()}),n?.addEventListener(`focus`,function(e){e.preventDefault(),this.blur(),window.searchModalState.open()})}}window.addEventListener(`keydown`,e=>{(e.metaKey||e.ctrlKey)&&e.key===`k`&&(e.preventDefault(),window.searchModalState.open())}),window.addEventListener(`searchModalToggle`,e=>{let t=document.getElementById(`eventcatalog-header`),n=document.getElementById(`eventcatalog-vertical-nav`),r=document.querySelectorAll(`aside[class*="fixed"][class*="z-10"]`);e.detail.isOpen?(t&&t.classList.remove(`backdrop-blur-sm`),n&&(n.style.zIndex=`-100`),r.forEach(e=>{e.style.zIndex=`-100`})):(t&&t.classList.add(`backdrop-blur-sm`),n&&(n.style.zIndex=`10`),r.forEach(e=>{e.style.zIndex=`10`}))}),e(),document.addEventListener(`astro:page-load`,e);</script></div><astro-island uid="ZHMA9U" prefix="r13" component-url="/arcadia-event-catalog/_astro/ChatPanelButton.CH3gwcPU.js" component-export="default" renderer-url="/arcadia-event-catalog/_astro/client.CzAn2KrN.js" props="{&quot;configured&quot;:[0,false],&quot;data-astro-cid-vyp7el5t&quot;:[0,true]}" ssr client="idle" opts="{&quot;name&quot;:&quot;ChatPanelButton&quot;,&quot;value&quot;:true}" await-children><button class="flex h-9 shrink-0 items-center justify-center gap-1.5 whitespace-nowrap px-4 rounded-md bg-[rgb(var(--ec-card-bg))] hover:bg-[rgb(var(--ec-content-hover))] ring-1 ring-inset ring-[rgb(var(--ec-page-border))] shadow-xs transition-colors text-sm" aria-label="Open AI Assistant" aria-keyshortcuts="Meta+i Control+i" title="Open Event Catalog Assistant (⌘I)"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-sparkles shrink-0 text-gray-500" aria-hidden="true"><path d="M9.937 15.5A2 2 0 0 0 8.5 14.063l-6.135-1.582a.5.5 0 0 1 0-.962L8.5 9.936A2 2 0 0 0 9.937 8.5l1.582-6.135a.5.5 0 0 1 .963 0L14.063 8.5A2 2 0 0 0 15.5 9.937l6.135 1.581a.5.5 0 0 1 0 .964L15.5 14.063a2 2 0 0 0-1.437 1.437l-1.582 6.135a.5.5 0 0 1-.963 0z"></path><path d="M20 3v4"></path><path d="M22 5h-4"></path><path d="M4 17v2"></path><path d="M5 18H3"></path></svg><span class="font-light text-gray-500">Ask</span></button><style>
+  @keyframes ec-chat-breathe {
+    0%, 100% { transform: scale(1); opacity: .7; }
+    50% { transform: scale(1.06); opacity: 1; }
+  }
+  .ec-chat-surface { font-weight: 400; }
+  .ec-chat-avatar { background: rgb(var(--ec-accent) / .06); animation: ec-chat-breathe 5s ease-in-out infinite; }
+  /* The closed panel stays on the page (off screen): a running animation there still costs every frame */
+  .ec-chat-surface[aria-hidden='true'] .ec-chat-avatar { animation-play-state: paused; }
+  .ec-chat-suggestion { width: fit-content; max-width: 100%; transition: background 180ms, transform 180ms; }
+  .ec-chat-suggestion:hover { transform: translateX(3px); }
+  .ec-chat-message { animation: fadeInUp 280ms ease-out both; }
+  .ec-chat-offline > * { animation: fadeInUp 350ms ease-out both; }
+  .ec-chat-offline > :nth-child(2) { animation-delay: 100ms; }
+  .ec-chat-offline > :nth-child(3) { animation-delay: 220ms; }
+  .ec-chat-offline > :nth-child(4) { animation-delay: 340ms; }
+  /* What the assistant's doing while it works: a card with a sheen passing over it, its steps so far ticked and the
+     one it's on spinning, its words shimmering */
+  @keyframes ec-chat-sheen {
+    from { background-position: 200% 0; }
+    to { background-position: -200% 0; }
+  }
+  @keyframes ec-chat-spin { to { transform: rotate(360deg); } }
+  .ec-chat-activity {
+    position: relative;
+    overflow: hidden;
+    border: 1px solid rgb(var(--ec-accent) / .18);
+    border-radius: 14px;
+    background: rgb(var(--ec-accent) / .03);
+    box-shadow: 0 6px 20px rgb(var(--ec-accent) / .05);
+  }
+  .ec-chat-activity::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background: linear-gradient(110deg, transparent 30%, rgb(var(--ec-accent) / .09) 50%, transparent 70%);
+    background-size: 200% 100%;
+    animation: ec-chat-sheen 2.2s linear infinite;
+  }
+  .ec-chat-activity-now {
+    background: linear-gradient(90deg, rgb(var(--ec-page-text)) 0%, rgb(var(--ec-accent)) 50%, rgb(var(--ec-page-text)) 100%);
+    background-size: 200% 100%;
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    animation: ec-chat-sheen 2.4s linear infinite;
+  }
+  .ec-chat-spinner {
+    width: 12px;
+    height: 12px;
+    flex: none;
+    border-radius: 50%;
+    border: 1.5px solid rgb(var(--ec-accent) / .2);
+    border-top-color: rgb(var(--ec-accent));
+    animation: ec-chat-spin .8s linear infinite;
+  }
+  /* Follow-up questions on their way: pills like theirs, a sheen passing along them */
+  .ec-chat-pending-pill {
+    height: 30px;
+    border-radius: 999px;
+    background: linear-gradient(90deg, rgb(var(--ec-accent) / .05) 25%, rgb(var(--ec-accent) / .14) 50%, rgb(var(--ec-accent) / .05) 75%);
+    background-size: 200% 100%;
+    animation: fadeInUp 300ms ease-out both, ec-chat-sheen 1.6s linear infinite;
+  }
+  .ec-chat-surface[aria-hidden='true'] .ec-chat-activity,
+  .ec-chat-surface[aria-hidden='true'] .ec-chat-activity *,
+  .ec-chat-surface[aria-hidden='true'] .ec-chat-pending-pill { animation-play-state: paused; }
+  .ec-chat-composer {
+    border-radius: 20px;
+    border-color: rgb(var(--ec-accent) / .22);
+    background: rgb(var(--ec-page-bg));
+    box-shadow: 0 0 0 3px rgb(var(--ec-accent) / .04), 0 8px 28px rgb(var(--ec-accent) / .04);
+    transition: border-color 200ms, box-shadow 200ms;
+  }
+  .ec-chat-composer:focus-within { border-color: rgb(var(--ec-accent) / .5); box-shadow: 0 0 0 3px rgb(var(--ec-accent) / .09); }
+  /* What's typed grows the box (up to a point, then scrolls), with what it's based on and Send in a row under it */
+  .ec-chat-composer textarea { display: block; resize: none; min-height: 58px; max-height: 200px; overflow-y: auto; padding: 14px 16px 4px; border-radius: 20px 20px 0 0; }
+  .ec-chat-composer-footer { display: flex; align-items: center; gap: 8px; padding: 2px 8px 8px 16px; }
+  @media (prefers-reduced-motion: reduce) {
+    .ec-chat-surface, .ec-chat-surface *, #eventcatalog-header, #eventcatalog-application {
+      animation: none !important;
+      transition: none !important;
+      scroll-behavior: auto !important;
+    }
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(8px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  @keyframes focusIn {
+    from {
+      box-shadow: 0 0 0 0 rgba(168, 85, 247, 0);
+      border-color: #e5e7eb;
+    }
+    to {
+      box-shadow: 0 0 0 3px rgba(168, 85, 247, 0.15);
+      border-color: #c084fc;
+    }
+  }
+  @keyframes pulse-glow {
+    0%, 100% { box-shadow: 0 0 8px rgba(147, 51, 234, 0.3); }
+    50% { box-shadow: 0 0 16px rgba(147, 51, 234, 0.5); }
+  }
+</style><div aria-hidden="true" class="ec-chat-surface fixed top-0 right-0 h-[100dvh] z-[200] border-l border-[rgb(var(--ec-page-border))] flex flex-col overflow-hidden" style="width:min(400px, 100vw);transform:translateX(100%);transition:transform 420ms cubic-bezier(0.16, 1, 0.3, 1);background:radial-gradient(ellipse 100% 40% at 50% 100%, rgb(var(--ec-accent) / 0.045) 0%, transparent 100%),
+              rgb(var(--ec-page-bg))"><div role="separator" aria-orientation="vertical" aria-label="Resize the assistant" aria-valuemin="360" aria-valuemax="800" aria-valuenow="400" tabindex="0" title="Drag to resize" class="group absolute inset-y-0 left-0 z-10 hidden w-1.5 cursor-col-resize outline-hidden lg:block"><span aria-hidden="true" class="absolute inset-y-0 left-0 w-0.5 transition-colors group-hover:bg-[rgb(var(--ec-accent)/0.6)] group-focus-visible:bg-[rgb(var(--ec-accent))]"></span></div><div class="flex-none shrink-0 border-b border-[rgb(var(--ec-page-border))]"><div class="flex items-center justify-between px-4 py-3"><div class="flex items-center space-x-2"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-sparkles text-[rgb(var(--ec-accent))]"><path d="M9.937 15.5A2 2 0 0 0 8.5 14.063l-6.135-1.582a.5.5 0 0 1 0-.962L8.5 9.936A2 2 0 0 0 9.937 8.5l1.582-6.135a.5.5 0 0 1 .963 0L14.063 8.5A2 2 0 0 0 15.5 9.937l6.135 1.581a.5.5 0 0 1 0 .964L15.5 14.063a2 2 0 0 0-1.437 1.437l-1.582 6.135a.5.5 0 0 1-.963 0z"></path><path d="M20 3v4"></path><path d="M22 5h-4"></path><path d="M4 17v2"></path><path d="M5 18H3"></path></svg><span class="font-medium text-[rgb(var(--ec-header-text))] text-sm">Assistant</span></div><div class="flex items-center space-x-1"><button class="p-2 rounded-lg hover:bg-[rgb(var(--ec-header-border))] text-[rgb(var(--ec-icon-color))] hover:text-[rgb(var(--ec-header-text))] transition-colors" aria-label="Expand to fullscreen" title="Expand"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-maximize2"><polyline points="15 3 21 3 21 9"></polyline><polyline points="9 21 3 21 3 15"></polyline><line x1="21" x2="14" y1="3" y2="10"></line><line x1="3" x2="10" y1="21" y2="14"></line></svg></button><button class="p-2 rounded-lg hover:bg-[rgb(var(--ec-header-border))] text-[rgb(var(--ec-icon-color))] hover:text-[rgb(var(--ec-header-text))] transition-colors" aria-label="Close chat panel"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x"><path d="M18 6 6 18"></path><path d="m6 6 12 12"></path></svg></button></div></div></div><div class="flex-1 flex flex-col min-h-0 relative overflow-hidden"><div class="flex-1 overflow-y-auto px-5 scrollbar-hide"><div class="flex flex-col h-full py-6"><div class="flex-1 flex flex-col items-center justify-center text-center"><div class="relative mb-6"><div class="ec-chat-avatar w-24 h-24 rounded-full flex items-center justify-center"><svg xmlns="http://www.w3.org/2000/svg" width="42" height="42" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-message-square text-[rgb(var(--ec-accent))]"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg></div></div><h2 class="text-lg font-medium text-[rgb(var(--ec-page-text))] mb-1">Good morning</h2><p class="text-sm font-normal text-[rgb(var(--ec-content-text))]">I&#x27;m here to help with your architecture</p></div><div class="flex-none flex flex-col items-start gap-2"><button class="ec-chat-suggestion text-left px-3 py-2 text-xs text-[rgb(var(--ec-page-text-muted))] hover:text-[rgb(var(--ec-page-text))] bg-[rgb(var(--ec-accent)/0.04)] hover:bg-[rgb(var(--ec-accent)/0.09)] rounded-full transition-all duration-200">What domains do we have?</button><button class="ec-chat-suggestion text-left px-3 py-2 text-xs text-[rgb(var(--ec-page-text-muted))] hover:text-[rgb(var(--ec-page-text))] bg-[rgb(var(--ec-accent)/0.04)] hover:bg-[rgb(var(--ec-accent)/0.09)] rounded-full transition-all duration-200">Show me all services</button><button class="ec-chat-suggestion text-left px-3 py-2 text-xs text-[rgb(var(--ec-page-text-muted))] hover:text-[rgb(var(--ec-page-text))] bg-[rgb(var(--ec-accent)/0.04)] hover:bg-[rgb(var(--ec-accent)/0.09)] rounded-full transition-all duration-200">What changed recently?</button><button class="ec-chat-suggestion text-left px-3 py-2 text-xs text-[rgb(var(--ec-page-text-muted))] hover:text-[rgb(var(--ec-page-text))] bg-[rgb(var(--ec-accent)/0.04)] hover:bg-[rgb(var(--ec-accent)/0.09)] rounded-full transition-all duration-200">How does data flow between services?</button></div></div></div><div class="flex-none px-4 py-3"><form><div class="ec-chat-composer relative bg-[rgb(var(--ec-page-bg)/0.5)] backdrop-blur-sm rounded-xl border border-[rgb(var(--ec-accent)/0.3)] focus-within:border-[rgb(var(--ec-accent)/0.5)] focus-within:ring-2 focus-within:ring-[rgb(var(--ec-accent)/0.1)] transition-all"><textarea rows="2" aria-label="Ask AI a question" placeholder="Ask, search, or explain..." class="w-full px-4 bg-transparent text-[rgb(var(--ec-input-text))] placeholder-[rgb(var(--ec-input-placeholder))] focus:outline-hidden text-sm disabled:opacity-50 rounded-xl"></textarea><div class="ec-chat-composer-footer"><div class="min-w-0 flex-1 truncate text-[10px] text-[rgb(var(--ec-page-text-muted))]"><span class="mr-1.5 rounded bg-[rgb(var(--ec-accent)/0.08)] px-1 py-0.5 font-medium text-[rgb(var(--ec-accent))]">AI</span>Explore your catalog with AI</div><div class="flex-none"><button type="submit" disabled="" class="px-3 py-1.5 bg-[rgb(var(--ec-accent))] text-white text-xs font-medium rounded-lg hover:bg-[rgb(var(--ec-accent-hover))] disabled:bg-transparent disabled:text-[rgb(var(--ec-icon-color))] transition-colors" aria-label="Send message">Send</button></div></div></div></form><div class="flex items-center justify-center gap-1.5 mt-2"><span class="text-[10px] text-[rgb(var(--ec-icon-color))]">AI can make mistakes. Verify important info.</span></div></div></div></div><!--astro:end--></astro-island></div><div class="hidden md:block shrink-0 ml-auto" data-astro-cid-vyp7el5t><div class="flex items-center gap-3 justify-end pr-2" data-astro-cid-vyp7el5t><ul class="flex items-center gap-1" data-astro-cid-vyp7el5t><li data-astro-cid-vyp7el5t><astro-island uid="Z1kAps1" prefix="r14" component-url="/arcadia-event-catalog/_astro/ThemeToggle.Dy5NaqG3.js" component-export="default" renderer-url="/arcadia-event-catalog/_astro/client.CzAn2KrN.js" props="{&quot;data-astro-cid-vyp7el5t&quot;:[0,true]}" ssr client="idle" opts="{&quot;name&quot;:&quot;ThemeToggle&quot;,&quot;value&quot;:true}" await-children><button class="p-2 rounded-md text-[rgb(var(--ec-icon-color))] hover:text-[rgb(var(--ec-icon-hover))] hover:bg-[rgb(var(--ec-dropdown-hover))] transition-colors" aria-label="Toggle theme" title="Toggle theme"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-moon w-5 h-5"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"></path></svg></button><!--astro:end--></astro-island></li><li data-astro-cid-vyp7el5t><a href="https://discord.com/invite/3rjaZMmrAm" class="block p-2 rounded-md text-[rgb(var(--ec-icon-color))] hover:text-[rgb(var(--ec-icon-hover))] hover:bg-[rgb(var(--ec-dropdown-hover))] transition-colors" aria-label="Join our Discord community" data-astro-cid-vyp7el5t><span class="block h-5 w-5 bg-current" style="mask: url(&quot;/arcadia-event-catalog/icons/discord.svg&quot;) center / contain no-repeat; -webkit-mask: url(&quot;/arcadia-event-catalog/icons/discord.svg&quot;) center / contain no-repeat;" aria-hidden="true" data-astro-cid-vyp7el5t></span></a></li><li data-astro-cid-vyp7el5t><a href="https://github.com/event-catalog/eventcatalog" class="block p-2 rounded-md text-[rgb(var(--ec-icon-color))] hover:text-[rgb(var(--ec-icon-hover))] hover:bg-[rgb(var(--ec-dropdown-hover))] transition-colors" aria-label="View EventCatalog on GitHub" data-astro-cid-vyp7el5t><span class="block h-5 w-5 bg-current" style="mask: url(&quot;/arcadia-event-catalog/icons/github.svg&quot;) center / contain no-repeat; -webkit-mask: url(&quot;/arcadia-event-catalog/icons/github.svg&quot;) center / contain no-repeat;" aria-hidden="true" data-astro-cid-vyp7el5t></span></a></li></ul></div></div><div class="md:hidden" data-astro-cid-vyp7el5t><button id="menu-toggle" type="button" class="text-[rgb(var(--ec-icon-color))] hover:text-[rgb(var(--ec-icon-hover))] focus:outline-hidden focus:text-[rgb(var(--ec-icon-hover))]" aria-label="Toggle menu" data-astro-cid-vyp7el5t><svg viewBox="0 0 24 24" class="h-6 w-6 fill-current" data-astro-cid-vyp7el5t><path fill-rule="evenodd" d="M4 5h16a1 1 0 0 1 0 2H4a1 1 0 1 1 0-2zm0 6h16a1 1 0 0 1 0 2H4a1 1 0 0 1 0-2zm0 6h16a1 1 0 0 1 0 2H4a1 1 0 0 1 0-2z" data-astro-cid-vyp7el5t></path></svg></button></div></div><div id="mobile-menu" class="md:hidden ec-hidden mt-4" data-astro-cid-vyp7el5t><ul class="flex flex-col space-y-8 my-4 mb-8" data-astro-cid-vyp7el5t><!-- {
+          navItems.map((item) => {
+            const isActive = currentPath.includes(item.href);
+            return (
+              <li class={`font-light ${isActive ? 'font-bold text-primary' : ''}`}>
+                <a href={item.href}>{item.label}</a>
+              </li>
+            );
+          })
+        } --></ul></div></div></nav><div id="eventcatalog-header-spacer" class="h-[60px]" data-astro-cid-vyp7el5t></div><!-- Spacer to prevent content from being hidden under the fixed header --><script type="module">async function e(e){let{callbackUrl:t=window.location.href,prefix:n=`/api/auth`}=e??{},{csrfToken:r}=await(await fetch(`${n}/csrf`)).json(),i=(await(await fetch(`${n}/signout`,{method:`post`,headers:{"Content-Type":`application/x-www-form-urlencoded`,"X-Auth-Return-Redirect":`1`},body:new URLSearchParams({csrfToken:r,callbackUrl:t})})).json()).url??t;window.location.href=i,i.includes(`#`)&&window.location.reload()}function t(){let t=document.getElementById(`eventcatalog-header`);if(!t||t.dataset.initialized===`true`)return;t.dataset.initialized=`true`;let n=document.getElementById(`menu-toggle`),r=document.getElementById(`mobile-menu`);n&&r&&n.addEventListener(`click`,()=>{r.classList.toggle(`ec-hidden`)});let i=document.getElementById(`profile-menu-button`),a=document.getElementById(`profile-dropdown`);i&&a&&(i.addEventListener(`click`,e=>{e.stopPropagation(),a.classList.toggle(`ec-hidden`),i.setAttribute(`aria-expanded`,a.classList.contains(`ec-hidden`)?`false`:`true`)}),document.addEventListener(`click`,e=>{!i.contains(e.target)&&!a.contains(e.target)&&(a.classList.add(`ec-hidden`),i.setAttribute(`aria-expanded`,`false`))}),document.addEventListener(`keydown`,e=>{e.key===`Escape`&&!a.classList.contains(`ec-hidden`)&&(a.classList.add(`ec-hidden`),i.setAttribute(`aria-expanded`,`false`),i.focus())}),document.getElementById(`signout-btn`)?.addEventListener(`click`,async()=>{try{await e()}catch(e){console.error(`Sign out failed:`,e),alert(`Sign out failed. Please check your AUTH_TRUST_HOST configuration if running behind a reverse proxy.`)}}))}t(),document.addEventListener(`astro:page-load`,t);</script></div><div class="app-shell app-shell--with-sidebar"><aside class="flex" id="eventcatalog-vertical-nav"><div data-astro-transition-persist="vertical-nav-rail" id="vertical-nav-rail" data-collapsed="true" class="vertical-nav-rail fixed top-0 left-0 flex flex-col h-screen z-30 transition-[width] duration-200"><a href="/arcadia-event-catalog//" aria-label="Home" class="nav-brand-link flex items-center gap-2.5 px-4 h-[3.75rem] border-b border-[rgb(var(--ec-sidebar-border)/0.7)] flex-shrink-0"><img src="/arcadia-event-catalog/logo.png" alt="EventCatalog" class="w-6 h-6 flex-shrink-0"><span class="nav-brand-text text-[15px] font-semibold text-[rgb(var(--ec-page-text))] tracking-tight">Arcadia Editions</span></a><nav class="flex flex-col flex-1 overflow-y-auto px-3 py-4 gap-1"><a id="/" href="/arcadia-event-catalog//" data-role="vertical-nav-item" aria-label="Home" class="flex items-center gap-3 px-3 py-2.5 rounded-xl border text-[13px] font-medium transition-all duration-150 border-[rgb(var(--ec-accent)/0.2)] bg-[rgb(var(--ec-page-bg)/0.88)] text-[rgb(var(--ec-accent))] shadow-sm" title="Home"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-house h-4 w-4 flex-shrink-0" aria-hidden="true"><path d="M15 21v-8a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v8"></path><path d="M3 10a2 2 0 0 1 .709-1.528l7-5.999a2 2 0 0 1 2.582 0l7 5.999A2 2 0 0 1 21 10v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path></svg><span class="nav-item-label">Home</span></a><hr class="rail-divider my-3 border-t border-[rgb(var(--ec-sidebar-border)/0.7)]"><div class="rail-section-label px-3 pb-1 text-[0.65rem] font-semibold tracking-[0.18em] uppercase text-[rgb(var(--ec-sidebar-text)/0.5)]">Browse</div><a id="/discover" href="/arcadia-event-catalog/discover/domains/" data-role="vertical-nav-item" aria-label="Catalog" class="flex items-center gap-3 px-3 py-2.5 rounded-xl border text-[13px] font-medium transition-all duration-150 border-transparent text-[rgb(var(--ec-sidebar-text))] hover:border-[rgb(var(--ec-sidebar-border)/0.65)] hover:bg-[rgb(var(--ec-page-bg)/0.78)] hover:text-[rgb(var(--ec-page-text))]" title="Catalog"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-table-properties h-4 w-4 flex-shrink-0" aria-hidden="true"><path d="M15 3v18"></path><rect width="18" height="18" x="3" y="3" rx="2"></rect><path d="M21 9H3"></path><path d="M21 15H3"></path></svg><span class="nav-item-label">Catalog</span></a><a id="/schemas/explorer" href="/arcadia-event-catalog/schemas/explorer/" data-role="vertical-nav-item" aria-label="Schemas &amp; APIs" class="flex items-center gap-3 px-3 py-2.5 rounded-xl border text-[13px] font-medium transition-all duration-150 border-transparent text-[rgb(var(--ec-sidebar-text))] hover:border-[rgb(var(--ec-sidebar-border)/0.65)] hover:bg-[rgb(var(--ec-page-bg)/0.78)] hover:text-[rgb(var(--ec-page-text))]" title="Schemas &amp; APIs"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-file-code h-4 w-4 flex-shrink-0" aria-hidden="true"><path d="M10 12.5 8 15l2 2.5"></path><path d="m14 12.5 2 2.5-2 2.5"></path><path d="M14 2v4a2 2 0 0 0 2 2h4"></path><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7z"></path></svg><span class="nav-item-label">Schemas &amp; APIs</span></a><hr class="rail-divider my-3 border-t border-[rgb(var(--ec-sidebar-border)/0.7)]"><div class="rail-section-label px-3 pb-1 text-[0.65rem] font-semibold tracking-[0.18em] uppercase text-[rgb(var(--ec-sidebar-text)/0.5)]">Organization</div><a id="/directory/teams" href="/arcadia-event-catalog/directory/teams/" data-role="vertical-nav-item" aria-label="Teams" class="flex items-center gap-3 px-3 py-2.5 rounded-xl border text-[13px] font-medium transition-all duration-150 border-transparent text-[rgb(var(--ec-sidebar-text))] hover:border-[rgb(var(--ec-sidebar-border)/0.65)] hover:bg-[rgb(var(--ec-page-bg)/0.78)] hover:text-[rgb(var(--ec-page-text))]" title="Teams"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-users-round h-4 w-4 flex-shrink-0" aria-hidden="true"><path d="M18 21a8 8 0 0 0-16 0"></path><circle cx="10" cy="8" r="5"></circle><path d="M22 20c0-3.37-2-6.5-4-8a5 5 0 0 0-.45-8.3"></path></svg><span class="nav-item-label">Teams</span></a><a id="/directory/users" href="/arcadia-event-catalog/directory/users/" data-role="vertical-nav-item" aria-label="Users" class="flex items-center gap-3 px-3 py-2.5 rounded-xl border text-[13px] font-medium transition-all duration-150 border-transparent text-[rgb(var(--ec-sidebar-text))] hover:border-[rgb(var(--ec-sidebar-border)/0.65)] hover:bg-[rgb(var(--ec-page-bg)/0.78)] hover:text-[rgb(var(--ec-page-text))]" title="Users"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-user-round h-4 w-4 flex-shrink-0" aria-hidden="true"><circle cx="12" cy="8" r="5"></circle><path d="M20 21a8 8 0 0 0-16 0"></path></svg><span class="nav-item-label">Users</span></a><div class="mt-auto pt-3"><hr class="rail-divider mb-3 border-t border-[rgb(var(--ec-sidebar-border)/0.7)]"><a id="/settings/general" href="/arcadia-event-catalog/settings/general/" data-role="vertical-nav-item" aria-label="Settings" class="flex items-center gap-3 px-3 py-2.5 rounded-xl border text-[13px] font-medium transition-all duration-150 border-transparent text-[rgb(var(--ec-sidebar-text))] hover:border-[rgb(var(--ec-sidebar-border)/0.65)] hover:bg-[rgb(var(--ec-page-bg)/0.78)] hover:text-[rgb(var(--ec-page-text))]" title="Settings"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-settings h-4 w-4 flex-shrink-0" aria-hidden="true"><path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"></path><circle cx="12" cy="12" r="3"></circle></svg><span class="nav-item-label">Settings</span></a></div></nav><div class="border-t border-[rgb(var(--ec-sidebar-border)/0.7)] px-3 py-3 flex-shrink-0"><button id="vertical-nav-toggle" type="button" aria-label="Collapse sidebar" class="flex items-center gap-3 px-3 py-2.5 rounded-xl border border-transparent text-[13px] font-medium text-[rgb(var(--ec-sidebar-text))] hover:border-[rgb(var(--ec-sidebar-border)/0.65)] hover:bg-[rgb(var(--ec-page-bg)/0.78)] hover:text-[rgb(var(--ec-page-text))] transition-all duration-150 w-full"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-panel-left-close h-4 w-4 flex-shrink-0 nav-collapse-icon" aria-hidden="true"><rect width="18" height="18" x="3" y="3" rx="2"></rect><path d="M9 3v18"></path><path d="m16 15-3-3 3-3"></path></svg><span class="nav-label">Collapse</span></button></div></div></aside><aside id="sidebar" class="sidebar-panel sidebar-transition"><div class="h-full min-h-0"><meta name="astro-view-transitions-enabled" content="true"><meta name="astro-view-transitions-fallback" content="animate"><script type="module" src="/arcadia-event-catalog/_astro/ClientRouter.astro_astro_type_script_index_0_lang.CKq7OsbX.js"></script><script>(function(){let e=async e=>{await(await e())()};(self.Astro||(self.Astro={})).only=e,window.dispatchEvent(new Event(`astro:only`))})();</script><astro-island uid="2dRfXA" component-url="/arcadia-event-catalog/_astro/index.DUD9AqsX.js" component-export="default" renderer-url="/arcadia-event-catalog/_astro/client.CzAn2KrN.js" props="{&quot;snapshot&quot;:[0,{&quot;url&quot;:[0,&quot;/docs/services/modulith.application.arcadia-editions-modulith/0.0.0/resources/&quot;],&quot;stack&quot;:[1,[[0,{&quot;key&quot;:[0,null],&quot;entries&quot;:[1,[[0,&quot;list:top-level-domains&quot;],[0,&quot;list:all&quot;]]],&quot;title&quot;:[0,&quot;Documentation&quot;]}],[0,{&quot;key&quot;:[0,&quot;service:modulith.application.arcadia-editions-modulith:0.0.0&quot;],&quot;entries&quot;:[1,[[0,{&quot;type&quot;:[0,&quot;group&quot;],&quot;title&quot;:[0,&quot;Quick Reference&quot;],&quot;icon&quot;:[0,&quot;BookOpen&quot;],&quot;pages&quot;:[1,[[0,{&quot;type&quot;:[0,&quot;item&quot;],&quot;title&quot;:[0,&quot;Overview&quot;],&quot;href&quot;:[0,&quot;/arcadia-event-catalog/docs/services/modulith.application.arcadia-editions-modulith/0.0.0/&quot;]}],[0,{&quot;type&quot;:[0,&quot;item&quot;],&quot;title&quot;:[0,&quot;Resources&quot;],&quot;href&quot;:[0,&quot;/arcadia-event-catalog/docs/services/modulith.application.arcadia-editions-modulith/0.0.0/resources/&quot;]}]]]}],[0,{&quot;type&quot;:[0,&quot;group&quot;],&quot;title&quot;:[0,&quot;Architecture&quot;],&quot;icon&quot;:[0,&quot;Workflow&quot;],&quot;pages&quot;:[1,[[0,{&quot;type&quot;:[0,&quot;item&quot;],&quot;title&quot;:[0,&quot;Diagram&quot;],&quot;href&quot;:[0,&quot;/arcadia-event-catalog/visualiser/services/modulith.application.arcadia-editions-modulith/0.0.0/&quot;]}],[0,{&quot;type&quot;:[0,&quot;item&quot;],&quot;title&quot;:[0,&quot;Entity Diagram&quot;],&quot;href&quot;:[0,&quot;/arcadia-event-catalog/visualiser/services/modulith.application.arcadia-editions-modulith/0.0.0/entity-map/&quot;]}]]]}],[0,{&quot;type&quot;:[0,&quot;group&quot;],&quot;title&quot;:[0,&quot;API &amp; Contracts&quot;],&quot;icon&quot;:[0,&quot;FileCode&quot;],&quot;pages&quot;:[1,[[0,{&quot;type&quot;:[0,&quot;item&quot;],&quot;title&quot;:[0,&quot;OpenAPI&quot;],&quot;leftIcon&quot;:[0,&quot;/icons/openapi-black.svg&quot;],&quot;href&quot;:[0,&quot;/arcadia-event-catalog/docs/services/modulith.application.arcadia-editions-modulith/0.0.0/spec/orders-checkout-openapi/&quot;]}]]]}],[0,{&quot;type&quot;:[0,&quot;group&quot;],&quot;title&quot;:[0,&quot;Entities&quot;],&quot;icon&quot;:[0,&quot;Box&quot;],&quot;pages&quot;:[1,[[0,{&quot;type&quot;:[0,&quot;item&quot;],&quot;title&quot;:[0,&quot;StockReservation&quot;],&quot;href&quot;:[0,&quot;/arcadia-event-catalog/docs/entities/modulith.application.arcadia-editions-modulith.stock-reservation/0.0.0/&quot;]}],[0,{&quot;type&quot;:[0,&quot;item&quot;],&quot;title&quot;:[0,&quot;InventoryPosition&quot;],&quot;href&quot;:[0,&quot;/arcadia-event-catalog/docs/entities/modulith.application.arcadia-editions-modulith.inventory-position/0.0.0/&quot;]}],[0,{&quot;type&quot;:[0,&quot;item&quot;],&quot;title&quot;:[0,&quot;Product&quot;],&quot;href&quot;:[0,&quot;/arcadia-event-catalog/docs/entities/modulith.application.arcadia-editions-modulith.product/0.0.0/&quot;]}],[0,{&quot;type&quot;:[0,&quot;item&quot;],&quot;title&quot;:[0,&quot;Fulfillment&quot;],&quot;href&quot;:[0,&quot;/arcadia-event-catalog/docs/entities/modulith.application.arcadia-editions-modulith.fulfillment/0.0.0/&quot;]}],[0,{&quot;type&quot;:[0,&quot;item&quot;],&quot;title&quot;:[0,&quot;ShippingAddress&quot;],&quot;href&quot;:[0,&quot;/arcadia-event-catalog/docs/entities/modulith.application.arcadia-editions-modulith.shipping-address/0.0.0/&quot;]}],[0,{&quot;type&quot;:[0,&quot;item&quot;],&quot;title&quot;:[0,&quot;FulfillmentItem&quot;],&quot;href&quot;:[0,&quot;/arcadia-event-catalog/docs/entities/modulith.application.arcadia-editions-modulith.fulfillment-item/0.0.0/&quot;]}],[0,{&quot;type&quot;:[0,&quot;item&quot;],&quot;title&quot;:[0,&quot;Notification&quot;],&quot;href&quot;:[0,&quot;/arcadia-event-catalog/docs/entities/modulith.application.arcadia-editions-modulith.notification/0.0.0/&quot;]}],[0,{&quot;type&quot;:[0,&quot;item&quot;],&quot;title&quot;:[0,&quot;Order&quot;],&quot;href&quot;:[0,&quot;/arcadia-event-catalog/docs/entities/modulith.application.arcadia-editions-modulith.order/0.0.0/&quot;]}],[0,{&quot;type&quot;:[0,&quot;item&quot;],&quot;title&quot;:[0,&quot;OrderItem&quot;],&quot;href&quot;:[0,&quot;/arcadia-event-catalog/docs/entities/modulith.application.arcadia-editions-modulith.order-item/0.0.0/&quot;]}],[0,{&quot;type&quot;:[0,&quot;item&quot;],&quot;title&quot;:[0,&quot;Payment&quot;],&quot;href&quot;:[0,&quot;/arcadia-event-catalog/docs/entities/modulith.application.arcadia-editions-modulith.payment/0.0.0/&quot;]}]]]}]]],&quot;title&quot;:[0,&quot;Arcadia Editions Modulith&quot;],&quot;badge&quot;:[0,&quot;Service&quot;]}]]],&quot;data&quot;:[0,{&quot;roots&quot;:[1,[[0,&quot;list:top-level-domains&quot;],[0,&quot;list:all&quot;]]],&quot;nodes&quot;:[0,{&quot;service:modulith.application.arcadia-editions-modulith:0.0.0&quot;:[0,{&quot;type&quot;:[0,&quot;item&quot;],&quot;title&quot;:[0,&quot;Arcadia Editions Modulith&quot;],&quot;badge&quot;:[0,&quot;Service&quot;],&quot;summary&quot;:[0,&quot;Owns the in-process ZDL domain models for the modular monolith&quot;],&quot;icon&quot;:[0,&quot;Server&quot;],&quot;pages&quot;:[1,[[0,{&quot;type&quot;:[0,&quot;group&quot;],&quot;title&quot;:[0,&quot;Quick Reference&quot;],&quot;icon&quot;:[0,&quot;BookOpen&quot;],&quot;pages&quot;:[1,[[0,{&quot;type&quot;:[0,&quot;item&quot;],&quot;title&quot;:[0,&quot;Overview&quot;],&quot;href&quot;:[0,&quot;/arcadia-event-catalog/docs/services/modulith.application.arcadia-editions-modulith/0.0.0/&quot;]}],[0,{&quot;type&quot;:[0,&quot;item&quot;],&quot;title&quot;:[0,&quot;Resources&quot;],&quot;href&quot;:[0,&quot;/arcadia-event-catalog/docs/services/modulith.application.arcadia-editions-modulith/0.0.0/resources/&quot;]}]]]}],[0,{&quot;type&quot;:[0,&quot;group&quot;],&quot;title&quot;:[0,&quot;Architecture&quot;],&quot;icon&quot;:[0,&quot;Workflow&quot;],&quot;pages&quot;:[1,[[0,{&quot;type&quot;:[0,&quot;item&quot;],&quot;title&quot;:[0,&quot;Diagram&quot;],&quot;href&quot;:[0,&quot;/arcadia-event-catalog/visualiser/services/modulith.application.arcadia-editions-modulith/0.0.0/&quot;]}],[0,{&quot;type&quot;:[0,&quot;item&quot;],&quot;title&quot;:[0,&quot;Entity Diagram&quot;],&quot;href&quot;:[0,&quot;/arcadia-event-catalog/visualiser/services/modulith.application.arcadia-editions-modulith/0.0.0/entity-map/&quot;]}]]]}],[0,{&quot;type&quot;:[0,&quot;group&quot;],&quot;title&quot;:[0,&quot;API &amp; Contracts&quot;],&quot;icon&quot;:[0,&quot;FileCode&quot;],&quot;pages&quot;:[1,[[0,{&quot;type&quot;:[0,&quot;item&quot;],&quot;title&quot;:[0,&quot;OpenAPI&quot;],&quot;leftIcon&quot;:[0,&quot;/icons/openapi-black.svg&quot;],&quot;href&quot;:[0,&quot;/arcadia-event-catalog/docs/services/modulith.application.arcadia-editions-modulith/0.0.0/spec/orders-checkout-openapi/&quot;]}]]]}],[0,{&quot;type&quot;:[0,&quot;group&quot;],&quot;title&quot;:[0,&quot;Entities&quot;],&quot;icon&quot;:[0,&quot;Box&quot;],&quot;pages&quot;:[1,[[0,{&quot;type&quot;:[0,&quot;item&quot;],&quot;title&quot;:[0,&quot;StockReservation&quot;],&quot;href&quot;:[0,&quot;/arcadia-event-catalog/docs/entities/modulith.application.arcadia-editions-modulith.stock-reservation/0.0.0/&quot;]}],[0,{&quot;type&quot;:[0,&quot;item&quot;],&quot;title&quot;:[0,&quot;InventoryPosition&quot;],&quot;href&quot;:[0,&quot;/arcadia-event-catalog/docs/entities/modulith.application.arcadia-editions-modulith.inventory-position/0.0.0/&quot;]}],[0,{&quot;type&quot;:[0,&quot;item&quot;],&quot;title&quot;:[0,&quot;Product&quot;],&quot;href&quot;:[0,&quot;/arcadia-event-catalog/docs/entities/modulith.application.arcadia-editions-modulith.product/0.0.0/&quot;]}],[0,{&quot;type&quot;:[0,&quot;item&quot;],&quot;title&quot;:[0,&quot;Fulfillment&quot;],&quot;href&quot;:[0,&quot;/arcadia-event-catalog/docs/entities/modulith.application.arcadia-editions-modulith.fulfillment/0.0.0/&quot;]}],[0,{&quot;type&quot;:[0,&quot;item&quot;],&quot;title&quot;:[0,&quot;ShippingAddress&quot;],&quot;href&quot;:[0,&quot;/arcadia-event-catalog/docs/entities/modulith.application.arcadia-editions-modulith.shipping-address/0.0.0/&quot;]}],[0,{&quot;type&quot;:[0,&quot;item&quot;],&quot;title&quot;:[0,&quot;FulfillmentItem&quot;],&quot;href&quot;:[0,&quot;/arcadia-event-catalog/docs/entities/modulith.application.arcadia-editions-modulith.fulfillment-item/0.0.0/&quot;]}],[0,{&quot;type&quot;:[0,&quot;item&quot;],&quot;title&quot;:[0,&quot;Notification&quot;],&quot;href&quot;:[0,&quot;/arcadia-event-catalog/docs/entities/modulith.application.arcadia-editions-modulith.notification/0.0.0/&quot;]}],[0,{&quot;type&quot;:[0,&quot;item&quot;],&quot;title&quot;:[0,&quot;Order&quot;],&quot;href&quot;:[0,&quot;/arcadia-event-catalog/docs/entities/modulith.application.arcadia-editions-modulith.order/0.0.0/&quot;]}],[0,{&quot;type&quot;:[0,&quot;item&quot;],&quot;title&quot;:[0,&quot;OrderItem&quot;],&quot;href&quot;:[0,&quot;/arcadia-event-catalog/docs/entities/modulith.application.arcadia-editions-modulith.order-item/0.0.0/&quot;]}],[0,{&quot;type&quot;:[0,&quot;item&quot;],&quot;title&quot;:[0,&quot;Payment&quot;],&quot;href&quot;:[0,&quot;/arcadia-event-catalog/docs/entities/modulith.application.arcadia-editions-modulith.payment/0.0.0/&quot;]}]]]}]]]}]}]}]}]}" ssr client="only" opts="{&quot;name&quot;:&quot;NestedSideBar&quot;,&quot;value&quot;:&quot;react&quot;}" await-children><aside class="flex h-full min-h-0 w-full flex-1 flex-col bg-[rgb(var(--ec-rail-bg))] font-sans"><div class="flex h-[60px] items-center px-4 bg-[rgb(var(--ec-rail-bg)/0.98)] backdrop-blur-sm border-b border-[rgb(var(--ec-content-border))] sticky top-0 z-10"><button class="flex items-center gap-2 w-full px-2 py-1.5 -mx-2 rounded-md transition-colors hover:bg-[rgb(var(--ec-content-hover))] cursor-pointer"><span class="flex items-center justify-center w-5 h-5 text-[rgb(var(--ec-icon-color))] transition-all group-hover:-translate-x-0.5"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-left w-4 h-4"><path d="m15 18-6-6 6-6"></path></svg></span><span class="text-[0.65rem] font-semibold uppercase tracking-[0.18em] text-[rgb(var(--ec-sidebar-text))] truncate">Arcadia Editions Modulith</span><span class="ml-auto px-2 py-0.5 text-[8px] font-semibold uppercase tracking-wide rounded bg-[rgb(var(--ec-badge-service-bg))] text-[rgb(var(--ec-badge-service-text))]">Service</span></button></div><nav class="min-h-0 flex-1 overflow-y-auto overflow-x-hidden p-4 px-2" style="scrollbar-width:thin;scrollbar-color:rgb(var(--ec-content-border)) transparent"><div class="mb-4 last:mb-1"><button type="button" class="group flex items-center w-full rounded-md text-left transition-colors gap-2 px-2 py-1.5 cursor-pointer hover:bg-[rgb(var(--ec-content-hover))]"><span class="flex items-center justify-center w-5 h-5 flex-shrink-0 rounded bg-[rgb(var(--ec-group-icon-bg))] text-[rgb(var(--ec-group-icon-text))]"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-book-open w-3 h-3"><path d="M12 7v14"></path><path d="M3 18a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h5a4 4 0 0 1 4 4 4 4 0 0 1 4-4h5a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1h-6a3 3 0 0 0-3 3 3 3 0 0 0-3-3z"></path></svg></span><span class="text-[12px] font-semibold tracking-tight text-[rgb(var(--ec-content-text))] truncate">Quick Reference</span><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-down ml-auto w-4 h-4 flex-shrink-0 text-[rgb(var(--ec-icon-color))] transition-transform"><path d="m6 9 6 6 6-6"></path></svg></button><div class="flex flex-col gap-px mt-0.5 border-l border-[rgb(var(--ec-content-border))] ml-[18px] pl-2"><a href="/arcadia-event-catalog/docs/services/modulith.application.arcadia-editions-modulith/0.0.0/" title="Overview" class="group flex items-center justify-between w-full px-2 py-1.5 rounded-md cursor-pointer text-left transition-colors hover:bg-[rgb(var(--ec-content-hover))] active:bg-[rgb(var(--ec-content-hover))]"><div class="flex items-center gap-2.5 min-w-0 flex-1 "><span class="text-[12px] truncate text-[rgb(var(--ec-content-text-secondary))] group-hover:text-[rgb(var(--ec-content-text))]">Overview</span></div><div class="flex items-center gap-1 flex-shrink-0"></div></a><a href="/arcadia-event-catalog/docs/services/modulith.application.arcadia-editions-modulith/0.0.0/resources/" title="Resources" aria-current="page" data-active="true" class="group flex items-center justify-between w-full px-2 py-1.5 rounded-md cursor-pointer text-left transition-colors hover:bg-[rgb(var(--ec-content-hover))] active:bg-[rgb(var(--ec-content-hover))] bg-[rgb(var(--ec-rail-active-bg))] hover:bg-[rgb(var(--ec-rail-active-bg))]"><div class="flex items-center gap-2.5 min-w-0 flex-1 "><span class="text-[12px] truncate text-[rgb(var(--ec-accent-text))] font-medium">Resources</span></div><div class="flex items-center gap-1 flex-shrink-0"></div></a></div></div><div class="mb-4 last:mb-1"><button type="button" class="group flex items-center w-full rounded-md text-left transition-colors gap-2 px-2 py-1.5 cursor-pointer hover:bg-[rgb(var(--ec-content-hover))]"><span class="flex items-center justify-center w-5 h-5 flex-shrink-0 rounded bg-[rgb(var(--ec-group-icon-bg))] text-[rgb(var(--ec-group-icon-text))]"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-workflow w-3 h-3"><rect width="8" height="8" x="3" y="3" rx="2"></rect><path d="M7 11v4a2 2 0 0 0 2 2h4"></path><rect width="8" height="8" x="13" y="13" rx="2"></rect></svg></span><span class="text-[12px] font-semibold tracking-tight text-[rgb(var(--ec-content-text))] truncate">Architecture</span><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-down ml-auto w-4 h-4 flex-shrink-0 text-[rgb(var(--ec-icon-color))] transition-transform"><path d="m6 9 6 6 6-6"></path></svg></button><div class="flex flex-col gap-px mt-0.5 border-l border-[rgb(var(--ec-content-border))] ml-[18px] pl-2"><a href="/arcadia-event-catalog/visualiser/services/modulith.application.arcadia-editions-modulith/0.0.0/" title="Diagram" class="group flex items-center justify-between w-full px-2 py-1.5 rounded-md cursor-pointer text-left transition-colors hover:bg-[rgb(var(--ec-content-hover))] active:bg-[rgb(var(--ec-content-hover))]"><div class="flex items-center gap-2.5 min-w-0 flex-1 "><span class="text-[12px] truncate text-[rgb(var(--ec-content-text-secondary))] group-hover:text-[rgb(var(--ec-content-text))]">Diagram</span></div><div class="flex items-center gap-1 flex-shrink-0"></div></a><a href="/arcadia-event-catalog/visualiser/services/modulith.application.arcadia-editions-modulith/0.0.0/entity-map/" title="Entity Diagram" class="group flex items-center justify-between w-full px-2 py-1.5 rounded-md cursor-pointer text-left transition-colors hover:bg-[rgb(var(--ec-content-hover))] active:bg-[rgb(var(--ec-content-hover))]"><div class="flex items-center gap-2.5 min-w-0 flex-1 "><span class="text-[12px] truncate text-[rgb(var(--ec-content-text-secondary))] group-hover:text-[rgb(var(--ec-content-text))]">Entity Diagram</span></div><div class="flex items-center gap-1 flex-shrink-0"></div></a></div></div><div class="mb-4 last:mb-1"><button type="button" class="group flex items-center w-full rounded-md text-left transition-colors gap-2 px-2 py-1.5 cursor-pointer hover:bg-[rgb(var(--ec-content-hover))]"><span class="flex items-center justify-center w-5 h-5 flex-shrink-0 rounded bg-[rgb(var(--ec-group-icon-bg))] text-[rgb(var(--ec-group-icon-text))]"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-file-code w-3 h-3"><path d="M10 12.5 8 15l2 2.5"></path><path d="m14 12.5 2 2.5-2 2.5"></path><path d="M14 2v4a2 2 0 0 0 2 2h4"></path><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7z"></path></svg></span><span class="text-[12px] font-semibold tracking-tight text-[rgb(var(--ec-content-text))] truncate">API &amp; Contracts</span><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-down ml-auto w-4 h-4 flex-shrink-0 text-[rgb(var(--ec-icon-color))] transition-transform"><path d="m6 9 6 6 6-6"></path></svg></button><div class="flex flex-col gap-px mt-0.5 border-l border-[rgb(var(--ec-content-border))] ml-[18px] pl-2"><a href="/arcadia-event-catalog/docs/services/modulith.application.arcadia-editions-modulith/0.0.0/spec/orders-checkout-openapi/" title="OpenAPI" class="group flex items-center justify-between w-full px-2 py-1.5 rounded-md cursor-pointer text-left transition-colors hover:bg-[rgb(var(--ec-content-hover))] active:bg-[rgb(var(--ec-content-hover))]"><div class="flex items-center gap-2.5 min-w-0 flex-1 "><img src="/arcadia-event-catalog/icons/openapi-black.svg" alt="" loading="lazy" class="w-4 h-4 flex-shrink-0"/><span class="text-[12px] truncate text-[rgb(var(--ec-content-text-secondary))] group-hover:text-[rgb(var(--ec-content-text))]">OpenAPI</span></div><div class="flex items-center gap-1 flex-shrink-0"></div></a></div></div><div class="mb-4 last:mb-1"><button type="button" class="group flex items-center w-full rounded-md text-left transition-colors gap-2 px-2 py-1.5 cursor-pointer hover:bg-[rgb(var(--ec-content-hover))]"><span class="flex items-center justify-center w-5 h-5 flex-shrink-0 rounded bg-[rgb(var(--ec-group-icon-bg))] text-[rgb(var(--ec-group-icon-text))]"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-box w-3 h-3"><path d="M21 8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16Z"></path><path d="m3.3 7 8.7 5 8.7-5"></path><path d="M12 22V12"></path></svg></span><span class="text-[12px] font-semibold tracking-tight text-[rgb(var(--ec-content-text))] truncate">Entities</span><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-down ml-auto w-4 h-4 flex-shrink-0 text-[rgb(var(--ec-icon-color))] transition-transform -rotate-90"><path d="m6 9 6 6 6-6"></path></svg></button></div></nav><style>
+                @keyframes slideInRight {
+                    from { opacity: 0; transform: translateX(40px); }
+                    to { opacity: 1; transform: translateX(0); }
+                }
+                @keyframes slideInLeft {
+                    from { opacity: 0; transform: translateX(-40px); }
+                    to { opacity: 1; transform: translateX(0); }
+                }
+                .animate-slide-in-right {
+                    animation: slideInRight 200ms ease-out forwards;
+                }
+                .animate-slide-in-left {
+                    animation: slideInLeft 200ms ease-out forwards;
+                }
+            </style></aside><template data-astro-template="fallback"><aside class="flex h-full min-h-0 w-full flex-1 flex-col bg-[rgb(var(--ec-rail-bg))] font-sans"><div class="flex h-[60px] items-center px-4 bg-[rgb(var(--ec-rail-bg)/0.98)] backdrop-blur-sm border-b border-[rgb(var(--ec-content-border))] sticky top-0 z-10"><button class="flex items-center gap-2 w-full px-2 py-1.5 -mx-2 rounded-md transition-colors hover:bg-[rgb(var(--ec-content-hover))] cursor-pointer"><span class="flex items-center justify-center w-5 h-5 text-[rgb(var(--ec-icon-color))] transition-all group-hover:-translate-x-0.5"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-left w-4 h-4"><path d="m15 18-6-6 6-6"></path></svg></span><span class="text-[0.65rem] font-semibold uppercase tracking-[0.18em] text-[rgb(var(--ec-sidebar-text))] truncate">Arcadia Editions Modulith</span><span class="ml-auto px-2 py-0.5 text-[8px] font-semibold uppercase tracking-wide rounded bg-[rgb(var(--ec-badge-service-bg))] text-[rgb(var(--ec-badge-service-text))]">Service</span></button></div><nav class="min-h-0 flex-1 overflow-y-auto overflow-x-hidden p-4 px-2" style="scrollbar-width:thin;scrollbar-color:rgb(var(--ec-content-border)) transparent"><div class="mb-4 last:mb-1"><button type="button" class="group flex items-center w-full rounded-md text-left transition-colors gap-2 px-2 py-1.5 cursor-pointer hover:bg-[rgb(var(--ec-content-hover))]"><span class="flex items-center justify-center w-5 h-5 flex-shrink-0 rounded bg-[rgb(var(--ec-group-icon-bg))] text-[rgb(var(--ec-group-icon-text))]"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-book-open w-3 h-3"><path d="M12 7v14"></path><path d="M3 18a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h5a4 4 0 0 1 4 4 4 4 0 0 1 4-4h5a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1h-6a3 3 0 0 0-3 3 3 3 0 0 0-3-3z"></path></svg></span><span class="text-[12px] font-semibold tracking-tight text-[rgb(var(--ec-content-text))] truncate">Quick Reference</span><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-down ml-auto w-4 h-4 flex-shrink-0 text-[rgb(var(--ec-icon-color))] transition-transform"><path d="m6 9 6 6 6-6"></path></svg></button><div class="flex flex-col gap-px mt-0.5 border-l border-[rgb(var(--ec-content-border))] ml-[18px] pl-2"><a href="/arcadia-event-catalog/docs/services/modulith.application.arcadia-editions-modulith/0.0.0/" title="Overview" class="group flex items-center justify-between w-full px-2 py-1.5 rounded-md cursor-pointer text-left transition-colors hover:bg-[rgb(var(--ec-content-hover))] active:bg-[rgb(var(--ec-content-hover))]"><div class="flex items-center gap-2.5 min-w-0 flex-1 "><span class="text-[12px] truncate text-[rgb(var(--ec-content-text-secondary))] group-hover:text-[rgb(var(--ec-content-text))]">Overview</span></div><div class="flex items-center gap-1 flex-shrink-0"></div></a><a href="/arcadia-event-catalog/docs/services/modulith.application.arcadia-editions-modulith/0.0.0/resources/" title="Resources" aria-current="page" data-active="true" class="group flex items-center justify-between w-full px-2 py-1.5 rounded-md cursor-pointer text-left transition-colors hover:bg-[rgb(var(--ec-content-hover))] active:bg-[rgb(var(--ec-content-hover))] bg-[rgb(var(--ec-rail-active-bg))] hover:bg-[rgb(var(--ec-rail-active-bg))]"><div class="flex items-center gap-2.5 min-w-0 flex-1 "><span class="text-[12px] truncate text-[rgb(var(--ec-accent-text))] font-medium">Resources</span></div><div class="flex items-center gap-1 flex-shrink-0"></div></a></div></div><div class="mb-4 last:mb-1"><button type="button" class="group flex items-center w-full rounded-md text-left transition-colors gap-2 px-2 py-1.5 cursor-pointer hover:bg-[rgb(var(--ec-content-hover))]"><span class="flex items-center justify-center w-5 h-5 flex-shrink-0 rounded bg-[rgb(var(--ec-group-icon-bg))] text-[rgb(var(--ec-group-icon-text))]"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-workflow w-3 h-3"><rect width="8" height="8" x="3" y="3" rx="2"></rect><path d="M7 11v4a2 2 0 0 0 2 2h4"></path><rect width="8" height="8" x="13" y="13" rx="2"></rect></svg></span><span class="text-[12px] font-semibold tracking-tight text-[rgb(var(--ec-content-text))] truncate">Architecture</span><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-down ml-auto w-4 h-4 flex-shrink-0 text-[rgb(var(--ec-icon-color))] transition-transform"><path d="m6 9 6 6 6-6"></path></svg></button><div class="flex flex-col gap-px mt-0.5 border-l border-[rgb(var(--ec-content-border))] ml-[18px] pl-2"><a href="/arcadia-event-catalog/visualiser/services/modulith.application.arcadia-editions-modulith/0.0.0/" title="Diagram" class="group flex items-center justify-between w-full px-2 py-1.5 rounded-md cursor-pointer text-left transition-colors hover:bg-[rgb(var(--ec-content-hover))] active:bg-[rgb(var(--ec-content-hover))]"><div class="flex items-center gap-2.5 min-w-0 flex-1 "><span class="text-[12px] truncate text-[rgb(var(--ec-content-text-secondary))] group-hover:text-[rgb(var(--ec-content-text))]">Diagram</span></div><div class="flex items-center gap-1 flex-shrink-0"></div></a><a href="/arcadia-event-catalog/visualiser/services/modulith.application.arcadia-editions-modulith/0.0.0/entity-map/" title="Entity Diagram" class="group flex items-center justify-between w-full px-2 py-1.5 rounded-md cursor-pointer text-left transition-colors hover:bg-[rgb(var(--ec-content-hover))] active:bg-[rgb(var(--ec-content-hover))]"><div class="flex items-center gap-2.5 min-w-0 flex-1 "><span class="text-[12px] truncate text-[rgb(var(--ec-content-text-secondary))] group-hover:text-[rgb(var(--ec-content-text))]">Entity Diagram</span></div><div class="flex items-center gap-1 flex-shrink-0"></div></a></div></div><div class="mb-4 last:mb-1"><button type="button" class="group flex items-center w-full rounded-md text-left transition-colors gap-2 px-2 py-1.5 cursor-pointer hover:bg-[rgb(var(--ec-content-hover))]"><span class="flex items-center justify-center w-5 h-5 flex-shrink-0 rounded bg-[rgb(var(--ec-group-icon-bg))] text-[rgb(var(--ec-group-icon-text))]"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-file-code w-3 h-3"><path d="M10 12.5 8 15l2 2.5"></path><path d="m14 12.5 2 2.5-2 2.5"></path><path d="M14 2v4a2 2 0 0 0 2 2h4"></path><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7z"></path></svg></span><span class="text-[12px] font-semibold tracking-tight text-[rgb(var(--ec-content-text))] truncate">API &amp; Contracts</span><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-down ml-auto w-4 h-4 flex-shrink-0 text-[rgb(var(--ec-icon-color))] transition-transform"><path d="m6 9 6 6 6-6"></path></svg></button><div class="flex flex-col gap-px mt-0.5 border-l border-[rgb(var(--ec-content-border))] ml-[18px] pl-2"><a href="/arcadia-event-catalog/docs/services/modulith.application.arcadia-editions-modulith/0.0.0/spec/orders-checkout-openapi/" title="OpenAPI" class="group flex items-center justify-between w-full px-2 py-1.5 rounded-md cursor-pointer text-left transition-colors hover:bg-[rgb(var(--ec-content-hover))] active:bg-[rgb(var(--ec-content-hover))]"><div class="flex items-center gap-2.5 min-w-0 flex-1 "><img src="/arcadia-event-catalog/icons/openapi-black.svg" alt="" loading="lazy" class="w-4 h-4 flex-shrink-0"/><span class="text-[12px] truncate text-[rgb(var(--ec-content-text-secondary))] group-hover:text-[rgb(var(--ec-content-text))]">OpenAPI</span></div><div class="flex items-center gap-1 flex-shrink-0"></div></a></div></div><div class="mb-4 last:mb-1"><button type="button" class="group flex items-center w-full rounded-md text-left transition-colors gap-2 px-2 py-1.5 cursor-pointer hover:bg-[rgb(var(--ec-content-hover))]"><span class="flex items-center justify-center w-5 h-5 flex-shrink-0 rounded bg-[rgb(var(--ec-group-icon-bg))] text-[rgb(var(--ec-group-icon-text))]"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-box w-3 h-3"><path d="M21 8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16Z"></path><path d="m3.3 7 8.7 5 8.7-5"></path><path d="M12 22V12"></path></svg></span><span class="text-[12px] font-semibold tracking-tight text-[rgb(var(--ec-content-text))] truncate">Entities</span><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-down ml-auto w-4 h-4 flex-shrink-0 text-[rgb(var(--ec-icon-color))] transition-transform -rotate-90"><path d="m6 9 6 6 6-6"></path></svg></button></div></nav><style>
+                @keyframes slideInRight {
+                    from { opacity: 0; transform: translateX(40px); }
+                    to { opacity: 1; transform: translateX(0); }
+                }
+                @keyframes slideInLeft {
+                    from { opacity: 0; transform: translateX(-40px); }
+                    to { opacity: 1; transform: translateX(0); }
+                }
+                .animate-slide-in-right {
+                    animation: slideInRight 200ms ease-out forwards;
+                }
+                .animate-slide-in-left {
+                    animation: slideInLeft 200ms ease-out forwards;
+                }
+            </style></aside></template><!--astro:end--></astro-island></div><div id="sidebar-resize-handle" class="sidebar-resize-handle" role="separator" aria-label="Resize sidebar" aria-orientation="vertical" aria-valuemin="224" aria-valuemax="576" aria-valuenow="272" tabindex="0"></div></aside><main class="content-panel sidebar-transition w-full bg-[rgb(var(--ec-page-bg))]" id="content"><div class="app-content-wrapper "><main id="resources-page" class="flex h-full min-h-0 flex-col overflow-hidden bg-[rgb(var(--ec-page-bg))]" style="margin-left: calc(var(--ec-app-content-padding-left, 5rem) * -1); margin-right: calc(var(--ec-app-content-padding-right, 5rem) * -1); height: calc(100dvh - 60px);"><astro-island uid="Z2j3WX5" component-url="/arcadia-event-catalog/_astro/ResourcesTable.shZia-zd.js" component-export="ResourcesTable" renderer-url="/arcadia-event-catalog/_astro/client.CzAn2KrN.js" props="{&quot;resources&quot;:[1,[[0,{&quot;collection&quot;:[0,&quot;entities&quot;],&quot;id&quot;:[0,&quot;modulith.application.arcadia-editions-modulith.stock-reservation&quot;],&quot;name&quot;:[0,&quot;StockReservation&quot;],&quot;version&quot;:[0,&quot;0.0.0&quot;],&quot;summary&quot;:[0],&quot;icon&quot;:[0],&quot;href&quot;:[0,&quot;/arcadia-event-catalog/docs/entities/modulith.application.arcadia-editions-modulith.stock-reservation/0.0.0/&quot;],&quot;visualiserHref&quot;:[0],&quot;schemaHref&quot;:[0],&quot;favorite&quot;:[0,{&quot;nodeKey&quot;:[0,&quot;entity:modulith.application.arcadia-editions-modulith.stock-reservation:0.0.0&quot;],&quot;badge&quot;:[0,&quot;Entity&quot;]}],&quot;relationship&quot;:[0,&quot;owns&quot;]}],[0,{&quot;collection&quot;:[0,&quot;entities&quot;],&quot;id&quot;:[0,&quot;modulith.application.arcadia-editions-modulith.inventory-position&quot;],&quot;name&quot;:[0,&quot;InventoryPosition&quot;],&quot;version&quot;:[0,&quot;0.0.0&quot;],&quot;summary&quot;:[0],&quot;icon&quot;:[0],&quot;href&quot;:[0,&quot;/arcadia-event-catalog/docs/entities/modulith.application.arcadia-editions-modulith.inventory-position/0.0.0/&quot;],&quot;visualiserHref&quot;:[0],&quot;schemaHref&quot;:[0],&quot;favorite&quot;:[0,{&quot;nodeKey&quot;:[0,&quot;entity:modulith.application.arcadia-editions-modulith.inventory-position:0.0.0&quot;],&quot;badge&quot;:[0,&quot;Entity&quot;]}],&quot;relationship&quot;:[0,&quot;owns&quot;]}],[0,{&quot;collection&quot;:[0,&quot;entities&quot;],&quot;id&quot;:[0,&quot;modulith.application.arcadia-editions-modulith.product&quot;],&quot;name&quot;:[0,&quot;Product&quot;],&quot;version&quot;:[0,&quot;0.0.0&quot;],&quot;summary&quot;:[0],&quot;icon&quot;:[0],&quot;href&quot;:[0,&quot;/arcadia-event-catalog/docs/entities/modulith.application.arcadia-editions-modulith.product/0.0.0/&quot;],&quot;visualiserHref&quot;:[0],&quot;schemaHref&quot;:[0],&quot;favorite&quot;:[0,{&quot;nodeKey&quot;:[0,&quot;entity:modulith.application.arcadia-editions-modulith.product:0.0.0&quot;],&quot;badge&quot;:[0,&quot;Entity&quot;]}],&quot;relationship&quot;:[0,&quot;owns&quot;]}],[0,{&quot;collection&quot;:[0,&quot;entities&quot;],&quot;id&quot;:[0,&quot;modulith.application.arcadia-editions-modulith.fulfillment&quot;],&quot;name&quot;:[0,&quot;Fulfillment&quot;],&quot;version&quot;:[0,&quot;0.0.0&quot;],&quot;summary&quot;:[0],&quot;icon&quot;:[0],&quot;href&quot;:[0,&quot;/arcadia-event-catalog/docs/entities/modulith.application.arcadia-editions-modulith.fulfillment/0.0.0/&quot;],&quot;visualiserHref&quot;:[0],&quot;schemaHref&quot;:[0],&quot;favorite&quot;:[0,{&quot;nodeKey&quot;:[0,&quot;entity:modulith.application.arcadia-editions-modulith.fulfillment:0.0.0&quot;],&quot;badge&quot;:[0,&quot;Entity&quot;]}],&quot;relationship&quot;:[0,&quot;owns&quot;]}],[0,{&quot;collection&quot;:[0,&quot;entities&quot;],&quot;id&quot;:[0,&quot;modulith.application.arcadia-editions-modulith.shipping-address&quot;],&quot;name&quot;:[0,&quot;ShippingAddress&quot;],&quot;version&quot;:[0,&quot;0.0.0&quot;],&quot;summary&quot;:[0],&quot;icon&quot;:[0],&quot;href&quot;:[0,&quot;/arcadia-event-catalog/docs/entities/modulith.application.arcadia-editions-modulith.shipping-address/0.0.0/&quot;],&quot;visualiserHref&quot;:[0],&quot;schemaHref&quot;:[0],&quot;favorite&quot;:[0,{&quot;nodeKey&quot;:[0,&quot;entity:modulith.application.arcadia-editions-modulith.shipping-address:0.0.0&quot;],&quot;badge&quot;:[0,&quot;Entity&quot;]}],&quot;relationship&quot;:[0,&quot;owns&quot;]}],[0,{&quot;collection&quot;:[0,&quot;entities&quot;],&quot;id&quot;:[0,&quot;modulith.application.arcadia-editions-modulith.fulfillment-item&quot;],&quot;name&quot;:[0,&quot;FulfillmentItem&quot;],&quot;version&quot;:[0,&quot;0.0.0&quot;],&quot;summary&quot;:[0],&quot;icon&quot;:[0],&quot;href&quot;:[0,&quot;/arcadia-event-catalog/docs/entities/modulith.application.arcadia-editions-modulith.fulfillment-item/0.0.0/&quot;],&quot;visualiserHref&quot;:[0],&quot;schemaHref&quot;:[0],&quot;favorite&quot;:[0,{&quot;nodeKey&quot;:[0,&quot;entity:modulith.application.arcadia-editions-modulith.fulfillment-item:0.0.0&quot;],&quot;badge&quot;:[0,&quot;Entity&quot;]}],&quot;relationship&quot;:[0,&quot;owns&quot;]}],[0,{&quot;collection&quot;:[0,&quot;entities&quot;],&quot;id&quot;:[0,&quot;modulith.application.arcadia-editions-modulith.notification&quot;],&quot;name&quot;:[0,&quot;Notification&quot;],&quot;version&quot;:[0,&quot;0.0.0&quot;],&quot;summary&quot;:[0],&quot;icon&quot;:[0],&quot;href&quot;:[0,&quot;/arcadia-event-catalog/docs/entities/modulith.application.arcadia-editions-modulith.notification/0.0.0/&quot;],&quot;visualiserHref&quot;:[0],&quot;schemaHref&quot;:[0],&quot;favorite&quot;:[0,{&quot;nodeKey&quot;:[0,&quot;entity:modulith.application.arcadia-editions-modulith.notification:0.0.0&quot;],&quot;badge&quot;:[0,&quot;Entity&quot;]}],&quot;relationship&quot;:[0,&quot;owns&quot;]}],[0,{&quot;collection&quot;:[0,&quot;entities&quot;],&quot;id&quot;:[0,&quot;modulith.application.arcadia-editions-modulith.order&quot;],&quot;name&quot;:[0,&quot;Order&quot;],&quot;version&quot;:[0,&quot;0.0.0&quot;],&quot;summary&quot;:[0],&quot;icon&quot;:[0],&quot;href&quot;:[0,&quot;/arcadia-event-catalog/docs/entities/modulith.application.arcadia-editions-modulith.order/0.0.0/&quot;],&quot;visualiserHref&quot;:[0],&quot;schemaHref&quot;:[0],&quot;favorite&quot;:[0,{&quot;nodeKey&quot;:[0,&quot;entity:modulith.application.arcadia-editions-modulith.order:0.0.0&quot;],&quot;badge&quot;:[0,&quot;Entity&quot;]}],&quot;relationship&quot;:[0,&quot;owns&quot;]}],[0,{&quot;collection&quot;:[0,&quot;entities&quot;],&quot;id&quot;:[0,&quot;modulith.application.arcadia-editions-modulith.order-item&quot;],&quot;name&quot;:[0,&quot;OrderItem&quot;],&quot;version&quot;:[0,&quot;0.0.0&quot;],&quot;summary&quot;:[0],&quot;icon&quot;:[0],&quot;href&quot;:[0,&quot;/arcadia-event-catalog/docs/entities/modulith.application.arcadia-editions-modulith.order-item/0.0.0/&quot;],&quot;visualiserHref&quot;:[0],&quot;schemaHref&quot;:[0],&quot;favorite&quot;:[0,{&quot;nodeKey&quot;:[0,&quot;entity:modulith.application.arcadia-editions-modulith.order-item:0.0.0&quot;],&quot;badge&quot;:[0,&quot;Entity&quot;]}],&quot;relationship&quot;:[0,&quot;owns&quot;]}],[0,{&quot;collection&quot;:[0,&quot;entities&quot;],&quot;id&quot;:[0,&quot;modulith.application.arcadia-editions-modulith.payment&quot;],&quot;name&quot;:[0,&quot;Payment&quot;],&quot;version&quot;:[0,&quot;0.0.0&quot;],&quot;summary&quot;:[0],&quot;icon&quot;:[0],&quot;href&quot;:[0,&quot;/arcadia-event-catalog/docs/entities/modulith.application.arcadia-editions-modulith.payment/0.0.0/&quot;],&quot;visualiserHref&quot;:[0],&quot;schemaHref&quot;:[0],&quot;favorite&quot;:[0,{&quot;nodeKey&quot;:[0,&quot;entity:modulith.application.arcadia-editions-modulith.payment:0.0.0&quot;],&quot;badge&quot;:[0,&quot;Entity&quot;]}],&quot;relationship&quot;:[0,&quot;owns&quot;]}]]],&quot;title&quot;:[0,&quot;Arcadia Editions Modulith Resources&quot;],&quot;description&quot;:[0,&quot;10 resources mapped to Arcadia Editions Modulith.&quot;]}" ssr client="only" opts="{&quot;name&quot;:&quot;ResourcesTable&quot;,&quot;value&quot;:&quot;react&quot;}"></astro-island></main></div></main></div></main></body></html><meta name="astro-view-transitions-enabled" content="true"><meta name="astro-view-transitions-fallback" content="animate"><script>(function(){const clientNavigationItems = [{"id":"/","href":"/arcadia-event-catalog//","matchId":"/"},{"id":"/discover","href":"/arcadia-event-catalog/discover/domains/","matchId":"/discover"},{"id":"/schemas/explorer","href":"/arcadia-event-catalog/schemas/explorer/","matchId":"/schemas/explorer"},{"id":"/directory/teams","href":"/arcadia-event-catalog/directory/teams/","matchId":"/directory/teams"},{"id":"/directory/users","href":"/arcadia-event-catalog/directory/users/","matchId":"/directory/users"},{"id":"/settings/general","href":"/arcadia-event-catalog/settings/general/","matchId":"/settings/general"}];
+const verticalNavAutoCollapsePaths = ["/arcadia-event-catalog/discover","/arcadia-event-catalog/docs"];
+
+  const VERTICAL_NAV_STORAGE_KEY = 'eventcatalog-vertical-nav-collapsed';
+  const SIDEBAR_WIDTH_STORAGE_KEY = 'eventcatalog-sidebar-width:v1';
+  const MINIMUM_SIDEBAR_WIDTH = 224;
+  const MAXIMUM_SIDEBAR_WIDTH = 576;
+  const ACTIVE_NAV_CLASSES = [
+    'border-[rgb(var(--ec-accent)/0.2)]',
+    'bg-[rgb(var(--ec-page-bg)/0.88)]',
+    'text-[rgb(var(--ec-accent))]',
+    'shadow-sm',
+  ];
+  const INACTIVE_NAV_CLASSES = [
+    'border-transparent',
+    'text-[rgb(var(--ec-sidebar-text))]',
+    'hover:border-[rgb(var(--ec-sidebar-border)/0.65)]',
+    'hover:bg-[rgb(var(--ec-page-bg)/0.78)]',
+    'hover:text-[rgb(var(--ec-page-text))]',
+  ];
+
+  const isNavItemCurrent = (item, pathname) => {
+    const matchId = item?.matchId || item?.id;
+
+    if (matchId === '/') {
+      const targetPath = item?.href ? new URL(item.href, window.location.origin).pathname : '/';
+      return (
+        pathname === targetPath ||
+        (pathname.includes('/docs') && !pathname.includes('/docs/custom')) ||
+        pathname.includes('/visualiser') ||
+        (pathname.includes('/schemas') && !pathname.includes('/schemas/explorer') && !pathname.includes('/schemas/fields'))
+      );
+    }
+
+    if (matchId === '/schemas/explorer') {
+      return pathname.includes('/schemas/explorer') && !pathname.includes('/schemas/fields');
+    }
+
+    if (matchId === '/schemas/fields') {
+      return pathname.includes('/schemas/fields');
+    }
+
+    if (matchId === '/discover') {
+      return pathname.endsWith('/discover') || pathname.includes('/discover/');
+    }
+
+    if (matchId === '/studio') {
+      return pathname.includes('/studio');
+    }
+
+    if (matchId === '/docs/custom') {
+      return pathname.includes('/docs/custom');
+    }
+
+    if (matchId === '/settings/general') {
+      return pathname.includes('/settings');
+    }
+
+    const matches = Array.isArray(item?.match) ? item.match : item?.match ? [item.match] : [];
+    if (matches.length > 0) {
+      return matches.some((match) => {
+        if (/^https?:\/\//.test(match)) return false;
+
+        return pathname === match || pathname.startsWith(match);
+      });
+    }
+
+    if (item?.href) {
+      if (/^https?:\/\//.test(item.href)) return false;
+
+      const targetPath = new URL(item.href, window.location.origin).pathname;
+      return pathname === targetPath;
+    }
+
+    return false;
+  };
+
+  const syncNavItemStates = () => {
+    const pathname = window.location.pathname;
+    const navItems = document.querySelectorAll('[data-role="vertical-nav-item"]');
+
+    navItems.forEach((item) => {
+      const id = item.getAttribute('id');
+      const navigationItem = clientNavigationItems.find((navItem) => navItem.id === id);
+      const isCurrent = navigationItem ? isNavItemCurrent(navigationItem, pathname) : false;
+
+      if (isCurrent) {
+        item.classList.remove(...INACTIVE_NAV_CLASSES);
+        item.classList.add(...ACTIVE_NAV_CLASSES);
+      } else {
+        item.classList.remove(...ACTIVE_NAV_CLASSES);
+        item.classList.add(...INACTIVE_NAV_CLASSES);
+      }
+    });
+  };
+
+  const routeShouldAutoCollapseVerticalNav = (pathname) =>
+    verticalNavAutoCollapsePaths.some((path) => pathname === path || pathname.startsWith(`${path}/`));
+
+  const persistVerticalNavCollapsedState = (collapsed) => {
+    try {
+      localStorage.setItem(VERTICAL_NAV_STORAGE_KEY, String(collapsed));
+    } catch (error) {}
+  };
+
+  const getPersistedVerticalNavCollapsedState = () => {
+    if (routeShouldAutoCollapseVerticalNav(window.location.pathname)) {
+      persistVerticalNavCollapsedState(true);
+      return true;
+    }
+
+    try {
+      const savedState = localStorage.getItem(VERTICAL_NAV_STORAGE_KEY);
+      return savedState === null ? true : savedState === 'true';
+    } catch (error) {
+      return true;
+    }
+  };
+
+  const applyPersistedVerticalNavState = () => {
+    const isCollapsed = getPersistedVerticalNavCollapsedState();
+    document.documentElement.setAttribute('data-vertical-nav-collapsed', isCollapsed ? 'true' : 'false');
+
+    const verticalNavRail = document.getElementById('vertical-nav-rail');
+    if (verticalNavRail) {
+      verticalNavRail.setAttribute('data-collapsed', isCollapsed ? 'true' : 'false');
+    }
+  };
+
+  const clampSidebarWidth = (width) => Math.min(MAXIMUM_SIDEBAR_WIDTH, Math.max(MINIMUM_SIDEBAR_WIDTH, width));
+
+  const applySidebarWidth = (width) => {
+    const nextWidth = clampSidebarWidth(width);
+    document.documentElement.style.setProperty('--ec-sidebar-panel-width', `${nextWidth}px`);
+
+    const resizeHandle = document.getElementById('sidebar-resize-handle');
+    resizeHandle?.setAttribute('aria-valuenow', String(Math.round(nextWidth)));
+    return nextWidth;
+  };
+
+  const persistSidebarWidth = (width) => {
+    try {
+      localStorage.setItem(SIDEBAR_WIDTH_STORAGE_KEY, String(Math.round(width)));
+    } catch (error) {}
+  };
+
+  const getPersistedSidebarWidth = () => {
+    try {
+      const savedWidth = Number(localStorage.getItem(SIDEBAR_WIDTH_STORAGE_KEY));
+      return Number.isFinite(savedWidth) && savedWidth > 0 ? clampSidebarWidth(savedWidth) : null;
+    } catch (error) {
+      return null;
+    }
+  };
+
+  const setupSidebarResize = () => {
+    const sidebar = document.getElementById('sidebar');
+    const resizeHandle = document.getElementById('sidebar-resize-handle');
+    if (!sidebar || !resizeHandle) return;
+
+    const persistedWidth = getPersistedSidebarWidth();
+    const currentWidth = persistedWidth ?? sidebar.getBoundingClientRect().width;
+    applySidebarWidth(currentWidth);
+
+    resizeHandle.onpointerdown = (event) => {
+      if (event.button !== 0) return;
+
+      const startX = event.clientX;
+      const startWidth = sidebar.getBoundingClientRect().width;
+      document.body.classList.add('sidebar-is-resizing');
+      resizeHandle.setPointerCapture(event.pointerId);
+
+      resizeHandle.onpointermove = (moveEvent) => {
+        applySidebarWidth(startWidth + moveEvent.clientX - startX);
+      };
+
+      const finishResize = (upEvent) => {
+        const finalWidth = applySidebarWidth(startWidth + upEvent.clientX - startX);
+        persistSidebarWidth(finalWidth);
+        document.body.classList.remove('sidebar-is-resizing');
+        if (resizeHandle.hasPointerCapture(upEvent.pointerId)) {
+          resizeHandle.releasePointerCapture(upEvent.pointerId);
+        }
+        resizeHandle.onpointermove = null;
+        resizeHandle.onpointerup = null;
+        resizeHandle.onpointercancel = null;
+      };
+
+      resizeHandle.onpointerup = finishResize;
+      resizeHandle.onpointercancel = finishResize;
+    };
+
+    resizeHandle.onkeydown = (event) => {
+      if (event.key !== 'ArrowLeft' && event.key !== 'ArrowRight') return;
+
+      event.preventDefault();
+      const direction = event.key === 'ArrowLeft' ? -1 : 1;
+      const step = event.shiftKey ? 32 : 16;
+      const nextWidth = applySidebarWidth(sidebar.getBoundingClientRect().width + direction * step);
+      persistSidebarWidth(nextWidth);
+    };
+  };
+
+  // Apply immediately when this script executes so transitions don't briefly re-open the rail.
+  applyPersistedVerticalNavState();
+
+  // Re-apply around Astro view transitions because the incoming document can momentarily drop the root attribute.
+  document.addEventListener('astro:before-preparation', applyPersistedVerticalNavState);
+  document.addEventListener('astro:after-swap', applyPersistedVerticalNavState);
+
+  // Listen for Astro transititions
+  document.addEventListener('astro:page-load', () => {
+    applyPersistedVerticalNavState();
+    document.dispatchEvent(new CustomEvent('contentLoaded'));
+  });
+
+  // Listen for DOM loaded
+  document.addEventListener('DOMContentLoaded', () => {
+    applyPersistedVerticalNavState();
+    document.dispatchEvent(new CustomEvent('contentLoaded'));
+  });
+
+  document.addEventListener('contentLoaded', () => {
+    // Users can add ?embed=true to the URL to hide the navigation
+    const urlSearchParams = new URLSearchParams(window.location.search);
+    const params = Object.fromEntries(urlSearchParams.entries());
+    const embeded = params.embed === 'true' ? true : false;
+    document.documentElement.setAttribute('data-embedded', embeded ? 'true' : 'false');
+    const content = document.getElementById('content');
+    const shell = document.querySelector('.app-shell');
+    const app = document.getElementById('eventcatalog-application');
+    const verticalNavRail = document.getElementById('vertical-nav-rail');
+    const verticalNavToggle = document.getElementById('vertical-nav-toggle');
+    const navToggleLabel = verticalNavToggle?.querySelector('.nav-label');
+    const collapseIcon = verticalNavToggle?.querySelector('.nav-collapse-icon');
+
+    const setVerticalNavCollapsedState = (collapsed) => {
+      if (!app || !verticalNavRail || !verticalNavToggle || !navToggleLabel) return;
+      const railTextElements = verticalNavRail.querySelectorAll(
+        '.nav-brand-text, .nav-item-label, .rail-section-label, .nav-count-pill, .nav-label'
+      );
+
+      document.documentElement.setAttribute('data-vertical-nav-collapsed', collapsed ? 'true' : 'false');
+      verticalNavRail.setAttribute('data-collapsed', collapsed ? 'true' : 'false');
+      verticalNavToggle.setAttribute('aria-label', collapsed ? 'Expand sidebar' : 'Collapse sidebar');
+      verticalNavToggle.setAttribute('aria-expanded', collapsed ? 'false' : 'true');
+      navToggleLabel.textContent = collapsed ? 'Expand' : 'Collapse';
+      railTextElements.forEach((element) => {
+        if (collapsed) {
+          element.setAttribute('hidden', '');
+        } else {
+          element.removeAttribute('hidden');
+        }
+      });
+
+      if (collapseIcon) {
+        collapseIcon.setAttribute('title', collapsed ? 'Expand sidebar' : 'Collapse sidebar');
+      }
+    };
+
+    if (embeded) {
+      const elementsToHide = [
+        'eventcatalog-vertical-nav',
+        'eventcatalog-header',
+        'eventcatalog-header-spacer',
+        'sidebar',
+        'visualiser-footer',
+        // /discover page elements
+        'discover-collection-tabs',
+        'discover-title',
+      ];
+
+      elementsToHide.forEach((id) => {
+        const element = document.getElementById(id);
+        if (element) element.style.display = 'none';
+      });
+
+      document.body.style.overflow = '';
+      app.style.overflow = '';
+      if (shell) shell.style.marginLeft = '0';
+      return;
+    }
+
+    if (shell) {
+      shell.style.marginLeft = '';
+    }
+
+    setVerticalNavCollapsedState(getPersistedVerticalNavCollapsedState());
+    setupSidebarResize();
+
+    syncNavItemStates();
+
+    if (verticalNavToggle) {
+      verticalNavToggle.onclick = () => {
+        const isCollapsed = verticalNavRail?.getAttribute('data-collapsed') === 'true';
+        const nextState = !isCollapsed;
+
+        setVerticalNavCollapsedState(nextState);
+        persistVerticalNavCollapsedState(nextState);
+      };
+    }
+  });
+})();</script>

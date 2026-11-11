@@ -1,0 +1,25 @@
+%% EventCatalog Mermaid Diagram
+%% Resource: services/catalog.catalog-management.catalog-products (v0.0.0)
+%% Level: L3 full (services, messages and channels)
+%% Generated: 2026-11-11T08:56:41.507Z
+
+flowchart LR
+
+    %% Style definitions
+    classDef services fill:#ec4899,stroke:#be185d,color:#fff
+    classDef events fill:#f97316,stroke:#c2410c,color:#fff
+    classDef focused stroke-width:4px
+
+    %% Nodes
+    catalog_catalog_management_catalog_products_0_0_0[["Catalog Products (0.0.0)"]]:::services
+    catalog_catalog_management_catalog_products_product_published_event_v1_0_1_0>"product-published-event-v1 (0.1.0)"]:::events
+    catalog_catalog_management_catalog_products_product_retired_event_v1_0_1_0>"product-retired-event-v1 (0.1.0)"]:::events
+
+    %% Edges
+    catalog_catalog_management_catalog_products_0_0_0 -->|"publishes event"| catalog_catalog_management_catalog_products_product_published_event_v1_0_1_0
+    catalog_catalog_management_catalog_products_product_published_event_v1_0_1_0 -->|"routes to"| catalog_catalog_management_catalog_products_product_published_event_v1_0_1_0
+    catalog_catalog_management_catalog_products_0_0_0 -->|"publishes event"| catalog_catalog_management_catalog_products_product_retired_event_v1_0_1_0
+    catalog_catalog_management_catalog_products_product_retired_event_v1_0_1_0 -->|"routes to"| catalog_catalog_management_catalog_products_product_retired_event_v1_0_1_0
+
+    %% Boundaries and highlights
+    class catalog_catalog_management_catalog_products_0_0_0 focused
