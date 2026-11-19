@@ -1,0 +1,61 @@
+---
+id: "modulith.application.arcadia-editions-modulith.order"
+name: "Order"
+version: "0.0.0"
+aggregateRoot: true
+identifier: "orderId"
+properties:
+- name: "orderId"
+  type: "String"
+  required: true
+- name: "status"
+  type: "OrderStatus"
+  required: true
+  references: "OrderStatus"
+  enum:
+  - "CREATED"
+  - "CONFIRMED"
+  - "CANCELLED"
+- name: "customerId"
+  type: "String"
+  required: true
+  description: "Customer snapshot taken at checkout (there is no customers bounded\
+    \ context yet)."
+- name: "customerEmail"
+  type: "String"
+  required: true
+- name: "paymentMethodId"
+  type: "String"
+  required: true
+- name: "items"
+  type: "OrderItem"
+  required: true
+  references: "OrderItem"
+- name: "shippingAddress"
+  type: "ShippingAddress"
+  required: true
+  references: "ShippingAddress"
+- name: "totalAmount"
+  type: "BigDecimal"
+  required: true
+- name: "currency"
+  type: "String"
+  required: true
+- name: "createdAt"
+  type: "Instant"
+- name: "confirmedAt"
+  type: "Instant"
+- name: "cancelledAt"
+  type: "Instant"
+- name: "cancellationReason"
+  type: "String"
+services:
+- "modulith.application.arcadia-editions-modulith-0.0.0"
+domains:
+- "modulith.application-0.0.1"
+---
+## Overview### Entity Properties
+
+<EntityPropertiesTable />## Relationships
+
+This entity includes references to related entities captured in the generated frontmatter properties.

@@ -1,7 +1,7 @@
 ---
 id: "modulith.application.arcadia-editions-modulith.payment"
 name: "Payment"
-version: "0.0.0"
+version: "0.10.3"
 aggregateRoot: true
 identifier: "orderId"
 properties:
@@ -37,6 +37,7 @@ properties:
   - "CAPTURED"
   - "CAPTURE_FAILED"
   - "VOIDED"
+  - "VOID_FAILED"
 - name: "providerReference"
   type: "String"
 - name: "attemptCount"
@@ -52,10 +53,12 @@ properties:
   type: "Instant"
 - name: "voidedAt"
   type: "Instant"
+- name: "voidFailedAt"
+  type: "Instant"
 - name: "failureReason"
   type: "String"
 services:
-- "modulith.application.arcadia-editions-modulith-0.0.0"
+- "modulith.application.arcadia-editions-modulith-0.10.3"
 domains:
 - "modulith.application-0.0.1"
 ---
