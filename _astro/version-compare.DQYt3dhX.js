@@ -1,0 +1,1 @@
+import{i as e}from"./rolldown-runtime.COiEfhsA.js";import{t}from"./semver.D5z4OHXw.js";var n=e(t(),1),r=/^[vV]?\d+(?:\.\d+){0,2}$/;function i(e){if(!e)return;let t=(0,n.valid)(e);if(t)return t;if(r.test(e))return(0,n.coerce)(e)??void 0}function a(e,t){let r=i(e),a=i(t);if(r&&a)return(0,n.compare)(r,a)}function o(e,t){let n=a(e,t);return n===void 0?e===t:n===0}export{o as t};

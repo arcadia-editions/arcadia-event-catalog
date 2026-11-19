@@ -1,0 +1,1 @@
+import{t as e}from"./url-builder.CyOTTlym.js";function t(e){return e?e.startsWith(`/`)||e.startsWith(`http://`)||e.startsWith(`https://`):!1}function n(t){return t.startsWith(`http://`)||t.startsWith(`https://`)?t:e(t,!0)}function r(e){return t(e)?e:`/icons/specification.svg`}export{t as n,n as r,r as t};

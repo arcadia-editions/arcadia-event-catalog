@@ -1,0 +1,147 @@
+asyncapi: 3.1.0
+id: urn:com.arcadiaeditions:catalog:inventory:asyncapi
+
+info:
+  title: Arcadia Editions - Catalog Inventory
+  version: "0.1.0"
+  tags:
+  - name: Default
+  - name: Inventory
+  - name: InventoryBackoffice
+
+servers:
+  develop:
+    $ref: https://raw.githubusercontent.com/arcadia-editions/api-contract-commons/refs/heads/main/asyncapi-master.yml#/servers/develop
+
+x-application-bindings:
+  x-principal: catalog_inventory
+  x-clientId: catalog_inventory
+  x-groupId: catalog_inventory
+
+defaultContentType: application/json
+
+channels:
+  stock-released-event-v1:
+    address: catalog-inventory.stock-released.event.avro.v1
+    messages:
+      StockReleasedEvent:
+        $ref: "#/components/messages/StockReleasedEvent"
+    x-traits:
+    - $ref: https://raw.githubusercontent.com/arcadia-editions/api-contract-commons/refs/heads/main/asyncapi-channel-traits.yml#/components/channelTraits/kafkaTopicS
+    - $ref: https://raw.githubusercontent.com/arcadia-editions/api-contract-commons/refs/heads/main/asyncapi-channel-traits.yml#/components/channelTraits/kafkaTopicRetained
+    x-visibility: global
+  stock-reservation-confirmed-event-v1:
+    address: catalog-inventory.stock-reservation-confirmed.event.avro.v1
+    messages:
+      StockReservationConfirmedEvent:
+        $ref: "#/components/messages/StockReservationConfirmedEvent"
+    x-traits:
+    - $ref: https://raw.githubusercontent.com/arcadia-editions/api-contract-commons/refs/heads/main/asyncapi-channel-traits.yml#/components/channelTraits/kafkaTopicS
+    - $ref: https://raw.githubusercontent.com/arcadia-editions/api-contract-commons/refs/heads/main/asyncapi-channel-traits.yml#/components/channelTraits/kafkaTopicRetained
+    x-visibility: global
+  stock-received-event-v1:
+    address: catalog-inventory.stock-received.event.avro.v1
+    messages:
+      StockReceivedEvent:
+        $ref: "#/components/messages/StockReceivedEvent"
+    x-traits:
+    - $ref: https://raw.githubusercontent.com/arcadia-editions/api-contract-commons/refs/heads/main/asyncapi-channel-traits.yml#/components/channelTraits/kafkaTopicS
+    - $ref: https://raw.githubusercontent.com/arcadia-editions/api-contract-commons/refs/heads/main/asyncapi-channel-traits.yml#/components/channelTraits/kafkaTopicRetained
+    x-visibility: global
+  stock-adjusted-event-v1:
+    address: catalog-inventory.stock-adjusted.event.avro.v1
+    messages:
+      StockAdjustedEvent:
+        $ref: "#/components/messages/StockAdjustedEvent"
+    x-traits:
+    - $ref: https://raw.githubusercontent.com/arcadia-editions/api-contract-commons/refs/heads/main/asyncapi-channel-traits.yml#/components/channelTraits/kafkaTopicS
+    - $ref: https://raw.githubusercontent.com/arcadia-editions/api-contract-commons/refs/heads/main/asyncapi-channel-traits.yml#/components/channelTraits/kafkaTopicRetained
+    x-visibility: global
+
+operations:
+  onStockReleased:
+    action: send
+    tags:
+    - name: Inventory
+    channel:
+      $ref: "#/channels/stock-released-event-v1"
+    traits:
+    - $ref: "#/components/operationTraits/clientIdAndPrincipal"
+  onStockReservationConfirmed:
+    action: send
+    tags:
+    - name: Inventory
+    channel:
+      $ref: "#/channels/stock-reservation-confirmed-event-v1"
+    traits:
+    - $ref: "#/components/operationTraits/clientIdAndPrincipal"
+  onStockReceived:
+    action: send
+    tags:
+    - name: InventoryBackoffice
+    channel:
+      $ref: "#/channels/stock-received-event-v1"
+    traits:
+    - $ref: "#/components/operationTraits/clientIdAndPrincipal"
+  onStockAdjusted:
+    action: send
+    tags:
+    - name: InventoryBackoffice
+    channel:
+      $ref: "#/channels/stock-adjusted-event-v1"
+    traits:
+    - $ref: "#/components/operationTraits/clientIdAndPrincipal"
+
+components:
+  messages:
+    StockReleasedEvent:
+      name: StockReleasedEvent
+      title: ""
+      summary: ""
+      traits:
+      - $ref: "#/components/messageTraits/CommonHeaders"
+      payload:
+        schemaFormat: application/vnd.apache.avro+json;version=1.9.0
+        schema:
+          $ref: avro/StockReleased.avsc
+    StockReservationConfirmedEvent:
+      name: StockReservationConfirmedEvent
+      title: ""
+      summary: ""
+      traits:
+      - $ref: "#/components/messageTraits/CommonHeaders"
+      payload:
+        schemaFormat: application/vnd.apache.avro+json;version=1.9.0
+        schema:
+          $ref: avro/StockReservationConfirmed.avsc
+    StockReceivedEvent:
+      name: StockReceivedEvent
+      title: ""
+      summary: ""
+      traits:
+      - $ref: "#/components/messageTraits/CommonHeaders"
+      payload:
+        schemaFormat: application/vnd.apache.avro+json;version=1.9.0
+        schema:
+          $ref: avro/StockReceived.avsc
+    StockAdjustedEvent:
+      name: StockAdjustedEvent
+      title: ""
+      summary: ""
+      traits:
+      - $ref: "#/components/messageTraits/CommonHeaders"
+      payload:
+        schemaFormat: application/vnd.apache.avro+json;version=1.9.0
+        schema:
+          $ref: avro/StockAdjusted.avsc
+  messageTraits:
+    CommonHeaders:
+      $ref: https://raw.githubusercontent.com/arcadia-editions/api-contract-commons/refs/heads/main/asyncapi-message-traits.yml#/components/messageTraits/CommonHeaders
+  operationTraits:
+    clientIdAndPrincipal:
+      bindings:
+        kafka:
+          x-principal:
+            $ref: "#/x-application-bindings/x-principal"
+          x-groupId:
+            $ref: "#/x-application-bindings/x-groupId"

@@ -1,0 +1,119 @@
+asyncapi: 3.1.0
+id: urn:com.arcadiaeditions:fulfillment:shipping:asyncapi
+
+info:
+  title: Arcadia Editions - Fulfillment Shipping
+  version: "0.1.0"
+  tags:
+  - name: Default
+  - name: FulfillmentShipping
+
+servers:
+  develop:
+    $ref: https://raw.githubusercontent.com/arcadia-editions/api-contract-commons/refs/heads/main/asyncapi-master.yml#/servers/develop
+
+x-application-bindings:
+  x-principal: fulfillment_shipping
+  x-clientId: fulfillment_shipping
+  x-groupId: fulfillment_shipping
+
+defaultContentType: application/json
+
+channels:
+  fulfillment-scheduled-event-v1:
+    address: fulfillment-shipping.fulfillment-scheduled.event.avro.v1
+    messages:
+      FulfillmentScheduledEvent:
+        $ref: "#/components/messages/FulfillmentScheduledEvent"
+    x-traits:
+    - $ref: https://raw.githubusercontent.com/arcadia-editions/api-contract-commons/refs/heads/main/asyncapi-channel-traits.yml#/components/channelTraits/kafkaTopicS
+    - $ref: https://raw.githubusercontent.com/arcadia-editions/api-contract-commons/refs/heads/main/asyncapi-channel-traits.yml#/components/channelTraits/kafkaTopicRetained
+    x-visibility: global
+  fulfillment-failed-event-v1:
+    address: fulfillment-shipping.fulfillment-failed.event.avro.v1
+    messages:
+      FulfillmentFailedEvent:
+        $ref: "#/components/messages/FulfillmentFailedEvent"
+    x-traits:
+    - $ref: https://raw.githubusercontent.com/arcadia-editions/api-contract-commons/refs/heads/main/asyncapi-channel-traits.yml#/components/channelTraits/kafkaTopicS
+    - $ref: https://raw.githubusercontent.com/arcadia-editions/api-contract-commons/refs/heads/main/asyncapi-channel-traits.yml#/components/channelTraits/kafkaTopicRetained
+    x-visibility: global
+  fulfillment-ready-to-ship-event-v1:
+    address: fulfillment-shipping.fulfillment-ready-to-ship.event.avro.v1
+    messages:
+      FulfillmentReadyToShipEvent:
+        $ref: "#/components/messages/FulfillmentReadyToShipEvent"
+    x-traits:
+    - $ref: https://raw.githubusercontent.com/arcadia-editions/api-contract-commons/refs/heads/main/asyncapi-channel-traits.yml#/components/channelTraits/kafkaTopicS
+    - $ref: https://raw.githubusercontent.com/arcadia-editions/api-contract-commons/refs/heads/main/asyncapi-channel-traits.yml#/components/channelTraits/kafkaTopicRetained
+    x-visibility: global
+
+operations:
+  onFulfillmentScheduled:
+    action: send
+    tags:
+    - name: FulfillmentShipping
+    channel:
+      $ref: "#/channels/fulfillment-scheduled-event-v1"
+    traits:
+    - $ref: "#/components/operationTraits/clientIdAndPrincipal"
+  onFulfillmentFailed:
+    action: send
+    tags:
+    - name: FulfillmentShipping
+    channel:
+      $ref: "#/channels/fulfillment-failed-event-v1"
+    traits:
+    - $ref: "#/components/operationTraits/clientIdAndPrincipal"
+  onFulfillmentReadyToShip:
+    action: send
+    tags:
+    - name: FulfillmentShipping
+    channel:
+      $ref: "#/channels/fulfillment-ready-to-ship-event-v1"
+    traits:
+    - $ref: "#/components/operationTraits/clientIdAndPrincipal"
+
+components:
+  messages:
+    FulfillmentScheduledEvent:
+      name: FulfillmentScheduledEvent
+      title: ""
+      summary: ""
+      traits:
+      - $ref: "#/components/messageTraits/CommonHeaders"
+      payload:
+        schemaFormat: application/vnd.apache.avro+json;version=1.9.0
+        schema:
+          $ref: avro/FulfillmentScheduled.avsc
+    FulfillmentFailedEvent:
+      name: FulfillmentFailedEvent
+      title: ""
+      summary: ""
+      traits:
+      - $ref: "#/components/messageTraits/CommonHeaders"
+      payload:
+        schemaFormat: application/vnd.apache.avro+json;version=1.9.0
+        schema:
+          $ref: avro/FulfillmentFailed.avsc
+    FulfillmentReadyToShipEvent:
+      name: FulfillmentReadyToShipEvent
+      title: ""
+      summary: ""
+      traits:
+      - $ref: "#/components/messageTraits/CommonHeaders"
+      payload:
+        schemaFormat: application/vnd.apache.avro+json;version=1.9.0
+        schema:
+          $ref: avro/FulfillmentReadyToShip.avsc
+  messageTraits:
+    CommonHeaders:
+      $ref: https://raw.githubusercontent.com/arcadia-editions/api-contract-commons/refs/heads/main/asyncapi-message-traits.yml#/components/messageTraits/CommonHeaders
+  operationTraits:
+    clientIdAndPrincipal:
+      bindings:
+        kafka:
+          x-principal:
+            $ref: "#/x-application-bindings/x-principal"
+          x-groupId:
+            $ref: "#/x-application-bindings/x-groupId"

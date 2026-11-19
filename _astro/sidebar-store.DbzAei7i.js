@@ -1,0 +1,1 @@
+import{t as e}from"./atom.HIphgfyt.js";var t=e(null),n=e=>{t.set(e)};export{t as n,n as t};
