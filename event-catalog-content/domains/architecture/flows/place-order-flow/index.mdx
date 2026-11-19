@@ -8,27 +8,28 @@ summary: "Place Order Flow\n *\n * Covers the full lifecycle of a customer order
   \ drop, inventory\n * is the binding constraint. We hold the item first and charge\
   \ second.\n *\n * Payment runs in two phases. Authorization at checkout places a\
   \ hold on the\n * customer's funds without moving money. Capture happens later,\
-  \ at fulfillment\n * time, when the order is physically ready to ship. If fulfillment\
-  \ fails after\n * authorization but before capture, the hold is voided — no charge\
-  \ ever appears\n * on the customer's statement.\n *\n * Transient payment errors\
-  \ are retried within the reservation window. A hard\n * decline from the processor\
-  \ is not retried — it goes straight to cancellation.\n *\n * Reservation expiry\
-  \ is owned by the Scheduler, not the payment service. If\n * payment is not resolved\
-  \ within ten minutes of the order being created, the\n * Scheduler fires ReservationExpired\
-  \ and the stock is returned to the pool."
+  \ as soon as\n * fulfillment is scheduled (FulfillmentScheduled); the warehouse\
+  \ may mark the\n * order ready to ship only after capture. If fulfillment fails\
+  \ after\n * authorization but before capture, the hold is voided — no charge ever\
+  \ appears\n * on the customer's statement.\n *\n * Transient payment errors are\
+  \ retried a bounded number of times. A hard\n * decline from the processor is not\
+  \ retried — it goes straight to cancellation.\n *\n * Reservation expiry is owned\
+  \ by the Scheduler. If payment has not started ten\n * minutes after the order was\
+  \ created, the stock is returned to the pool. Once\n * payment has started, payment\
+  \ owns the end: at most 3 attempts of at most\n * 30 seconds each, with 5 and 15\
+  \ seconds of backoff between them.\n *\n * Redelivery: every policy is a no-op,\
+  \ with no event, when the aggregate is\n * already in a target state of that command."
 version: "0.0.0"
 steps:
 - id: "zw:architecture/artifact/place-order-flow/zfl-step/flows.PlaceOrderFlow.starts.ReservationExpired"
   type: "actor"
   title: "Reservation Expired"
-  summary: "Scheduled: 10 minutes after OrderCreated and not PaymentAuthorized or\
-    \ PaymentDeclined or PaymentRetryExhausted"
+  summary: "Scheduled: 10 minutes after OrderCreated"
   actor:
     name: "Scheduler"
-    summary: "Scheduled: 10 minutes after OrderCreated and not PaymentAuthorized or\
-      \ PaymentDeclined or PaymentRetryExhausted"
+    summary: "Scheduled: 10 minutes after OrderCreated"
   next_step:
-    id: "zw:architecture/artifact/place-order-flow/zfl-step/flows.PlaceOrderFlow.occurrences.releaseStock%40when%5BPaymentDeclined%2CPaymentRetryExhausted%2CPaymentVoided%2CReservationExpired%5D:service"
+    id: "zw:architecture/artifact/place-order-flow/zfl-step/flows.PlaceOrderFlow.occurrences.expireReservation%40when%5BReservationExpired%5D"
 - id: "zw:architecture/artifact/place-order-flow/zfl-step/flows.PlaceOrderFlow.starts.StartOrderCheckout"
   type: "actor"
   title: "Start Order Checkout"
@@ -36,6 +37,12 @@ steps:
     name: "Customer"
   next_step:
     id: "zw:architecture/artifact/place-order-flow/zfl-step/flows.PlaceOrderFlow.occurrences.startOrderCheckout%40when%5BStartOrderCheckout%5D:service"
+- id: "zw:architecture/artifact/place-order-flow/zfl-event/flows.PlaceOrderFlow.events.FulfillmentCancelled"
+  type: "node"
+  title: "Fulfillment Cancelled"
+  custom:
+    title: "Fulfillment Cancelled"
+    type: "event"
 - id: "zw:architecture/artifact/place-order-flow/zfl-event/flows.PlaceOrderFlow.events.FulfillmentFailed"
   type: "message"
   title: "fulfillment-failed-event-v1"
@@ -44,7 +51,7 @@ steps:
     version: "0.1.0"
     type: "event"
   next_step:
-    id: "zw:architecture/artifact/place-order-flow/zfl-step/flows.PlaceOrderFlow.occurrences.voidPayment%40when%5BFulfillmentFailed%2CPaymentCaptureFailed%5D:service"
+    id: "zw:architecture/artifact/place-order-flow/zfl-step/flows.PlaceOrderFlow.occurrences.voidPayment%40when%5BFulfillmentFailed%2COrderConfirmationRejected%2CPaymentCaptureFailed%5D:service"
 - id: "zw:architecture/artifact/place-order-flow/zfl-event/flows.PlaceOrderFlow.events.FulfillmentScheduled"
   type: "message"
   title: "fulfillment-scheduled-event-v1"
@@ -54,6 +61,15 @@ steps:
     type: "event"
   next_step:
     id: "zw:architecture/artifact/place-order-flow/zfl-step/flows.PlaceOrderFlow.occurrences.capturePayment%40when%5BFulfillmentScheduled%5D:service"
+- id: "zw:architecture/artifact/place-order-flow/zfl-event/flows.PlaceOrderFlow.events.NotificationDeliveryFailed"
+  type: "message"
+  title: "notification-delivery-failed-event-v1"
+  message:
+    id: "notifications.customer-communications.notifications-consumer.notification-delivery-failed-event-v1"
+    version: "0.1.0"
+    type: "event"
+  next_step:
+    id: "zw:architecture/artifact/place-order-flow/zfl-outcome/flows.PlaceOrderFlow.outcomes.notificationFailed"
 - id: "zw:architecture/artifact/place-order-flow/zfl-event/flows.PlaceOrderFlow.events.OrderCancelled"
   type: "message"
   title: "order-cancelled-event-v1"
@@ -61,8 +77,9 @@ steps:
     id: "orders.checkout.orders-checkout.order-cancelled-event-v1"
     version: "0.1.0"
     type: "event"
-  next_step:
-    id: "zw:architecture/artifact/place-order-flow/zfl-step/flows.PlaceOrderFlow.occurrences.sendOrderCancelledNotification%40when%5BOrderCancelled%5D:service"
+  next_steps:
+  - id: "zw:architecture/artifact/place-order-flow/zfl-step/flows.PlaceOrderFlow.occurrences.cancelFulfillment%40when%5BOrderCancelled%5D"
+  - id: "zw:architecture/artifact/place-order-flow/zfl-step/flows.PlaceOrderFlow.occurrences.sendOrderCancelledNotification%40when%5BOrderCancelled%5D:service"
 - id: "zw:architecture/artifact/place-order-flow/zfl-event/flows.PlaceOrderFlow.events.OrderCancelledNotificationSent"
   type: "message"
   title: "order-cancelled-notification-sent-event-v1"
@@ -72,6 +89,14 @@ steps:
     type: "event"
   next_step:
     id: "zw:architecture/artifact/place-order-flow/zfl-outcome/flows.PlaceOrderFlow.outcomes.orderCancelled"
+- id: "zw:architecture/artifact/place-order-flow/zfl-event/flows.PlaceOrderFlow.events.OrderConfirmationRejected"
+  type: "node"
+  title: "Order Confirmation Rejected"
+  custom:
+    title: "Order Confirmation Rejected"
+    type: "event"
+  next_step:
+    id: "zw:architecture/artifact/place-order-flow/zfl-step/flows.PlaceOrderFlow.occurrences.voidPayment%40when%5BFulfillmentFailed%2COrderConfirmationRejected%2CPaymentCaptureFailed%5D:service"
 - id: "zw:architecture/artifact/place-order-flow/zfl-event/flows.PlaceOrderFlow.events.OrderConfirmationSent"
   type: "message"
   title: "order-confirmation-sent-event-v1"
@@ -116,7 +141,7 @@ steps:
     version: "0.1.0"
     type: "event"
   next_step:
-    id: "zw:architecture/artifact/place-order-flow/zfl-step/flows.PlaceOrderFlow.occurrences.voidPayment%40when%5BFulfillmentFailed%2CPaymentCaptureFailed%5D:service"
+    id: "zw:architecture/artifact/place-order-flow/zfl-step/flows.PlaceOrderFlow.occurrences.voidPayment%40when%5BFulfillmentFailed%2COrderConfirmationRejected%2CPaymentCaptureFailed%5D:service"
 - id: "zw:architecture/artifact/place-order-flow/zfl-event/flows.PlaceOrderFlow.events.PaymentCaptured"
   type: "message"
   title: "payment-captured-event-v1"
@@ -124,8 +149,9 @@ steps:
     id: "payments.payment-processing.payments-processing.payment-captured-event-v1"
     version: "0.1.0"
     type: "event"
-  next_step:
-    id: "zw:architecture/artifact/place-order-flow/zfl-step/flows.PlaceOrderFlow.occurrences.sendOrderConfirmation%40when%5BPaymentCaptured%5D:service"
+  next_steps:
+  - id: "zw:architecture/artifact/place-order-flow/zfl-step/flows.PlaceOrderFlow.occurrences.recordPaymentCaptured%40when%5BPaymentCaptured%5D"
+  - id: "zw:architecture/artifact/place-order-flow/zfl-step/flows.PlaceOrderFlow.occurrences.sendOrderConfirmation%40when%5BPaymentCaptured%5D:service"
 - id: "zw:architecture/artifact/place-order-flow/zfl-event/flows.PlaceOrderFlow.events.PaymentDeclined"
   type: "message"
   title: "payment-declined-event-v1"
@@ -134,7 +160,7 @@ steps:
     version: "0.1.0"
     type: "event"
   next_step:
-    id: "zw:architecture/artifact/place-order-flow/zfl-step/flows.PlaceOrderFlow.occurrences.releaseStock%40when%5BPaymentDeclined%2CPaymentRetryExhausted%2CPaymentVoided%2CReservationExpired%5D:service"
+    id: "zw:architecture/artifact/place-order-flow/zfl-step/flows.PlaceOrderFlow.occurrences.releaseStock%40when%5BPaymentDeclined%2CPaymentRetryExhausted%2CPaymentVoidFailed%2CPaymentVoided%5D:service"
 - id: "zw:architecture/artifact/place-order-flow/zfl-event/flows.PlaceOrderFlow.events.PaymentFailed"
   type: "message"
   title: "payment-failed-event-v1"
@@ -152,7 +178,7 @@ steps:
     version: "0.1.0"
     type: "event"
   next_step:
-    id: "zw:architecture/artifact/place-order-flow/zfl-step/flows.PlaceOrderFlow.occurrences.authorizePayment%40when%5BPaymentRetried%5D:service"
+    id: "zw:architecture/artifact/place-order-flow/zfl-step/flows.PlaceOrderFlow.occurrences.reauthorizePayment%40when%5BPaymentRetried%5D"
 - id: "zw:architecture/artifact/place-order-flow/zfl-event/flows.PlaceOrderFlow.events.PaymentRetryExhausted"
   type: "message"
   title: "payment-retry-exhausted-event-v1"
@@ -161,7 +187,16 @@ steps:
     version: "0.1.0"
     type: "event"
   next_step:
-    id: "zw:architecture/artifact/place-order-flow/zfl-step/flows.PlaceOrderFlow.occurrences.releaseStock%40when%5BPaymentDeclined%2CPaymentRetryExhausted%2CPaymentVoided%2CReservationExpired%5D:service"
+    id: "zw:architecture/artifact/place-order-flow/zfl-step/flows.PlaceOrderFlow.occurrences.releaseStock%40when%5BPaymentDeclined%2CPaymentRetryExhausted%2CPaymentVoidFailed%2CPaymentVoided%5D:service"
+- id: "zw:architecture/artifact/place-order-flow/zfl-event/flows.PlaceOrderFlow.events.PaymentVoidFailed"
+  type: "node"
+  title: "Payment Void Failed"
+  custom:
+    title: "Payment Void Failed"
+    type: "event"
+    color: "red"
+  next_step:
+    id: "zw:architecture/artifact/place-order-flow/zfl-step/flows.PlaceOrderFlow.occurrences.releaseStock%40when%5BPaymentDeclined%2CPaymentRetryExhausted%2CPaymentVoidFailed%2CPaymentVoided%5D:service"
 - id: "zw:architecture/artifact/place-order-flow/zfl-event/flows.PlaceOrderFlow.events.PaymentVoided"
   type: "message"
   title: "payment-voided-event-v1"
@@ -170,7 +205,7 @@ steps:
     version: "0.1.0"
     type: "event"
   next_step:
-    id: "zw:architecture/artifact/place-order-flow/zfl-step/flows.PlaceOrderFlow.occurrences.releaseStock%40when%5BPaymentDeclined%2CPaymentRetryExhausted%2CPaymentVoided%2CReservationExpired%5D:service"
+    id: "zw:architecture/artifact/place-order-flow/zfl-step/flows.PlaceOrderFlow.occurrences.releaseStock%40when%5BPaymentDeclined%2CPaymentRetryExhausted%2CPaymentVoidFailed%2CPaymentVoided%5D:service"
 - id: "zw:architecture/artifact/place-order-flow/zfl-event/flows.PlaceOrderFlow.events.StockReleased"
   type: "message"
   title: "stock-released-event-v1"
@@ -263,7 +298,7 @@ steps:
     \     * are reserved at the processor but not yet transferred to us. A decline\n\
     \     * means the processor rejected the card outright and we will not retry —\
     \n     * the customer needs to act. A failure means a technical error on our side\n\
-    \     * or the processor's, which we will retry within the reservation window."
+    \     * or the processor's, which we will retry a bounded number of times."
   service:
     id: "payments.payment-processing.payments-processing"
     version: "0.1.0"
@@ -276,7 +311,7 @@ steps:
     \     * are reserved at the processor but not yet transferred to us. A decline\n\
     \     * means the processor rejected the card outright and we will not retry —\
     \n     * the customer needs to act. A failure means a technical error on our side\n\
-    \     * or the processor's, which we will retry within the reservation window."
+    \     * or the processor's, which we will retry a bounded number of times."
   custom:
     title: "Authorize Payment"
     type: "operation"
@@ -284,8 +319,8 @@ steps:
       \     * are reserved at the processor but not yet transferred to us. A decline\n\
       \     * means the processor rejected the card outright and we will not retry\
       \ —\n     * the customer needs to act. A failure means a technical error on\
-      \ our side\n     * or the processor's, which we will retry within the reservation\
-      \ window."
+      \ our side\n     * or the processor's, which we will retry a bounded number\
+      \ of times."
     color: "blue"
   next_steps:
   - id: "zw:architecture/artifact/place-order-flow/zfl-event/flows.PlaceOrderFlow.events.PaymentAuthorized"
@@ -297,10 +332,10 @@ steps:
 - id: "zw:architecture/artifact/place-order-flow/zfl-step/flows.PlaceOrderFlow.occurrences.retryPayment%40when%5BPaymentFailed%5D:service"
   type: "node"
   title: "Retry Payment"
-  summary: "A technical failure during authorization is eligible for retry. We attempt\n\
-    \     * again within the same reservation window. If all retry attempts are spent,\n\
-    \     * PaymentRetryExhausted is emitsted and the order moves to cancellation.\n\
-    \     * PaymentRetried feeds back into authorizePayment for the next attempt."
+  summary: "A technical failure during authorization is eligible for retry: at most\
+    \ 3\n     * attempts in all, 5 and 15 seconds apart. If all retry attempts are\
+    \ spent,\n     * PaymentRetryExhausted is emitted and the order moves to cancellation.\n\
+    \     * PaymentRetried feeds back into reauthorizePayment for the next attempt."
   service:
     id: "payments.payment-processing.payments-processing"
     version: "0.1.0"
@@ -309,54 +344,30 @@ steps:
 - id: "zw:architecture/artifact/place-order-flow/zfl-step/flows.PlaceOrderFlow.occurrences.retryPayment%40when%5BPaymentFailed%5D"
   type: "node"
   title: "Retry Payment"
-  summary: "A technical failure during authorization is eligible for retry. We attempt\n\
-    \     * again within the same reservation window. If all retry attempts are spent,\n\
-    \     * PaymentRetryExhausted is emitsted and the order moves to cancellation.\n\
-    \     * PaymentRetried feeds back into authorizePayment for the next attempt."
+  summary: "A technical failure during authorization is eligible for retry: at most\
+    \ 3\n     * attempts in all, 5 and 15 seconds apart. If all retry attempts are\
+    \ spent,\n     * PaymentRetryExhausted is emitted and the order moves to cancellation.\n\
+    \     * PaymentRetried feeds back into reauthorizePayment for the next attempt."
   custom:
     title: "Retry Payment"
     type: "operation"
-    summary: "A technical failure during authorization is eligible for retry. We attempt\n\
-      \     * again within the same reservation window. If all retry attempts are\
-      \ spent,\n     * PaymentRetryExhausted is emitsted and the order moves to cancellation.\n\
-      \     * PaymentRetried feeds back into authorizePayment for the next attempt."
+    summary: "A technical failure during authorization is eligible for retry: at most\
+      \ 3\n     * attempts in all, 5 and 15 seconds apart. If all retry attempts are\
+      \ spent,\n     * PaymentRetryExhausted is emitted and the order moves to cancellation.\n\
+      \     * PaymentRetried feeds back into reauthorizePayment for the next attempt."
     color: "blue"
   next_steps:
   - id: "zw:architecture/artifact/place-order-flow/zfl-event/flows.PlaceOrderFlow.events.PaymentRetried"
     label: "retried"
   - id: "zw:architecture/artifact/place-order-flow/zfl-event/flows.PlaceOrderFlow.events.PaymentRetryExhausted"
     label: "retry-exhausted"
-- id: "zw:architecture/artifact/place-order-flow/zfl-step/flows.PlaceOrderFlow.occurrences.authorizePayment%40when%5BPaymentRetried%5D:service"
+- id: "zw:architecture/artifact/place-order-flow/zfl-step/flows.PlaceOrderFlow.occurrences.reauthorizePayment%40when%5BPaymentRetried%5D"
   type: "node"
-  title: "Authorize Payment"
-  summary: "We place an authorization hold on the customer's payment method. Funds\n\
-    \     * are reserved at the processor but not yet transferred to us. A decline\n\
-    \     * means the processor rejected the card outright and we will not retry —\
-    \n     * the customer needs to act. A failure means a technical error on our side\n\
-    \     * or the processor's, which we will retry within the reservation window."
-  service:
-    id: "payments.payment-processing.payments-processing"
-    version: "0.1.0"
-  next_step:
-    id: "zw:architecture/artifact/place-order-flow/zfl-step/flows.PlaceOrderFlow.occurrences.authorizePayment%40when%5BPaymentRetried%5D"
-- id: "zw:architecture/artifact/place-order-flow/zfl-step/flows.PlaceOrderFlow.occurrences.authorizePayment%40when%5BPaymentRetried%5D"
-  type: "node"
-  title: "Authorize Payment"
-  summary: "We place an authorization hold on the customer's payment method. Funds\n\
-    \     * are reserved at the processor but not yet transferred to us. A decline\n\
-    \     * means the processor rejected the card outright and we will not retry —\
-    \n     * the customer needs to act. A failure means a technical error on our side\n\
-    \     * or the processor's, which we will retry within the reservation window."
+  title: "Reauthorize Payment"
   custom:
-    title: "Authorize Payment"
-    type: "operation"
-    summary: "We place an authorization hold on the customer's payment method. Funds\n\
-      \     * are reserved at the processor but not yet transferred to us. A decline\n\
-      \     * means the processor rejected the card outright and we will not retry\
-      \ —\n     * the customer needs to act. A failure means a technical error on\
-      \ our side\n     * or the processor's, which we will retry within the reservation\
-      \ window."
-    color: "blue"
+    title: "Reauthorize Payment"
+    type: "unresolved-operation"
+    color: "red"
   next_steps:
   - id: "zw:architecture/artifact/place-order-flow/zfl-event/flows.PlaceOrderFlow.events.PaymentAuthorized"
     label: "authorized"
@@ -368,7 +379,10 @@ steps:
   type: "node"
   title: "Confirm Order"
   summary: "Authorization succeeded. We update the order status so the rest of the\n\
-    \     * system knows this order is payment-backed and ready for fulfillment."
+    \     * system knows this order is payment-backed and ready for fulfillment.\n\
+    \     * An authorization that arrives for a cancelled order, or after the timer\n\
+    \     * released the stock, is rejected: OrderConfirmationRejected asks payments\n\
+    \     * to void it."
   service:
     id: "orders.checkout.orders-checkout"
     version: "0.1.0"
@@ -378,20 +392,33 @@ steps:
   type: "node"
   title: "Confirm Order"
   summary: "Authorization succeeded. We update the order status so the rest of the\n\
-    \     * system knows this order is payment-backed and ready for fulfillment."
+    \     * system knows this order is payment-backed and ready for fulfillment.\n\
+    \     * An authorization that arrives for a cancelled order, or after the timer\n\
+    \     * released the stock, is rejected: OrderConfirmationRejected asks payments\n\
+    \     * to void it."
   custom:
     title: "Confirm Order"
     type: "operation"
     summary: "Authorization succeeded. We update the order status so the rest of the\n\
-      \     * system knows this order is payment-backed and ready for fulfillment."
+      \     * system knows this order is payment-backed and ready for fulfillment.\n\
+      \     * An authorization that arrives for a cancelled order, or after the timer\n\
+      \     * released the stock, is rejected: OrderConfirmationRejected asks payments\n\
+      \     * to void it."
     color: "blue"
   next_steps:
+  - id: "zw:architecture/artifact/place-order-flow/zfl-event/flows.PlaceOrderFlow.events.OrderConfirmationRejected"
+    label: "stock-not-held"
+  - id: "zw:architecture/artifact/place-order-flow/zfl-event/flows.PlaceOrderFlow.events.OrderConfirmationRejected"
+    label: "order-cancelled"
   - id: "zw:architecture/artifact/place-order-flow/zfl-event/flows.PlaceOrderFlow.events.OrderConfirmed"
+    label: "confirmed"
   - id: "edge/invokes/zw%3Aarchitecture%2Fartifact%2Fplace-order-flow%2Fzfl-step%2Fflows.PlaceOrderFlow.occurrences.confirmOrder%2540when%255BPaymentAuthorized%255D/zw%3Aarchitecture%2Fartifact%2Fplace-order-flow%2Fzfl-operation%2Fflows.PlaceOrderFlow.operations.confirmStockReservation/confirmOrder%40when%5BPaymentAuthorized%5D%3Acall%3A1%3AconfirmStockReservation:service"
 - id: "zw:architecture/artifact/place-order-flow/zfl-step/flows.PlaceOrderFlow.occurrences.confirmStockReservation%40definition:service"
   type: "node"
   title: "Confirm Stock Reservation"
-  summary: "Stock Reservation is confirmed"
+  summary: "Stock Reservation is confirmed. NOT_HELD when some line is no longer\n\
+    \     * RESERVED. StockReservationConfirmed is published on purpose; no step of\n\
+    \     * this flow consumes it."
   service:
     id: "catalog.inventory-management.catalog-inventory"
     version: "0.1.0"
@@ -400,11 +427,15 @@ steps:
 - id: "zw:architecture/artifact/place-order-flow/zfl-step/flows.PlaceOrderFlow.occurrences.confirmStockReservation%40definition"
   type: "node"
   title: "Confirm Stock Reservation"
-  summary: "Stock Reservation is confirmed"
+  summary: "Stock Reservation is confirmed. NOT_HELD when some line is no longer\n\
+    \     * RESERVED. StockReservationConfirmed is published on purpose; no step of\n\
+    \     * this flow consumes it."
   custom:
     title: "Confirm Stock Reservation"
     type: "operation"
-    summary: "Stock Reservation is confirmed"
+    summary: "Stock Reservation is confirmed. NOT_HELD when some line is no longer\n\
+      \     * RESERVED. StockReservationConfirmed is published on purpose; no step\
+      \ of\n     * this flow consumes it."
     color: "blue"
   next_step:
     id: "zw:architecture/artifact/place-order-flow/zfl-event/flows.PlaceOrderFlow.events.StockReservationConfirmed"
@@ -442,9 +473,9 @@ steps:
   type: "node"
   title: "Capture Payment"
   summary: "Money moves here, not at checkout. We capture the authorization hold\n\
-    \     * only when the order is physically ready to leave our warehouse. If capture\n\
-    \     * fails at this point, we treat it the same as a fulfillment failure and\n\
-    \     * void the authorization."
+    \     * once fulfillment is scheduled, before the order is ready to ship. If capture\n\
+    \     * fails, we void the authorization; the cancellation that follows also\n\
+    \     * cancels the fulfillment."
   service:
     id: "payments.payment-processing.payments-processing"
     version: "0.1.0"
@@ -454,16 +485,16 @@ steps:
   type: "node"
   title: "Capture Payment"
   summary: "Money moves here, not at checkout. We capture the authorization hold\n\
-    \     * only when the order is physically ready to leave our warehouse. If capture\n\
-    \     * fails at this point, we treat it the same as a fulfillment failure and\n\
-    \     * void the authorization."
+    \     * once fulfillment is scheduled, before the order is ready to ship. If capture\n\
+    \     * fails, we void the authorization; the cancellation that follows also\n\
+    \     * cancels the fulfillment."
   custom:
     title: "Capture Payment"
     type: "operation"
     summary: "Money moves here, not at checkout. We capture the authorization hold\n\
-      \     * only when the order is physically ready to leave our warehouse. If capture\n\
-      \     * fails at this point, we treat it the same as a fulfillment failure and\n\
-      \     * void the authorization."
+      \     * once fulfillment is scheduled, before the order is ready to ship. If\
+      \ capture\n     * fails, we void the authorization; the cancellation that follows\
+      \ also\n     * cancels the fulfillment."
     color: "blue"
   next_steps:
   - id: "zw:architecture/artifact/place-order-flow/zfl-event/flows.PlaceOrderFlow.events.PaymentCaptureFailed"
@@ -492,8 +523,22 @@ steps:
       \     * send the customer their order confirmation. Sending it earlier — at\n\
       \     * authorization — would risk confirming an order we later have to cancel."
     color: "blue"
-  next_step:
-    id: "zw:architecture/artifact/place-order-flow/zfl-event/flows.PlaceOrderFlow.events.OrderConfirmationSent"
+  next_steps:
+  - id: "zw:architecture/artifact/place-order-flow/zfl-event/flows.PlaceOrderFlow.events.NotificationDeliveryFailed"
+    label: "failed"
+  - id: "zw:architecture/artifact/place-order-flow/zfl-event/flows.PlaceOrderFlow.events.OrderConfirmationSent"
+    label: "sent"
+- id: "zw:architecture/artifact/place-order-flow/zfl-step/flows.PlaceOrderFlow.occurrences.recordPaymentCaptured%40when%5BPaymentCaptured%5D"
+  type: "node"
+  title: "Record Payment Captured"
+  summary: "Capture succeeded: the warehouse may now mark the order ready to ship.\n\
+    \     * markReadyToShip is refused until this is recorded."
+  custom:
+    title: "Record Payment Captured"
+    type: "unresolved-operation"
+    summary: "Capture succeeded: the warehouse may now mark the order ready to ship.\n\
+      \     * markReadyToShip is refused until this is recorded."
+    color: "red"
 - id: "zw:architecture/artifact/place-order-flow/zfl-step/flows.PlaceOrderFlow.occurrences.sendStockUnavailableNotification%40when%5BStockUnavailable%5D:service"
   type: "node"
   title: "Send Stock Unavailable Notification"
@@ -518,79 +563,124 @@ steps:
       \     * immediately so they can look for alternatives. No payment was attempted\n\
       \     * and no order record was created."
     color: "blue"
-  next_step:
-    id: "zw:architecture/artifact/place-order-flow/zfl-event/flows.PlaceOrderFlow.events.StockUnavailableNotificationSent"
-- id: "zw:architecture/artifact/place-order-flow/zfl-step/flows.PlaceOrderFlow.occurrences.voidPayment%40when%5BFulfillmentFailed%2CPaymentCaptureFailed%5D:service"
+  next_steps:
+  - id: "zw:architecture/artifact/place-order-flow/zfl-event/flows.PlaceOrderFlow.events.NotificationDeliveryFailed"
+    label: "failed"
+  - id: "zw:architecture/artifact/place-order-flow/zfl-event/flows.PlaceOrderFlow.events.StockUnavailableNotificationSent"
+    label: "sent"
+- id: "zw:architecture/artifact/place-order-flow/zfl-step/flows.PlaceOrderFlow.occurrences.voidPayment%40when%5BFulfillmentFailed%2COrderConfirmationRejected%2CPaymentCaptureFailed%5D:service"
   type: "node"
   title: "Void Payment"
   summary: "Fulfillment could not be completed after we had already authorized\n \
     \    * payment. We void the authorization rather than capturing and then\n   \
     \  * refunding — a void is cleaner, faster, and never appears as a charge\n  \
-    \   * on the customer's statement."
+    \   * on the customer's statement.\n     * OrderConfirmationRejected voids an\
+    \ authorization that arrived after the\n     * order was cancelled or its stock\
+    \ released. No-op when there is nothing to void.\n     * A refused void (PaymentVoidFailed)\
+    \ is left to ops; the order is cancelled anyway."
   service:
     id: "payments.payment-processing.payments-processing"
     version: "0.1.0"
   next_step:
-    id: "zw:architecture/artifact/place-order-flow/zfl-step/flows.PlaceOrderFlow.occurrences.voidPayment%40when%5BFulfillmentFailed%2CPaymentCaptureFailed%5D"
-- id: "zw:architecture/artifact/place-order-flow/zfl-step/flows.PlaceOrderFlow.occurrences.voidPayment%40when%5BFulfillmentFailed%2CPaymentCaptureFailed%5D"
+    id: "zw:architecture/artifact/place-order-flow/zfl-step/flows.PlaceOrderFlow.occurrences.voidPayment%40when%5BFulfillmentFailed%2COrderConfirmationRejected%2CPaymentCaptureFailed%5D"
+- id: "zw:architecture/artifact/place-order-flow/zfl-step/flows.PlaceOrderFlow.occurrences.voidPayment%40when%5BFulfillmentFailed%2COrderConfirmationRejected%2CPaymentCaptureFailed%5D"
   type: "node"
   title: "Void Payment"
   summary: "Fulfillment could not be completed after we had already authorized\n \
     \    * payment. We void the authorization rather than capturing and then\n   \
     \  * refunding — a void is cleaner, faster, and never appears as a charge\n  \
-    \   * on the customer's statement."
+    \   * on the customer's statement.\n     * OrderConfirmationRejected voids an\
+    \ authorization that arrived after the\n     * order was cancelled or its stock\
+    \ released. No-op when there is nothing to void.\n     * A refused void (PaymentVoidFailed)\
+    \ is left to ops; the order is cancelled anyway."
   custom:
     title: "Void Payment"
     type: "operation"
     summary: "Fulfillment could not be completed after we had already authorized\n\
       \     * payment. We void the authorization rather than capturing and then\n\
       \     * refunding — a void is cleaner, faster, and never appears as a charge\n\
-      \     * on the customer's statement."
+      \     * on the customer's statement.\n     * OrderConfirmationRejected voids\
+      \ an authorization that arrived after the\n     * order was cancelled or its\
+      \ stock released. No-op when there is nothing to void.\n     * A refused void\
+      \ (PaymentVoidFailed) is left to ops; the order is cancelled anyway."
     color: "blue"
   next_steps:
   - id: "zw:architecture/artifact/place-order-flow/zfl-step/flows.PlaceOrderFlow.occurrences.authorizePayment%40when%5BOrderCreated%5D:service"
     label: "compensates"
+  - id: "zw:architecture/artifact/place-order-flow/zfl-event/flows.PlaceOrderFlow.events.PaymentVoidFailed"
+    label: "void-failed"
   - id: "zw:architecture/artifact/place-order-flow/zfl-event/flows.PlaceOrderFlow.events.PaymentVoided"
-- id: "zw:architecture/artifact/place-order-flow/zfl-step/flows.PlaceOrderFlow.occurrences.releaseStock%40when%5BPaymentDeclined%2CPaymentRetryExhausted%2CPaymentVoided%2CReservationExpired%5D:service"
+    label: "voided"
+- id: "zw:architecture/artifact/place-order-flow/zfl-step/flows.PlaceOrderFlow.occurrences.releaseStock%40when%5BPaymentDeclined%2CPaymentRetryExhausted%2CPaymentVoidFailed%2CPaymentVoided%5D:service"
   type: "node"
   title: "Release Stock"
-  summary: "All terminal failure paths converge here. Whether payment was declined,\n\
-    \     * retries were exhausted, the authorization was voided, or the reservation\n\
-    \     * window expired — the outcome is the same: stock goes back to the pool.\n\
-    \     * The emits that triggered this step carries the reason; this operation\n\
-    \     * does not need to know it."
+  summary: "All payment failure paths converge here. Whether payment was declined,\n\
+    \     * retries were exhausted, or the authorization was voided (or the void was\n\
+    \     * refused) — the outcome is the same: stock goes back to the pool.\n   \
+    \  * The type of the event that triggered this step sets the release reason.\n\
+    \     * No-op, no event, when the stock is already RELEASED (a late authorization\n\
+    \     * voided after the timer released it): the order is cancelled only once."
   service:
     id: "catalog.inventory-management.catalog-inventory"
     version: "0.1.0"
   next_step:
-    id: "zw:architecture/artifact/place-order-flow/zfl-step/flows.PlaceOrderFlow.occurrences.releaseStock%40when%5BPaymentDeclined%2CPaymentRetryExhausted%2CPaymentVoided%2CReservationExpired%5D"
-- id: "zw:architecture/artifact/place-order-flow/zfl-step/flows.PlaceOrderFlow.occurrences.releaseStock%40when%5BPaymentDeclined%2CPaymentRetryExhausted%2CPaymentVoided%2CReservationExpired%5D"
+    id: "zw:architecture/artifact/place-order-flow/zfl-step/flows.PlaceOrderFlow.occurrences.releaseStock%40when%5BPaymentDeclined%2CPaymentRetryExhausted%2CPaymentVoidFailed%2CPaymentVoided%5D"
+- id: "zw:architecture/artifact/place-order-flow/zfl-step/flows.PlaceOrderFlow.occurrences.releaseStock%40when%5BPaymentDeclined%2CPaymentRetryExhausted%2CPaymentVoidFailed%2CPaymentVoided%5D"
   type: "node"
   title: "Release Stock"
-  summary: "All terminal failure paths converge here. Whether payment was declined,\n\
-    \     * retries were exhausted, the authorization was voided, or the reservation\n\
-    \     * window expired — the outcome is the same: stock goes back to the pool.\n\
-    \     * The emits that triggered this step carries the reason; this operation\n\
-    \     * does not need to know it."
+  summary: "All payment failure paths converge here. Whether payment was declined,\n\
+    \     * retries were exhausted, or the authorization was voided (or the void was\n\
+    \     * refused) — the outcome is the same: stock goes back to the pool.\n   \
+    \  * The type of the event that triggered this step sets the release reason.\n\
+    \     * No-op, no event, when the stock is already RELEASED (a late authorization\n\
+    \     * voided after the timer released it): the order is cancelled only once."
   custom:
     title: "Release Stock"
     type: "operation"
-    summary: "All terminal failure paths converge here. Whether payment was declined,\n\
-      \     * retries were exhausted, the authorization was voided, or the reservation\n\
-      \     * window expired — the outcome is the same: stock goes back to the pool.\n\
-      \     * The emits that triggered this step carries the reason; this operation\n\
-      \     * does not need to know it."
+    summary: "All payment failure paths converge here. Whether payment was declined,\n\
+      \     * retries were exhausted, or the authorization was voided (or the void\
+      \ was\n     * refused) — the outcome is the same: stock goes back to the pool.\n\
+      \     * The type of the event that triggered this step sets the release reason.\n\
+      \     * No-op, no event, when the stock is already RELEASED (a late authorization\n\
+      \     * voided after the timer released it): the order is cancelled only once."
     color: "blue"
   next_steps:
   - id: "zw:architecture/artifact/place-order-flow/zfl-step/flows.PlaceOrderFlow.occurrences.reserveStock%40definition:service"
     label: "compensates"
   - id: "zw:architecture/artifact/place-order-flow/zfl-event/flows.PlaceOrderFlow.events.StockReleased"
+- id: "zw:architecture/artifact/place-order-flow/zfl-step/flows.PlaceOrderFlow.occurrences.expireReservation%40when%5BReservationExpired%5D"
+  type: "node"
+  title: "Expire Reservation"
+  summary: "Releases the RESERVED lines (RESERVATION_EXPIRED) only on NoPaymentResult.\n\
+    \     * PaymentStartedResult is not handled: the step ends and payment owns the\
+    \ end.\n     * No-op, no event, when no line is RESERVED (late fire)."
+  custom:
+    title: "Expire Reservation"
+    type: "unresolved-operation"
+    summary: "Releases the RESERVED lines (RESERVATION_EXPIRED) only on NoPaymentResult.\n\
+      \     * PaymentStartedResult is not handled: the step ends and payment owns\
+      \ the end.\n     * No-op, no event, when no line is RESERVED (late fire)."
+    color: "red"
+  next_steps:
+  - id: "zw:architecture/artifact/place-order-flow/zfl-step/flows.PlaceOrderFlow.occurrences.reserveStock%40definition:service"
+    label: "compensates"
+  - id: "zw:architecture/artifact/place-order-flow/zfl-event/flows.PlaceOrderFlow.events.StockReleased"
+    label: "expired"
+  - id: "edge/invokes/zw%3Aarchitecture%2Fartifact%2Fplace-order-flow%2Fzfl-step%2Fflows.PlaceOrderFlow.occurrences.expireReservation%2540when%255BReservationExpired%255D/zw%3Aarchitecture%2Fartifact%2Fplace-order-flow%2Fzfl-operation%2Fflows.PlaceOrderFlow.operations.getPaymentStatus/expireReservation%40when%5BReservationExpired%5D%3Acall%3A1%3AgetPaymentStatus"
+- id: "zw:architecture/artifact/place-order-flow/zfl-step/flows.PlaceOrderFlow.occurrences.getPaymentStatus%40definition"
+  type: "node"
+  title: "Get Payment Status"
+  custom:
+    title: "Get Payment Status"
+    type: "unresolved-operation"
+    color: "red"
 - id: "zw:architecture/artifact/place-order-flow/zfl-step/flows.PlaceOrderFlow.occurrences.cancelOrder%40when%5BStockReleased%5D:service"
   type: "node"
   title: "Cancel Order"
   summary: "Once stock is released, the order has no inventory backing it and must\n\
     \     * be cancelled. OrdersCheckout is the single owner of this transition —\n\
-    \     * no other part of the system should emits OrderCancelled directly."
+    \     * no other part of the system should emit OrderCancelled directly.\n   \
+    \  * No-op, no event, when the order is already CANCELLED."
   service:
     id: "orders.checkout.orders-checkout"
     version: "0.1.0"
@@ -601,24 +691,46 @@ steps:
   title: "Cancel Order"
   summary: "Once stock is released, the order has no inventory backing it and must\n\
     \     * be cancelled. OrdersCheckout is the single owner of this transition —\n\
-    \     * no other part of the system should emits OrderCancelled directly."
+    \     * no other part of the system should emit OrderCancelled directly.\n   \
+    \  * No-op, no event, when the order is already CANCELLED."
   custom:
     title: "Cancel Order"
     type: "operation"
     summary: "Once stock is released, the order has no inventory backing it and must\n\
       \     * be cancelled. OrdersCheckout is the single owner of this transition\
-      \ —\n     * no other part of the system should emits OrderCancelled directly."
+      \ —\n     * no other part of the system should emit OrderCancelled directly.\n\
+      \     * No-op, no event, when the order is already CANCELLED."
     color: "blue"
   next_steps:
   - id: "zw:architecture/artifact/place-order-flow/zfl-step/flows.PlaceOrderFlow.occurrences.startOrderCheckout%40when%5BStartOrderCheckout%5D:service"
     label: "compensates"
   - id: "zw:architecture/artifact/place-order-flow/zfl-event/flows.PlaceOrderFlow.events.OrderCancelled"
+- id: "zw:architecture/artifact/place-order-flow/zfl-step/flows.PlaceOrderFlow.occurrences.cancelFulfillment%40when%5BOrderCancelled%5D"
+  type: "node"
+  title: "Cancel Fulfillment"
+  summary: "A cancelled order may already have a fulfillment (capture failed, void\
+    \ refused).\n     * We stop the warehouse. No-op when there is no Fulfillment,\
+    \ or it is FAILED or\n     * CANCELLED. FulfillmentCancelled is published for\
+    \ the warehouse."
+  custom:
+    title: "Cancel Fulfillment"
+    type: "unresolved-operation"
+    summary: "A cancelled order may already have a fulfillment (capture failed, void\
+      \ refused).\n     * We stop the warehouse. No-op when there is no Fulfillment,\
+      \ or it is FAILED or\n     * CANCELLED. FulfillmentCancelled is published for\
+      \ the warehouse."
+    color: "red"
+  next_steps:
+  - id: "zw:architecture/artifact/place-order-flow/zfl-step/flows.PlaceOrderFlow.occurrences.scheduleFulfillment%40when%5BOrderConfirmed%5D:service"
+    label: "compensates"
+  - id: "zw:architecture/artifact/place-order-flow/zfl-event/flows.PlaceOrderFlow.events.FulfillmentCancelled"
 - id: "zw:architecture/artifact/place-order-flow/zfl-step/flows.PlaceOrderFlow.occurrences.sendOrderCancelledNotification%40when%5BOrderCancelled%5D:service"
   type: "node"
   title: "Send Order Cancelled Notification"
   summary: "The customer is informed that their order has been cancelled and why.\n\
-    \     * At this point the reservation is gone, the order is closed, and no\n \
-    \    * payment was taken."
+    \     * At this point the reservation is gone and the order is closed. No payment\n\
+    \     * was captured; when the void was refused (PAYMENT_VOID_FAILED) the hold\
+    \ may\n     * still show until ops release it, and the message must say so."
   service:
     id: "notifications.customer-communications.notifications-consumer"
     version: "0.1.0"
@@ -628,42 +740,72 @@ steps:
   type: "node"
   title: "Send Order Cancelled Notification"
   summary: "The customer is informed that their order has been cancelled and why.\n\
-    \     * At this point the reservation is gone, the order is closed, and no\n \
-    \    * payment was taken."
+    \     * At this point the reservation is gone and the order is closed. No payment\n\
+    \     * was captured; when the void was refused (PAYMENT_VOID_FAILED) the hold\
+    \ may\n     * still show until ops release it, and the message must say so."
   custom:
     title: "Send Order Cancelled Notification"
     type: "operation"
     summary: "The customer is informed that their order has been cancelled and why.\n\
-      \     * At this point the reservation is gone, the order is closed, and no\n\
-      \     * payment was taken."
+      \     * At this point the reservation is gone and the order is closed. No payment\n\
+      \     * was captured; when the void was refused (PAYMENT_VOID_FAILED) the hold\
+      \ may\n     * still show until ops release it, and the message must say so."
     color: "blue"
-  next_step:
-    id: "zw:architecture/artifact/place-order-flow/zfl-event/flows.PlaceOrderFlow.events.OrderCancelledNotificationSent"
+  next_steps:
+  - id: "zw:architecture/artifact/place-order-flow/zfl-event/flows.PlaceOrderFlow.events.NotificationDeliveryFailed"
+    label: "failed"
+  - id: "zw:architecture/artifact/place-order-flow/zfl-event/flows.PlaceOrderFlow.events.OrderCancelledNotificationSent"
+    label: "sent"
 - id: "zw:architecture/artifact/place-order-flow/zfl-outcome/flows.PlaceOrderFlow.outcomes.completed"
   type: "node"
   title: "Completed"
+  summary: "notificationFailed hides the business outcome: NotificationDeliveryFailed.type\n\
+    \     * says which one (ORDER_CONFIRMATION, STOCK_UNAVAILABLE, ORDER_CANCELLED)."
   custom:
     title: "Completed"
     type: "outcome"
+    summary: "notificationFailed hides the business outcome: NotificationDeliveryFailed.type\n\
+      \     * says which one (ORDER_CONFIRMATION, STOCK_UNAVAILABLE, ORDER_CANCELLED)."
+    color: "green"
+- id: "zw:architecture/artifact/place-order-flow/zfl-outcome/flows.PlaceOrderFlow.outcomes.notificationFailed"
+  type: "node"
+  title: "Notification Failed"
+  summary: "notificationFailed hides the business outcome: NotificationDeliveryFailed.type\n\
+    \     * says which one (ORDER_CONFIRMATION, STOCK_UNAVAILABLE, ORDER_CANCELLED)."
+  custom:
+    title: "Notification Failed"
+    type: "outcome"
+    summary: "notificationFailed hides the business outcome: NotificationDeliveryFailed.type\n\
+      \     * says which one (ORDER_CONFIRMATION, STOCK_UNAVAILABLE, ORDER_CANCELLED)."
     color: "green"
 - id: "zw:architecture/artifact/place-order-flow/zfl-outcome/flows.PlaceOrderFlow.outcomes.orderCancelled"
   type: "node"
   title: "Order Cancelled"
+  summary: "notificationFailed hides the business outcome: NotificationDeliveryFailed.type\n\
+    \     * says which one (ORDER_CONFIRMATION, STOCK_UNAVAILABLE, ORDER_CANCELLED)."
   custom:
     title: "Order Cancelled"
     type: "outcome"
+    summary: "notificationFailed hides the business outcome: NotificationDeliveryFailed.type\n\
+      \     * says which one (ORDER_CONFIRMATION, STOCK_UNAVAILABLE, ORDER_CANCELLED)."
     color: "green"
 - id: "zw:architecture/artifact/place-order-flow/zfl-outcome/flows.PlaceOrderFlow.outcomes.stockGone"
   type: "node"
   title: "Stock Gone"
+  summary: "notificationFailed hides the business outcome: NotificationDeliveryFailed.type\n\
+    \     * says which one (ORDER_CONFIRMATION, STOCK_UNAVAILABLE, ORDER_CANCELLED)."
   custom:
     title: "Stock Gone"
     type: "outcome"
+    summary: "notificationFailed hides the business outcome: NotificationDeliveryFailed.type\n\
+      \     * says which one (ORDER_CONFIRMATION, STOCK_UNAVAILABLE, ORDER_CANCELLED)."
     color: "green"
 - id: "edge/invokes/zw%3Aarchitecture%2Fartifact%2Fplace-order-flow%2Fzfl-step%2Fflows.PlaceOrderFlow.occurrences.confirmOrder%2540when%255BPaymentAuthorized%255D/zw%3Aarchitecture%2Fartifact%2Fplace-order-flow%2Fzfl-operation%2Fflows.PlaceOrderFlow.operations.confirmStockReservation/confirmOrder%40when%5BPaymentAuthorized%5D%3Acall%3A1%3AconfirmStockReservation:service"
   type: "node"
   title: "Confirm Stock Reservation"
-  summary: "Stock Reservation is confirmed"
+  summary: "Stock Reservation is confirmed. NOT_HELD when some line is no longer\n\
+    \     * RESERVED. StockReservationConfirmed is published on purpose; no step of\n\
+    \     * this flow consumes it."
   service:
     id: "catalog.inventory-management.catalog-inventory"
     version: "0.1.0"
@@ -672,12 +814,23 @@ steps:
 - id: "edge/invokes/zw%3Aarchitecture%2Fartifact%2Fplace-order-flow%2Fzfl-step%2Fflows.PlaceOrderFlow.occurrences.confirmOrder%2540when%255BPaymentAuthorized%255D/zw%3Aarchitecture%2Fartifact%2Fplace-order-flow%2Fzfl-operation%2Fflows.PlaceOrderFlow.operations.confirmStockReservation/confirmOrder%40when%5BPaymentAuthorized%5D%3Acall%3A1%3AconfirmStockReservation"
   type: "node"
   title: "Confirm Stock Reservation"
-  summary: "Stock Reservation is confirmed"
+  summary: "Stock Reservation is confirmed. NOT_HELD when some line is no longer\n\
+    \     * RESERVED. StockReservationConfirmed is published on purpose; no step of\n\
+    \     * this flow consumes it."
   custom:
     title: "Confirm Stock Reservation"
     type: "operation"
-    summary: "Stock Reservation is confirmed"
+    summary: "Stock Reservation is confirmed. NOT_HELD when some line is no longer\n\
+      \     * RESERVED. StockReservationConfirmed is published on purpose; no step\
+      \ of\n     * this flow consumes it."
     color: "blue"
+- id: "edge/invokes/zw%3Aarchitecture%2Fartifact%2Fplace-order-flow%2Fzfl-step%2Fflows.PlaceOrderFlow.occurrences.expireReservation%2540when%255BReservationExpired%255D/zw%3Aarchitecture%2Fartifact%2Fplace-order-flow%2Fzfl-operation%2Fflows.PlaceOrderFlow.operations.getPaymentStatus/expireReservation%40when%5BReservationExpired%5D%3Acall%3A1%3AgetPaymentStatus"
+  type: "node"
+  title: "Get Payment Status"
+  custom:
+    title: "Get Payment Status"
+    type: "unresolved-operation"
+    color: "red"
 - id: "edge/invokes/zw%3Aarchitecture%2Fartifact%2Fplace-order-flow%2Fzfl-step%2Fflows.PlaceOrderFlow.occurrences.startOrderCheckout%2540when%255BStartOrderCheckout%255D/zw%3Aarchitecture%2Fartifact%2Fplace-order-flow%2Fzfl-operation%2Fflows.PlaceOrderFlow.operations.reserveStock/startOrderCheckout%40when%5BStartOrderCheckout%5D%3Acall%3A1%3AreserveStock:service"
   type: "node"
   title: "Reserve Stock"
@@ -720,17 +873,22 @@ Place Order Flow
  * is the binding constraint. We hold the item first and charge second.
  *
  * Payment runs in two phases. Authorization at checkout places a hold on the
- * customer's funds without moving money. Capture happens later, at fulfillment
- * time, when the order is physically ready to ship. If fulfillment fails after
+ * customer's funds without moving money. Capture happens later, as soon as
+ * fulfillment is scheduled (FulfillmentScheduled); the warehouse may mark the
+ * order ready to ship only after capture. If fulfillment fails after
  * authorization but before capture, the hold is voided — no charge ever appears
  * on the customer's statement.
  *
- * Transient payment errors are retried within the reservation window. A hard
+ * Transient payment errors are retried a bounded number of times. A hard
  * decline from the processor is not retried — it goes straight to cancellation.
  *
- * Reservation expiry is owned by the Scheduler, not the payment service. If
- * payment is not resolved within ten minutes of the order being created, the
- * Scheduler fires ReservationExpired and the stock is returned to the pool.
+ * Reservation expiry is owned by the Scheduler. If payment has not started ten
+ * minutes after the order was created, the stock is returned to the pool. Once
+ * payment has started, payment owns the end: at most 3 attempts of at most
+ * 30 seconds each, with 5 and 15 seconds of backoff between them.
+ *
+ * Redelivery: every policy is a no-op, with no event, when the aggregate is
+ * already in a target state of that command.
 
 
 <Flow id="place-order-flow" version="0.0.0" />

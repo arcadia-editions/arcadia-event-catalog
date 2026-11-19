@@ -1,7 +1,7 @@
 ---
 id: "modulith.application.arcadia-editions-modulith.fulfillment"
 name: "Fulfillment"
-version: "0.0.0"
+version: "0.10.3"
 aggregateRoot: true
 identifier: "fulfillmentId"
 properties:
@@ -22,6 +22,7 @@ properties:
   - "SCHEDULED"
   - "READY_TO_SHIP"
   - "FAILED"
+  - "CANCELLED"
 - name: "shippingAddress"
   type: "ShippingAddress"
   required: true
@@ -42,8 +43,15 @@ properties:
   type: "Instant"
 - name: "failureReason"
   type: "String"
+- name: "paymentCapturedAt"
+  type: "Instant"
+  description: "Set from PaymentCaptured; markReadyToShip requires it."
+- name: "cancelledAt"
+  type: "Instant"
+- name: "cancellationReason"
+  type: "String"
 services:
-- "modulith.application.arcadia-editions-modulith-0.0.0"
+- "modulith.application.arcadia-editions-modulith-0.10.3"
 domains:
 - "modulith.application-0.0.1"
 ---
