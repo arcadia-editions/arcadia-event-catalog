@@ -5,18 +5,19 @@ summary: "Customer checkout, order commitment, and commercial orchestration"
 version: "0.0.1"
 services:
 - id: "orders.checkout.orders-checkout"
-  version: "0.1.0"
+  version: "0.2.0"
 entities:
 - id: "orders.checkout.orders-checkout.order"
-  version: "0.1.0"
+  version: "0.2.0"
 - id: "orders.checkout.orders-checkout.order-item"
-  version: "0.1.0"
+  version: "0.2.0"
 - id: "orders.checkout.orders-checkout.shipping-address"
-  version: "0.1.0"
+  version: "0.2.0"
 sends:
 - id: "orders.checkout.orders-checkout.order-created-event-v1"
 - id: "orders.checkout.orders-checkout.stock-unavailable-event-v1"
 - id: "orders.checkout.orders-checkout.order-confirmed-event-v1"
+- id: "orders.checkout.orders-checkout.order-confirmation-rejected-event-v1"
 - id: "orders.checkout.orders-checkout.order-cancelled-event-v1"
 receives:
 - id: "catalog.inventory-management.catalog-inventory.stock-released-event-v1"

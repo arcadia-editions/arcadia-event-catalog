@@ -5,20 +5,22 @@ summary: "Shipment scheduling, readiness, and fulfillment failure handling"
 version: "0.0.1"
 services:
 - id: "fulfillment.shipping.fulfillment-shipping"
-  version: "0.1.0"
+  version: "0.2.0"
 entities:
 - id: "fulfillment.shipping.fulfillment-shipping.fulfillment"
-  version: "0.1.0"
+  version: "0.2.0"
 - id: "fulfillment.shipping.fulfillment-shipping.shipping-address"
-  version: "0.1.0"
+  version: "0.2.0"
 - id: "fulfillment.shipping.fulfillment-shipping.fulfillment-item"
-  version: "0.1.0"
+  version: "0.2.0"
 sends:
 - id: "fulfillment.shipping.fulfillment-shipping.fulfillment-scheduled-event-v1"
 - id: "fulfillment.shipping.fulfillment-shipping.fulfillment-failed-event-v1"
 - id: "fulfillment.shipping.fulfillment-shipping.fulfillment-ready-to-ship-event-v1"
+- id: "fulfillment.shipping.fulfillment-shipping.fulfillment-cancelled-event-v1"
 receives:
 - id: "orders.checkout.orders-checkout.order-confirmed-event-v1"
+- id: "orders.checkout.orders-checkout.order-cancelled-event-v1"
 ---
 Shipment scheduling, readiness, and fulfillment failure handling## Overview
 

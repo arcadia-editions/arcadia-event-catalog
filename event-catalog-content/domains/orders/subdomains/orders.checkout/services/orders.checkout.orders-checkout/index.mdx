@@ -3,7 +3,7 @@ id: "orders.checkout.orders-checkout"
 name: "Orders Checkout"
 summary: "Owns checkout flow, order lifecycle, and the handoff from purchase intent\
   \ to confirmed order"
-version: "0.1.0"
+version: "0.2.0"
 specifications:
 - type: "asyncapi"
   path: "https://github.com/arcadia-editions/orders-checkout-api/raw/main/asyncapi.yml"
@@ -13,17 +13,18 @@ sends:
 - id: "orders.checkout.orders-checkout.order-created-event-v1"
 - id: "orders.checkout.orders-checkout.stock-unavailable-event-v1"
 - id: "orders.checkout.orders-checkout.order-confirmed-event-v1"
+- id: "orders.checkout.orders-checkout.order-confirmation-rejected-event-v1"
 - id: "orders.checkout.orders-checkout.order-cancelled-event-v1"
 receives:
 - id: "catalog.inventory-management.catalog-inventory.stock-released-event-v1"
 - id: "payments.payment-processing.payments-processing.payment-authorized-event-v1"
 entities:
 - id: "orders.checkout.orders-checkout.order"
-  version: "0.1.0"
+  version: "0.2.0"
 - id: "orders.checkout.orders-checkout.order-item"
-  version: "0.1.0"
+  version: "0.2.0"
 - id: "orders.checkout.orders-checkout.shipping-address"
-  version: "0.1.0"
+  version: "0.2.0"
 flows:
 - id: "place-order-flow"
   version: "0.0.0"
