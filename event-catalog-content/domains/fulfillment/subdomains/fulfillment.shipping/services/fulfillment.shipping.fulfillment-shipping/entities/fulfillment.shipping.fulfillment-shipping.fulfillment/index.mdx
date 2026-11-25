@@ -1,7 +1,7 @@
 ---
 id: "fulfillment.shipping.fulfillment-shipping.fulfillment"
 name: "Fulfillment"
-version: "0.1.0"
+version: "0.2.0"
 aggregateRoot: true
 identifier: "fulfillmentId"
 properties:
@@ -22,6 +22,7 @@ properties:
   - "SCHEDULED"
   - "READY_TO_SHIP"
   - "FAILED"
+  - "CANCELLED"
 - name: "shippingAddress"
   type: "ShippingAddress"
   required: true
@@ -42,8 +43,15 @@ properties:
   type: "Instant"
 - name: "failureReason"
   type: "String"
+- name: "paymentCapturedAt"
+  type: "Instant"
+  description: "Set from PaymentCaptured; markReadyToShip requires it."
+- name: "cancelledAt"
+  type: "Instant"
+- name: "cancellationReason"
+  type: "String"
 services:
-- "fulfillment.shipping.fulfillment-shipping-0.1.0"
+- "fulfillment.shipping.fulfillment-shipping-0.2.0"
 domains:
 - "fulfillment.shipping-0.0.1"
 ---

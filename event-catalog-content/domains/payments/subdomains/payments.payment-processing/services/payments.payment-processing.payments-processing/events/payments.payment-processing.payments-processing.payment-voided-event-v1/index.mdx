@@ -1,12 +1,10 @@
 ---
 id: "payments.payment-processing.payments-processing.payment-voided-event-v1"
 name: "payment-voided-event-v1"
-version: "0.1.0"
+version: "0.2.0"
 schemaPath: "https://github.com/arcadia-editions/payments-processing-api/raw/main/avro/PaymentVoided.avsc"
 producers:
-- "payments.payment-processing.payments-processing-0.1.0"
-consumers:
-- "catalog.inventory-management.catalog-inventory-0.1.0"
+- "payments.payment-processing.payments-processing-0.2.0"
 channels:
 - id: "payments.payment-processing.payments-processing.payment-voided-event-v1"
 ---
@@ -17,13 +15,6 @@ import RemoteSpecificationSchema from '@catalog/components/RemoteSpecificationSc
 Generated event reference page.
 
 <NodeGraph />
-
-
-## Consumer operations
-
-
-- `catalog.inventory-management.catalog-inventory.onPaymentVoidedEventV1` (`receive`, matched by external-ref)
-
 
 
 

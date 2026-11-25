@@ -2,12 +2,13 @@
 id: "orders.checkout.orders-checkout.getOrder"
 name: "getOrder"
 summary: "getOrder"
-version: "0.1.0"
+version: "0.2.0"
 operation:
   method: "GET"
   path: "/orders/{id}"
   statusCodes:
   - "200"
+  - "400"
 ---
 import RemoteSpecificationSchema from '@catalog/components/RemoteSpecificationSchema.astro';
 

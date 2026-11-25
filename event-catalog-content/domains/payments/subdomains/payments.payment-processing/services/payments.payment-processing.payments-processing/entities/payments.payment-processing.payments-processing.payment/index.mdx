@@ -1,7 +1,7 @@
 ---
 id: "payments.payment-processing.payments-processing.payment"
 name: "Payment"
-version: "0.1.0"
+version: "0.2.0"
 aggregateRoot: true
 identifier: "orderId"
 properties:
@@ -37,6 +37,7 @@ properties:
   - "CAPTURED"
   - "CAPTURE_FAILED"
   - "VOIDED"
+  - "VOID_FAILED"
 - name: "providerReference"
   type: "String"
 - name: "attemptCount"
@@ -52,10 +53,12 @@ properties:
   type: "Instant"
 - name: "voidedAt"
   type: "Instant"
+- name: "voidFailedAt"
+  type: "Instant"
 - name: "failureReason"
   type: "String"
 services:
-- "payments.payment-processing.payments-processing-0.1.0"
+- "payments.payment-processing.payments-processing-0.2.0"
 domains:
 - "payments.payment-processing-0.0.1"
 ---

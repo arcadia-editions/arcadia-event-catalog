@@ -1,8 +1,8 @@
 ---
 id: "catalog.inventory-management.catalog-inventory.confirmStockReservation"
 name: "confirmStockReservation"
-summary: "confirmStockReservation"
-version: "0.1.0"
+summary: "Returns CONFIRMED with no change when every line is already CONFIRMED (redelivery)."
+version: "0.2.0"
 operation:
   method: "POST"
   path: "/inventory/reservations/confirm"
@@ -12,7 +12,7 @@ operation:
 ---
 ## Overview
 
-confirmStockReservation
+Returns CONFIRMED with no change when every line is already CONFIRMED (redelivery).
 
 <NodeGraph />
 
