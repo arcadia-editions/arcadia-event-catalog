@@ -2,27 +2,27 @@
 id: "catalog.inventory-management.catalog-inventory"
 name: "Catalog Inventory"
 summary: "Owns scarce stock reservation, stock release, and inventory position management"
-version: "0.2.0"
+version: "0.2.1"
 specifications:
 - type: "asyncapi"
-  path: "https://github.com/arcadia-editions/catalog-inventory-api/raw/release/asyncapi-all/v0.2.0/asyncapi.yml"
+  path: "https://github.com/arcadia-editions/catalog-inventory-api/raw/release/asyncapi-all/v0.2.1/asyncapi.yml"
 - type: "openapi"
-  path: "https://github.com/arcadia-editions/catalog-inventory-api/raw/release/openapi/v0.2.0/openapi.yml"
+  path: "https://github.com/arcadia-editions/catalog-inventory-api/raw/release/openapi/v0.2.1/openapi.yml"
 sends:
 - id: "catalog.inventory-management.catalog-inventory.stock-released-event-v1"
 - id: "catalog.inventory-management.catalog-inventory.stock-reservation-confirmed-event-v1"
 - id: "catalog.inventory-management.catalog-inventory.stock-received-event-v1"
 - id: "catalog.inventory-management.catalog-inventory.stock-adjusted-event-v1"
 receives:
+- id: "payments.payment-processing.payments-processing.payment-declined-event-v1"
+- id: "payments.payment-processing.payments-processing.payment-retry-exhausted-event-v1"
+- id: "payments.payment-processing.payments-processing.payment-voided-event-v1"
 - id: "payments.payment-processing.payments-processing.payment-void-failed-event-v1"
 entities:
 - id: "catalog.inventory-management.catalog-inventory.stock-reservation"
-  version: "0.2.0"
+  version: "0.2.1"
 - id: "catalog.inventory-management.catalog-inventory.inventory-position"
-  version: "0.2.0"
-flows:
-- id: "place-order-flow"
-  version: "0.0.0"
+  version: "0.2.1"
 ---
 ## OverviewOwns scarce stock reservation, stock release, and inventory position management<NodeGraph />## Message Flow
 

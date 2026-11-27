@@ -3,12 +3,12 @@ id: "payments.payment-processing.payments-processing"
 name: "Payments Processing"
 summary: "Owns payment authorization, retries, capture, voiding, and provider-facing\
   \ outcomes"
-version: "0.2.0"
+version: "0.2.2"
 specifications:
 - type: "asyncapi"
-  path: "https://github.com/arcadia-editions/payments-processing-api/raw/release/asyncapi-all/v0.2.0/asyncapi.yml"
+  path: "https://github.com/arcadia-editions/payments-processing-api/raw/release/asyncapi-all/v0.2.2/asyncapi.yml"
 - type: "openapi"
-  path: "https://github.com/arcadia-editions/payments-processing-api/raw/release/openapi/v0.2.0/openapi.yml"
+  path: "https://github.com/arcadia-editions/payments-processing-api/raw/release/openapi/v0.2.2/openapi.yml"
 sends:
 - id: "payments.payment-processing.payments-processing.payment-retried-event-v1"
 - id: "payments.payment-processing.payments-processing.payment-failed-event-v1"
@@ -24,13 +24,12 @@ receives:
 - id: "payments.payment-processing.payments-processing.payment-failed-event-v1"
 - id: "payments.payment-processing.payments-processing.payment-capture-failed-event-v1"
 - id: "orders.checkout.orders-checkout.order-created-event-v1"
+- id: "orders.checkout.orders-checkout.order-confirmation-rejected-event-v1"
 - id: "fulfillment.shipping.fulfillment-shipping.fulfillment-scheduled-event-v1"
+- id: "fulfillment.shipping.fulfillment-shipping.fulfillment-failed-event-v1"
 entities:
 - id: "payments.payment-processing.payments-processing.payment"
-  version: "0.2.0"
-flows:
-- id: "place-order-flow"
-  version: "0.0.0"
+  version: "0.2.2"
 ---
 ## OverviewOwns payment authorization, retries, capture, voiding, and provider-facing outcomes<NodeGraph />## Message Flow
 
