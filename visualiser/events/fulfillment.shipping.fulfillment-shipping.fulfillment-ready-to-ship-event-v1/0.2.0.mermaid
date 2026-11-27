@@ -1,0 +1,24 @@
+%% EventCatalog Mermaid Diagram
+%% Resource: events/fulfillment.shipping.fulfillment-shipping.fulfillment-ready-to-ship-event-v1 (v0.2.0)
+%% Level: L3 full (services, messages and channels)
+%% Generated: 2026-11-27T11:15:58.273Z
+
+flowchart LR
+
+    %% Style definitions
+    classDef events fill:#f97316,stroke:#c2410c,color:#fff
+    classDef services fill:#ec4899,stroke:#be185d,color:#fff
+    classDef channels fill:#6b7280,stroke:#374151,color:#fff
+    classDef focused stroke-width:4px
+
+    %% Nodes
+    fulfillment_shipping_fulfillment_shipping_fulfillment_ready_to_ship_event_v1_0_2_0_2>"fulfillment-ready-to-ship-event-v1 (0.2.0)"]:::events
+    fulfillment_shipping_fulfillment_shipping_0_2_0[["Fulfillment Shipping (0.2.0)"]]:::services
+    fulfillment_shipping_fulfillment_shipping_fulfillment_ready_to_ship_event_v1_0_2_0_2[/"fulfillment-ready-to-ship-event-v1 (0.2.0)"/]:::channels
+
+    %% Edges
+    fulfillment_shipping_fulfillment_shipping_0_2_0 -->|"publishes event"| fulfillment_shipping_fulfillment_shipping_fulfillment_ready_to_ship_event_v1_0_2_0_2
+    fulfillment_shipping_fulfillment_shipping_fulfillment_ready_to_ship_event_v1_0_2_0_2 -->|"routes to"| fulfillment_shipping_fulfillment_shipping_fulfillment_ready_to_ship_event_v1_0_2_0_2
+
+    %% Boundaries and highlights
+    class fulfillment_shipping_fulfillment_shipping_fulfillment_ready_to_ship_event_v1_0_2_0_2 focused

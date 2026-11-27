@@ -1,0 +1,28 @@
+%% EventCatalog Mermaid Diagram
+%% Resource: events/catalog.inventory-management.catalog-inventory.stock-received-event-v1 (v0.2.1)
+%% Level: L3 full (services, messages and channels)
+%% Generated: 2026-11-27T11:15:58.512Z
+
+flowchart LR
+
+    %% Style definitions
+    classDef events fill:#f97316,stroke:#c2410c,color:#fff
+    classDef services fill:#ec4899,stroke:#be185d,color:#fff
+    classDef channels fill:#6b7280,stroke:#374151,color:#fff
+    classDef focused stroke-width:4px
+
+    %% Nodes
+    catalog_inventory_management_catalog_inventory_stock_received_event_v1_0_2_1_3>"stock-received-event-v1 (0.2.1)"]:::events
+    catalog_inventory_management_catalog_inventory_0_2_0[["Catalog Inventory (0.2.0)"]]:::services
+    catalog_inventory_management_catalog_inventory_stock_received_event_v1_0_2_1_3[/"stock-received-event-v1 (0.2.1)"/]:::channels
+    catalog_inventory_management_catalog_inventory_0_2_1[["Catalog Inventory (0.2.1)"]]:::services
+    catalog_inventory_management_catalog_inventory_stock_received_event_v1_0_2_1_3[/"stock-received-event-v1 (0.2.1)"/]:::channels
+
+    %% Edges
+    catalog_inventory_management_catalog_inventory_0_2_0 -->|"publishes event"| catalog_inventory_management_catalog_inventory_stock_received_event_v1_0_2_1_3
+    catalog_inventory_management_catalog_inventory_stock_received_event_v1_0_2_1_3 -->|"routes to"| catalog_inventory_management_catalog_inventory_stock_received_event_v1_0_2_1_3
+    catalog_inventory_management_catalog_inventory_0_2_1 -->|"publishes event"| catalog_inventory_management_catalog_inventory_stock_received_event_v1_0_2_1_3
+    catalog_inventory_management_catalog_inventory_stock_received_event_v1_0_2_1_3 -->|"routes to"| catalog_inventory_management_catalog_inventory_stock_received_event_v1_0_2_1_3
+
+    %% Boundaries and highlights
+    class catalog_inventory_management_catalog_inventory_stock_received_event_v1_0_2_1_3 focused

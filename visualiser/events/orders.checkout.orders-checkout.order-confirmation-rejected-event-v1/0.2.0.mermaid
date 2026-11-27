@@ -1,0 +1,28 @@
+%% EventCatalog Mermaid Diagram
+%% Resource: events/orders.checkout.orders-checkout.order-confirmation-rejected-event-v1 (v0.2.0)
+%% Level: L3 full (services, messages and channels)
+%% Generated: 2026-11-27T11:15:58.304Z
+
+flowchart LR
+
+    %% Style definitions
+    classDef events fill:#f97316,stroke:#c2410c,color:#fff
+    classDef services fill:#ec4899,stroke:#be185d,color:#fff
+    classDef channels fill:#6b7280,stroke:#374151,color:#fff
+    classDef focused stroke-width:4px
+
+    %% Nodes
+    orders_checkout_orders_checkout_order_confirmation_rejected_event_v1_0_2_0_3>"order-confirmation-rejected-event-v1 (0.2.0)"]:::events
+    orders_checkout_orders_checkout_0_2_0[["Orders Checkout (0.2.0)"]]:::services
+    orders_checkout_orders_checkout_order_confirmation_rejected_event_v1_0_2_0_3[/"order-confirmation-rejected-event-v1 (0.2.0)"/]:::channels
+    payments_payment_processing_payments_processing_0_2_2[["Payments Processing (0.2.2)"]]:::services
+    orders_checkout_orders_checkout_order_confirmation_rejected_event_v1_0_2_0_3[/"order-confirmation-rejected-event-v1 (0.2.0)"/]:::channels
+
+    %% Edges
+    orders_checkout_orders_checkout_0_2_0 -->|"publishes event"| orders_checkout_orders_checkout_order_confirmation_rejected_event_v1_0_2_0_3
+    orders_checkout_orders_checkout_order_confirmation_rejected_event_v1_0_2_0_3 -->|"routes to"| orders_checkout_orders_checkout_order_confirmation_rejected_event_v1_0_2_0_3
+    orders_checkout_orders_checkout_order_confirmation_rejected_event_v1_0_2_0_3 -->|"routes to"| orders_checkout_orders_checkout_order_confirmation_rejected_event_v1_0_2_0_3
+    orders_checkout_orders_checkout_order_confirmation_rejected_event_v1_0_2_0_3 -->|"consumes"| payments_payment_processing_payments_processing_0_2_2
+
+    %% Boundaries and highlights
+    class orders_checkout_orders_checkout_order_confirmation_rejected_event_v1_0_2_0_3 focused

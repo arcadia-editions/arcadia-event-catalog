@@ -1,0 +1,24 @@
+%% EventCatalog Mermaid Diagram
+%% Resource: events/notifications.customer-communications.notifications-consumer.notification-delivery-failed-event-v1 (v0.2.0)
+%% Level: L3 full (services, messages and channels)
+%% Generated: 2026-11-27T11:15:58.288Z
+
+flowchart LR
+
+    %% Style definitions
+    classDef events fill:#f97316,stroke:#c2410c,color:#fff
+    classDef services fill:#ec4899,stroke:#be185d,color:#fff
+    classDef channels fill:#6b7280,stroke:#374151,color:#fff
+    classDef focused stroke-width:4px
+
+    %% Nodes
+    notifications_customer_communications_notifications_consumer_notification_delivery_failed_event_v1_0_2_0_2>"notification-delivery-failed-event-v1 (0.2.0)"]:::events
+    notifications_customer_communications_notifications_consumer_0_2_0[["Notifications Consumer (0.2.0)"]]:::services
+    notifications_customer_communications_notifications_consumer_notification_delivery_failed_event_v1_0_2_0_2[/"notification-delivery-failed-event-v1 (0.2.0)"/]:::channels
+
+    %% Edges
+    notifications_customer_communications_notifications_consumer_0_2_0 -->|"publishes event"| notifications_customer_communications_notifications_consumer_notification_delivery_failed_event_v1_0_2_0_2
+    notifications_customer_communications_notifications_consumer_notification_delivery_failed_event_v1_0_2_0_2 -->|"routes to"| notifications_customer_communications_notifications_consumer_notification_delivery_failed_event_v1_0_2_0_2
+
+    %% Boundaries and highlights
+    class notifications_customer_communications_notifications_consumer_notification_delivery_failed_event_v1_0_2_0_2 focused

@@ -1,0 +1,54 @@
+openapi: 3.0.1
+info:
+  title: Arcadia Editions - Fulfillment Shipping
+  version: "0.2.0"
+  description: Arcadia Editions - Fulfillment Shipping
+  contact:
+    email: email@domain.com
+  license:
+    name: MIT
+    url: https://opensource.org/licenses/MIT
+
+servers:
+
+- description: API
+  url: /api
+
+- description: custom
+  url: "{protocol}://{server}/{path}"
+  variables:
+    protocol:
+      enum:
+      - http
+      - https
+      default: http
+    server:
+      default: localhost:8080
+    path:
+      default: api
+
+tags:
+
+- name: Default
+  description: Operations that are not assigned to a service.
+
+- name: FulfillmentShipping
+
+paths: {}
+
+components:
+  schemas: {}
+  securitySchemes:
+    basicAuth:
+      type: http
+      scheme: basic
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+
+security:
+
+- basicAuth: []
+
+- bearerAuth: []

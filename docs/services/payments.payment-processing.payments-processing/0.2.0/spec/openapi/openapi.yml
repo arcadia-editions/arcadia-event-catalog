@@ -1,0 +1,129 @@
+openapi: 3.0.1
+info:
+  title: Arcadia Editions - Payments Processing
+  version: "0.2.0"
+  description: Arcadia Editions - Payments Processing
+  contact:
+    email: email@domain.com
+  license:
+    name: MIT
+    url: https://opensource.org/licenses/MIT
+
+servers:
+
+- description: API
+  url: /api
+
+- description: custom
+  url: "{protocol}://{server}/{path}"
+  variables:
+    protocol:
+      enum:
+      - http
+      - https
+      default: http
+    server:
+      default: localhost:8080
+    path:
+      default: api
+
+tags:
+
+- name: Default
+  description: Operations that are not assigned to a service.
+
+- name: PaymentsProcessing
+
+paths:
+  /payments/status:
+    post:
+      operationId: getPaymentStatus
+      description: "Read only, for the reservation timer. STARTED for any existing\
+        \ Payment."
+      tags:
+      - PaymentsProcessing
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/GetPaymentStatusInput"
+      responses:
+        "201":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GetPaymentStatusResult"
+        "400":
+          description: Invalid request
+
+components:
+  schemas:
+    GetPaymentStatusInput:
+      type: object
+      x-business-entity: GetPaymentStatusInput
+      required:
+      - orderId
+      properties:
+        orderId:
+          type: string
+    GetPaymentStatusResult:
+      type: object
+      x-business-entity: GetPaymentStatusResult
+      required:
+      - outcome
+      properties:
+        outcome:
+          $ref: "#/components/schemas/GetPaymentStatusOutcome"
+        noPayment:
+          $ref: "#/components/schemas/NoPaymentResult"
+        started:
+          $ref: "#/components/schemas/PaymentStartedResult"
+    PaymentStartedResult:
+      type: object
+      x-business-entity: PaymentStartedResult
+      properties:
+        orderId:
+          type: string
+        status:
+          $ref: "#/components/schemas/PaymentStatus"
+    NoPaymentResult:
+      type: object
+      x-business-entity: NoPaymentResult
+      properties:
+        orderId:
+          type: string
+    GetPaymentStatusOutcome:
+      type: string
+      x-business-entity: GetPaymentStatusOutcome
+      enum:
+      - NO_PAYMENT
+      - STARTED
+    PaymentStatus:
+      type: string
+      x-business-entity: PaymentStatus
+      enum:
+      - AUTHORIZATION_REQUESTED
+      - AUTHORIZED
+      - DECLINED
+      - FAILED
+      - RETRY_EXHAUSTED
+      - CAPTURED
+      - CAPTURE_FAILED
+      - VOIDED
+      - VOID_FAILED
+  securitySchemes:
+    basicAuth:
+      type: http
+      scheme: basic
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+
+security:
+
+- basicAuth: []
+
+- bearerAuth: []

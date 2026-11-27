@@ -1,0 +1,1 @@
+import{t as e}from"./url-builder.CyOTTlym.js";import{n as t,t as n}from"./sidebar-store.DbzAei7i.js";t.get()||fetch(e(`/api/sidebar-data.json`,!0)).then(e=>{if(!e.ok)throw Error(`Failed to fetch sidebar data: ${e.status}`);return e.json()}).then(e=>{n(e)}).catch(e=>{console.error(`Error loading sidebar data:`,e)});
