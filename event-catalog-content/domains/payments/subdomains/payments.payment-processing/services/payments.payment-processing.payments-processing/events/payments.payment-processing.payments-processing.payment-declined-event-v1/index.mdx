@@ -1,10 +1,12 @@
 ---
 id: "payments.payment-processing.payments-processing.payment-declined-event-v1"
 name: "payment-declined-event-v1"
-version: "0.2.0"
-schemaPath: "https://github.com/arcadia-editions/payments-processing-api/raw/release/service-all/v0.2.0/avro/PaymentDeclined.avsc"
+version: "0.2.2"
+schemaPath: "https://github.com/arcadia-editions/payments-processing-api/raw/release/asyncapi-all/v0.2.2/avro/PaymentDeclined.avsc"
 producers:
-- "payments.payment-processing.payments-processing-0.2.0"
+- "payments.payment-processing.payments-processing-0.2.2"
+consumers:
+- "catalog.inventory-management.catalog-inventory-0.2.1"
 channels:
 - id: "payments.payment-processing.payments-processing.payment-declined-event-v1"
 ---
@@ -17,9 +19,16 @@ Generated event reference page.
 <NodeGraph />
 
 
+## Consumer operations
+
+
+- `catalog.inventory-management.catalog-inventory.onPaymentDeclinedEventV1` (`receive`, matched by external-ref)
+
+
+
 
 ## Schema
 
-<RemoteSpecificationSchema url="https://github.com/arcadia-editions/payments-processing-api/raw/release/asyncapi-all/v0.2.0/asyncapi.yml" channel="payment-declined-event-v1" channelMessage="PaymentDeclinedResponse" />
+<RemoteSpecificationSchema url="https://github.com/arcadia-editions/payments-processing-api/raw/release/asyncapi-all/v0.2.2/asyncapi.yml" channel="payment-declined-event-v1" channelMessage="PaymentDeclinedResponse" />
 
 

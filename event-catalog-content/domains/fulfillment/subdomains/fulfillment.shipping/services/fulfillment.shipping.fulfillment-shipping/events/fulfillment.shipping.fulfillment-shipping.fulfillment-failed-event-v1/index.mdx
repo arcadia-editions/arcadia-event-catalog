@@ -2,9 +2,11 @@
 id: "fulfillment.shipping.fulfillment-shipping.fulfillment-failed-event-v1"
 name: "fulfillment-failed-event-v1"
 version: "0.2.0"
-schemaPath: "https://github.com/arcadia-editions/fulfillment-shipping-api/raw/release/service-all/v0.2.0/avro/FulfillmentFailed.avsc"
+schemaPath: "https://github.com/arcadia-editions/fulfillment-shipping-api/raw/release/asyncapi-all/v0.2.0/avro/FulfillmentFailed.avsc"
 producers:
 - "fulfillment.shipping.fulfillment-shipping-0.2.0"
+consumers:
+- "payments.payment-processing.payments-processing-0.2.2"
 channels:
 - id: "fulfillment.shipping.fulfillment-shipping.fulfillment-failed-event-v1"
 ---
@@ -15,6 +17,13 @@ import RemoteSpecificationSchema from '@catalog/components/RemoteSpecificationSc
 Generated event reference page.
 
 <NodeGraph />
+
+
+## Consumer operations
+
+
+- `payments.payment-processing.payments-processing.onFulfillmentFailedEventV1` (`receive`, matched by external-ref)
+
 
 
 

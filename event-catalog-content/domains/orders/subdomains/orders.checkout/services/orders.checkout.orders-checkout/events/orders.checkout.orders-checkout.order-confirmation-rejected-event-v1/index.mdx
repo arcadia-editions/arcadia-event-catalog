@@ -2,9 +2,11 @@
 id: "orders.checkout.orders-checkout.order-confirmation-rejected-event-v1"
 name: "order-confirmation-rejected-event-v1"
 version: "0.2.0"
-schemaPath: "https://github.com/arcadia-editions/orders-checkout-api/raw/release/service-all/v0.2.0/avro/OrderConfirmationRejected.avsc"
+schemaPath: "https://github.com/arcadia-editions/orders-checkout-api/raw/release/asyncapi-all/v0.2.0/avro/OrderConfirmationRejected.avsc"
 producers:
 - "orders.checkout.orders-checkout-0.2.0"
+consumers:
+- "payments.payment-processing.payments-processing-0.2.2"
 channels:
 - id: "orders.checkout.orders-checkout.order-confirmation-rejected-event-v1"
 ---
@@ -15,6 +17,13 @@ import RemoteSpecificationSchema from '@catalog/components/RemoteSpecificationSc
 Generated event reference page.
 
 <NodeGraph />
+
+
+## Consumer operations
+
+
+- `payments.payment-processing.payments-processing.onOrderConfirmationRejectedEventV1` (`receive`, matched by external-ref)
+
 
 
 
